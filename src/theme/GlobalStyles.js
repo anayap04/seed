@@ -1,30 +1,15 @@
 // @flow
 import { createGlobalStyle } from 'styled-components'
+import  BebasNeue from '../assets/fonts/BebasNeue-Regular.woff'
 
 const GlobalStyles = createGlobalStyle`
   @font-face {
     font-family: BebasNeue-Regular;
-    src: url('../assets/fonts/BebasNeue-Regular.ttf');
+    src: url(${BebasNeue}) format('woff');
   }
-  
   @font-face {
-    font-family: Acumin-RPro;
-    src: url('../assets/fonts/Acumin-RPro.otf');
-  }
-
-  @font-face {
-    font-family: Acumin-BdPro;
-    src: url('../assets/fonts/Acumin-BdPro.otf');
-  }
-
-  @font-face {
-    font-family: Acumin-ItPro;
-    src: url('../assets/fonts/Acumin-ItPro.otf');
-  }
-  
-  @font-face {
-    font-family: Acumin-BdItPro;
-    src: url('../assets/fonts/Acumin-BdItPro.otf');
+    font-family: Montserrat-Regular;
+    src: url('../assets/fonts/Montserrat-Regular.ttf')format('ttf');
   }
 `
 
