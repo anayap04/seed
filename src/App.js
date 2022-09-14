@@ -1,8 +1,12 @@
 import logo from './logo.svg';
 import './App.css';
+import { DefaultTheme } from '../src/theme/themes'
+import ThemeProvider from './theme/ThemeProvider';
 
 function App() {
+  const theme = DefaultTheme
   return (
+    <ThemeProvider theme={theme}>
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
@@ -19,6 +23,7 @@ function App() {
         </a>
       </header>
     </div>
+    </ThemeProvider>
   );
 }
 
