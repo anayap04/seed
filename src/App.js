@@ -3,7 +3,7 @@ import "./App.css";
 import { DefaultTheme } from "../src/theme/themes";
 import ThemeProvider from "./theme/ThemeProvider";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Home from "./screens/home/Home";
+import Home from "./app/screens/home/Home";
 
 function App() {
   const theme = DefaultTheme;
