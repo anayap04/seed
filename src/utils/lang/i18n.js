@@ -3,12 +3,11 @@ import { initReactI18next } from "react-i18next";
 import esConstants from "./esConstants";
 import enConstants from "./enConstants";
 
-
 const resources = {
-  es:  {
+  es: {
     translation: esConstants,
   },
-  en:  {
+  en: {
     translation: enConstants,
   },
 };
