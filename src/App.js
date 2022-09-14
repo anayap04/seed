@@ -1,29 +1,19 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
-import { DefaultTheme } from '../src/theme/themes'
-import ThemeProvider from './theme/ThemeProvider';
+import React from "react";
+import "./App.css";
+import { DefaultTheme } from "../src/theme/themes";
+import ThemeProvider from "./theme/ThemeProvider";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Home from "./screens/home/Home";
 
 function App() {
-  const theme = DefaultTheme
+  const theme = DefaultTheme;
   return (
     <ThemeProvider theme={theme}>
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Home />}></Route>
+        </Routes>
+      </BrowserRouter>
     </ThemeProvider>
   );
 }
