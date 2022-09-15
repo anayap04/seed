@@ -1,18 +1,18 @@
 import React from "react";
-import { SecondaryContainer, TextSecondary } from "./styles";
+import { LinkContainer, TextLink } from "./styles";
 
-const SecondaryBtn = (props) => {
+const LinkBtn = (props) => {
   const { label, onClick, disabled } = props;
   return (
-    <SecondaryContainer
+    <LinkContainer
       onClick={!disabled && onClick}
       onKeyPress={!disabled && onClick}
       aria-label={label}
       role="button"
     >
-      <TextSecondary>{label}</TextSecondary>
-    </SecondaryContainer>
+      <TextLink>{label}</TextLink>
+    </LinkContainer>
   );
 };
 
-export default SecondaryBtn;
+export default LinkBtn;

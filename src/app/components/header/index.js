@@ -8,9 +8,9 @@ const Header = (props) => {
 
   const btnRender = (btn) => {
     return btn.type === "secondary" ? (
-      <SecondaryBtn label={btn.label} />
+      <SecondaryBtn key={btn.id} label={btn.label} onClick={btn.onClick} />
     ) : (
-      <PrimaryBtn label={btn.label} />
+      <PrimaryBtn key={btn.id} label={btn.label} onClick={btn.onClick} />
     );
   };
 

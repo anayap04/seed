@@ -3,7 +3,7 @@ import { DefaultTheme } from "../../../theme/themes";
 
 const Container = styled.div`
   width: 100%;
-  background-color: ${({ theme }) => theme.colors.nero};
+  background-color: ${({ theme }) => theme.colors.black};
   padding-top: 12px;
   padding-bottom: 12px;
   display: flex;
