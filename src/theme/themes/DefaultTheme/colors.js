@@ -3,7 +3,7 @@ export const lightTheme = {
   fonts: '#0D0D0D',
   nero: '#1C1C1C',
   background: '#FFFFFF',
-  primaryColor: '#4FE0B3',
+  primaryColor: '#026243',
 }
 
 export const darkTheme = {
@@ -11,5 +11,5 @@ export const darkTheme = {
   fonts: '#FFFFFF',
   nero: '#1C1C1C',
   background: '#0D0D0D',
-  primaryColor: '#026243',
+  primaryColor: '#4FE0B3',
 }

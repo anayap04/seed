@@ -62,7 +62,8 @@ LinkContainer.defaultProps = {
 
 export const TextLink = styled.div`
   font-family: BebasNeue-Regular;
-  color: ${({ theme }) => theme.fonts};
+  font-size: ${({fontSize}) => fontSize ? fontSize+'px' : '20px'};
+  color: white;
   margin-bottom: -5px;
   &:hover {
     color: ${({ theme }) => theme.primaryColor};
