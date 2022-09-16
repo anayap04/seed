@@ -2,23 +2,20 @@ import styled from "styled-components";
 import { DefaultTheme } from "../../../theme/themes";
 
 export const PrimaryContainer = styled.div`
-  border: 2px solid ${({ theme }) => theme.colors.medAquamarine};
+  border: 2px solid ${({ theme }) => theme.primaryColor};
   padding: 5px;
   padding-left: 10px;
   padding-right: 10px;
   margin-left: 24px;
   &:hover {
-    background-color: ${({ theme }) => theme.colors.medAquamarine};
+    background-color: ${({ theme }) => theme.primaryColor};
   }
 `;
 
-PrimaryContainer.defaultProps = {
-  theme: DefaultTheme,
-};
 
 export const TextButton = styled.div`
   font-family: BebasNeue-Regular;
-  color: ${({ theme }) => theme.colors.white};
+  color: ${({ theme }) => theme.fonts};
 `;
 
 TextButton.defaultProps = {
@@ -29,7 +26,7 @@ export const SecondaryContainer = styled.div`
   padding: 5px;
   margin-left: 24px;
   &:hover {
-    color: ${({ theme }) => theme.colors.medAquamarine};
+    color: ${({ theme }) => theme.primaryColor};
   }
 `;
 
@@ -39,9 +36,9 @@ SecondaryContainer.defaultProps = {
 
 export const TextSecondary = styled.div`
   font-family: BebasNeue-Regular;
-  color: ${({ theme }) => theme.colors.white};
+  color: ${({ theme }) => theme.fonts};
   &:hover {
-    color: ${({ theme }) => theme.colors.medAquamarine};
+    color: ${({ theme }) => theme.primaryColor};
 }
 `;
 
@@ -53,9 +50,9 @@ export const LinkContainer = styled.div`
   margin-left: 24px;
   padding-bottom: 0px;
   width: fit-content;
-  border-bottom: 3px ${({ theme }) => theme.colors.medAquamarine} solid;
+  border-bottom: 3px ${({ theme }) => theme.primaryColor} solid;
   &:hover {
-    color: ${({ theme }) => theme.colors.medAquamarine};
+    color: ${({ theme }) => theme.primaryColor};
   }
 `;
 
@@ -65,10 +62,10 @@ LinkContainer.defaultProps = {
 
 export const TextLink = styled.div`
   font-family: BebasNeue-Regular;
-  color: ${({ theme }) => theme.colors.white};
+  color: ${({ theme }) => theme.fonts};
   margin-bottom: -5px;
   &:hover {
-    color: ${({ theme }) => theme.colors.medAquamarine};
+    color: ${({ theme }) => theme.primaryColor};
 }
 `;
 

@@ -2,9 +2,10 @@ import React from "react";
 import Header from "../../components/header";
 import { useTranslation } from "react-i18next";
 import { ContainerMain, ImgContainer } from "./styles";
-import logoWhite from '../../../assets/imgs/seed-white.png'
+import logoWhite from "../../../assets/imgs/seed-white.png";
 
-const Home = () => {
+const Home = props => {
+  const {theme, themeToggler, mode} = props
   const { t } = useTranslation();
   const optionsHeader = [
     {
@@ -25,14 +26,20 @@ const Home = () => {
       label: t("register"),
       onClick: () => console.log("Test register"),
     },
+    {
+      id: "mode",
+      type: "primary",
+      label: mode === 'dark' ? t("modeDark") : t("modeLight"),
+      onClick: () => themeToggler(),
+    },
   ];
   return (
     <div className="App">
-      <ContainerMain>
-        <Header btnsArray={optionsHeader} />
-       <ImgContainer>
-       <img width={'100%'} src={logoWhite} />
-       </ImgContainer>
+      <ContainerMain theme={theme}>
+        <Header theme={theme} btnsArray={optionsHeader} />
+        <ImgContainer>
+          <img width={"100%"} src={logoWhite} />
+        </ImgContainer>
       </ContainerMain>
     </div>
   );

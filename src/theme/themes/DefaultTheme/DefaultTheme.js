@@ -1,11 +1,8 @@
-import colors from './colors'
-import dimensions from './dimensions'
-import spaces from './spaces'
+import { darkTheme, lightTheme } from "./colors";
 
 const DefaultTheme = {
-  colors,
-  dimensions,
-  spaces,
-}
+  darkTheme,
+  lightTheme,
+};
 
 export default DefaultTheme;
