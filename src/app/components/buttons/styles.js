@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { DefaultTheme } from "../../../theme/themes";
+import { device } from "../../../theme/themes/DefaultTheme/screenSizes";
 
 export const PrimaryContainer = styled.div`
   border: 2px solid ${({ theme }) => theme.primaryColor};
@@ -67,6 +68,13 @@ export const TextLink = styled.div`
   margin-bottom: -5px;
   &:hover {
     color: ${({ theme }) => theme.primaryColor};
+  }
+  @media (${device.mobileS}) {
+    font-size: 24px
+  }
+  @media (${device.tablet}) {
+    font-size: ${({fontSize}) => fontSize ? fontSize+'px' : '20px'};
+  }
 }
 `;
 

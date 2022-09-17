@@ -3,13 +3,14 @@ import { DefaultTheme } from "../../../theme/themes";
 import image from "../../../assets/imgs/trees.jpg";
 import bonos from "../../../assets/imgs/bonos.jpeg";
 import { fadeIn, fadeInRight, fadeInLeft, fadeInDown } from "react-animations";
+import { device } from "../../../theme/themes/DefaultTheme/screenSizes";
 
 const fadeAnimation = keyframes`${fadeIn}`;
 const animationsObj = {
   right: keyframes`${fadeInRight}`,
   left: keyframes`${fadeInLeft}`,
-  down: keyframes`${fadeInDown},`
-}
+  down: keyframes`${fadeInDown},`,
+};
 
 export const ContainerMain = styled.div`
   height: 100vh;
@@ -56,8 +57,16 @@ export const ContainerHowTo = styled.div`
 `;
 
 export const BtnContainer = styled.div`
-    top: ${({posY}) => posY};
-    left: ${({posX}) => posX};
-    position: absolute;
-    animation: 2.5s ${({animation}) => animationsObj[animation]};
-`
+  top: ${({ posY }) => posY}%;
+  left: ${({ posX }) => posX}%;
+  position: absolute;
+  animation: 2.5s ${({ animation }) => animationsObj[animation]};
+  @media ${device.mobileS} {
+    top: ${({ posY }) => posY - 10}%;
+    left: ${({ posX }) => posX - 10}%;
+  }
+  @media (${device.tablet}) {
+    top: ${({ posY }) => posY}%;
+    left: ${({ posX }) => posX}%;
+  }
+`;
