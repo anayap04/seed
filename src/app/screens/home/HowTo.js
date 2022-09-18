@@ -22,7 +22,7 @@ const HowTo = (props) => {
   console.log(height);
   const renderStep = () =>
     infoSteps.map((step) => (
-      <StepContainer responsiveWidth={width} key={step.id}>
+      <StepContainer responsiveWidth={width} responsiveHeight={height} key={step.id}>
         <Dots theme={theme} />
         <TextContainer>
           <TitleText theme={theme}>{step.title}</TitleText>
@@ -32,7 +32,7 @@ const HowTo = (props) => {
   return (
     <ContainerHowTo ref={howRef} theme={theme}>
       <HowContainer>
-        <StepsShapes responsiveWidth={width} height={height} theme={theme} />
+        <StepsShapes responsiveWidth={width} responsiveHeight={height} theme={theme} />
         {renderStep()}
       </HowContainer>
     </ContainerHowTo>
