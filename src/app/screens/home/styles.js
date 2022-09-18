@@ -82,8 +82,9 @@ export const StepsShapes = styled.div`
   border-radius: 50%;
   border: ${({ theme }) => theme.fonts} 3px solid;
   @media (${device.laptopL}) {
-    width: ${({ responsiveWidth }) => 0.4 * responsiveWidth}px;
-    height: ${({ responsiveWidth }) => 0.4 * responsiveWidth}px;
+    width: ${({ responsiveWidth }) => 0.33 * responsiveWidth}px;
+    height: ${({ responsiveWidth }) => 0.33 * responsiveWidth}px;
+    margin-left: ${({ responsiveWidth }) => 0.3 * responsiveWidth}px;
   }
   @media (${device.mobileS} and ${device.mobileAll}) {
     height: ${({ responsiveHeight }) => 0.7 * responsiveHeight}px;
@@ -118,6 +119,14 @@ export const StepContainer = styled.div`
         ${({ responsiveHeight }) => responsiveHeight * -0.73}px
       );
     }
+    @media (${device.laptopL}) {
+      flex-direction: row-reverse;
+      transform: translate(
+        ${({ responsiveWidth }) => -(responsiveWidth - 0.34 * responsiveWidth)}px,
+        ${({ responsiveWidth }) => -(responsiveWidth - 0.73 * responsiveWidth)}px
+      );
+      width: ${({responsiveWidth}) => responsiveWidth * 0.9};
+     }
   }
   &:nth-child(3) {
     flex-direction: row-reverse;
@@ -133,7 +142,13 @@ export const StepContainer = styled.div`
         ${({ responsiveHeight }) => responsiveHeight * -0.425}px
       );
     }
-
+    @media (${device.laptopL}) {
+      flex-direction: row-reverse;
+      transform: translate(
+        ${({ responsiveWidth }) => -(responsiveWidth - 0.335 * responsiveWidth)}px,
+        ${({ responsiveWidth }) => -(responsiveWidth - 0.9 * responsiveWidth)}px
+      );
+    }
   }
   &:nth-child(4) {
     flex-direction: row;
@@ -148,6 +163,13 @@ export const StepContainer = styled.div`
       transform: translate(
         ${({ responsiveWidth }) => responsiveWidth * 0.04}px,
         ${({ responsiveHeight }) => responsiveHeight * -0.1}px
+      );
+    }
+    @media (${device.laptopL}) {
+      flex-direction: row;
+      transform: translate(
+        ${({ responsiveWidth }) => responsiveWidth - 0.38 * responsiveWidth}px,
+        ${({ responsiveWidth }) => -(responsiveWidth - 0.75 * responsiveWidth)}px
       );
     }
   }
