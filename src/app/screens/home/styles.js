@@ -70,3 +70,78 @@ export const BtnContainer = styled.div`
     left: ${({ posX }) => posX}%;
   }
 `;
+
+export const HowContainer = styled.div`
+  position: sticky;
+`;
+export const StepsShapes = styled.div`
+  margin-top: ${({ responsiveWidth }) => 0.05 * responsiveWidth}px;
+  margin-left: ${({ responsiveWidth }) => 0.25 * responsiveWidth}px;
+  width: ${({ responsiveWidth }) => 0.5 * responsiveWidth}px;
+  height: ${({ responsiveWidth }) => 0.5 * responsiveWidth}px;
+  border-radius: 50%;
+  border: ${({ theme }) => theme.fonts} 3px solid;
+  @media (${device.laptopL}) {
+    width: ${({ responsiveWidth }) => 0.4 * responsiveWidth}px;
+    height: ${({ responsiveWidth }) => 0.4 * responsiveWidth}px;
+  }
+  @media (${device.mobileS} and ${device.mobileAll}) {
+    height: ${({ height }) => 0.7 * height}px;
+    margin-top: ${({ height }) => 0.1 * height}px;
+    margin-left: ${({ responsiveWidth }) => 0.05 * responsiveWidth}px;
+    width: 0;
+    border-radius: 0;
+    border-left: ${({ theme }) => theme.fonts} 1px solid;
+  }
+`;
+export const Dots = styled.div`
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-color: ${({ theme }) => theme.primaryColor};
+`;
+
+export const StepContainer = styled.div`
+  display: flex;
+  &:nth-child(2) {
+    flex-direction: row-reverse;
+    transform: translate(
+      ${({ responsiveWidth }) => -(responsiveWidth - 0.3 * responsiveWidth)}px,
+      ${({ responsiveWidth }) => -(responsiveWidth - 0.6 * responsiveWidth)}px
+    );
+    width: ${({responsiveWidth}) => responsiveWidth * 0.9}
+  }
+  &:nth-child(3) {
+    flex-direction: row-reverse;
+    transform: translate(
+      ${({ responsiveWidth }) => -(responsiveWidth - 0.3 * responsiveWidth)}px,
+      ${({ responsiveWidth }) => -(responsiveWidth - 0.85 * responsiveWidth)}px
+    );
+
+  }
+  &:nth-child(4) {
+    flex-direction: row;
+    transform: translate(
+      ${({ responsiveWidth }) => responsiveWidth - 0.275 * responsiveWidth}px,
+      ${({ responsiveWidth }) => -(responsiveWidth - 0.6 * responsiveWidth)}px
+    );
+    width: 300px;
+  }
+`;
+export const TextContainer = styled.div`
+  margin-left: 40px;
+  margin-right: 30px;
+  @media (${device.laptop} and ${device.biggerScreens}) {
+    width: 200px;
+  }
+  @media (${device.laptopL}) {
+    width: 10.5vw;
+  }
+  text-align: left;
+`;
+
+export const TitleText = styled.div`
+  font-family: BebasNeue-Regular;
+  color: ${({ theme }) => theme.fonts};
+  font-size: 20px;
+`;

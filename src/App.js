@@ -14,16 +14,14 @@ function App() {
     window.matchMedia('(prefers-color-scheme: dark)')
       .addEventListener('change', event => {
         const colorScheme = event.matches ? "dark" : "light";
-        console.log(colorScheme); // "dark" or "light"
         setMode(colorScheme);
        
       });
   }, []);
 
-  console.log(mode);
 
   return (
-    <ThemeProvider theme={themeMode}>
+    <ThemeProvider theme={themeMode || mode}>
       <BrowserRouter>
         <Routes>
           <Route

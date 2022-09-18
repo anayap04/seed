@@ -12,9 +12,12 @@ export const device = {
   mobileS: `(min-width: ${size.mobileS})`,
   mobileM: `(min-width: ${size.mobileM})`,
   mobileL: `(min-width: ${size.mobileL})`,
+  mobileAll: `(max-width: ${size.mobileL})`,
   tablet: `(min-width: ${size.tablet})`,
+  laptopLess: `(max-width: ${size.laptop})`,
   laptop: `(min-width: ${size.laptop})`,
   laptopL: `(min-width: ${size.laptopL})`,
+  biggerScreens: `(max-width: ${size.desktopL})`,
   desktop: `(min-width: ${size.desktop})`,
   desktopL: `(min-width: ${size.desktop})`
 };

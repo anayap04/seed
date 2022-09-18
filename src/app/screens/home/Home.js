@@ -15,7 +15,6 @@ const Home = (props) => {
   const projectRef = useRef(null);
 
   const scrollToView = (ref) => {
-    console.log(ref);
     ref.current.scrollIntoView({ behavior: "smooth", block: "start" });
   };
   const optionsHeader = [
