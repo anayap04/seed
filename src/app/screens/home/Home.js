@@ -35,7 +35,7 @@ const Home = (props) => {
     <div className="App">
       <Header theme={theme} mode={mode} themeToggler={themeToggler} btnsArray={optionsHeader} />
       <Main theme={theme} scrollToView={scrollToView} refs={{homeRef, aboutRef, howRef, projectRef}} />
-      <About theme={theme} aboutRef={aboutRef} />
+      <About mode={mode} theme={theme} aboutRef={aboutRef} />
       <HowTo theme={theme} howRef={howRef} />
       <Projects theme={theme} projectRef={projectRef} /> 
     </div>

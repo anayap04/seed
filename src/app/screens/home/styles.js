@@ -42,8 +42,34 @@ export const ImgContainer = styled.div`
 
 export const ContainerAbout = styled.div`
   height: 100vh;
+  display: flex;
+  flex-direction: column;
   background-color: ${({ theme }) => theme.background};
+  align-items: center;
+  padding-top: ${({responsiveHeight}) => responsiveHeight * 0.1}px;
 `;
+
+export const Content = styled.div`
+  height: ${({responsiveHeight}) => responsiveHeight * 0.2}px;
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+  padding-top: ${({responsiveHeight}) => responsiveHeight * 0.2}px;
+`
+
+export const DescriptionBody = styled.div`
+  width: ${({responsiveWidth}) => responsiveWidth * 0.4}px;
+  border-left:  ${({ theme }) => theme.primaryColor} 2px solid;
+  padding-left: ${({responsiveWidth}) => responsiveWidth * 0.03}px;
+  margin-left: ${({responsiveWidth}) => responsiveWidth * 0.2}px;
+`
+export const DescriptionText = styled.div`
+  font-family: Montserrat-Regular;
+  animation: 2s ${animationsObj.left};
+  margin-bottom: 30px;
+  color: ${({ theme }) => theme.fonts};
+  text-align: left;
+`
 
 export const ContainerHowTo = styled.div`
   height: 100vh;
@@ -87,6 +113,8 @@ export const HeadContainer = styled.div`
 `
 export const HeadTitle = styled.div`
   font-family: BebasNeue-Regular;
+  width: fit-content;
+  border-bottom:  ${({theme}) => theme.primaryColor} 3px solid;
   color: ${({theme}) => theme.fonts};
   font-size: ${({responsiveWidth}) => responsiveWidth*0.07}px;
   @media (${device.laptopL}) {
@@ -238,4 +266,3 @@ export const BodyText = styled.div`
   font-family: Montserrat-Regular;
   color: ${({ theme }) => theme.fonts};
 `
-
