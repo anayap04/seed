@@ -19,12 +19,11 @@ const HowTo = (props) => {
     { id: 1, title: t("startInvest"), desc: t("startInvestDesc") },
     { id: 2, title: t("checkBenefits"), desc: t("checkBenefitsDesc") },
   ];
-  console.log(height);
   const renderStep = () =>
     infoSteps.map((step) => (
       <StepContainer responsiveWidth={width} responsiveHeight={height} key={step.id}>
         <Dots theme={theme} />
-        <TextContainer>
+        <TextContainer responsiveWidth={width}>
           <TitleText theme={theme}>{step.title}</TitleText>
         </TextContainer>
       </StepContainer>

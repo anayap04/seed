@@ -153,10 +153,10 @@ export const StepContainer = styled.div`
   &:nth-child(4) {
     flex-direction: row;
     transform: translate(
-      ${({ responsiveWidth }) => responsiveWidth - 0.275 * responsiveWidth}px,
-      ${({ responsiveWidth }) => -(responsiveWidth - 0.6 * responsiveWidth)}px
+      ${({ responsiveWidth }) => responsiveWidth - 0.26 * responsiveWidth}px,
+      ${({ responsiveWidth }) => -(responsiveWidth - 0.67 * responsiveWidth)}px
     );
-    width: 300px;
+    width:  ${({ responsiveWidth }) => 0.26 * responsiveWidth}px;
     @media (${device.mobileS} and ${device.mobileAll}) {
       width: ${({responsiveWidth}) => responsiveWidth * 0.65};
       flex-direction: row;
@@ -175,14 +175,8 @@ export const StepContainer = styled.div`
   }
 `;
 export const TextContainer = styled.div`
-  margin-left: 40px;
-  margin-right: 30px;
-  @media (${device.laptop} and ${device.biggerScreens}) {
-    width: 200px;
-  }
-  @media (${device.laptopL}) {
-    width: 10.5vw;
-  }
+  margin-left: ${({responsiveWidth}) => responsiveWidth * 0.01}px;
+  margin-right: ${({responsiveWidth}) => responsiveWidth * 0.04}px;
   text-align: left;
 `;
 
@@ -190,4 +184,7 @@ export const TitleText = styled.div`
   font-family: BebasNeue-Regular;
   color: ${({ theme }) => theme.fonts};
   font-size: 20px;
+  @media (${device.laptop}) { 
+    font-size: 28px;
+  }
 `;
