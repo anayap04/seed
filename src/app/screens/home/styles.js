@@ -76,7 +76,7 @@ export const HowContainer = styled.div`
 `;
 export const StepsShapes = styled.div`
   margin-top: ${({ responsiveWidth }) => 0.1 * responsiveWidth}px;
-  margin-left: ${({ responsiveWidth }) => 0.25 * responsiveWidth}px;
+  margin-left: ${({ responsiveWidth }) => 0.3 * responsiveWidth}px;
   width: ${({ responsiveWidth }) => 0.5 * responsiveWidth}px;
   height: ${({ responsiveWidth }) => 0.5 * responsiveWidth}px;
   border-radius: 50%;
@@ -87,8 +87,8 @@ export const StepsShapes = styled.div`
     margin-left: ${({ responsiveWidth }) => 0.3 * responsiveWidth}px;
   }
   @media (${device.mobileS} and ${device.mobileAll}) {
-    height: ${({ responsiveHeight }) => 0.7 * responsiveHeight}px;
-    margin-top: ${({ responsiveHeight }) => 0.01 * responsiveHeight}px;
+    height: ${({ responsiveHeight }) => 0.5 * responsiveHeight}px;
+    margin-top: ${({ responsiveHeight }) => 0.05 * responsiveHeight}px;
     margin-left: ${({ responsiveWidth }) => 0.07 * responsiveWidth}px;
     width: 0;
     border-radius: 0;
@@ -107,46 +107,45 @@ export const StepContainer = styled.div`
   &:nth-child(2) {
     flex-direction: row-reverse;
     transform: translate(
-      ${({ responsiveWidth }) => -(responsiveWidth - 0.3 * responsiveWidth)}px,
-      ${({ responsiveWidth }) => -(responsiveWidth - 0.6 * responsiveWidth)}px
+      ${({ responsiveWidth }) => -(responsiveWidth - 0.34 * responsiveWidth)}px,
+      ${({ responsiveWidth }) => -(responsiveWidth - 0.63 * responsiveWidth)}px
     );
-    width: ${({responsiveWidth}) => responsiveWidth * 0.9};
     @media (${device.mobileS} and ${device.mobileAll}) {
-      width: ${({responsiveWidth}) => responsiveWidth * 0.6};
+      width: ${({responsiveWidth}) => responsiveWidth * 0.8}px;
       flex-direction: row;
       transform: translate(
         ${({ responsiveWidth }) => responsiveWidth * 0.04}px,
-        ${({ responsiveHeight }) => responsiveHeight * -0.73}px
+        ${({ responsiveHeight }) => responsiveHeight * -0.53}px
       );
     }
     @media (${device.laptopL}) {
       flex-direction: row-reverse;
       transform: translate(
-        ${({ responsiveWidth }) => -(responsiveWidth - 0.34 * responsiveWidth)}px,
+        ${({ responsiveWidth }) => -(responsiveWidth - 0.436 * responsiveWidth)}px,
         ${({ responsiveWidth }) => -(responsiveWidth - 0.73 * responsiveWidth)}px
       );
-      width: ${({responsiveWidth}) => responsiveWidth * 0.9};
+      width: ${({responsiveWidth}) => responsiveWidth * 0.9}px;
      }
   }
   &:nth-child(3) {
     flex-direction: row-reverse;
     transform: translate(
-      ${({ responsiveWidth }) => -(responsiveWidth - 0.3 * responsiveWidth)}px,
-      ${({ responsiveWidth }) => -(responsiveWidth - 0.85 * responsiveWidth)}px
+      ${({ responsiveWidth }) => -(responsiveWidth - 0.355 * responsiveWidth)}px,
+      ${({ responsiveWidth }) => -(responsiveWidth - 0.75 * responsiveWidth)}px
     );
     @media (${device.mobileS} and ${device.mobileAll}) {
-      width: ${({responsiveWidth}) => responsiveWidth * 0.6};
+      width: ${({responsiveWidth}) => responsiveWidth * 0.9}px;
       flex-direction: row;
       transform: translate(
         ${({ responsiveWidth }) => responsiveWidth * 0.04}px,
-        ${({ responsiveHeight }) => responsiveHeight * -0.425}px
+        ${({ responsiveHeight }) => responsiveHeight * -0.45}px
       );
     }
     @media (${device.laptopL}) {
       flex-direction: row-reverse;
       transform: translate(
-        ${({ responsiveWidth }) => -(responsiveWidth - 0.335 * responsiveWidth)}px,
-        ${({ responsiveWidth }) => -(responsiveWidth - 0.9 * responsiveWidth)}px
+        ${({ responsiveWidth }) => -(responsiveWidth - 0.37 * responsiveWidth)}px,
+        ${({ responsiveWidth }) => -(responsiveWidth - 0.89 * responsiveWidth)}px
       );
     }
   }
@@ -154,15 +153,15 @@ export const StepContainer = styled.div`
     flex-direction: row;
     transform: translate(
       ${({ responsiveWidth }) => responsiveWidth - 0.26 * responsiveWidth}px,
-      ${({ responsiveWidth }) => -(responsiveWidth - 0.67 * responsiveWidth)}px
+      ${({ responsiveWidth }) => -(responsiveWidth - 0.65 * responsiveWidth)}px
     );
     width:  ${({ responsiveWidth }) => 0.26 * responsiveWidth}px;
     @media (${device.mobileS} and ${device.mobileAll}) {
-      width: ${({responsiveWidth}) => responsiveWidth * 0.65};
+      width: ${({responsiveWidth}) => responsiveWidth * 0.8}px;
       flex-direction: row;
       transform: translate(
-        ${({ responsiveWidth }) => responsiveWidth * 0.04}px,
-        ${({ responsiveHeight }) => responsiveHeight * -0.1}px
+        ${({ responsiveWidth }) => responsiveWidth * 0.05}px,
+        ${({ responsiveHeight }) => responsiveHeight * -0.37}px
       );
     }
     @media (${device.laptopL}) {
@@ -175,16 +174,36 @@ export const StepContainer = styled.div`
   }
 `;
 export const TextContainer = styled.div`
+  display: flex;
+  flex-direction: column; 
+  align-items:  ${({alignment}) => alignment === 'left' ? 'flex-start': 'flex-end'};
   margin-left: ${({responsiveWidth}) => responsiveWidth * 0.01}px;
-  margin-right: ${({responsiveWidth}) => responsiveWidth * 0.04}px;
-  text-align: left;
+  margin-right: ${({responsiveWidth}) => responsiveWidth * 0.032}px;
+  text-align: ${({alignment}) => alignment};
+  width:  ${({responsiveWidth}) => responsiveWidth * 0.25}px;
+  @media (${device.mobileS} and ${device.mobileAll}) {
+    width: ${({responsiveWidth}) => responsiveWidth * 0.9}px;
+    text-align: left;
+    align-items: flex-start;
+    margin-right: 0px;
+   }
 `;
 
 export const TitleText = styled.div`
   font-family: BebasNeue-Regular;
+  width: fit-content;
+  border-bottom: ${({ theme }) => theme.primaryColor} 3px solid;
   color: ${({ theme }) => theme.fonts};
   font-size: 20px;
   @media (${device.laptop}) { 
     font-size: 28px;
   }
 `;
+
+
+export const BodyText = styled.div`
+margin-top: 10px;
+  font-family: Montserrat-Regular;
+  color: ${({ theme }) => theme.fonts};
+`
+

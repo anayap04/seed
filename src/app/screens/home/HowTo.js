@@ -9,22 +9,25 @@ import {
   TitleText,
   TextContainer,
   HowContainer,
+  BodyText,
 } from "./styles";
 const HowTo = (props) => {
   const { howRef, theme } = props;
   const { height, width } = useWindowDimensions();
   const { t } = useTranslation();
   const infoSteps = [
-    { id: 0, title: t("createAccount"), desc: t("createAccountDesc") },
-    { id: 1, title: t("startInvest"), desc: t("startInvestDesc") },
-    { id: 2, title: t("checkBenefits"), desc: t("checkBenefitsDesc") },
+    { id: 0, title: t("createAccount"), desc: t("createAccountDesc"), alignment: 'right', },
+    { id: 1, title: t("startInvest"), desc: t("startInvestDesc"), alignment: 'right', },
+    { id: 2, title: t("checkBenefits"), desc: t("checkBenefitsDesc"), alignment: 'left', },
   ];
   const renderStep = () =>
     infoSteps.map((step) => (
       <StepContainer responsiveWidth={width} responsiveHeight={height} key={step.id}>
         <Dots theme={theme} />
-        <TextContainer responsiveWidth={width}>
-          <TitleText theme={theme}>{step.title}</TitleText>
+       
+        <TextContainer responsiveWidth={width} alignment={step.alignment}>
+          <TitleText  theme={theme}>{step.title}</TitleText>
+          <BodyText theme={theme}>{step.desc}</BodyText>
         </TextContainer>
       </StepContainer>
     ));
