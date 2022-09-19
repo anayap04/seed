@@ -38,6 +38,7 @@ SecondaryContainer.defaultProps = {
 export const TextSecondary = styled.div`
   font-family: BebasNeue-Regular;
   color: ${({ theme }) => theme.fonts};
+  font-size: ${({fontSize}) => fontSize ? fontSize : '18'}px;
   &:hover {
     color: ${({ theme }) => theme.primaryColor};
 }

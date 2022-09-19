@@ -71,6 +71,32 @@ export const BtnContainer = styled.div`
   }
 `;
 
+export const HeadContainer = styled.div`
+  position: absolute;
+  z-index: 10;
+  margin-top: 32%;
+  left: ${({responsiveWidth}) => responsiveWidth*0.35}px;
+  @media (${device.laptopL}) {
+    margin-top: 24%;
+    left: ${({responsiveWidth}) => responsiveWidth*0.35}px;
+  }
+  @media (${device.mobileS} and ${device.laptopLess}) {
+    margin-top: 30px;
+    left:15px;
+   }
+`
+export const HeadTitle = styled.div`
+  font-family: BebasNeue-Regular;
+  color: ${({theme}) => theme.fonts};
+  font-size: ${({responsiveWidth}) => responsiveWidth*0.07}px;
+  @media (${device.laptopL}) {
+    font-size: ${({responsiveWidth}) => responsiveWidth*0.04}px;
+  }
+  @media (${device.mobileS} and ${device.mobileAll}) {
+    font-size: ${({responsiveWidth}) => responsiveWidth*0.1}px;
+   }
+`
+
 export const HowContainer = styled.div`
   position: sticky;
 `;
@@ -86,10 +112,10 @@ export const StepsShapes = styled.div`
     height: ${({ responsiveWidth }) => 0.33 * responsiveWidth}px;
     margin-left: ${({ responsiveWidth }) => 0.3 * responsiveWidth}px;
   }
-  @media (${device.mobileS} and ${device.mobileAll}) {
+  @media (${device.mobileS} and ${device.laptopLess}) {
     height: ${({ responsiveHeight }) => 0.5 * responsiveHeight}px;
-    margin-top: ${({ responsiveHeight }) => 0.05 * responsiveHeight}px;
-    margin-left: ${({ responsiveWidth }) => 0.07 * responsiveWidth}px;
+    margin-top: ${({ responsiveHeight }) => 0.15 * responsiveHeight}px;
+    margin-left: ${({ responsiveWidth }) => 0.05 * responsiveWidth}px;
     width: 0;
     border-radius: 0;
     border-left: ${({ theme }) => theme.fonts} 1px solid;
@@ -110,13 +136,16 @@ export const StepContainer = styled.div`
       ${({ responsiveWidth }) => -(responsiveWidth - 0.34 * responsiveWidth)}px,
       ${({ responsiveWidth }) => -(responsiveWidth - 0.63 * responsiveWidth)}px
     );
-    @media (${device.mobileS} and ${device.mobileAll}) {
+    @media (${device.mobileS} and ${device.laptopLess}) {
       width: ${({responsiveWidth}) => responsiveWidth * 0.8}px;
       flex-direction: row;
       transform: translate(
         ${({ responsiveWidth }) => responsiveWidth * 0.04}px,
         ${({ responsiveHeight }) => responsiveHeight * -0.53}px
       );
+    }
+    @media (${device.tablet} and ${device.laptopLess}) {
+      margin-bottom: ${({responsiveHeight}) => responsiveHeight * 0.09}px;
     }
     @media (${device.laptopL}) {
       flex-direction: row-reverse;
@@ -133,13 +162,16 @@ export const StepContainer = styled.div`
       ${({ responsiveWidth }) => -(responsiveWidth - 0.355 * responsiveWidth)}px,
       ${({ responsiveWidth }) => -(responsiveWidth - 0.75 * responsiveWidth)}px
     );
-    @media (${device.mobileS} and ${device.mobileAll}) {
+    @media (${device.mobileS} and ${device.laptopLess}) {
       width: ${({responsiveWidth}) => responsiveWidth * 0.9}px;
       flex-direction: row;
       transform: translate(
         ${({ responsiveWidth }) => responsiveWidth * 0.04}px,
         ${({ responsiveHeight }) => responsiveHeight * -0.45}px
       );
+    }
+    @media (${device.tablet} and ${device.laptopLess}) {
+      margin-bottom: ${({responsiveHeight}) => responsiveHeight * 0.09}px;
     }
     @media (${device.laptopL}) {
       flex-direction: row-reverse;
@@ -156,7 +188,7 @@ export const StepContainer = styled.div`
       ${({ responsiveWidth }) => -(responsiveWidth - 0.65 * responsiveWidth)}px
     );
     width:  ${({ responsiveWidth }) => 0.26 * responsiveWidth}px;
-    @media (${device.mobileS} and ${device.mobileAll}) {
+    @media (${device.mobileS} and ${device.laptopLess}) {
       width: ${({responsiveWidth}) => responsiveWidth * 0.8}px;
       flex-direction: row;
       transform: translate(
@@ -181,7 +213,7 @@ export const TextContainer = styled.div`
   margin-right: ${({responsiveWidth}) => responsiveWidth * 0.032}px;
   text-align: ${({alignment}) => alignment};
   width:  ${({responsiveWidth}) => responsiveWidth * 0.25}px;
-  @media (${device.mobileS} and ${device.mobileAll}) {
+  @media (${device.mobileS} and ${device.laptopLess}) {
     width: ${({responsiveWidth}) => responsiveWidth * 0.9}px;
     text-align: left;
     align-items: flex-start;
@@ -202,7 +234,7 @@ export const TitleText = styled.div`
 
 
 export const BodyText = styled.div`
-margin-top: 10px;
+  margin-top: 10px;
   font-family: Montserrat-Regular;
   color: ${({ theme }) => theme.fonts};
 `
