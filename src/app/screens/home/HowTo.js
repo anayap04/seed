@@ -1,7 +1,8 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
 import useWindowDimensions from "../../../utils/useWindowDimensions";
-import SecondaryBtn from "../../components/buttons/Secondary";
+import SecondaryBtn from "../../components/atoms/buttons/Secondary";
 import {
   StepsShapes,
   ContainerHowTo,
@@ -16,8 +17,9 @@ import {
 } from "./styles";
 
 const HowTo = (props) => {
-  const { howRef, theme } = props;
+  const { howRef, theme, userData } = props;
   const { height, width } = useWindowDimensions();
+  const navigate = useNavigate()
   const { t } = useTranslation();
   const infoSteps = [
     {
@@ -61,10 +63,10 @@ const HowTo = (props) => {
           {t("howWorks")}
         </HeadTitle>
         <SecondaryBtn
-          onClick={() => console.log("AAA")}
+          onClick={() => userData ? navigate("/profile") : navigate("/register")}
           fontSize={width * 0.025}
           theme={theme}
-          label="Empieza ya"
+          label={t('start')}
         />
       </HeadContainer>
       <HowContainer>

@@ -4,6 +4,8 @@ export const lightTheme = {
   nero: '#1C1C1C',
   background: '#FFFFFF',
   primaryColor: '#026243',
+  error: '#99221E',
+  lightBackground: '#EAE9E9',
 }
 
 export const darkTheme = {
@@ -12,4 +14,6 @@ export const darkTheme = {
   nero: '#1C1C1C',
   background: '#0D0D0D',
   primaryColor: '#4FE0B3',
+  error: '#DB504A',
+  lightBackground: '#1C1C1C',
 }

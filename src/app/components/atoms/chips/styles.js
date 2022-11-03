@@ -1,0 +1,31 @@
+import styled from "styled-components";
+
+export const ChipDiv = styled.div`
+  border: ${({theme}) => theme.primaryColor} 4px solid;
+  border-radius: 10px;
+  padding-top: 4px;
+  background-color: ${({theme, selected}) => selected ? theme.primaryColor + '80' : 'transparent'};
+  width: fit-content;
+  padding-left: 10px;
+  padding-right: 10px;
+  height: 44px;
+  cursor: pointer;
+`
+
+export const ChipText  = styled.p`
+  font-family: Bitter-SemiBold;
+  font-size: 18px;
+  color: ${({theme}) => theme.fonts};
+`
+
+export const Group = styled.div`
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 30px;
+  padding-left: 10px;
+  padding-top: 20px;
+`
+
+export const ChipSingle = styled.div`
+  margin-right: 25px;
+`

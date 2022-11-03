@@ -2,6 +2,7 @@ import i18next from "i18next";
 import { initReactI18next } from "react-i18next";
 import esConstants from "./esConstants";
 import enConstants from "./enConstants";
+import ptConstants from "./ptConstants";
 
 const resources = {
   es: {
@@ -9,6 +10,9 @@ const resources = {
   },
   en: {
     translation: enConstants,
+  },
+  pt: {
+    translation: ptConstants,
   },
 };
 i18next.use(initReactI18next).init({

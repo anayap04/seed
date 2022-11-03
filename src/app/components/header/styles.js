@@ -8,6 +8,7 @@ const Container = styled.div`
   padding-bottom: 12px;
   display: flex;
   justify-content: right;
+  z-index: 100;
 `;
 const ButtonContainer = styled.div`
   margin-right: 20px;

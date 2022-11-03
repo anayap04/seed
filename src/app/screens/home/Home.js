@@ -1,45 +1,61 @@
 import React, { useRef } from "react";
 import Header from "../../components/header";
-import { useTranslation } from "react-i18next";
 import Main from "./Main";
 import About from "./About";
 import HowTo from "./HowTo";
 import Projects from "./Projects";
+import { connect } from "react-redux";
+import { loginSuccessed } from "../../../redux/actions/login";
+import Footer from "../../components/footer/Footer";
 
 const Home = (props) => {
-  const { theme, themeToggler, mode } = props;
-  const { t } = useTranslation();
+  const { theme, themeToggler, mode, userData } = props;
   const homeRef = useRef(null);
   const aboutRef = useRef(null);
   const howRef = useRef(null);
   const projectRef = useRef(null);
+  const btnsArray = ['lang', 'mode'];
+  const cachedUser = localStorage.getItem('userId')
+  if (cachedUser || userData) {
+    btnsArray.push(...['profile', 'logout'])
+  } else {
+    btnsArray.push(...['reg', 'login'])
+  }
 
   const scrollToView = (ref) => {
     ref.current.scrollIntoView({ behavior: "smooth", block: "start" });
   };
-  const optionsHeader = [
-    {
-      id: "login",
-      type: "secondary",
-      label: t("login"),
-      onClick: () => console.log("Test login"),
-    },
-    {
-      id: "reg",
-      type: "primary",
-      label: t("register"),
-      onClick: () => console.log("Test register"),
-    },
-  ];
   return (
     <div className="App">
-      <Header theme={theme} mode={mode} themeToggler={themeToggler} btnsArray={optionsHeader} />
-      <Main theme={theme} scrollToView={scrollToView} refs={{homeRef, aboutRef, howRef, projectRef}} />
+      <Header
+        theme={theme}
+        mode={mode}
+        themeToggler={themeToggler}
+        btnsArray={btnsArray}
+      />
+      <Main
+        theme={theme}
+        scrollToView={scrollToView}
+        refs={{ homeRef, aboutRef, howRef, projectRef }}
+      />
       <About mode={mode} theme={theme} aboutRef={aboutRef} />
-      <HowTo theme={theme} howRef={howRef} />
-      <Projects theme={theme} projectRef={projectRef} /> 
+      <HowTo userData={cachedUser || userData} theme={theme} howRef={howRef} />
+      <Projects theme={theme} projectRef={projectRef} />
+      <Footer theme={theme} />
     </div>
   );
 };
+const mapToStateProps = (state) => {
+  const { userData } = state.loginReducer;
+  return {
+    userData: userData,
+  };
+}
 
-export default Home;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    loadUser: () => dispatch(loginSuccessed)
+  }
+}
+
+export default connect(mapToStateProps, mapDispatchToProps)(Home);

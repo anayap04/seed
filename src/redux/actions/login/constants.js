@@ -1,0 +1,10 @@
+const FETCH_LOGIN = "FETCH_LOGIN";
+const LOGIN_SUCCESS = "LOGIN_SUCCESS";
+const LOGIN_FAILED = "LOGIN_FAILED";
+const LOGOUT = "LOGOUT"
+export const  Login  = {
+  FETCH_LOGIN,
+  LOGIN_SUCCESS,
+  LOGIN_FAILED,
+  LOGOUT,
+}

@@ -7,7 +7,7 @@ import GlobalStyles from './GlobalStyles'
 
 const ThemeProvider = ({ children }) => (
   <StyledComponentsThemeProvider theme={DefaultTheme}>
-    <GlobalStyles />
+    <GlobalStyles theme={DefaultTheme} />
     {children}
   </StyledComponentsThemeProvider>
 )
