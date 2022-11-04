@@ -3,7 +3,7 @@ import { device } from "../../../theme/themes/DefaultTheme/screenSizes";
 
 export const CardContainer = styled.div`
   width: 610px;
-  heigth: 320px;
+  heigth: 370px;
   border: ${({ theme }) => theme.primaryColor} 2px solid;
   display: flex;
   flex-direction: row;
@@ -16,7 +16,7 @@ export const CardContainer = styled.div`
 `;
 export const ImageFragment = styled.div`
   width: 250px;
-  height: 320px;
+  height: 370px;
   border-right: ${({ theme }) => theme.primaryColor} 2px solid;
   background: url(${({url}) => url});
   background-position: center;
@@ -35,8 +35,14 @@ export const TextFragment = styled.div`
   paddig-right: 20px;
   padding-top: 10px;
   text-align: left;
-  width: 350px;
+  width: 340px;
+  height: 250px;
 `;
+
+export const TitleContent = styled.div`
+ height: 80px;
+ margin-bottom: 10px;
+`
 
 export const CardTitle = styled.p`
   color: ${({ theme }) => theme.fonts};
@@ -45,12 +51,12 @@ export const CardTitle = styled.p`
   margin-bottom: 5px;
 `;
 
-export const Description = styled.p`
-  color: ${({ theme }) => theme.fonts};
-  font-size: 14px;
-  font-family: Montserrat-Regular;
-  margin-bottom: 10px;
-`;
+export const ContentBody = styled.div`
+ height: 120px;
+ margin-bottom: 10px;
+ width: 298px;
+`
+
 
 export const InfoSub = styled.div`
   display: flex;
@@ -80,7 +86,7 @@ export const FooterImg = styled.div`
   text-align: left;
   padding-left: 20px;
   @media (${device.laptop}) { 
-    width: 216px;
+    width: 224px;
   }
   @media(${device.mobileAll}) {
     width: 0px;

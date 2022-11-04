@@ -16,10 +16,16 @@ const Body = styled.p`
   font-family: Montserrat-Regular;
 `;
 
+const BodySmall = styled.p`
+  font-size: 14px;
+  color: ${({ theme }) => theme.fonts};
+  font-family: Montserrat-Light;
+`;
+
 const BodyError = styled.p`
   font-size: 16px;
   color: ${({ theme }) => theme.error};
   font-family: Montserrat-Regular;
 `
 
-export { Title, Body, BodyError };
+export { Title, Body, BodyError, BodySmall };

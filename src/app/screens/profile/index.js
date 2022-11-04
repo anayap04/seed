@@ -162,7 +162,7 @@ const Profile = (props) => {
   useEffect(() => {
     dispatch(fetchUser());
     setUserData(userInfo ? userInfo.data : {});
-  }, [dispatch, userInfo]);
+  }, [dispatch]);
 
   return (
     <Root theme={theme}>

@@ -5,15 +5,17 @@ import Icon from "../foundation/Icon";
 import {
   CardContainer,
   ImageFragment,
+  TitleContent,
   TextFragment,
   CardTitle,
-  Description,
   InfoSub,
   InfoContainer,
   TitleInfo,
   FooterImg,
   ProfitTitle,
+  ContentBody,
 } from "./styles";
+import {Body, BodySmall} from  "../foundation/Typography"
 
 const Card = (props) => {
   const { theme, title, location, description, time, objective, profit, img } =
@@ -30,20 +32,24 @@ const Card = (props) => {
         </FooterImg>
       </ImageFragment>
       <TextFragment>
+        <TitleContent>
         <CardTitle theme={theme}>{title}</CardTitle>
-        <Description theme={theme}>
-          <Icon tintColor={theme.fonts} size={20} iconName="Location" />
+        <BodySmall theme={theme}>
+          <Icon tintColor={theme.fonts} size={18} iconName="Location" />
           {location}
-        </Description>
-        <Description theme={theme}>{description}</Description>
+        </BodySmall>
+        </TitleContent>
+        <ContentBody>
+        <Body theme={theme}>{description}</Body>
+        </ContentBody>
         <InfoSub>
           <InfoContainer>
             <TitleInfo theme={theme}>{t("objectiveTitle")}</TitleInfo>
-            <Description theme={theme}>{objective}</Description>
+            <Body theme={theme}>{objective}</Body>
           </InfoContainer>
           <InfoContainer>
             <TitleInfo theme={theme}>{t("daysLeft")}</TitleInfo>
-            <Description theme={theme}>{time}</Description>
+            <Body theme={theme}>{time}</Body>
           </InfoContainer>
         </InfoSub>
         <PrimaryBtn
