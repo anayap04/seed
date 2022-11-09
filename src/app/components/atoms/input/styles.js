@@ -20,7 +20,7 @@ export const Field = styled.input`
   color: ${({ theme }) => theme.fonts};
   :not(textarea) {
     line-height: 1;
-    border: ${({ theme }) => theme.acqua} 2px solid;
+    border: ${({ theme }) => theme.primaryColor} 2px solid;
   }
   focus {
     font-family: Montserrat-Regular;
@@ -64,7 +64,7 @@ export const InputContentIcon = styled.div`
   border: ${({ theme }) => theme.primaryColor} 2px solid;
   :not(textarea) {
     line-height: 1;
-    border: ${({ theme }) => theme.acqua} 2px solid;
+    border: ${({ theme }) => theme.primaryColor} 2px solid;
   }
   focus {
     font-family: Montserrat-Regular;

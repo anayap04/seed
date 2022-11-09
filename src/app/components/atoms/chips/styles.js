@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { device } from "../../../../theme/themes/DefaultTheme/screenSizes";
 
 export const ChipDiv = styled.div`
   border: ${({theme}) => theme.primaryColor} 4px solid;
@@ -10,6 +11,9 @@ export const ChipDiv = styled.div`
   padding-right: 10px;
   height: 44px;
   cursor: pointer;
+  @media(${device.mobileAll}) {
+    height: fit-content;
+  }
 `
 
 export const ChipText  = styled.p`

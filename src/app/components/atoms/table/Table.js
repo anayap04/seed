@@ -5,7 +5,7 @@ const TableSeed = (props) => {
   const { headArr, bodyArr, theme } = props;
   const renderRow = (item) => {
     return (
-      <tr>
+      <tr key={item.name}>
         <td>
           <p>{item.name}</p>
         </td>

@@ -26,7 +26,7 @@ export const Image = styled.img`
 
 export const ContentInfo = styled.div`
   margin-left: ${({ responsiveWidth }) => responsiveWidth * 0.05}px;
-  padding-top: 20px;
+  padding-top: 30px;
   animation: 1.5s ${fadeAnimation};
 `;
 
@@ -42,6 +42,11 @@ export const SectionDetail = styled(SectionContainer)`
   padding-top: 40px;
   padding-left: 17px;
   padding-bottom: 30px;
+  @media(${device.mobileAll}) {
+    position: relative;
+    width: ${({ responsiveWidth }) => responsiveWidth * 0.8}px;
+    margin-left: ${({ responsiveWidth }) => responsiveWidth * 0.01}px;
+  }
 `;
 
 export const ProgressBarDiv = styled(ProgressBar)`

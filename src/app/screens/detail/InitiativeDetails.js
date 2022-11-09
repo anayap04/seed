@@ -56,7 +56,7 @@ const InitiativeDetail = (props) => {
       <Image src={data.imageUrl} responsiveWidth={width} />
       <ContentInfo responsiveWidth={width}>
         <RowDetail>
-          <Col xl={7}>
+          <Col xl={7} sm={12} md={12}>
             <Title theme={theme}>{data.name}</Title>
             <Info>
             <InfoContent>
@@ -77,7 +77,7 @@ const InitiativeDetail = (props) => {
             </InfoContent>
             </Info>
           </Col>
-          <Col xl={4}>
+          <Col xl={4} sm={12} md={12}>
             <SectionDetail responsiveWidth={width} theme={theme}>
               <Subtitle theme={theme}>{t("timeLeft")}</Subtitle>
               <CountdownStyle theme={theme} date={Date.now() + 100000} />
@@ -91,7 +91,7 @@ const InitiativeDetail = (props) => {
               />
             </SectionDetail>
           </Col>
-          <Col xl={7}>
+          <Col xl={7} sm={12} md={12}>
             <BodyContent>
               <Body theme={theme}>{data.resume}</Body>
             </BodyContent>
