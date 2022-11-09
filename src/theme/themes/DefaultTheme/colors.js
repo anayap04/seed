@@ -3,7 +3,7 @@ export const lightTheme = {
   fonts: '#0D0D0D',
   nero: '#1C1C1C',
   background: '#FFFFFF',
-  primaryColor: '#026243',
+  primaryColor: '#18906A',
   error: '#99221E',
   lightBackground: '#EAE9E9',
 }

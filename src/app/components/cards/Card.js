@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import PrimaryBtn from "../atoms/buttons/Primary";
 import Icon from "../foundation/Icon";
@@ -14,33 +14,53 @@ import {
   FooterImg,
   ProfitTitle,
   ContentBody,
+  ProgressBarDiv,
 } from "./styles";
-import {Body, BodySmall} from  "../foundation/Typography"
+import { Body, BodySmall } from "../foundation/Typography";
 
 const Card = (props) => {
-  const { theme, title, location, description, time, objective, profit, img } =
-    props;
+  const {
+    theme,
+    title,
+    location,
+    description,
+    time,
+    objective,
+    profit,
+    img,
+    achieved,
+    btnClick,
+  } = props;
   const { t } = useTranslation();
-  const imgUrl = img
+  const [onHover, setHover] = useState(false);
+  const imgUrl = img;
 
   return (
-    <CardContainer theme={theme}>
+    <CardContainer onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)} theme={theme}>
       <ImageFragment url={imgUrl} theme={theme}>
-        <FooterImg  theme={theme}>
+        <FooterImg onHover={onHover} theme={theme}>
           <ProfitTitle theme={theme}>{t("profit")}</ProfitTitle>
-          <ProfitTitle theme={theme}>{profit}</ProfitTitle>
+          <Body theme={theme}>{profit}</Body>
+          {onHover && (
+            <>
+              {" "}
+              <ProfitTitle theme={theme}>{t("achieved")}</ProfitTitle>
+              <Body theme={theme}>{`${achieved} %`}</Body>
+              <ProgressBarDiv theme={theme} animated now={achieved} />
+            </>
+          )}
         </FooterImg>
       </ImageFragment>
       <TextFragment>
         <TitleContent>
-        <CardTitle theme={theme}>{title}</CardTitle>
-        <BodySmall theme={theme}>
-          <Icon tintColor={theme.fonts} size={18} iconName="Location" />
-          {location}
-        </BodySmall>
+          <CardTitle theme={theme}>{title}</CardTitle>
+          <BodySmall theme={theme}>
+            <Icon tintColor={theme.fonts} size={18} iconName="Location" />
+            {location}
+          </BodySmall>
         </TitleContent>
         <ContentBody>
-        <Body theme={theme}>{description}</Body>
+          <Body theme={theme}>{description}</Body>
         </ContentBody>
         <InfoSub>
           <InfoContainer>
@@ -55,8 +75,9 @@ const Card = (props) => {
         <PrimaryBtn
           margin={20}
           width={275}
-          label={t('seeMore')}
+          label={t("seeMore")}
           theme={theme}
+          onClick={btnClick}
         />
       </TextFragment>
     </CardContainer>

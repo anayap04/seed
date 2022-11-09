@@ -6,7 +6,6 @@ export const FooterContent = styled.div`
   background-color: ${({ theme }) => theme.background};
   align-items: center;
   text-align: center;
-  position: fixed;
   width: 100vw;
   padding-top: 20px;
   @media (${device.laptop}) {

@@ -9,6 +9,7 @@ import LoginPage from "./app/screens/login";
 import Profile from "./app/screens/profile";
 import GlobalStyles from "./theme/GlobalStyles";
 import ProjectsMain from "./app/screens/projects/Projects";
+import InitiativeDetail from "./app/screens/detail/InitiativeDetails";
 
 function App() {
   const [theme, themeToggler] = useDarkMode();
@@ -64,6 +65,16 @@ function App() {
             path="/projects"
             element={
               <ProjectsMain
+                themeToggler={themeToggler}
+                theme={themeMode}
+                mode={theme}
+              />
+            }
+          ></Route>
+          <Route
+            path="/initiative"
+            element={
+              <InitiativeDetail
                 themeToggler={themeToggler}
                 theme={themeMode}
                 mode={theme}

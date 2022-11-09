@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { Row } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
 import { connect, useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { fetchAllInitiatives } from "../../../redux/actions/initiatives";
 import { mapCards } from "../../../utils/mappers";
 import useWindowDimensions from "../../../utils/useWindowDimensions";
@@ -15,6 +16,7 @@ const Projects = (props) => {
   const { t } = useTranslation()
   const { width } = useWindowDimensions();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const noOfCards = width < 1240 ? 2 : 4;
   useEffect(() => {
     dispatch(fetchAllInitiatives());
@@ -33,6 +35,8 @@ const Projects = (props) => {
         objective={item.objective}
         profit={item.profit}
         img={item.img}
+        achieved={item.achieved}
+        btnClick={() => navigate("/initiative", {id: item.id})}
       />
     </ColProject>
   );

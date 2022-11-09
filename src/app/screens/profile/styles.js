@@ -4,6 +4,7 @@ import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import { device } from "../../../theme/themes/DefaultTheme/screenSizes";
 import texture from "../../../assets/imgs/earth.jpeg";
+import { SectionContainer } from "../../components/section/styles";
 
 export const Root = styled.div`
   background-color: ${({ theme }) => theme.background};
@@ -25,16 +26,30 @@ export const Content = styled.div`
   padding-left: 30px;
 `;
 
-export const ProfileInfoInputs = styled.div`
-  
+export const RowInvestment = styled(Row)`
+  padding-left: 30px;
 `;
+
+export const ColInvestment = styled(Col)`
+  align-items: center;
+`
+
+export const SectionBonds = styled(SectionContainer)`
+  text-align: center;
+  padding-left: ${({responsiveWidth}) => responsiveWidth * 0.45}px;
+  padding-top: 50px;
+`
+
+export const ProfileInfoInputs = styled.div``;
+
+
 export const BtnFooter = styled.div`
   margin-top: 35px;
-  margin-bottom: 30px;
-  text-align: center;
+  padding-bottom: 35px;
+  margin-left:  -${({responsiveWidth}) => responsiveWidth * 0.43}px;
 `;
 export const ContainerProfile = styled(Container)`
-  max-width: ${({responsiveWidth}) => responsiveWidth * 0.95}px;
+  max-width: ${({ responsiveWidth }) => responsiveWidth * 0.95}px;
   padding-bottom: 100px;
   background-color: ${({ theme }) => theme.background};
   margin-left: 0px;
@@ -48,8 +63,8 @@ export const ColBonds = styled(Col)`
 export const ColProfile = styled(Col)`
   margin-left: 10px;
   margin-right: 15px;
-`
+`;
 
 export const RowProfile = styled(Row)`
-  max-width: ${({responsiveWidth}) => responsiveWidth * 0.9}px;
-`
+  max-width: ${({ responsiveWidth }) => responsiveWidth * 0.9}px;
+`;

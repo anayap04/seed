@@ -18,7 +18,10 @@ const Main = (props) => {
   const { theme, scrollToView, refs } = props;
   const { t } = useTranslation();
   const { width } = useWindowDimensions();
-  const videoBck =  theme.background === "#FFFFFF"  ? videoLight : video
+  console.log(theme.background)
+  const videoBck =  theme.background === '#FFFFFF'  ? videoLight : video
+  console.log(videoBck)
+
 
   const btns = [
     {
@@ -47,7 +50,7 @@ const Main = (props) => {
   return (
     <ContainerMain theme={theme}>
       <VideoContainer height="90%" autoPlay muted loop no-controls>
-        <source src={videoBck} />
+        <source src={ theme.background === '#FFFFFF'  ? videoLight : video} />
       </VideoContainer>
       <Back theme={theme} />
       <ImgContainer theme={theme}>

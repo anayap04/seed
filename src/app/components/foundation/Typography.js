@@ -10,6 +10,19 @@ const Title = styled.p`
   heigth: 40px;
 `;
 
+const Subtitle = styled.p`
+  font-size: 18px;
+  color: ${({ theme }) => theme.fonts};
+  font-family: Bitter-SemiBold;
+  margin-bottom: -5px;
+`;
+
+const BodyBold = styled.p`
+  font-size: 16px;
+  color: ${({ theme }) => theme.fonts};
+  font-family: Montserrat-Regular;
+  font-weight: 900;
+`;
 const Body = styled.p`
   font-size: 16px;
   color: ${({ theme }) => theme.fonts};
@@ -28,4 +41,4 @@ const BodyError = styled.p`
   font-family: Montserrat-Regular;
 `
 
-export { Title, Body, BodyError, BodySmall };
+export { Title, Subtitle, Body, BodyError, BodySmall, BodyBold };

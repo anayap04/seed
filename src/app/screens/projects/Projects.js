@@ -10,12 +10,22 @@ import { CardsContainer, ColProject, Container, Root } from "./styles";
 import { mapCards } from "../../../utils/mappers";
 import useWindowDimensions from "../../../utils/useWindowDimensions";
 import Footer from "../../components/footer/Footer";
+import { useNavigate } from "react-router-dom";
 
 const ProjectsMain = (props) => {
   const { theme, mode, themeToggler, allInitiatives } = props;
   const { t } = useTranslation();
   const { width } = useWindowDimensions();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const handleNavigation = (id) => {
+    navigate('/initiative', {
+      state: {
+        id: id,
+      }
+    });
+  };
 
   const renderCards = (item) => (
     <ColProject key={item.title} responsiveWidth={width} lg={12} xl={6} m={7}>
@@ -29,6 +39,8 @@ const ProjectsMain = (props) => {
         objective={item.objective}
         profit={item.profit}
         img={item.img}
+        achieved={item.achieved}
+        btnClick={() => handleNavigation(item.id)}
       />
     </ColProject>
   );

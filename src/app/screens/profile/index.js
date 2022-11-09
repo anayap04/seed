@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { connect, useDispatch } from "react-redux";
 import { fetchUser, userUpdateFetch } from "../../../redux/actions/user";
-import { Title, Body } from "../../components/foundation/Typography";
+import { Title, Subtitle } from "../../components/foundation/Typography";
 import Header from "../../components/header";
 import Input from "../../components/atoms/input";
 import Section from "../../components/section";
@@ -14,12 +14,17 @@ import {
   ContainerProfile,
   ColProfile,
   RowProfile,
+  RowInvestment,
+  ColInvestment,
+  SectionBonds,
 } from "./styles";
 import SecondaryBtn from "../../components/atoms/buttons/Secondary";
 import useWindowDimensions from "../../../utils/useWindowDimensions";
 import ChipGroup from "../../components/atoms/chips/ChipGroup";
+import TableSeed from "../../components/atoms/table/Table";
 import Footer from "../../components/footer/Footer";
 import { useForm } from "react-hook-form";
+import { mapTableInvesment } from "../../../utils/mappers";
 
 const ProfileSummary = ({
   userInfo,
@@ -64,7 +69,13 @@ const ProfileSummary = ({
         <ContainerProfile responsiveWidth={width}>
           <RowProfile>
             {profileArray.map((info, e) => (
-              <ColProfile xl={width > 1400 ? 2 : 3} lg={3} md={4} sm={6} key={e}>
+              <ColProfile
+                xl={width > 1400 ? 2 : 3}
+                lg={3}
+                md={4}
+                sm={6}
+                key={e}
+              >
                 <Input
                   key={e}
                   labelTitle={info.label}
@@ -87,31 +98,45 @@ const ProfileSummary = ({
     </ProfileInfoInputs>
   );
 };
-
-const Profits = ({ theme, userData, t, width }) => (
-  <Content>
-    <Title theme={theme}>{t("profitTable")}</Title>
-    <Section customWidth={width} theme={theme}>
-      <Body theme={theme}>{t("totalProfits")}</Body>
-      <Title theme={theme}>{1000}</Title>
-      <Body theme={theme}>{t("totalProfits")}</Body>
-      <Title theme={theme}>{userData.iniciativesSupported?.length}</Title>
-      <BtnFooter>
-        <SecondaryBtn theme={theme} label={t("seeInvestments")} />
-      </BtnFooter>
-    </Section>
-  </Content>
-);
+const Profits = ({ theme, userData, t, width, openTable, table }) => {
+  const titleArr = ["Iniciativa", "Cantidad", "Fecha"];
+  const body = userData && mapTableInvesment(userData);
+  return (
+    <Content>
+      <Title theme={theme}>{t("profitTable")}</Title>
+      <Section customWidth={width} theme={theme}>
+        <RowInvestment>
+          <ColInvestment>
+            <Subtitle theme={theme}>{t("totalProfits")}</Subtitle>
+            <Title theme={theme}>{1000}</Title>
+          </ColInvestment>
+          <ColInvestment>
+            <Subtitle theme={theme}>{t("investments")}</Subtitle>
+            <Title theme={theme}>{userData.iniciativesSupported?.length}</Title>
+          </ColInvestment>
+        </RowInvestment>
+        {table && <TableSeed theme={theme} headArr={titleArr} bodyArr={body} />}
+        <BtnFooter>
+          <SecondaryBtn
+            onClick={() => openTable(!table)}
+            theme={theme}
+            label={table ? t("noSeeInvestments") : t("seeInvestments")}
+          />
+        </BtnFooter>
+      </Section>
+    </Content>
+  );
+};
 
 const Bonds = ({ theme, t, width, userData }) => (
   <Content>
     <Title theme={theme}>{t("myGreenBonds")}</Title>
-    <Section customWidth={width} theme={theme}>
+    <SectionBonds responsiveWidth={width} customWidth={width} theme={theme}>
       <Title theme={theme}>{`$ ${userData.credits} ${t("money")}`}</Title>
-      <BtnFooter>
-        <SecondaryBtn theme={theme} label={t("buyBonds")} />
+      <BtnFooter responsiveWidth={width}>
+        <SecondaryBtn  theme={theme} label={t("buyBonds")} />
       </BtnFooter>
-    </Section>
+    </SectionBonds>
   </Content>
 );
 
@@ -152,6 +177,7 @@ const Profile = (props) => {
   const { width } = useWindowDimensions();
   const { register, handleSubmit } = useForm();
   const [id, setId] = useState(0);
+  const [table, openTable] = useState(false);
   const [disabled, setDisabled] = useState(true);
   const [userData, setUserData] = useState(userInfo ? userInfo.data : {});
   const chipsInfo = [
@@ -196,7 +222,14 @@ const Profile = (props) => {
         <Bonds theme={theme} userData={userData} t={t} width={width} />
       )}
       {id === 2 && (
-        <Profits theme={theme} userData={userData} t={t} width={width} />
+        <Profits
+          theme={theme}
+          userData={userData}
+          t={t}
+          width={width}
+          openTable={openTable}
+          table={table}
+        />
       )}
       <Footer theme={theme} />
     </Root>

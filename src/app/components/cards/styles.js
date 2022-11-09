@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { device } from "../../../theme/themes/DefaultTheme/screenSizes";
+import ProgressBar from 'react-bootstrap/ProgressBar';
 
 export const CardContainer = styled.div`
   width: 610px;
@@ -78,7 +79,7 @@ export const InfoContainer = styled.div`
 
 export const FooterImg = styled.div`
   position: absolute;
-  height: 81px;
+  height: ${({onHover}) => onHover ? '160px' : '81px'};
   bottom: 0;
   background-color: ${({ theme }) => theme.background}85;
   width: 250px;
@@ -92,14 +93,27 @@ export const FooterImg = styled.div`
     width: 0px;
     display: none;
   }
+ 
 `;
 
 export const ProfitTitle = styled.p`
   color: ${({ theme }) => theme.primaryColor};
   font-family: Bitter-SemiBold;
   font-size: 18px;
-  margin-bottom: -2px;
+  margin-bottom: -5px;
   @media(${device.mobileAll}) {
     display: none;
   }
 `;
+
+export const ProgressBarDiv = styled(ProgressBar)`
+  width: 180px;
+  height: 10px;
+  margin-top: -15px;
+  & > .progress {
+    background-color: #f9f9f98c
+  }
+  & > .progress-bar {
+    background-color: ${({theme}) => theme.primaryColor};
+  }
+`
