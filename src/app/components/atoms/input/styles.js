@@ -31,7 +31,7 @@ export const Field = styled.input`
 export const InputContent = styled.div`
   display: flex;
   flex-direction: column;
-  width: 280px;
+  width: ${({customWidth}) => customWidth ? customWidth : '280'}px;
   margin-top: 30px;
 `;
 export const FieldBlank = styled.input`

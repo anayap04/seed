@@ -52,8 +52,9 @@ const InputWithoutIcon = ({
   label,
   value,
   valueWidth,
+  customWidth,
 }) => (
-  <InputContent>
+  <InputContent customWidth={customWidth}>
     <Label theme={theme}>{labelTitle}</Label>
     <Field
       valueWidth={valueWidth}
@@ -79,10 +80,11 @@ const Input = (props) => {
     disabled,
     value,
     defaultValue,
+    customWidth
   } = props;
   const width = useTextWidth({ text: !disabled ? value + 'sfgdrgfdg' : defaultValue, font: "20px Times" });
   const widthInt = Math.ceil(width);
-  console
+  
   return iconName ? (
     <InputWithIcon
       type={type}
@@ -110,6 +112,7 @@ const Input = (props) => {
       onClick={onClick}
       value={value}
       valueWidth={widthInt}
+      customWidth={customWidth}
     />
   );
 };

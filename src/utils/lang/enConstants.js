@@ -22,7 +22,9 @@ export default {
   checkBenefitsDesc:
     "Desde la plataforma, podrás revisar el día a día de los proyectos y monitorear en tiempo real tus inversiones.",
   loginTitle: "Hello, again!",
+  registerTitle: "Welcome!",
   loginSubtitle: "Please enter your username and password",
+  rgisterSubtitle: "Please the follow information to register",
   labelUserId: "User",
   labelPass: "Password",
   errorPass: "Wrong password",

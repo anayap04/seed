@@ -18,10 +18,6 @@ const Main = (props) => {
   const { theme, scrollToView, refs } = props;
   const { t } = useTranslation();
   const { width } = useWindowDimensions();
-  console.log(theme.background)
-  const videoBck =  theme.background === '#FFFFFF'  ? videoLight : video
-  console.log(videoBck)
-
 
   const btns = [
     {

@@ -13,22 +13,22 @@ const Header = (props) => {
   const navigate = useNavigate();
   const { t, i18n } = useTranslation();
   const dispatch = useDispatch();
-  const [ listOpen, setList ] = useState(false);
+  const [listOpen, setList] = useState(false);
   const arrayLang = [
     {
       id: "en",
       label: "EN",
-      onClick: () => i18n.changeLanguage('en'),
+      onClick: () => i18n.changeLanguage("en"),
     },
     {
       id: "es",
       label: "ES",
-      onClick: () => i18n.changeLanguage('es'),
+      onClick: () => i18n.changeLanguage("es"),
     },
     {
       id: "pt",
       label: "PT",
-      onClick: () => i18n.changeLanguage('pt'),
+      onClick: () => i18n.changeLanguage("pt"),
     },
   ];
   const open = () => {
@@ -36,11 +36,11 @@ const Header = (props) => {
   };
 
   const logoutSession = () => {
-    dispatch(logout())
-    localStorage.removeItem('userId')
-    localStorage.removeItem('mail')
-    navigate('/')
-  }
+    dispatch(logout());
+    localStorage.removeItem("userId");
+    localStorage.removeItem("mail");
+    navigate("/");
+  };
   const arrayComplete = [
     {
       id: "lang",
@@ -65,39 +65,49 @@ const Header = (props) => {
       id: "reg",
       type: "primary",
       label: t("register"),
-      onClick: () => navigate("/register"),
+      onClick: () =>
+        navigate("/register", {
+          state: {
+            isRegister: true,
+          },
+        }),
     },
     {
       id: "profile",
       type: "secondary",
-      label: t('profile'),
+      label: t("profile"),
       onClick: () => navigate("/profile"),
     },
     {
       id: "projects",
       type: "secondary",
-      label: t('projects'),
+      label: t("projects"),
       onClick: () => navigate("/projects"),
     },
     {
       id: "logout",
       type: "primary",
-      label: t('logout'),
+      label: t("logout"),
       onClick: () => logoutSession(),
-    }
+    },
   ];
 
-  const btnFiletered = arrayComplete.filter(option => btnsArray.includes(option.id))
+  const btnFiletered = arrayComplete.filter((option) =>
+    btnsArray.includes(option.id)
+  );
 
   const btnRender = (btn) => {
     return btn.type === "secondary" ? (
       <div key={btn.id}>
-        <SecondaryBtn
-          theme={theme}
-          label={btn.label}
-          onClick={btn.onClick}
-        />
-        {listOpen && btn.hasList && <ListView key={btn.id} setList={setList} arrayItems={arrayLang} theme={theme} />}
+        <SecondaryBtn theme={theme} label={btn.label} onClick={btn.onClick} />
+        {listOpen && btn.hasList && (
+          <ListView
+            key={btn.id}
+            setList={setList}
+            arrayItems={arrayLang}
+            theme={theme}
+          />
+        )}
       </div>
     ) : (
       <PrimaryBtn

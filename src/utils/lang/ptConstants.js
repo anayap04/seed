@@ -21,8 +21,10 @@ export default {
   checkBenefits: "Recibe y monitorea tus beneficios",
   checkBenefitsDesc:
     "Desde la plataforma, podrás revisar el día a día de los proyectos y monitorear en tiempo real tus inversiones.",
-  loginTitle: "¡Hola!",
-  loginSubtitle: "Ingresa tus datos para inciar sesión",
+    loginTitle: "¡Hola!",
+    registerTitle: "¡Hola!",
+    loginSubtitle: "Ingresa tus datos para inciar sesión",
+    resgiterSubtitle: "Para registrarse, ingrese la siguiente información",
   labelUserId: "Usuario",
   labelPass: "Contraseña",
   errorPass: "La contraseña es incorrecta",
