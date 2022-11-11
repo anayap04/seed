@@ -2,17 +2,18 @@ import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import useWindowDimensions from "../../../utils/useWindowDimensions";
 import { Body, Title, BodyError } from "../../components/foundation/Typography";
-import { BtnSubmit, Container, FormContainer, LinkContent } from "./styles";
+import { BtnSubmit, Container, FormContainer, LinkContent, ErrorContent } from "./styles";
 import { useForm } from "react-hook-form";
 import Input from "../../components/atoms/input";
 import { useTranslation } from "react-i18next";
 import { connect, useDispatch } from "react-redux";
 import { loginRequest } from "../../../redux/actions/login";
-import SelectCountry from "../../components/atoms/select/SelectCountry";
 import LinkBtn from "../../components/atoms/buttons/Link";
+import { registerRequest } from "../../../redux/actions/register";
+import SelectCountry from "../../components/atoms/select/SelectCountry";
 
 const LoginPage = (props) => {
-  const { theme, loginError, userData } = props;
+  const { theme, loginError, userData, registerData,registerError } = props;
   const { width } = useWindowDimensions();
   const { t } = useTranslation();
   const { register, handleSubmit } = useForm();
@@ -20,12 +21,24 @@ const LoginPage = (props) => {
   const dispatch = useDispatch();
   const location = useLocation();
   const [errorMsg, setErrorMsg] = useState(null);
+  const [country, setCountry] = useState(null);
+  const [user, setUser] = useState();
   const [isRegister, setRegister] = useState(
     location.state && location.state.isRegister
   );
 
   const onSubmit = (data) => {
-    dispatch(loginRequest({ userId: data.userId, password: data.password }));
+    dispatch(
+      isRegister
+        ? registerRequest({
+            userId: data.userId,
+            password: data.password,
+            email: data.email,
+            country: country,
+          })
+        : loginRequest({ userId: data.userId, password: data.password })
+    );
+    setUser({ userId: data.userId, password: data.password })
   };
 
   useEffect(() => {
@@ -42,7 +55,13 @@ const LoginPage = (props) => {
       localStorage.setItem("token", userData.data.token);
       navigate("/profile");
     }
-  }, [loginError, userData]);
+    if (registerData) {
+      dispatch(loginRequest({ userId: user.userId, password: user.password }))
+    }
+    if (registerError) {
+      setErrorMsg(registerError.message);
+    }
+  }, [loginError, userData, registerData, registerError]);
 
   return (
     <Container theme={theme}>
@@ -53,8 +72,30 @@ const LoginPage = (props) => {
         <Body theme={theme}>
           {isRegister ? t("registerSubtitle") : t("loginSubtitle")}
         </Body>
+        <ErrorContent>
         {errorMsg && <BodyError theme={theme}>{errorMsg}</BodyError>}
+        </ErrorContent>
         <form onSubmit={handleSubmit(onSubmit)}>
+          {isRegister && (
+            <>
+              <Input
+                theme={theme}
+                labelTitle={t("mailField")}
+                label="email"
+                register={register}
+                required
+                type="mail"
+                customWidth={300}
+              />
+              <SelectCountry
+                required
+                label="country"
+                theme={theme}
+                setCountry={setCountry}
+                customWidth={300}
+              />
+            </>
+          )}
           <Input
             theme={theme}
             labelTitle={t("labelUserId")}
@@ -72,20 +113,7 @@ const LoginPage = (props) => {
             type="password"
             customWidth={300}
           />
-          {isRegister && (
-            <>
-              <Input
-                theme={theme}
-                labelTitle={t("mailField")}
-                label="email"
-                register={register}
-                required
-                type="mail"
-                customWidth={300}
-              />
-              <SelectCountry theme={theme} customWidth={300} />
-            </>
-          )}
+
           <BtnSubmit
             value={isRegister ? t("register") : t("login")}
             isRegister={isRegister}
@@ -93,12 +121,12 @@ const LoginPage = (props) => {
           />
         </form>
         <LinkContent>
-        <LinkBtn
-        fontSize={20}
-          theme={theme}
-          label={"Ya tengo cuenta"}
-          onClick={() => setRegister(!isRegister)}
-        />
+          <LinkBtn
+            fontSize={24}
+            theme={theme}
+            label={"Ya tengo cuenta"}
+            onClick={() => setRegister(!isRegister)}
+          />
         </LinkContent>
       </FormContainer>
     </Container>
@@ -107,9 +135,13 @@ const LoginPage = (props) => {
 
 const mapStateToProps = (state) => {
   const { loginError, userData } = state.loginReducer;
+  const { registerError, registerData } = state.registerReducer;
+  console.log(state)
   return {
     loginError: loginError,
     userData: userData,
+    registerData: registerData,
+    registerError: registerError,
   };
 };
 

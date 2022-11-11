@@ -1,9 +1,10 @@
 import styled from "styled-components";
+import PasswordChecklist from "react-password-checklist";
 
-const widthCalc = textWidth => {
+const widthCalc = (textWidth) => {
   const totalWidth = textWidth + 75;
   return textWidth ? totalWidth : 300;
-}
+};
 
 export const Label = styled.label`
   color: ${({ theme }) => theme.fonts};
@@ -31,8 +32,8 @@ export const Field = styled.input`
 export const InputContent = styled.div`
   display: flex;
   flex-direction: column;
-  width: ${({customWidth}) => customWidth ? customWidth : '280'}px;
-  margin-top: 30px;
+  width: ${({ customWidth }) => (customWidth ? customWidth : "280")}px;
+  margin-top: 20px;
 `;
 export const FieldBlank = styled.input`
   height: 40px;
@@ -40,9 +41,9 @@ export const FieldBlank = styled.input`
   width: fit-content;
   background-color: transparent;
   padding-left: 10px;
-  width: ${({valueWidth}) => valueWidth + 35}px !important;
+  width: ${({ valueWidth }) => valueWidth + 35}px !important;
   font-family: Montserrat-Regular;
-  opacity: ${({disabled}) => disabled ? 0.3 : 1};
+  opacity: ${({ disabled }) => (disabled ? 0.3 : 1)};
   border: 0;
   color: ${({ theme }) => theme.fonts};
   :not(textarea) {
@@ -57,7 +58,7 @@ export const FieldBlank = styled.input`
 `;
 
 export const InputContentIcon = styled.div`
-  width: ${({valueWidth}) => widthCalc(valueWidth)}px;
+  width: ${({ valueWidth }) => widthCalc(valueWidth)}px;
   margin-right: 10px;
   display: flex;
   flex-direction: row;
@@ -75,4 +76,11 @@ export const InputContentIcon = styled.div`
 export const IconContainer = styled.div`
   padding-top: 8px;
   padding-left: 5px;
+`;
+
+export const PasswordChecklistStyled = styled(PasswordChecklist)`
+  color: ${({ theme }) => theme.fonts};
+  font-family: Montserrat-Regular;
+  font-size: 14px;
+  width: 400px;
 `;

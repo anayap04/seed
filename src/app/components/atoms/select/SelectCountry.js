@@ -3,7 +3,7 @@ import countryList from "react-select-country-list";
 import { SelectContent } from "./styles";
 
 const SelectCountry = (props) => {
-  const { theme, customWidth } = props;
+  const { theme, customWidth, setCountry} = props;
   const [value, setValue] = useState("");
   const options = useMemo(() => countryList().getData(), []);
   const changeHandler = (value) => {
@@ -11,6 +11,7 @@ const SelectCountry = (props) => {
       return x.label === value.label
     })
     setValue(countryCode[0]);
+    setCountry(countryCode[0].value)
   };
 
   const colourStyles = {

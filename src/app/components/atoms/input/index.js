@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Icon from "../../foundation/Icon";
 import {
   Label,
@@ -7,8 +7,10 @@ import {
   InputContentIcon,
   IconContainer,
   FieldBlank,
+  PasswordChecklistStyled,
 } from "./styles";
 import { useTextWidth } from "@imagemarker/use-text-width";
+
 
 const InputWithIcon = ({
   theme,
@@ -53,6 +55,7 @@ const InputWithoutIcon = ({
   value,
   valueWidth,
   customWidth,
+  setPassword,
 }) => (
   <InputContent customWidth={customWidth}>
     <Label theme={theme}>{labelTitle}</Label>
@@ -63,6 +66,7 @@ const InputWithoutIcon = ({
       type={type}
       theme={theme}
       {...register(label, { required })}
+      onChange={e => setPassword ? setPassword(e.target.value) : null}
     />
   </InputContent>
 );
@@ -84,7 +88,8 @@ const Input = (props) => {
   } = props;
   const width = useTextWidth({ text: !disabled ? value + 'sfgdrgfdg' : defaultValue, font: "20px Times" });
   const widthInt = Math.ceil(width);
-  
+  const [password, setPassword] = useState("")
+
   return iconName ? (
     <InputWithIcon
       type={type}
@@ -99,8 +104,10 @@ const Input = (props) => {
       value={value}
       onClick={onClick}
       valueWidth={widthInt}
+      
     />
   ) : (
+    <>
     <InputWithoutIcon
       type={type}
       label={label}
@@ -113,7 +120,20 @@ const Input = (props) => {
       value={value}
       valueWidth={widthInt}
       customWidth={customWidth}
+      setPassword={setPassword}
     />
+    {label === 'password' && <PasswordChecklistStyled
+    theme={theme}
+				rules={["minLength","number","capital"]}
+				minLength={6}
+				value={password}
+				messages={{
+					minLength: "La contraseña tiene más de 6 caracteres.",
+					number: "La contraseña tiene un número.",
+					capital: "La contraseña tiene una letra mayúscula.",
+				}}
+			/>}
+    </>
   );
 };
 

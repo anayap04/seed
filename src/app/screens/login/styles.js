@@ -32,7 +32,7 @@ export const BtnSubmit = styled.input.attrs({
   padding: 10px;
   padding-left: 10px;
   padding-right: 10px;
-  margin-top: 30px;
+  margin-top: 20px;
   font-size: 24px;
   width: 300px;
   background-color: transparent;
@@ -47,5 +47,9 @@ export const BtnSubmit = styled.input.attrs({
 export const LinkContent = styled.div`
   width: 300px;
   padding-top: 20px;
-  padding-left: 60px;
+  padding-left: 65px;
+`
+
+export const ErrorContent = styled.div`
+ width: 400px;
 `
