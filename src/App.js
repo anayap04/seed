@@ -29,7 +29,7 @@ function App() {
   return (
     <ThemeProvider theme={themeMode || mode}>
       <GlobalStyles theme={themeMode || mode} />
-      <BrowserRouter>
+      <BrowserRouter basename="/seed">
         <Routes>
           <Route
             path="/"
