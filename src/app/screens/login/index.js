@@ -136,7 +136,6 @@ const LoginPage = (props) => {
 const mapStateToProps = (state) => {
   const { loginError, userData } = state.loginReducer;
   const { registerError, registerData } = state.registerReducer;
-  console.log(state)
   return {
     loginError: loginError,
     userData: userData,

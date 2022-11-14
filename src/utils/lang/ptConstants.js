@@ -46,6 +46,7 @@ export default {
   totalProfits: "Ganancias totales",
   investments: "Número de Inversiones",
   seeInvestments: "Ver Mis Inversiones",
+  noInvestments: "No tienes inversiones ",
   achieved: "% Achieved",
   money: "USD",
   buyBonds: "Comprar Bonos",

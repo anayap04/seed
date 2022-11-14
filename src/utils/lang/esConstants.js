@@ -24,7 +24,7 @@ export default {
   loginTitle: "¡Hola!",
   registerTitle: "¡Hola!",
   loginSubtitle: "Ingresa tus datos para inciar sesión",
-  resgiterSubtitle: "Para registrarse, ingrese la siguiente información",
+  registerSubtitle: "Para registrarse, ingrese la siguiente información",
   labelUserId: "Usuario",
   labelPass: "Contraseña",
   errorPass: "La contraseña es incorrecta",

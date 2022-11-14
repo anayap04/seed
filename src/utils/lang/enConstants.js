@@ -24,7 +24,7 @@ export default {
   loginTitle: "Hello, again!",
   registerTitle: "Welcome!",
   loginSubtitle: "Please enter your username and password",
-  rgisterSubtitle: "Please the follow information to register",
+  registerSubtitle: "Please the follow information to register",
   labelUserId: "User",
   labelPass: "Password",
   errorPass: "Wrong password",
