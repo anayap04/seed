@@ -4,6 +4,7 @@
   "private": true,
   "homepage": "https://anayap04.github.io/seed/",
   "dependencies": {
+    "@jamesives/github-pages-deploy-action": "^4.4.1",
     "@reduxjs/toolkit": "^1.8.5",
     "@tag0/use-text-width": "^1.2.0",
     "@testing-library/jest-dom": "^5.16.5",
