@@ -86,3 +86,8 @@ export const Info = styled.div`
 export const TextInfo = styled.div`
   margin-left: 10px;
 `
+
+export const BtnContainer = styled.div`
+  padding-left: 20px;
+  padding-top: 20px;
+`

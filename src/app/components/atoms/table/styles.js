@@ -14,3 +14,7 @@ export const TableBody = styled.tbody`
   font-size: 16px;
   color: ${({ theme }) => theme.fonts};
 `;
+
+export const BtnTable = styled.td`
+  margin-top: -10px;
+`

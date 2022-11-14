@@ -4,6 +4,8 @@ const initialState = {
   isLoading: false,
   allInitiatives: null,
   initiativesError: null,
+  initiativeSupported: null,
+  initiativeSupportedError: null,
 };
 
 const initiativesReducer = (state = initialState, action) => {
@@ -25,6 +27,25 @@ const initiativesReducer = (state = initialState, action) => {
         isLoading: false,
         initiativesError: action.error,
       };
+    case Initiatives.FETCH_SUPPORT_INITIATIVES:
+      return {
+        ...state,
+        isLoading: true,
+      }
+    case Initiatives.SUPPORT_INITIATIVES_SUCCEED: 
+      return {
+        ...state,
+        isLoading: false,
+        initiativeSupported: action.data,
+        initiativeSupportedError: null,
+      }
+    case Initiatives.SUPPORT_INITIATIVES_ERROR:
+      return {
+        ...state,
+        isLoading: false,
+        initiativeSupported: null,
+        initiativeSupportedError: action.error,
+      }
     default:
       return state;
   }
