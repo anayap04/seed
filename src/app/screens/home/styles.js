@@ -15,7 +15,9 @@ const animationsObj = {
 
 export const VideoContainer = styled.video`
   z-index: -10;
- 
+  ${device.mobileAll} {
+    height: 100vh;
+  }
   width: 100%;
   max-height: 100%;
 `;

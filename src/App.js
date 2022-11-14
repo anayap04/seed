@@ -28,8 +28,6 @@ function App() {
 
   return (
     <ThemeProvider theme={themeMode || mode}>
-      <meta http-equiv="Content-Security-Policy"
-            content="default-src 'self' https: ; object-src 'none'" />
       <GlobalStyles theme={themeMode || mode} />
       <BrowserRouter basename="/seed">
         <Routes>
