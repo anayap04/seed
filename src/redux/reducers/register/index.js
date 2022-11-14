@@ -14,7 +14,6 @@ const registerReducer = (state = initialState, action) => {
         isLoading: true,
       };
     case Register.REGISTER_SUCCESS:
-      console.log(action)
       return {
         ...state,
         isLoading: false,

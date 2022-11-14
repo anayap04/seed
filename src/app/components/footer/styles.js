@@ -8,6 +8,7 @@ export const FooterContent = styled.div`
   text-align: center;
   width: 100vw;
   padding-top: 20px;
+  position: ${({isFixed}) => isFixed && 'fixed'};
   @media (${device.laptop}) {
     bottom: 0;
   }

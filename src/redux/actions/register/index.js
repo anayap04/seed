@@ -9,7 +9,6 @@ export const registerRequest = (payload) => {
 }
 
 export const registerSuccessed = (data) => {
-  console.log(data)
   return {
     type: Register.REGISTER_SUCCESS,
     data: data,

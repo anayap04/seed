@@ -18,13 +18,18 @@ export const mapCards = (data) => {
 
 const converTime = time => DateTime.fromISO(time).toLocaleString()
 
-export const mapTableInvesment = (data) => {
+export const mapTableInvesment = (data, navigate) => {
   return data.iniciativesSupported && data.iniciativesSupported.length > 0
     ? data.iniciativesSupported.map((item) => {
         return {
           name: item.iniciative,
           quantity: item.quantity,
           date: converTime(item.investmentDate),
+          onClick: () => navigate('/initiative', {
+            state: {
+              id: item.iniciative,
+            }
+          }),
         };
       })
     : [];

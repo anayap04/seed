@@ -16,8 +16,8 @@ export const Root = styled.div`
     url(${texture});
   width: 100vw;
   padding-bottom: 30px;
-  @media (${device.laptop}) {
-    height: 100vh;
+  @media (${device.laptopLess}) {
+    height: fit-content;
   }
 `;
 export const Content = styled.div`

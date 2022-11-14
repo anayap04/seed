@@ -35,6 +35,7 @@ const InitiativeDetail = (props) => {
   const { t } = useTranslation();
   const location = useLocation();
   const { width } = useWindowDimensions();
+  console.log(location.state)
 
   useEffect(() => {
     dispatch(fetchAllInitiatives());
@@ -42,7 +43,7 @@ const InitiativeDetail = (props) => {
   const data =
     allInitiatives &&
     allInitiatives.data.filter(
-      (item) => item.iniciativeId === location.state.id
+      (item) => item.iniciativeId === location.state.id || item.name === location.state.id
     )[0];
 
   return (
@@ -56,7 +57,7 @@ const InitiativeDetail = (props) => {
       <Image src={data.imageUrl} responsiveWidth={width} />
       <ContentInfo responsiveWidth={width}>
         <RowDetail>
-          <Col xl={7} sm={12} md={12}>
+          <Col xl={7} lg={12} sm={12} md={12}>
             <Title theme={theme}>{data.name}</Title>
             <Info>
             <InfoContent>
@@ -77,7 +78,7 @@ const InitiativeDetail = (props) => {
             </InfoContent>
             </Info>
           </Col>
-          <Col xl={4} sm={12} md={12}>
+          <Col xl={4} lg={12} sm={12} md={12}>
             <SectionDetail responsiveWidth={width} theme={theme}>
               <Subtitle theme={theme}>{t("timeLeft")}</Subtitle>
               <CountdownStyle theme={theme} date={Date.now() + 100000} />
@@ -98,7 +99,7 @@ const InitiativeDetail = (props) => {
           </Col>
         </RowDetail>
       </ContentInfo>
-      <Footer theme={theme} />
+      <Footer isFixed theme={theme} />
     </Root>
   );
 };

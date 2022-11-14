@@ -333,7 +333,6 @@ export const BodyText = styled.div`
 export const ColProject = styled(Col)`
   margin-top: 30px;
   margin-bottom: 20px;
-  padding-left: ${({ responsiveWidth }) => responsiveWidth * 0.3}px;
   @media (${device.laptopL}) {
     padding-left: ${({ responsiveWidth }) => responsiveWidth * 0.1}px;
   }

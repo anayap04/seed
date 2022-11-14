@@ -1,8 +1,9 @@
 import React from "react";
+import LinkBtn from "../buttons/Link";
 import { TableRoot, TableBody } from "./styles";
 
 const TableSeed = (props) => {
-  const { headArr, bodyArr, theme } = props;
+  const { headArr, bodyArr, theme, enableBtn } = props;
   const renderRow = (item) => {
     return (
       <tr key={item.name}>
@@ -11,6 +12,19 @@ const TableSeed = (props) => {
         </td>
         <td>{item.quantity}</td>
         <td>{item.date}</td>
+        {enableBtn && (
+          <td>
+            {
+              <LinkBtn
+                fontSize={14}
+                key={item.name}
+                theme={theme}
+                label={"Ver proyecto"}
+                onClick={() => item.onClick()}
+              />
+            }
+          </td>
+        )}
       </tr>
     );
   };

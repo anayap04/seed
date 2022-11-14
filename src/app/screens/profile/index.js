@@ -72,7 +72,7 @@ const ProfileSummary = ({
           <RowProfile>
             {profileArray.map((info, e) => (
               <ColProfile
-                xl={width > 1400 ? 2 : 3}
+                xl={3}
                 lg={3}
                 md={4}
                 sm={6}
@@ -102,7 +102,7 @@ const ProfileSummary = ({
 };
 const Profits = ({ theme, userData, t, width, openTable, table, navigate }) => {
   const titleArr = ["Iniciativa", "Cantidad", "Fecha"];
-  const body = userData && mapTableInvesment(userData);
+  const body = userData && mapTableInvesment(userData, navigate);
   return (
     <Content>
       <Title theme={theme}>{t("profitTable")}</Title>
@@ -118,7 +118,7 @@ const Profits = ({ theme, userData, t, width, openTable, table, navigate }) => {
             
           </ColInvestment>
         </RowInvestment>
-        {table && <TableSeed theme={theme} headArr={titleArr} bodyArr={body} />}
+        {table && <TableSeed theme={theme} headArr={titleArr} bodyArr={body} enableBtn />}
         <BtnFooter>
         {userData.iniciativesSupported?.length === 0 && <SubInfo><BodyBold theme={theme}>{t("withoutInvestments")}</BodyBold></SubInfo>}
           <SecondaryBtn
@@ -237,7 +237,7 @@ const Profile = (props) => {
           navigate={navigate}
         />
       )}
-      <Footer theme={theme} />
+      <Footer isFixed theme={theme} />
     </Root>
   );
 };
