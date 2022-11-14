@@ -2,7 +2,7 @@
   "name": "seed",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://anayap04.github.io/",
+  "homepage": "https://anayap04.github.io/seed/",
   "dependencies": {
     "@jamesives/github-pages-deploy-action": "^4.4.1",
     "@reduxjs/toolkit": "^1.8.5",
@@ -36,7 +36,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "CI=false && react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "deploy": "gh-pages -d build"
