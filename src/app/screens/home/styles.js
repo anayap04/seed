@@ -34,6 +34,9 @@ ContainerMain.defaultProps = {
 export const Back = styled.div`
   height: 125vh;
   width: 100vw;
+  ${device.mobileAll} {
+    height: 100vh;
+  }
   background-color: ${({ theme }) => theme.background};
   opacity: 60%;
   position: absolute;
@@ -48,9 +51,11 @@ export const ImgContainer = styled.div`
   top: 40%;
   padding: 40px;
 
+
   @media (max-width: 700px) {
     left: 15%;
     width: 300px;
+    top: -10%;
   }
 `;
 
