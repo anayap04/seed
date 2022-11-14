@@ -9,7 +9,7 @@ import {
   FieldBlank,
   PasswordChecklistStyled,
 } from "./styles";
-import { useTextWidth } from "@imagemarker/use-text-width";
+import { useTextWidth } from '@tag0/use-text-width';
 
 
 const InputWithIcon = ({
