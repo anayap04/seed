@@ -19,7 +19,7 @@ import {
 const HowTo = (props) => {
   const { howRef, theme, userData } = props;
   const { height, width } = useWindowDimensions();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const { t } = useTranslation();
   const infoSteps = [
     {
@@ -63,10 +63,18 @@ const HowTo = (props) => {
           {t("howWorks")}
         </HeadTitle>
         <SecondaryBtn
-          onClick={() => userData ? navigate("/profile") : navigate("/register")}
+          onClick={() =>
+            userData
+              ? navigate("/profile")
+              : navigate("/register", {
+                  state: {
+                    isRegister: true,
+                  },
+                })
+          }
           fontSize={width * 0.025}
           theme={theme}
-          label={t('start')}
+          label={t("start")}
         />
       </HeadContainer>
       <HowContainer>

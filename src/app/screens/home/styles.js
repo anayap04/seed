@@ -25,6 +25,9 @@ export const VideoContainer = styled.video`
 export const ContainerMain = styled.div`
   width: 100vw;
   z-index: 10;
+  ${device.mobileAll} {
+    height: 125vh;
+  }
 `;
 
 ContainerMain.defaultProps = {
@@ -32,11 +35,11 @@ ContainerMain.defaultProps = {
 };
 
 export const Back = styled.div`
-  height: 125vh;
-  width: 100vw;
-  ${device.mobileAll} {
-    height: 100vh;
+  height: 70vw;
+  ${device.laptopL} {
+    height: 95vh;
   }
+  width: 100vw;
   background-color: ${({ theme }) => theme.background};
   opacity: 60%;
   position: absolute;

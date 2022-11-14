@@ -108,6 +108,7 @@ const LoginPage = (props) => {
             theme={theme}
             labelTitle={t("labelPass")}
             label="password"
+            needsValidation={isRegister}
             register={register}
             required
             type="password"
@@ -124,7 +125,7 @@ const LoginPage = (props) => {
           <LinkBtn
             fontSize={24}
             theme={theme}
-            label={"Ya tengo cuenta"}
+            label={isRegister ? t('iHaveAcc') : t('iHaveNotAcc')}
             onClick={() => setRegister(!isRegister)}
           />
         </LinkContent>

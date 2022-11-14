@@ -47,7 +47,7 @@ export const BtnSubmit = styled.input.attrs({
 export const LinkContent = styled.div`
   width: 300px;
   padding-top: 20px;
-  padding-left: 65px;
+  padding-left: 45px;
 `
 
 export const ErrorContent = styled.div`

@@ -10,6 +10,7 @@ import {
   PasswordChecklistStyled,
 } from "./styles";
 import { useTextWidth } from '@tag0/use-text-width';
+import { useTranslation } from "react-i18next";
 
 
 const InputWithIcon = ({
@@ -84,11 +85,13 @@ const Input = (props) => {
     disabled,
     value,
     defaultValue,
-    customWidth
+    customWidth,
+    needsValidation
   } = props;
   const width = useTextWidth({ text: !disabled ? value + 'sfgdrgfdg' : defaultValue, font: "20px Times" });
   const widthInt = Math.ceil(width);
   const [password, setPassword] = useState("")
+  const {t} = useTranslation()
 
   return iconName ? (
     <InputWithIcon
@@ -122,15 +125,15 @@ const Input = (props) => {
       customWidth={customWidth}
       setPassword={setPassword}
     />
-    {label === 'password' && <PasswordChecklistStyled
+    {label === 'password' && needsValidation && <PasswordChecklistStyled
     theme={theme}
 				rules={["minLength","number","capital"]}
 				minLength={6}
 				value={password}
 				messages={{
-					minLength: "La contraseña tiene más de 6 caracteres.",
-					number: "La contraseña tiene un número.",
-					capital: "La contraseña tiene una letra mayúscula.",
+					minLength: t('minLength'),
+					number: t('number'),
+					capital: t('capital'),
 				}}
 			/>}
     </>

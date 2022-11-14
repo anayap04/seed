@@ -6,6 +6,8 @@
   "dependencies": {
     "@jamesives/github-pages-deploy-action": "^4.4.1",
     "@reduxjs/toolkit": "^1.8.5",
+    "@stripe/react-stripe-js": "^1.14.2",
+    "@stripe/stripe-js": "^1.44.1",
     "@tag0/use-text-width": "^1.2.0",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",

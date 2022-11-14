@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { connect, useDispatch } from "react-redux";
 import { fetchUser, userUpdateFetch } from "../../../redux/actions/user";
-import { Title, Subtitle } from "../../components/foundation/Typography";
+import { Title, Subtitle, BodyBold } from "../../components/foundation/Typography";
 import Header from "../../components/header";
 import Input from "../../components/atoms/input";
 import Section from "../../components/section";
@@ -17,6 +17,7 @@ import {
   RowInvestment,
   ColInvestment,
   SectionBonds,
+  SubInfo,
 } from "./styles";
 import SecondaryBtn from "../../components/atoms/buttons/Secondary";
 import useWindowDimensions from "../../../utils/useWindowDimensions";
@@ -25,6 +26,7 @@ import TableSeed from "../../components/atoms/table/Table";
 import Footer from "../../components/footer/Footer";
 import { useForm } from "react-hook-form";
 import { mapTableInvesment } from "../../../utils/mappers";
+import { useNavigate } from "react-router-dom";
 
 const ProfileSummary = ({
   userInfo,
@@ -98,7 +100,7 @@ const ProfileSummary = ({
     </ProfileInfoInputs>
   );
 };
-const Profits = ({ theme, userData, t, width, openTable, table }) => {
+const Profits = ({ theme, userData, t, width, openTable, table, navigate }) => {
   const titleArr = ["Iniciativa", "Cantidad", "Fecha"];
   const body = userData && mapTableInvesment(userData);
   return (
@@ -108,17 +110,19 @@ const Profits = ({ theme, userData, t, width, openTable, table }) => {
         <RowInvestment>
           <ColInvestment>
             <Subtitle theme={theme}>{t("totalProfits")}</Subtitle>
-            <Title theme={theme}>{1000}</Title>
+            <Title theme={theme}>{userData.iniciativesSupported?.length}</Title>
           </ColInvestment>
           <ColInvestment>
             <Subtitle theme={theme}>{t("investments")}</Subtitle>
             <Title theme={theme}>{userData.iniciativesSupported?.length}</Title>
+            
           </ColInvestment>
         </RowInvestment>
         {table && <TableSeed theme={theme} headArr={titleArr} bodyArr={body} />}
         <BtnFooter>
+        {userData.iniciativesSupported?.length === 0 && <SubInfo><BodyBold theme={theme}>{t("withoutInvestments")}</BodyBold></SubInfo>}
           <SecondaryBtn
-            onClick={() => openTable(!table)}
+            onClick={() => userData.iniciativesSupported?.length > 0 ? openTable(!table) : navigate('/projects')}
             theme={theme}
             label={table ? t("noSeeInvestments") : t("seeInvestments")}
           />
@@ -128,13 +132,13 @@ const Profits = ({ theme, userData, t, width, openTable, table }) => {
   );
 };
 
-const Bonds = ({ theme, t, width, userData }) => (
+const Bonds = ({ theme, t, width, userData, navigate }) => (
   <Content>
     <Title theme={theme}>{t("myGreenBonds")}</Title>
     <SectionBonds responsiveWidth={width} customWidth={width} theme={theme}>
-      <Title theme={theme}>{`$ ${userData.credits} ${t("money")}`}</Title>
+      {userData.credits ? <Title theme={theme}>{`$ ${userData.credits} ${t("money")}`}</Title> : <Title theme={theme}>{t("noMoney")}</Title>} 
       <BtnFooter responsiveWidth={width}>
-        <SecondaryBtn  theme={theme} label={t("buyBonds")} />
+        <SecondaryBtn onClick={() => navigate('/buyBonds')} theme={theme} label={t("buyBonds")} />
       </BtnFooter>
     </SectionBonds>
   </Content>
@@ -176,6 +180,7 @@ const Profile = (props) => {
   const { t } = useTranslation();
   const { width } = useWindowDimensions();
   const { register, handleSubmit } = useForm();
+  const navigate = useNavigate();
   const [id, setId] = useState(0);
   const [table, openTable] = useState(false);
   const [disabled, setDisabled] = useState(true);
@@ -219,7 +224,7 @@ const Profile = (props) => {
         />
       )}
       {id === 1 && (
-        <Bonds theme={theme} userData={userData} t={t} width={width} />
+        <Bonds theme={theme} userData={userData} t={t} width={width} navigate={navigate} />
       )}
       {id === 2 && (
         <Profits
@@ -229,6 +234,7 @@ const Profile = (props) => {
           width={width}
           openTable={openTable}
           table={table}
+          navigate={navigate}
         />
       )}
       <Footer theme={theme} />

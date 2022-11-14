@@ -10,6 +10,7 @@ import Profile from "./app/screens/profile";
 import GlobalStyles from "./theme/GlobalStyles";
 import ProjectsMain from "./app/screens/projects/Projects";
 import InitiativeDetail from "./app/screens/detail/InitiativeDetails";
+import Buy from "./app/screens/bounds/Buy";
 
 function App() {
   const [theme, themeToggler] = useDarkMode();
@@ -21,7 +22,7 @@ function App() {
       .matchMedia("(prefers-color-scheme: dark)")
       .addEventListener("change", (event) => {
         const colorScheme = event.matches ? "dark" : "light";
-        localStorage.setItem('themeMode');
+        localStorage.setItem("themeMode");
         setMode(colorScheme);
       });
   }, []);
@@ -61,7 +62,7 @@ function App() {
               />
             }
           ></Route>
-             <Route
+          <Route
             path="/projects"
             element={
               <ProjectsMain
@@ -79,6 +80,12 @@ function App() {
                 theme={themeMode}
                 mode={theme}
               />
+            }
+          ></Route>
+          <Route
+            path="/buyBonds"
+            element={
+              <Buy themeToggler={themeToggler} theme={themeMode} mode={theme} />
             }
           ></Route>
         </Routes>

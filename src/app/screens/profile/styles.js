@@ -48,6 +48,11 @@ export const BtnFooter = styled.div`
   padding-bottom: 35px;
   margin-left:  -${({responsiveWidth}) => responsiveWidth * 0.43}px;
 `;
+
+export const SubInfo = styled.div`
+  align-text: center;
+  padding-left: 30px;
+`;
 export const ContainerProfile = styled(Container)`
   max-width: ${({ responsiveWidth }) => responsiveWidth * 0.95}px;
   padding-bottom: 100px;
