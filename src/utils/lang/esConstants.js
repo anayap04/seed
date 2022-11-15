@@ -66,4 +66,5 @@ export default {
   capital: "La contraseña tiene una letra mayúscula.",
   iHaveAcc: "Ya tengo una cuenta",
   iHaveNotAcc: "No tengo una cuenta",
+  inverstQtyTitle: "Ingresa la cantidad que deseas invertir: ",
 };

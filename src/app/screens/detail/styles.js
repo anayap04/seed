@@ -91,3 +91,8 @@ export const BtnContainer = styled.div`
   padding-left: 20px;
   padding-top: 20px;
 `
+
+export const ModalBtnContainer = styled.div`
+  padding: 20px;
+
+`

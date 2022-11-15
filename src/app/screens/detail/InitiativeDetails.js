@@ -26,6 +26,7 @@ import {
   Info,
   TextInfo,
   BtnContainer,
+  ModalBtnContainer,
 } from "./styles";
 import grow from "../../../assets/imgs/grow.png";
 import money from "../../../assets/imgs/money.png";
@@ -33,18 +34,22 @@ import PrimaryBtn from "../../components/atoms/buttons/Primary";
 import ModalSeed from "../../components/modal/Modal";
 import Input from "../../components/atoms/input";
 import { useForm } from "react-hook-form";
+import SecondaryBtn from "../../components/atoms/buttons/Secondary";
 
-const InvestmentModal = ({ theme, data, isModalOpen, setOpen, register }) => {
+const InvestmentModal = ({ theme, data, isModalOpen, setOpen, register, t }) => {
   return (
     <ModalSeed theme={theme} isModalOpen={isModalOpen} setOpen={setOpen}>
       <Title theme={theme}>{data.name}</Title>
       <Input
         register={register}
         theme={theme}
-        label="userId"
-        labelTitle="Ingresa la cantidad que deseas invertir"
+        label="supportQuantity"
+        labelTitle={t('inverstQtyTitle')}
       />
-      <PrimaryBtn theme={theme} width={280} label="Confirmar" />
+      <ModalBtnContainer>
+      <PrimaryBtn theme={theme} width={200} label="Confirmar" />
+      <SecondaryBtn theme={theme} width={200} label="Cancelar" />
+      </ModalBtnContainer>
     </ModalSeed>
   );
 };
@@ -84,6 +89,7 @@ const InitiativeDetail = (props) => {
           isModalOpen={isModalOpen}
           setOpen={setOpen}
           register={register}
+          t={t}
         />
       )}
       <Image src={data.imageUrl} responsiveWidth={width} />

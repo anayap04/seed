@@ -30,6 +30,7 @@ export const SecondaryContainer = styled.button`
   padding: 5px;
   margin-left: 24px;
   background: transparent;
+  width: ${({width}) => width}px;
   border: 0;
   &:hover {
     color: ${({ theme }) => theme.primaryColor};

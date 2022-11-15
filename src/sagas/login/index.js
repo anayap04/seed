@@ -5,7 +5,7 @@ import axios from "axios";
 export function* login(payload) {
   try {
     const response = yield axios.post(
-      "http://pruebaproyecto3-env.eba-hqp2m6wq.us-east-1.elasticbeanstalk.com/login",
+      "https://pruebaproyecto3-env.eba-hqp2m6wq.us-east-1.elasticbeanstalk.com/login",
       JSON.stringify(payload.payload),
       {
         headers: {

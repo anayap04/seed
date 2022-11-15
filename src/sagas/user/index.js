@@ -5,7 +5,7 @@ const token = localStorage.getItem('token')
 export function* userSaga() {
   try {
     const response = yield axios.get(
-      "http://pruebaproyecto3-env.eba-hqp2m6wq.us-east-1.elasticbeanstalk.com/users/profile",
+      "https://pruebaproyecto3-env.eba-hqp2m6wq.us-east-1.elasticbeanstalk.com/users/profile",
       {
         headers: {
           "Content-Type": "application/json",
@@ -28,7 +28,7 @@ export function* userSaga() {
 export function* userUpdateSaga(payload) {
   try {
     const response = yield axios.put(
-      "http://pruebaproyecto3-env.eba-hqp2m6wq.us-east-1.elasticbeanstalk.com/user/update",
+      "https://pruebaproyecto3-env.eba-hqp2m6wq.us-east-1.elasticbeanstalk.com/user/update",
       JSON.stringify(payload.payload),
       {
         headers: {
