@@ -23,7 +23,7 @@ export const ColProject = styled(Col)`
   margin-bottom: 20px;
   padding-left: ${({ responsiveWidth }) => responsiveWidth * 0.01}px;
   @media (${device.laptopL}) {
-    padding-left: ${({ responsiveWidth }) => responsiveWidth * 0.1}px;
+    padding-left: ${({ responsiveWidth }) => responsiveWidth * 0.02}px;
   }
   @media (${device.mobileAll}) {
     padding-left: ${({ responsiveWidth }) => responsiveWidth * 0.05}px;

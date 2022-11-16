@@ -13,6 +13,7 @@ export const PrimaryContainer = styled.button`
   width: ${({width}) => width}px;
   &:hover {
     background-color: ${({ theme }) => theme.primaryColor};
+    cursor: pointer;
   }
 `;
 
@@ -63,6 +64,7 @@ export const LinkContainer = styled.div`
   border-bottom: 3px ${({ theme }) => theme.primaryColor} solid;
   &:hover {
     color: ${({ theme }) => theme.primaryColor};
+    cursor: pointer;
   }
 `;
 
@@ -76,6 +78,7 @@ export const TextLink = styled.div`
   margin-bottom: -5px;
   &:hover {
     color: ${({ theme }) => theme.primaryColor};
+    cursor: pointer;
   }
   @media (${device.mobileS}) {
     font-size: 24px

@@ -3,7 +3,7 @@ import { Col } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
 import { connect, useDispatch } from "react-redux";
 import { useLocation } from "react-router-dom";
-import { fetchAllInitiatives } from "../../../redux/actions/initiatives";
+import { fetchAllInitiatives, fetchSupportInitiatives } from "../../../redux/actions/initiatives";
 import useWindowDimensions from "../../../utils/useWindowDimensions";
 import Footer from "../../components/footer/Footer";
 import {
@@ -27,6 +27,7 @@ import {
   TextInfo,
   BtnContainer,
   ModalBtnContainer,
+  ContentModalInfo,
 } from "./styles";
 import grow from "../../../assets/imgs/grow.png";
 import money from "../../../assets/imgs/money.png";
@@ -35,33 +36,71 @@ import ModalSeed from "../../components/modal/Modal";
 import Input from "../../components/atoms/input";
 import { useForm } from "react-hook-form";
 import SecondaryBtn from "../../components/atoms/buttons/Secondary";
+import { DateTime } from "luxon";
 
-const InvestmentModal = ({ theme, data, isModalOpen, setOpen, register, t }) => {
+const InvestmentModal = ({
+  theme,
+  dataInfo,
+  isModalOpen,
+  setOpen,
+  register,
+  t,
+  userInfo,
+  width,
+  dispatch,
+  handleSubmit,
+}) => {
+  const onSubmit = (data) => {
+    dispatch(fetchSupportInitiatives({
+      iniciativeId: dataInfo && dataInfo.iniciativeId,
+      supportQuantity: parseInt(data.supportQuantity),
+      investmentDate: parseInt(DateTime.now().toISODate({ format: 'basic' })),
+    }))
+  }
+  
   return (
     <ModalSeed theme={theme} isModalOpen={isModalOpen} setOpen={setOpen}>
-      <Title theme={theme}>{data.name}</Title>
-      <Input
-        register={register}
-        theme={theme}
-        label="supportQuantity"
-        labelTitle={t('inverstQtyTitle')}
-      />
+      <form onSubmit={handleSubmit(onSubmit)}>
+      <ContentModalInfo>
+
+        <Title theme={theme}>{dataInfo.name}</Title>
+        <Body>{`${t("currentBonds")}${userInfo.data.credits} ${t(
+          "currentBonds2"
+        )}`}</Body>
+       
+        <Input
+          register={register}
+          theme={theme}
+          label="supportQuantity"
+          labelTitle={t("inverstQtyTitle")}
+          type="number"
+          customWidth={width > 768 ? width * 0.3 : width * 0.1}
+        />
+        
+      </ContentModalInfo>
       <ModalBtnContainer>
-      <PrimaryBtn theme={theme} width={200} label="Confirmar" />
-      <SecondaryBtn theme={theme} width={200} label="Cancelar" />
+        <PrimaryBtn type="submit" theme={theme} width={width * 0.15} label="Confirmar" />
+        <SecondaryBtn
+          onClick={() => setOpen(false)}
+          theme={theme}
+          width={width * 0.15}
+          label="Cancelar"
+        />
+    
       </ModalBtnContainer>
+      </form>
     </ModalSeed>
   );
 };
 
 const InitiativeDetail = (props) => {
-  const { theme, mode, themeToggler, allInitiatives } = props;
+  const { theme, mode, themeToggler, allInitiatives, userInfo } = props;
   const dispatch = useDispatch();
   const { t } = useTranslation();
   const location = useLocation();
   const { width } = useWindowDimensions();
   const [isModalOpen, setOpen] = useState(false);
-  const { register } = useForm();
+  const { register, handleSubmit} = useForm();
 
   useEffect(() => {
     dispatch(fetchAllInitiatives());
@@ -84,12 +123,16 @@ const InitiativeDetail = (props) => {
       />
       {isModalOpen && (
         <InvestmentModal
-          data={data}
+        dataInfo={data}
           theme={theme}
           isModalOpen={isModalOpen}
           setOpen={setOpen}
           register={register}
+          userInfo={userInfo}
+          width={width}
           t={t}
+          dispatch={dispatch}
+          handleSubmit={handleSubmit}
         />
       )}
       <Image src={data.imageUrl} responsiveWidth={width} />
@@ -131,7 +174,7 @@ const InitiativeDetail = (props) => {
               <BtnContainer>
                 <PrimaryBtn
                   onClick={() => setOpen(!isModalOpen)}
-                  width={320}
+                  width={width < 768 ? width * 0.5 : width * 0.2}
                   theme={theme}
                   label="Invertir"
                 />
@@ -152,8 +195,10 @@ const InitiativeDetail = (props) => {
 
 const mapToStateProps = (state) => {
   const { allInitiatives } = state.initiativesReducer;
+  const { userInfo } = state.userReducer;
   return {
     allInitiatives: allInitiatives,
+    userInfo: userInfo,
   };
 };
 

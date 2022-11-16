@@ -2,18 +2,19 @@ import styled from "styled-components";
 
 
 export const ListContainer = styled.div`
-  width: ${({width}) => width ? width : '30px'};
+  width: ${({width}) => width ? width : '60px'};
   font-family: BebasNeue-Regular;
   font-size: 16px;
   color: ${({theme}) => theme.fonts};
+  background-color: ${({theme}) => theme.background};
   position: absolute;
-  height: 60px;
   z-index: 12;
-  padding-left: 20px;
+  text-align: center;
   cursor: pointer;
 `
 
 export const Item = styled.div`
+  border:  ${({theme}) => theme.primaryColor} 1px solid;
   &:hover {
     color: ${({theme}) => theme.primaryColor};
   }

@@ -27,6 +27,11 @@ import Footer from "../../components/footer/Footer";
 import { useForm } from "react-hook-form";
 import { mapTableInvesment } from "../../../utils/mappers";
 import { useNavigate } from "react-router-dom";
+import Loading from "../../components/loading/Loading";
+
+
+
+
 
 const ProfileSummary = ({
   userInfo,
@@ -57,6 +62,7 @@ const ProfileSummary = ({
       label: t("documentType"),
     },
   ];
+  console.log(profileArray)
   const clickPressed = () => (disabled ? setDisabled(!disabled) : null);
   const onSubmit = (data) => {
     dispatch(userUpdateFetch(data));
@@ -175,7 +181,7 @@ const Summary = ({
   );
 };
 const Profile = (props) => {
-  const { theme, themeToggler, mode, userInfo } = props;
+  const { theme, themeToggler, mode, userInfo, isLoading } = props;
   const dispatch = useDispatch();
   const { t } = useTranslation();
   const { width } = useWindowDimensions();
@@ -184,7 +190,6 @@ const Profile = (props) => {
   const [id, setId] = useState(0);
   const [table, openTable] = useState(false);
   const [disabled, setDisabled] = useState(true);
-  const [userData, setUserData] = useState(userInfo ? userInfo.data : {});
   const chipsInfo = [
     { id: 0, label: t("myInfo") },
     { id: 1, label: t("myBounds") },
@@ -192,11 +197,11 @@ const Profile = (props) => {
   ];
   useEffect(() => {
     dispatch(fetchUser());
-    setUserData(userInfo ? userInfo.data : {});
-  }, [dispatch]);
+  }, [dispatch, fetchUser]);
 
   return (
     <Root theme={theme}>
+      <Loading theme={theme} isLoading={isLoading} />
       <Header
         mode={mode}
         themeToggler={themeToggler}
@@ -210,10 +215,10 @@ const Profile = (props) => {
         idSelected={id}
         setId={setId}
       />
-      {id === 0 && (
+      {id === 0 && userInfo && (
         <Summary
           theme={theme}
-          userData={userData}
+          userData={userInfo.data}
           t={t}
           width={width}
           disabled={disabled}
@@ -223,13 +228,13 @@ const Profile = (props) => {
           dispatch={dispatch}
         />
       )}
-      {id === 1 && (
-        <Bonds theme={theme} userData={userData} t={t} width={width} navigate={navigate} />
+      {id === 1 && userInfo && (
+        <Bonds theme={theme} userData={userInfo.data} t={t} width={width} navigate={navigate} />
       )}
-      {id === 2 && (
+      {id === 2 && userInfo && (
         <Profits
           theme={theme}
-          userData={userData}
+          userData={userInfo.data}
           t={t}
           width={width}
           openTable={openTable}
@@ -243,9 +248,10 @@ const Profile = (props) => {
 };
 
 const mapStateToProps = (state) => {
-  const { userInfo } = state.userReducer;
+  const { userInfo, isLoading } = state.userReducer;
   return {
     userInfo: userInfo,
+    isLoading: isLoading,
   };
 };
 

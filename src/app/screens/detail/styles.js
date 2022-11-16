@@ -94,5 +94,8 @@ export const BtnContainer = styled.div`
 
 export const ModalBtnContainer = styled.div`
   padding: 20px;
+`
 
+export const ContentModalInfo = styled.div`
+  padding-left: 30px;
 `

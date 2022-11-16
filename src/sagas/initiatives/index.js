@@ -6,7 +6,7 @@ const token = localStorage.getItem('token')
 export function* allInitiativesSaga() {
   try {
     const response = yield axios.get(
-      "https://pruebaproyecto3-env.eba-hqp2m6wq.us-east-1.elasticbeanstalk.com/iniciatives",
+      "http://pruebaproyecto3-env.eba-hqp2m6wq.us-east-1.elasticbeanstalk.com/iniciatives",
       {
         headers: {
           "Content-Type": "application/json",
@@ -27,8 +27,8 @@ export function* allInitiativesSaga() {
 
 export function* supportInitiativesSaga(payload) {
   try {
-    const response = yield axios.post(
-      "https://pruebaproyecto3-env.eba-hqp2m6wq.us-east-1.elasticbeanstalk.com/iniciative/support",
+    const response = yield axios.put(
+      "http://pruebaproyecto3-env.eba-hqp2m6wq.us-east-1.elasticbeanstalk.com/iniciative/support",
       JSON.stringify(payload.payload),
       {
         headers: {

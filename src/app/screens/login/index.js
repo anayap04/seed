@@ -24,7 +24,7 @@ const LoginPage = (props) => {
   const [country, setCountry] = useState(null);
   const [user, setUser] = useState();
   const [isRegister, setRegister] = useState(
-    location.state && location.state.isRegister
+    location && location.state && location.state.isRegister
   );
 
   const onSubmit = (data) => {

@@ -7,7 +7,7 @@ import PrimaryBtn from "../atoms/buttons/Primary";
 import SecondaryBtn from "../atoms/buttons/Secondary";
 import ListView from "../list-view";
 // Styled components
-import { Container, ButtonContainer } from "./styles";
+import { Container, ButtonContainer, ListContent} from "./styles";
 const Header = (props) => {
   const { btnsArray, theme, themeToggler, mode } = props;
   const navigate = useNavigate();
@@ -59,7 +59,7 @@ const Header = (props) => {
       id: "login",
       type: "secondary",
       label: t("login"),
-      onClick: () => navigate({ pathname: "/register", search: "?userExists" }),
+      onClick: () => navigate("/register"),
     },
     {
       id: "reg",
@@ -101,12 +101,14 @@ const Header = (props) => {
       <div key={btn.id}>
         <SecondaryBtn theme={theme} label={btn.label} onClick={btn.onClick} />
         {listOpen && btn.hasList && (
+          <ListContent>
           <ListView
             key={btn.id}
             setList={setList}
             arrayItems={arrayLang}
             theme={theme}
           />
+          </ListContent>
         )}
       </div>
     ) : (

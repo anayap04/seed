@@ -9,7 +9,7 @@ import useWindowDimensions from "../../../utils/useWindowDimensions";
 import SecondaryBtn from "../../components/atoms/buttons/Secondary";
 import Card from "../../components/cards/Card";
 import { Title } from "../../components/foundation/Typography";
-import { ColProject, ContainerAbout, CardsContainer } from "./styles";
+import { ColProject, ContainerProjects, CardsContainer } from "./styles";
 
 const Projects = (props) => {
   const { theme, projectRef, allInitiatives } = props;
@@ -36,13 +36,13 @@ const Projects = (props) => {
         profit={item.profit}
         img={item.img}
         achieved={item.achieved}
-        btnClick={() => navigate("/initiative", {id: item.id})}
+        btnClick={() => navigate("/register")}
       />
     </ColProject>
   );
 
   return (
-    <ContainerAbout ref={projectRef} theme={theme}>
+    <ContainerProjects ref={projectRef} theme={theme}>
       <Title theme={theme}>{t('projectsTitle')}</Title>
       <CardsContainer>
       <Row>{data && data.slice(0, noOfCards).map((value) => renderCards(value))}</Row>
@@ -52,7 +52,7 @@ const Projects = (props) => {
         fontSize={30}
         theme={theme}
       />
-    </ContainerAbout>
+    </ContainerProjects>
   );
 };
 

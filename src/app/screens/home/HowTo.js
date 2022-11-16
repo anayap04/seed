@@ -58,7 +58,7 @@ const HowTo = (props) => {
 
   return (
     <ContainerHowTo ref={howRef} theme={theme}>
-      <HeadContainer responsiveWidth={width}>
+      <HeadContainer responsiveHeight={height} responsiveWidth={width}>
         <HeadTitle responsiveWidth={width} theme={theme}>
           {t("howWorks")}
         </HeadTitle>

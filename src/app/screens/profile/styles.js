@@ -54,7 +54,7 @@ export const SubInfo = styled.div`
   padding-left: 30px;
 `;
 export const ContainerProfile = styled(Container)`
-  max-width: ${({ responsiveWidth }) => responsiveWidth * 0.95}px;
+  max-width: ${({ responsiveWidth }) => responsiveWidth * 1.1}px;
   padding-bottom: 100px;
   background-color: ${({ theme }) => theme.background};
   margin-left: 0px;
@@ -67,7 +67,7 @@ export const ColBonds = styled(Col)`
 
 export const ColProfile = styled(Col)`
   margin-left: 10px;
-  margin-right: 15px;
+  margin-right: 45px;
 `;
 
 export const RowProfile = styled(Row)`

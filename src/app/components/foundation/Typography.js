@@ -10,9 +10,26 @@ const Title = styled.p`
   heigth: 40px;
 `;
 
+const TitleSmall = styled.p`
+  font-size: 36px;
+  color: ${({ theme }) => theme.fonts};
+  font-family: BebasNeue-Regular;
+  border-bottom: inset green 3px solid;
+  width: fit-content;
+  box-shadow: 0px -3px 0px 0px ${({ theme }) => theme.primaryColor} inset;
+  heigth: 40px;
+`;
+
 const Subtitle = styled.p`
   font-size: 18px;
   color: ${({ theme }) => theme.fonts};
+  font-family: Bitter-SemiBold;
+  margin-bottom: -5px;
+`;
+
+const SubtitleHighlight = styled.p`
+  font-size: 18px;
+  color: ${({ theme }) => theme.primaryColor};
   font-family: Bitter-SemiBold;
   margin-bottom: -5px;
 `;
@@ -41,4 +58,4 @@ const BodyError = styled.p`
   font-family: Montserrat-Regular;
 `
 
-export { Title, Subtitle, Body, BodyError, BodySmall, BodyBold };
+export { Title, TitleSmall, Subtitle, SubtitleHighlight, Body, BodyError, BodySmall, BodyBold };

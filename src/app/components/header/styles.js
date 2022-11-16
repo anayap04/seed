@@ -20,4 +20,8 @@ Container.defaultProps = {
   theme: DefaultTheme,
 };
 
+export const ListContent = styled.div`
+  margin-left: 5px;
+`
+
 export { Container, ButtonContainer };

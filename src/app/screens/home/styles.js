@@ -35,8 +35,8 @@ ContainerMain.defaultProps = {
 };
 
 export const Back = styled.div`
-  height: 70vw;
-  ${device.laptopL} {
+  height: 130vh;
+  ${device.laptop} {
     height: 95vh;
   }
   width: 100vw;
@@ -68,7 +68,7 @@ export const ContainerAbout = styled.div`
   flex-direction: column;
   background-color: ${({ theme }) => theme.background};
   align-items: center;
-  padding-top: ${({ responsiveHeight }) => responsiveHeight * 0.1}px;
+  padding-top: ${({ responsiveHeight }) => responsiveHeight * 0.03}px;
   @media (${device.mobileAll}) {
     padding-top: ${({ responsiveHeight }) => responsiveHeight * 0.03}px;
   }
@@ -82,11 +82,11 @@ export const Content = styled.div`
     flex-direction: column;
     padding-top: ${({ responsiveHeight }) => responsiveHeight * 0.05}px;
     height: ${({ responsiveHeight }) => responsiveHeight * 0.1}px;
-    margin-bottom: 380px;
+    margin-bottom: 180px;
   }
   align-content: center;
-  padding-top: ${({ responsiveHeight }) => responsiveHeight * 0.2}px;
-  margin-bottom: 250px;
+  padding-top: ${({ responsiveHeight }) => responsiveHeight * 0.1}px;
+  margin-bottom: 200px;
 `;
 
 export const DescriptionBody = styled.div`
@@ -104,16 +104,16 @@ export const DescriptionBody = styled.div`
 export const DescriptionText = styled.div`
   font-family: Montserrat-Regular;
   animation: 2s ${animationsObj.left};
-  margin-bottom: 30px;
+  margin-bottom: 20px;
   color: ${({ theme }) => theme.fonts};
   text-align: left;
 `;
 
 export const CarouselContainer = styled.div`
-  heigth: 200px;
+  heigth: 180px;
   display: flex;
   flex-direction: row;
-  margin-top: 20px;
+  margin-top: -10px;
 `;
 
 export const ImageDiv = styled(Col)`
@@ -156,10 +156,10 @@ export const BtnContainer = styled.div`
 export const HeadContainer = styled.div`
   position: absolute;
   z-index: 10;
-  margin-top: ${({ responsiveWidth }) => responsiveWidth * 0.35}px;
+  margin-top: ${({ responsiveHeight }) => responsiveHeight * 0.35}px;
   left: ${({ responsiveWidth }) => responsiveWidth * 0.35}px;
-  @media (${device.laptopL}) {
-    margin-top: 24%;
+  @media (${device.laptopLess}) {
+    margin-top: ${({ responsiveHeight }) => responsiveHeight * 0.35}px;;
     left: ${({ responsiveWidth }) => responsiveWidth * 0.35}px;
   }
   @media (${device.mobileAll}) {
@@ -174,7 +174,7 @@ export const HeadTitle = styled.div`
   border-bottom: ${({ theme }) => theme.primaryColor} 3px solid;
   color: ${({ theme }) => theme.fonts};
   font-size: ${({ responsiveWidth }) => responsiveWidth * 0.07}px;
-  @media (${device.laptopL}) {
+  @media (${device.laptop}) {
     font-size: ${({ responsiveWidth }) => responsiveWidth * 0.04}px;
   }
   @media (${device.mobileS} and ${device.mobileAll}) {
@@ -186,13 +186,13 @@ export const HowContainer = styled.div`
   position: sticky;
 `;
 export const StepsShapes = styled.div`
-  margin-top: ${({ responsiveWidth }) => 0.1 * responsiveWidth}px;
+  margin-top: ${({ responsiveHeight }) => 0.1 * responsiveHeight}px;
   margin-left: ${({ responsiveWidth }) => 0.3 * responsiveWidth}px;
   width: ${({ responsiveWidth }) => 0.5 * responsiveWidth}px;
-  height: ${({ responsiveWidth }) => 0.5 * responsiveWidth}px;
+  height: ${({ responsiveHeight }) => 0.5 * responsiveHeight}px;
   border-radius: 50%;
   border: ${({ theme }) => theme.fonts} 3px solid;
-  @media (${device.laptopL}) {
+  @media (${device.laptop}) {
     width: ${({ responsiveWidth }) => 0.33 * responsiveWidth}px;
     height: ${({ responsiveWidth }) => 0.33 * responsiveWidth}px;
     margin-left: ${({ responsiveWidth }) => 0.3 * responsiveWidth}px;
@@ -232,7 +232,7 @@ export const StepContainer = styled.div`
     @media (${device.tablet} and ${device.laptopLess}) {
       margin-bottom: ${({ responsiveHeight }) => responsiveHeight * 0.09}px;
     }
-    @media (${device.laptopL}) {
+    @media (${device.laptop}) {
       flex-direction: row-reverse;
       transform: translate(
         ${({ responsiveWidth }) =>
@@ -265,9 +265,9 @@ export const StepContainer = styled.div`
       flex-direction: row-reverse;
       transform: translate(
         ${({ responsiveWidth }) =>
-          -(responsiveWidth - 0.37 * responsiveWidth)}px,
-        ${({ responsiveWidth }) =>
-          -(responsiveWidth - 0.89 * responsiveWidth)}px
+          -(responsiveWidth - 0.35 * responsiveWidth)}px,
+        ${({ responsiveHeight }) =>
+          -(responsiveHeight - 0.5 * responsiveHeight)}px
       );
     }
   }
@@ -286,12 +286,12 @@ export const StepContainer = styled.div`
         ${({ responsiveHeight }) => responsiveHeight * -0.37}px
       );
     }
-    @media (${device.laptopL}) {
+    @media (${device.laptop}) {
       flex-direction: row;
       transform: translate(
-        ${({ responsiveWidth }) => responsiveWidth - 0.38 * responsiveWidth}px,
-        ${({ responsiveWidth }) =>
-          -(responsiveWidth - 0.75 * responsiveWidth)}px
+        ${({ responsiveWidth }) => responsiveWidth - 0.39 * responsiveWidth}px,
+        ${({ responsiveHeight }) =>
+          -(responsiveHeight - 0.15 * responsiveHeight)}px
       );
     }
   }
@@ -334,7 +334,7 @@ export const ColProject = styled(Col)`
   margin-top: 30px;
   margin-bottom: 20px;
   @media (${device.laptopL}) {
-    padding-left: ${({ responsiveWidth }) => responsiveWidth * 0.1}px;
+    padding-left: ${({ responsiveWidth }) => responsiveWidth * 0.05}px;
   }
   @media (${device.mobileAll}) {
     padding-left: ${({ responsiveWidth }) => responsiveWidth * 0.15}px;
@@ -342,4 +342,21 @@ export const ColProject = styled(Col)`
 `;
 export const CardsContainer = styled.div`
   margin-bottom: 40px;
+`;
+
+export const ContainerProjects = styled.div`
+  height: 150vh;
+  padding-left: 40px;
+  @media (${device.laptopL}) {
+    height: 190vh;
+    padding-left: 60px;
+  }
+  display: flex;
+  flex-direction: column;
+  background-color: ${({ theme }) => theme.background};
+  align-items: center;
+  padding-top: ${({ responsiveHeight }) => responsiveHeight * 0.03}px;
+  @media (${device.mobileAll}) {
+    padding-top: ${({ responsiveHeight }) => responsiveHeight * 0.03}px;
+  }
 `;

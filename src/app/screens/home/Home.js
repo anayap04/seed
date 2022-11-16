@@ -41,7 +41,7 @@ const Home = (props) => {
       <About mode={mode} theme={theme} aboutRef={aboutRef} />
       <HowTo userData={cachedUser || userData} theme={theme} howRef={howRef} />
       <Projects theme={theme} projectRef={projectRef} />
-      <Footer theme={theme} />
+      <Footer isFixed theme={theme} />
     </div>
   );
 };

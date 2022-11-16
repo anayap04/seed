@@ -16,7 +16,7 @@ export const Container = styled.div`
   }
 `;
 export const FormContainer = styled.div`
-  @media (${device.laptopL}) {
+  @media (${device.laptop}) {
     width: 50vw;
     padding-top: ${({ width }) => width * 0.1}px;
   }

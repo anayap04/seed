@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, {  useState } from "react";
 import Icon from "../../foundation/Icon";
 import {
   Label,
@@ -86,13 +86,13 @@ const Input = (props) => {
     value,
     defaultValue,
     customWidth,
-    needsValidation
+    needsValidation,
   } = props;
   const width = useTextWidth({ text: !disabled ? value + 'sfgdrgfdg' : defaultValue, font: "20px Times" });
   const widthInt = Math.ceil(width);
   const [password, setPassword] = useState("")
   const {t} = useTranslation()
-
+  console.log(value, defaultValue)
   return iconName ? (
     <InputWithIcon
       type={type}
