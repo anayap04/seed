@@ -6,6 +6,7 @@ export const lightTheme = {
   primaryColor: '#19946D',
   error: '#99221E',
   lightBackground: '#EAE9E9',
+  disabled: '#4D5854',
 }
 
 export const darkTheme = {
@@ -16,4 +17,5 @@ export const darkTheme = {
   primaryColor: '#4FE0B3',
   error: '#DB504A',
   lightBackground: '#1C1C1C',
+  disabled: '#ADBBB7',
 }

@@ -1,82 +1,90 @@
-import React from "react";
-import {
-  MDBBtn,
-  MDBCard,
-  MDBCardBody,
-  MDBCardTitle,
-  MDBCol,
-  MDBContainer,
-  MDBRow,
-} from "mdb-react-ui-kit";
-import { useTranslation } from "react-i18next";
-import { Subtitle } from "../foundation/Typography";
-import { MDBInputSeed } from "./styles";
+import React, { useState } from "react";
+import axios from "axios";
+import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
+import { PaymentForm, PaymentFiledSet } from "./styles";
+import PrimaryBtn from "../atoms/buttons/Primary";
 
 const CardPayment = (props) => {
   const { theme, total } = props;
-  const { t } = useTranslation();
+  const [success, setSuccess] = useState(false);
+  const stripe = useStripe();
+  const elements = useElements();
+
+  const CARD_OPTIONS = {
+    iconStyle: "solid",
+    style: {
+      base: {
+        iconColor: theme.primaryColor,
+        borderColor: theme.primaryColor,
+        color: theme.fonts,
+        fontWeight: 500,
+        fontFamily: "Roboto, Open Sans, Segoe UI, sans-serif",
+        fontSize: "18px",
+        fontSmoothing: "antialiased",
+        ":-webkit-autofill": { color: theme.primaryColor },
+        "::placeholder": { color: theme.disabled },
+      },
+      invalid: {
+        iconColor: theme.error,
+        color: theme.error,
+      },
+    },
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const { error, paymentMethod } = await stripe.createPaymentMethod({
+      type: "card",
+      card: elements.getElement(CardElement),
+    });
+    console.log(paymentMethod, error);
+
+    if (!error) {
+      try {
+        const { id } = paymentMethod;
+        const response = await axios.post("http://localhost:4000/payment", {
+          amount: total,
+          id,
+        });
+
+        if (response.data.success) {
+          console.log("Successful payment");
+          setSuccess(true);
+        }
+      } catch (error) {
+        console.log("Error", error);
+      }
+    } else {
+      console.log(error.message);
+    }
+  };
+
   return (
-    <MDBContainer
-      fluid
-      className="py-5"
-      style={{ backgroundColor: theme.background }}
-    >
-      <MDBRow className="d-flex justify-content-center">
-        <MDBCol md="9" lg="10" xl="5">
-          <MDBCard>
-            <MDBCardBody>
-              <MDBCardTitle className="d-flex justify-content-between mb-0">
-                <p className="text-muted mb-">{t("total")}</p>
-                <p className="mb-0">{`$ ${total} USD`}</p>
-              </MDBCardTitle>
-            </MDBCardBody>
-            <div
-              className="rounded-bottom"
-              style={{ backgroundColor: theme.background }}
-            >
-              <MDBCardBody>
-                <p className="mb-6">
-                  <Subtitle theme={theme}>{t("payDetails")}</Subtitle>
-                </p>
-                <MDBInputSeed
-                  label="Card Number"
-                  id="form1"
-                  type="text"
-                  placeholder="1234 5678 1234 5678"
-                  wrapperClass="mb-3"
-                  theme={theme}
-                />
-                <MDBRow className="mb-3">
-                  <MDBCol size="6">
-                    <MDBInputSeed
-                      theme={theme}
-                      label="Expire"
-                      id="form2"
-                      type="password"
-                      placeholder="MM/YYYY"
-                      wrapperClass="mb-3"
-                    />
-                  </MDBCol>
-                  <MDBCol size="6">
-                    <MDBInputSeed
-                      theme={theme}
-                      label="CVV"
-                      id="form4"
-                      type="password"
-                      placeholder="CVV"
-                      wrapperClass="mb-3"
-                    />
-                  </MDBCol>
-                </MDBRow>
-                <MDBBtn block color="info">
-                  Order now
-                </MDBBtn>
-              </MDBCardBody>
+    <>
+      {!success ? (
+        <PaymentForm onSubmit={handleSubmit}>
+          <PaymentFiledSet>
+            <div className="FormRow">
+              <CardElement options={CARD_OPTIONS} />
             </div>
-          </MDBCard>
-        </MDBCol>
-      </MDBRow>
-    </MDBContainer>
+          </PaymentFiledSet>
+          <PrimaryBtn
+            theme={theme}
+            type="submit"
+            label="Pay"
+            margin={3}
+            width={500}
+          />
+        </PaymentForm>
+      ) : (
+        <div>
+          <h2>
+            You just bought a sweet spatula congrats this is the best decision
+            of youre life
+          </h2>
+        </div>
+      )}
+    </>
   );
 };
 

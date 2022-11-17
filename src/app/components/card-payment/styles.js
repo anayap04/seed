@@ -1,9 +1,10 @@
 import styled from "styled-components";
-import { MDBInput } from "mdb-react-ui-kit";
 
-export const MDBInputSeed = styled(MDBInput)`
-  & > input[type='text'] {
-    color: ${({ theme }) => theme.fonts} !important;
-    background-color: ${({ theme }) => theme.background} !important;
-  }
+export const PaymentForm = styled.div`
+  width: 500px;
+  margin-top: 30px;
 `;
+
+export const PaymentFiledSet = styled.fieldset`
+  margin-bottom: 30px;
+`

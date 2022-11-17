@@ -1,5 +1,6 @@
 import { Table } from "react-bootstrap";
 import styled from "styled-components";
+import { LinkContainer } from "../buttons/styles";
 
 export const TableRoot = styled(Table)`
   font-family: Bitter-SemiBold;
@@ -17,4 +18,8 @@ export const TableBody = styled.tbody`
 
 export const BtnTable = styled.td`
   margin-top: -10px;
+  & > ${LinkContainer} {
+    margin-left: 0px;
+    margin-top: -10px;
+  }
 `

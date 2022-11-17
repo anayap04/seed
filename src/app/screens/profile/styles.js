@@ -19,6 +19,9 @@ export const Root = styled.div`
   @media (${device.laptopLess}) {
     height: fit-content;
   }
+  @media (${device.laptop}) {
+    height: 100vh;
+  }
 `;
 export const Content = styled.div`
   background-color: ${({ theme }) => theme.background};
@@ -37,6 +40,9 @@ export const ColInvestment = styled(Col)`
 export const SectionBonds = styled(SectionContainer)`
   text-align: center;
   padding-left: ${({responsiveWidth}) => responsiveWidth * 0.45}px;
+  @media (${device.mobileAll}) {
+    padding-left: ${({responsiveWidth}) => responsiveWidth * 0.25}px;
+  }
   padding-top: 50px;
 `
 
@@ -60,6 +66,7 @@ export const ContainerProfile = styled(Container)`
   margin-left: 0px;
   margin: 0px;
   margin-top: 30px;
+ 
 `;
 export const ColBonds = styled(Col)`
   padding-left: 80px;

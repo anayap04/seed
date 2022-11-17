@@ -26,7 +26,7 @@ export const ContainerMain = styled.div`
   width: 100vw;
   z-index: 10;
   ${device.mobileAll} {
-    height: 125vh;
+    height: 12vh;
   }
 `;
 
@@ -35,9 +35,13 @@ ContainerMain.defaultProps = {
 };
 
 export const Back = styled.div`
-  height: 130vh;
-  ${device.laptop} {
-    height: 95vh;
+  
+height: 130vh;
+@media (${device.mobileAll}) {
+    height: 100vh;
+  }
+  @media (${device.mobileAll}) {
+    height: 35vh;
   }
   width: 100vw;
   background-color: ${({ theme }) => theme.background};
@@ -80,9 +84,10 @@ export const Content = styled.div`
   flex-direction: row;
   @media (${device.mobileAll}) {
     flex-direction: column;
-    padding-top: ${({ responsiveHeight }) => responsiveHeight * 0.05}px;
+    padding-top: ${({ responsiveHeight }) => responsiveHeight * 0.07}px;
     height: ${({ responsiveHeight }) => responsiveHeight * 0.1}px;
-    margin-bottom: 180px;
+    padding-left: -10px;
+    margin-bottom: 380px;
   }
   align-content: center;
   padding-top: ${({ responsiveHeight }) => responsiveHeight * 0.1}px;
@@ -114,6 +119,10 @@ export const CarouselContainer = styled.div`
   display: flex;
   flex-direction: row;
   margin-top: -10px;
+  @media (${device.mobileAll}) { 
+    margin-top: -5px;
+    padding-left: 40px;
+  }
 `;
 
 export const ImageDiv = styled(Col)`
@@ -171,6 +180,7 @@ export const HeadContainer = styled.div`
 export const HeadTitle = styled.div`
   font-family: BebasNeue-Regular;
   width: fit-content;
+  text-align-center;
   border-bottom: ${({ theme }) => theme.primaryColor} 3px solid;
   color: ${({ theme }) => theme.fonts};
   font-size: ${({ responsiveWidth }) => responsiveWidth * 0.07}px;
@@ -179,6 +189,7 @@ export const HeadTitle = styled.div`
   }
   @media (${device.mobileS} and ${device.mobileAll}) {
     font-size: ${({ responsiveWidth }) => responsiveWidth * 0.1}px;
+    margin-left: ${({ responsiveWidth }) => responsiveWidth * 0.15}px;
   }
 `;
 
@@ -198,8 +209,8 @@ export const StepsShapes = styled.div`
     margin-left: ${({ responsiveWidth }) => 0.3 * responsiveWidth}px;
   }
   @media (${device.mobileS} and ${device.laptopLess}) {
-    height: ${({ responsiveHeight }) => 0.5 * responsiveHeight}px;
-    margin-top: ${({ responsiveHeight }) => 0.15 * responsiveHeight}px;
+    height: ${({ responsiveHeight }) => 0.55 * responsiveHeight}px;
+    margin-top: ${({ responsiveHeight }) => 0.25 * responsiveHeight}px;
     margin-left: ${({ responsiveWidth }) => 0.05 * responsiveWidth}px;
     width: 0;
     border-radius: 0;
@@ -225,8 +236,8 @@ export const StepContainer = styled.div`
       width: ${({ responsiveWidth }) => responsiveWidth * 0.8}px;
       flex-direction: row;
       transform: translate(
-        ${({ responsiveWidth }) => responsiveWidth * 0.04}px,
-        ${({ responsiveHeight }) => responsiveHeight * -0.53}px
+        ${({ responsiveWidth }) => responsiveWidth * 0.03}px,
+        ${({ responsiveHeight }) => responsiveHeight * -0.56}px
       );
     }
     @media (${device.tablet} and ${device.laptopLess}) {
@@ -254,8 +265,8 @@ export const StepContainer = styled.div`
       width: ${({ responsiveWidth }) => responsiveWidth * 0.9}px;
       flex-direction: row;
       transform: translate(
-        ${({ responsiveWidth }) => responsiveWidth * 0.04}px,
-        ${({ responsiveHeight }) => responsiveHeight * -0.45}px
+        ${({ responsiveWidth }) => responsiveWidth * 0.03}px,
+        ${({ responsiveHeight }) => responsiveHeight * -0.5}px
       );
     }
     @media (${device.tablet} and ${device.laptopLess}) {
@@ -282,8 +293,8 @@ export const StepContainer = styled.div`
       width: ${({ responsiveWidth }) => responsiveWidth * 0.8}px;
       flex-direction: row;
       transform: translate(
-        ${({ responsiveWidth }) => responsiveWidth * 0.05}px,
-        ${({ responsiveHeight }) => responsiveHeight * -0.37}px
+        ${({ responsiveWidth }) => responsiveWidth * 0.03}px,
+        ${({ responsiveHeight }) => responsiveHeight * -0.43}px
       );
     }
     @media (${device.laptop}) {
@@ -350,6 +361,10 @@ export const ContainerProjects = styled.div`
   @media (${device.laptopL}) {
     height: 190vh;
     padding-left: 60px;
+  }
+  @media (${device.mobileAll}) {
+    padding-left: 0px;
+    height: 130vh;
   }
   display: flex;
   flex-direction: column;

@@ -24,7 +24,8 @@ const GlobalStyles = createGlobalStyle`
 
   }
 
-  html: {
+  body {
+    width: 100vw;
     background-color: ${props => props.theme.background}
   }
 `

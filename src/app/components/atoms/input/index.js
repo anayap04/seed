@@ -92,7 +92,6 @@ const Input = (props) => {
   const widthInt = Math.ceil(width);
   const [password, setPassword] = useState("")
   const {t} = useTranslation()
-  console.log(value, defaultValue)
   return iconName ? (
     <InputWithIcon
       type={type}

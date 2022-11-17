@@ -28,6 +28,7 @@ export const mapTableInvesment = (data, navigate) => {
           onClick: () => navigate('/initiative', {
             state: {
               id: item.iniciative,
+              didInvest: true,
             }
           }),
         };

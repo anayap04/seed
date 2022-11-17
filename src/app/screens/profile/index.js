@@ -2,7 +2,11 @@ import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { connect, useDispatch } from "react-redux";
 import { fetchUser, userUpdateFetch } from "../../../redux/actions/user";
-import { Title, Subtitle, BodyBold } from "../../components/foundation/Typography";
+import {
+  Title,
+  Subtitle,
+  BodyBold,
+} from "../../components/foundation/Typography";
 import Header from "../../components/header";
 import Input from "../../components/atoms/input";
 import Section from "../../components/section";
@@ -28,10 +32,6 @@ import { useForm } from "react-hook-form";
 import { mapTableInvesment } from "../../../utils/mappers";
 import { useNavigate } from "react-router-dom";
 import Loading from "../../components/loading/Loading";
-
-
-
-
 
 const ProfileSummary = ({
   userInfo,
@@ -62,7 +62,6 @@ const ProfileSummary = ({
       label: t("documentType"),
     },
   ];
-  console.log(profileArray)
   const clickPressed = () => (disabled ? setDisabled(!disabled) : null);
   const onSubmit = (data) => {
     dispatch(userUpdateFetch(data));
@@ -77,13 +76,7 @@ const ProfileSummary = ({
         <ContainerProfile responsiveWidth={width}>
           <RowProfile>
             {profileArray.map((info, e) => (
-              <ColProfile
-                xl={3}
-                lg={3}
-                md={4}
-                sm={6}
-                key={e}
-              >
+              <ColProfile xl={3} lg={3} md={4} sm={6} key={e}>
                 <Input
                   key={e}
                   labelTitle={info.label}
@@ -121,14 +114,29 @@ const Profits = ({ theme, userData, t, width, openTable, table, navigate }) => {
           <ColInvestment>
             <Subtitle theme={theme}>{t("investments")}</Subtitle>
             <Title theme={theme}>{userData.iniciativesSupported?.length}</Title>
-            
           </ColInvestment>
         </RowInvestment>
-        {table && <TableSeed theme={theme} headArr={titleArr} bodyArr={body} enableBtn />}
+        {table && (
+          <TableSeed
+            theme={theme}
+            headArr={titleArr}
+            bodyArr={body}
+            enableBtn
+          />
+        )}
         <BtnFooter>
-        {userData.iniciativesSupported?.length === 0 && <SubInfo><BodyBold theme={theme}>{t("withoutInvestments")}</BodyBold></SubInfo>}
+          {userData.iniciativesSupported?.length === 0 && (
+            <SubInfo>
+              <BodyBold theme={theme}>{t("withoutInvestments")}</BodyBold>
+            </SubInfo>
+          )}
           <SecondaryBtn
-            onClick={() => userData.iniciativesSupported?.length > 0 ? openTable(!table) : navigate('/projects')}
+            fontSize={width > 500 ? width * 0.02 : width * 0.07}
+            onClick={() =>
+              userData.iniciativesSupported?.length > 0
+                ? openTable(!table)
+                : navigate("/projects")
+            }
             theme={theme}
             label={table ? t("noSeeInvestments") : t("seeInvestments")}
           />
@@ -142,9 +150,18 @@ const Bonds = ({ theme, t, width, userData, navigate }) => (
   <Content>
     <Title theme={theme}>{t("myGreenBonds")}</Title>
     <SectionBonds responsiveWidth={width} customWidth={width} theme={theme}>
-      {userData.credits ? <Title theme={theme}>{`$ ${userData.credits} ${t("money")}`}</Title> : <Title theme={theme}>{t("noMoney")}</Title>} 
+      {userData.credits ? (
+        <Title theme={theme}>{`$ ${userData.credits} ${t("money")}`}</Title>
+      ) : (
+        <Title theme={theme}>{t("noMoney")}</Title>
+      )}
       <BtnFooter responsiveWidth={width}>
-        <SecondaryBtn onClick={() => navigate('/buyBonds')} theme={theme} label={t("buyBonds")} />
+        <SecondaryBtn
+          fontSize={width > 500 ? width * 0.02 : width * 0.07}
+          onClick={() => navigate("/buyBonds")}
+          theme={theme}
+          label={t("buyBonds")}
+        />
       </BtnFooter>
     </SectionBonds>
   </Content>
@@ -229,7 +246,13 @@ const Profile = (props) => {
         />
       )}
       {id === 1 && userInfo && (
-        <Bonds theme={theme} userData={userInfo.data} t={t} width={width} navigate={navigate} />
+        <Bonds
+          theme={theme}
+          userData={userInfo.data}
+          t={t}
+          width={width}
+          navigate={navigate}
+        />
       )}
       {id === 2 && userInfo && (
         <Profits

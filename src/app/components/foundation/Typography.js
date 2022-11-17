@@ -46,6 +46,12 @@ const Body = styled.p`
   font-family: Montserrat-Regular;
 `;
 
+const H2 = styled.p`
+  font-size: 26px;
+  color: ${({ theme }) => theme.fonts};
+  font-family: Montserrat-Regular;
+`;
+
 const BodySmall = styled.p`
   font-size: 14px;
   color: ${({ theme }) => theme.fonts};
@@ -58,4 +64,4 @@ const BodyError = styled.p`
   font-family: Montserrat-Regular;
 `
 
-export { Title, TitleSmall, Subtitle, SubtitleHighlight, Body, BodyError, BodySmall, BodyBold };
+export { Title, TitleSmall, Subtitle, SubtitleHighlight, Body, BodyError, BodySmall, BodyBold, H2 };

@@ -72,7 +72,7 @@ const HowTo = (props) => {
                   },
                 })
           }
-          fontSize={width * 0.025}
+          fontSize={width > 768 ? width * 0.025 : width * 0.07}
           theme={theme}
           label={t("start")}
         />

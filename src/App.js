@@ -11,6 +11,8 @@ import GlobalStyles from "./theme/GlobalStyles";
 import ProjectsMain from "./app/screens/projects/Projects";
 import InitiativeDetail from "./app/screens/detail/InitiativeDetails";
 import Buy from "./app/screens/bounds/Buy";
+import { FloatingWhatsApp } from "react-floating-whatsapp";
+import imageChat from './assets/imgs/operator.png'
 
 function App() {
   const [theme, themeToggler] = useDarkMode();
@@ -89,6 +91,14 @@ function App() {
             }
           ></Route>
         </Routes>
+        <FloatingWhatsApp
+        darkMode={theme !== "light"}
+          chatMessage="¡Hola! Estamos disponibles para atender cualquier duda que tengas"
+          statusMessage="Chatea con nosotros"
+          accountName="SEED Soporte"
+          phoneNumber="5215567878498"
+          avatar={imageChat}
+        />
       </BrowserRouter>
     </ThemeProvider>
   );

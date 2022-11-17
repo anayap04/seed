@@ -13,7 +13,6 @@ import {
 import logo from "../../../assets/imgs/seed-white.png";
 import logoDark from "../../../assets/imgs/seed-dark.png";
 import csci from "../../../assets/imgs/csci.png";
-import SecondaryBtn from "../../components/atoms/buttons/Secondary";
 import { Col, Row } from "react-bootstrap";
 import { Title } from "../../components/foundation/Typography";
 
@@ -40,11 +39,6 @@ const About = (props) => {
         <Col xl={4}>
         <DescriptionBody theme={theme} responsiveWidth={width}>
           <DescriptionText theme={theme}>{t("aboutDesc")}</DescriptionText>
-          <SecondaryBtn
-            label={t('seeMore')}
-            theme={theme}
-            fontSize={width * (width > 700 ? 0.015 : 0.05)}
-          />
         </DescriptionBody>
         </Col>
       </Content>
@@ -53,6 +47,7 @@ const About = (props) => {
       <CarouselContainer>
         <Row>{items.map((x) => mapImages(x))}</Row>
       </CarouselContainer>
+
     </ContainerAbout>
   );
 };

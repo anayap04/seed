@@ -38,6 +38,7 @@ import { useForm } from "react-hook-form";
 import SecondaryBtn from "../../components/atoms/buttons/Secondary";
 import { DateTime } from "luxon";
 
+
 const InvestmentModal = ({
   theme,
   dataInfo,
@@ -51,10 +52,11 @@ const InvestmentModal = ({
   handleSubmit,
 }) => {
   const onSubmit = (data) => {
+    const date = DateTime.now().setZone('utc');
     dispatch(fetchSupportInitiatives({
       iniciativeId: dataInfo && dataInfo.iniciativeId,
       supportQuantity: parseInt(data.supportQuantity),
-      investmentDate: parseInt(DateTime.now().toISODate({ format: 'basic' })),
+      investmentDate: parseInt(date.toMillis()),
     }))
   }
   
@@ -64,7 +66,7 @@ const InvestmentModal = ({
       <ContentModalInfo>
 
         <Title theme={theme}>{dataInfo.name}</Title>
-        <Body>{`${t("currentBonds")}${userInfo.data.credits} ${t(
+        <Body theme={theme}>{`${t("currentBonds")}${userInfo && userInfo.data.credits} ${t(
           "currentBonds2"
         )}`}</Body>
        
@@ -101,19 +103,25 @@ const InitiativeDetail = (props) => {
   const { width } = useWindowDimensions();
   const [isModalOpen, setOpen] = useState(false);
   const { register, handleSubmit} = useForm();
-
+  const [timeLeft, setTimeLeft] = useState(10000);
+  const [data, setData] = useState(allInitiatives);
   useEffect(() => {
     dispatch(fetchAllInitiatives());
-  }, [dispatch]);
-  const data =
-    allInitiatives &&
-    allInitiatives.data.filter(
-      (item) =>
-        item.iniciativeId === location.state.id ||
-        item.name === location.state.id
-    )[0];
-
-  return (
+    if (allInitiatives) {
+      
+      const dataTemp =
+      allInitiatives &&
+      allInitiatives.data.filter(
+        (item) =>
+          item.iniciativeId === location.state.id ||
+          item.name === location.state.id
+      )[0];
+      setData(dataTemp)
+      setTimeLeft(dataTemp.daysLeft * 24 * 60 * 60 * 1000)
+    }
+  }, [dispatch, fetchAllInitiatives]);
+ 
+      return (
     <Root theme={theme}>
       <Header
         mode={mode}
@@ -123,7 +131,7 @@ const InitiativeDetail = (props) => {
       />
       {isModalOpen && (
         <InvestmentModal
-        dataInfo={data}
+          dataInfo={data}
           theme={theme}
           isModalOpen={isModalOpen}
           setOpen={setOpen}
@@ -135,7 +143,7 @@ const InitiativeDetail = (props) => {
           handleSubmit={handleSubmit}
         />
       )}
-      <Image src={data.imageUrl} responsiveWidth={width} />
+      <Image src={ data.imageUrl} responsiveWidth={width} />
       <ContentInfo responsiveWidth={width}>
         <RowDetail>
           <Col xl={7} lg={12} sm={12} md={12}>
@@ -162,7 +170,7 @@ const InitiativeDetail = (props) => {
           <Col xl={4} lg={12} sm={12} md={12}>
             <SectionDetail responsiveWidth={width} theme={theme}>
               <Subtitle theme={theme}>{t("timeLeft")}</Subtitle>
-              <CountdownStyle theme={theme} date={Date.now() + 100000} />
+              {timeLeft && <CountdownStyle theme={theme} date={Date.now() + timeLeft} />}
               <Subtitle theme={theme}>{t("achieved")}</Subtitle>
               <BodyBold theme={theme}>{`${data.investPercentage} %`}</BodyBold>
               <ProgressBarDiv
@@ -172,19 +180,24 @@ const InitiativeDetail = (props) => {
                 now={data.investPercentage}
               />
               <BtnContainer>
+                {location.state.didInvest ?
+                <Subtitle>{'Gracias por Invertir'}</Subtitle> :
                 <PrimaryBtn
                   onClick={() => setOpen(!isModalOpen)}
                   width={width < 768 ? width * 0.5 : width * 0.2}
                   theme={theme}
                   label="Invertir"
-                />
+                />}
               </BtnContainer>
             </SectionDetail>
           </Col>
           <Col xl={7} lg={12} sm={12} md={12}>
             <BodyContent>
               <Body theme={theme}>{data.resume}</Body>
+              <Subtitle theme={theme}>{'Encargado del Proyecto'}</Subtitle>
+            <Body theme={theme}>{data.responsibleName}</Body>
             </BodyContent>
+           
           </Col>
         </RowDetail>
       </ContentInfo>

@@ -3,7 +3,7 @@ import { DefaultTheme } from "../../../../theme/themes";
 import { device } from "../../../../theme/themes/DefaultTheme/screenSizes";
 
 export const PrimaryContainer = styled.button`
-  border: 2px solid ${({ theme }) => theme.primaryColor};
+  border: 2px solid ${({ theme, disabled }) => disabled ? theme.disabled : theme.primaryColor };
   font-size: ${({fontSize}) => fontSize ? fontSize : '18'}px;
   background-color: transparent;
   padding: 5px;
@@ -12,7 +12,7 @@ export const PrimaryContainer = styled.button`
   margin-left: ${({margin}) => margin ? margin : '24px'};
   width: ${({width}) => width}px;
   &:hover {
-    background-color: ${({ theme }) => theme.primaryColor};
+    background-color: ${({ theme, disabled }) => !disabled && theme.primaryColor};
     cursor: pointer;
   }
 `;
