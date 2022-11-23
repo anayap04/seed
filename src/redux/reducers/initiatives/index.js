@@ -1,9 +1,10 @@
 import { Initiatives } from "../../actions/initiatives/constants";
 
 const initialState = {
-  isLoading: false,
+  isLoadingAllInitiatives: false,
   allInitiatives: null,
   initiativesError: null,
+  isLoadingSupported: false,
   initiativeSupported: null,
   initiativeSupportedError: null,
 };
@@ -13,36 +14,36 @@ const initiativesReducer = (state = initialState, action) => {
     case Initiatives.FETCH_ALL_INITIATIVES:
       return {
         ...state,
-        isLoading: true,
+        isLoadingAllInitiatives: true,
       };
     case Initiatives.ALL_INITIATIVES_SUCCEED:
       return {
         ...state,
-        isLoading: false,
+        isLoadingAllInitiatives: false,
         allInitiatives: action.data,
       };
     case Initiatives.ALL_INITIATIVES_ERROR:
       return {
         ...state,
-        isLoading: false,
+        isLoadingAllInitiatives: false,
         initiativesError: action.error,
       };
     case Initiatives.FETCH_SUPPORT_INITIATIVES:
       return {
         ...state,
-        isLoading: true,
-      }
+        isLoadingSupported: true,
+      };
     case Initiatives.SUPPORT_INITIATIVES_SUCCEED: 
       return {
         ...state,
-        isLoading: false,
+        isLoadingSupported: false,
         initiativeSupported: action.data,
         initiativeSupportedError: null,
       }
     case Initiatives.SUPPORT_INITIATIVES_ERROR:
       return {
         ...state,
-        isLoading: false,
+        isLoadingSupported: false,
         initiativeSupported: null,
         initiativeSupportedError: action.error,
       }

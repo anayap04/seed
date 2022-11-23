@@ -8,6 +8,7 @@ import { mapCards } from "../../../utils/mappers";
 import useWindowDimensions from "../../../utils/useWindowDimensions";
 import SecondaryBtn from "../../components/atoms/buttons/Secondary";
 import Card from "../../components/cards/Card";
+import Footer from "../../components/footer/Footer";
 import { Title } from "../../components/foundation/Typography";
 import { ColProject, ContainerProjects, CardsContainer } from "./styles";
 
@@ -17,14 +18,14 @@ const Projects = (props) => {
   const { width } = useWindowDimensions();
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const noOfCards = width < 1240 ? 2 : 4;
+  const noOfCards = width < 768 ? 2 : 4;
   useEffect(() => {
     dispatch(fetchAllInitiatives());
   }, [dispatch]);
   const data = allInitiatives && mapCards(allInitiatives.data);
 
   const renderCards = (item) => (
-    <ColProject key={item.title} responsiveWidth={width} lg={12} xl={6} m={7}>
+    <ColProject key={item.title} responsiveWidth={width} lg={12} xl={6} md={12}>
       <Card
         theme={theme}
         key={item.title}
@@ -52,6 +53,7 @@ const Projects = (props) => {
         fontSize={30}
         theme={theme}
       />
+      <Footer isFixed theme={theme} />
     </ContainerProjects>
   );
 };

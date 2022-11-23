@@ -6,7 +6,6 @@ import HowTo from "./HowTo";
 import Projects from "./Projects";
 import { connect } from "react-redux";
 import { loginSuccessed } from "../../../redux/actions/login";
-import Footer from "../../components/footer/Footer";
 
 const Home = (props) => {
   const { theme, themeToggler, mode, userData } = props;
@@ -41,7 +40,6 @@ const Home = (props) => {
       <About mode={mode} theme={theme} aboutRef={aboutRef} />
       <HowTo userData={cachedUser || userData} theme={theme} howRef={howRef} />
       <Projects theme={theme} projectRef={projectRef} />
-      <Footer isFixed theme={theme} />
     </div>
   );
 };

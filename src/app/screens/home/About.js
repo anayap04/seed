@@ -36,7 +36,7 @@ const About = (props) => {
         <Col xl={3} sm={12} md={12}>
         <img src={mode === "dark" ? logo : logoDark} height={height * (width > 700 ? 0.1 : 0.05)} />
         </Col>
-        <Col xl={4}>
+        <Col xl={4} sm={12} md={12}>
         <DescriptionBody theme={theme} responsiveWidth={width}>
           <DescriptionText theme={theme}>{t("aboutDesc")}</DescriptionText>
         </DescriptionBody>

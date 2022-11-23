@@ -62,7 +62,7 @@ const HowTo = (props) => {
         <HeadTitle responsiveWidth={width} theme={theme}>
           {t("howWorks")}
         </HeadTitle>
-        <SecondaryBtn
+        {width > 1100 && <SecondaryBtn
           onClick={() =>
             userData
               ? navigate("/profile")
@@ -75,7 +75,7 @@ const HowTo = (props) => {
           fontSize={width > 768 ? width * 0.025 : width * 0.07}
           theme={theme}
           label={t("start")}
-        />
+        />}
       </HeadContainer>
       <HowContainer>
         <StepsShapes

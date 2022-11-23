@@ -8,4 +8,9 @@ export const FooterContent = styled.div`
   width: 100vw;
   padding-top: 20px;
   vertical-align: bottom;
+    margin: 0;
+    clear: both;
+    width:100%;
+    position: relative;
+
 `;

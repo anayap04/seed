@@ -3,7 +3,10 @@ import { Col } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
 import { connect, useDispatch } from "react-redux";
 import { useLocation } from "react-router-dom";
-import { fetchAllInitiatives, fetchSupportInitiatives } from "../../../redux/actions/initiatives";
+import {
+  fetchAllInitiatives,
+  fetchSupportInitiatives,
+} from "../../../redux/actions/initiatives";
 import useWindowDimensions from "../../../utils/useWindowDimensions";
 import Footer from "../../components/footer/Footer";
 import {
@@ -38,7 +41,6 @@ import { useForm } from "react-hook-form";
 import SecondaryBtn from "../../components/atoms/buttons/Secondary";
 import { DateTime } from "luxon";
 
-
 const InvestmentModal = ({
   theme,
   dataInfo,
@@ -52,44 +54,48 @@ const InvestmentModal = ({
   handleSubmit,
 }) => {
   const onSubmit = (data) => {
-    const date = DateTime.now().setZone('utc');
-    dispatch(fetchSupportInitiatives({
-      iniciativeId: dataInfo && dataInfo.iniciativeId,
-      supportQuantity: parseInt(data.supportQuantity),
-      investmentDate: parseInt(date.toMillis()),
-    }))
-  }
-  
+    const date = DateTime.now().setZone("utc");
+    dispatch(
+      fetchSupportInitiatives({
+        iniciativeId: dataInfo && dataInfo.iniciativeId,
+        supportQuantity: parseInt(data.supportQuantity),
+        investmentDate: parseInt(date.toMillis()),
+      })
+    );
+  };
+
   return (
     <ModalSeed theme={theme} isModalOpen={isModalOpen} setOpen={setOpen}>
       <form onSubmit={handleSubmit(onSubmit)}>
-      <ContentModalInfo>
+        <ContentModalInfo>
+          <Title theme={theme}>{dataInfo.name}</Title>
+          <Body theme={theme}>{`${t("currentBonds")}${
+            userInfo && userInfo.data.credits
+          } ${t("currentBonds2")}`}</Body>
 
-        <Title theme={theme}>{dataInfo.name}</Title>
-        <Body theme={theme}>{`${t("currentBonds")}${userInfo && userInfo.data.credits} ${t(
-          "currentBonds2"
-        )}`}</Body>
-       
-        <Input
-          register={register}
-          theme={theme}
-          label="supportQuantity"
-          labelTitle={t("inverstQtyTitle")}
-          type="number"
-          customWidth={width > 768 ? width * 0.3 : width * 0.1}
-        />
-        
-      </ContentModalInfo>
-      <ModalBtnContainer>
-        <PrimaryBtn type="submit" theme={theme} width={width * 0.15} label="Confirmar" />
-        <SecondaryBtn
-          onClick={() => setOpen(false)}
-          theme={theme}
-          width={width * 0.15}
-          label="Cancelar"
-        />
-    
-      </ModalBtnContainer>
+          <Input
+            register={register}
+            theme={theme}
+            label="supportQuantity"
+            labelTitle={t("inverstQtyTitle")}
+            type="number"
+            customWidth={width > 768 ? width * 0.3 : width * 0.1}
+          />
+        </ContentModalInfo>
+        <ModalBtnContainer>
+          <PrimaryBtn
+            type="submit"
+            theme={theme}
+            width={width * 0.15}
+            label="Confirmar"
+          />
+          <SecondaryBtn
+            onClick={() => setOpen(false)}
+            theme={theme}
+            width={width * 0.15}
+            label="Cancelar"
+          />
+        </ModalBtnContainer>
       </form>
     </ModalSeed>
   );
@@ -102,26 +108,25 @@ const InitiativeDetail = (props) => {
   const location = useLocation();
   const { width } = useWindowDimensions();
   const [isModalOpen, setOpen] = useState(false);
-  const { register, handleSubmit} = useForm();
+  const { register, handleSubmit } = useForm();
   const [timeLeft, setTimeLeft] = useState(10000);
   const [data, setData] = useState(allInitiatives);
   useEffect(() => {
     dispatch(fetchAllInitiatives());
     if (allInitiatives) {
-      
       const dataTemp =
-      allInitiatives &&
-      allInitiatives.data.filter(
-        (item) =>
-          item.iniciativeId === location.state.id ||
-          item.name === location.state.id
-      )[0];
-      setData(dataTemp)
-      setTimeLeft(dataTemp.daysLeft * 24 * 60 * 60 * 1000)
+        allInitiatives &&
+        allInitiatives.data.filter(
+          (item) =>
+            item.iniciativeId === location.state.id ||
+            item.name === location.state.id
+        )[0];
+      setData(dataTemp);
+      setTimeLeft(dataTemp.daysLeft * 24 * 60 * 60 * 1000);
     }
   }, [dispatch, fetchAllInitiatives]);
- 
-      return (
+
+  return (
     <Root theme={theme}>
       <Header
         mode={mode}
@@ -143,10 +148,10 @@ const InitiativeDetail = (props) => {
           handleSubmit={handleSubmit}
         />
       )}
-      <Image src={ data.imageUrl} responsiveWidth={width} />
+      <Image src={data.imageUrl} responsiveWidth={width} />
       <ContentInfo responsiveWidth={width}>
         <RowDetail>
-          <Col xl={7} lg={12} sm={12} md={12}>
+          <Col xl={7} lg={7} sm={12} md={7}>
             <Title theme={theme}>{data.name}</Title>
             <Info>
               <InfoContent>
@@ -167,10 +172,12 @@ const InitiativeDetail = (props) => {
               </InfoContent>
             </Info>
           </Col>
-          <Col xl={4} lg={12} sm={12} md={12}>
+          <Col xl={4} lg={4} sm={12} md={4}>
             <SectionDetail responsiveWidth={width} theme={theme}>
               <Subtitle theme={theme}>{t("timeLeft")}</Subtitle>
-              {timeLeft && <CountdownStyle theme={theme} date={Date.now() + timeLeft} />}
+              {timeLeft && (
+                <CountdownStyle theme={theme} date={Date.now() + timeLeft} />
+              )}
               <Subtitle theme={theme}>{t("achieved")}</Subtitle>
               <BodyBold theme={theme}>{`${data.investPercentage} %`}</BodyBold>
               <ProgressBarDiv
@@ -180,24 +187,30 @@ const InitiativeDetail = (props) => {
                 now={data.investPercentage}
               />
               <BtnContainer>
-                {location.state.didInvest ?
-                <Subtitle>{'Gracias por Invertir'}</Subtitle> :
-                <PrimaryBtn
-                  onClick={() => setOpen(!isModalOpen)}
-                  width={width < 768 ? width * 0.5 : width * 0.2}
-                  theme={theme}
-                  label="Invertir"
-                />}
+                {location.state.didInvest ? (
+                  <Subtitle theme={theme}>{"Gracias por Invertir"}</Subtitle>
+                ) : (
+                  <PrimaryBtn
+                    onClick={() => setOpen(!isModalOpen)}
+                    width={width < 768 ? width * 0.5 : width * 0.2}
+                    theme={theme}
+                    label="Invertir"
+                  />
+                )}
               </BtnContainer>
             </SectionDetail>
           </Col>
-          <Col xl={7} lg={12} sm={12} md={12}>
+          <Col xl={7} lg={7} sm={12} md={7}>
             <BodyContent>
               <Body theme={theme}>{data.resume}</Body>
-              <Subtitle theme={theme}>{'Encargado del Proyecto'}</Subtitle>
-            <Body theme={theme}>{data.responsibleName}</Body>
+              {location.state.didInvest && (
+                <>
+                  <Subtitle theme={theme}>{"Encargado del Proyecto"}</Subtitle>
+                  <Body theme={theme}>{data.responsibleName}</Body>
+                  <Subtitle theme={theme}>{"Últimas Actualizaciones"}</Subtitle>
+                </>
+              )}
             </BodyContent>
-           
           </Col>
         </RowDetail>
       </ContentInfo>
