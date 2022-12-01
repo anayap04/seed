@@ -3,14 +3,14 @@ import { Payment } from "./constants"
 
 export const paymentRequest = (payload) => {
   return {
-    type: Register.FETCH_PAYMENT,
+    type: Payment.FETCH_PAYMENT,
     payload: payload 
   }
 }
 
 export const paymentSuccessed = (data) => {
   return {
-    type: Register.PAYMENT_SUCCESS,
+    type: Payment.PAYMENT_SUCCESS,
     data: data,
   }
 }
@@ -18,7 +18,7 @@ export const paymentSuccessed = (data) => {
 
 export const paymentFailed = (error) => {
   return {
-    type: Register.PAYMENT_FAILED,
+    type: Payment.PAYMENT_FAILED,
     error: error,
   }
 }

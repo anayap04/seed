@@ -80,5 +80,10 @@ export default {
   boundsBought: "Bonos Comprados",
   total: "Total",
   proceedCheck: "Proceder al pago",
-  payDetails: "Tus detales de pago",
+  payDetails: "Tus detalles de pago",
+  pay: "Pagar",
+  paymentSuccessful: "¡Su pago ha sido exitoso!",
+  resumePayment: "La compra de tus bonos ha sido exitosa. Resumen:  ",
+  bondsVal: " bono(s) por un valor de  ",
+  backProfile: "Volver a Mi Perfil"
 };

@@ -81,4 +81,9 @@ export default {
   total: "Total",
   proceedCheck: "Proceed to Checkout",
   payDetails: "Your payment details",
+  pay: "Pay",
+  paymentSuccessful: "Your payment has been successful!",
+  resumePayment: "The purchase of your bound(s) has been successful. Summary: ",
+  bondsVal: " bond(s) for a value of ",
+  backProfile: "Back to My Profile"
 };

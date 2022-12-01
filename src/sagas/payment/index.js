@@ -21,7 +21,7 @@ export function* payment(payload) {
       }
     );
 
-    if (response.status === 201) {
+    if (response.status === 200) {
       yield put(paymentSuccessed(response.data));
     }
   } catch (error) {
