@@ -1,6 +1,6 @@
 import { put } from "redux-saga/effects";
 import axios from "axios";
-import { allInitiativesSuccessed, allInitiativesError } from "../../redux/actions/initiatives";
+import { allInitiativesSuccessed, allInitiativesError, supportInitiativesSuccessed, supportInitiativesError } from "../../redux/actions/initiatives";
 const token = localStorage.getItem('token')
 
 export function* allInitiativesSaga() {
@@ -36,15 +36,15 @@ export function* supportInitiativesSaga(payload) {
           "Access-Control-Allow-Headers": "*",
           "Access-Control-Allow-Origin": "*",
           "Access-Control-Allow-Methods": "*",
-          accept: "text/html; charset=utf-8",
           'Authorization': `Bearer ${token}`,
+          accept: "text/html; charset=utf-8",
         },
       }
     );
     if (response.status === 200) {
-      yield put(allInitiativesSuccessed(response.data));
+      yield put(supportInitiativesSuccessed(response.data));
     }
   } catch (error) {
-    yield put(allInitiativesError(error.response.data));
+    yield put(supportInitiativesError(error.response.data));
   }
 }

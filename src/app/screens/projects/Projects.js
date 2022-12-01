@@ -40,7 +40,7 @@ const ProjectsMain = (props) => {
         profit={item.profit}
         img={item.img}
         achieved={item.achieved}
-        btnClick={() => handleNavigation(item.id)}
+        btnClick={() => handleNavigation(item.title)}
       />
     </ColProject>
   );

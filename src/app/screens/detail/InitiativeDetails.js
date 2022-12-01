@@ -55,13 +55,12 @@ const InvestmentModal = ({
 }) => {
   const onSubmit = (data) => {
     const date = DateTime.now().setZone("utc");
-    dispatch(
-      fetchSupportInitiatives({
-        iniciativeId: dataInfo && dataInfo.iniciativeId,
-        supportQuantity: parseInt(data.supportQuantity),
-        investmentDate: parseInt(date.toMillis()),
-      })
-    );
+    const dataObj = {
+      iniciativeId: dataInfo && dataInfo.iniciativeId,
+      supportQuantity: parseInt(data.supportQuantity),
+      investmentDate: parseInt(date.toMillis()),
+    };
+    dispatch(fetchSupportInitiatives(dataObj));
   };
 
   return (
@@ -79,7 +78,7 @@ const InvestmentModal = ({
             label="supportQuantity"
             labelTitle={t("inverstQtyTitle")}
             type="number"
-            customWidth={width > 768 ? width * 0.3 : width * 0.1}
+            customWidth={width > 768 ? width * 0.3 : width * 0.7}
           />
         </ContentModalInfo>
         <ModalBtnContainer>
@@ -102,7 +101,14 @@ const InvestmentModal = ({
 };
 
 const InitiativeDetail = (props) => {
-  const { theme, mode, themeToggler, allInitiatives, userInfo } = props;
+  const {
+    theme,
+    mode,
+    themeToggler,
+    allInitiatives,
+    userInfo,
+    initiativeSupported,
+  } = props;
   const dispatch = useDispatch();
   const { t } = useTranslation();
   const location = useLocation();
@@ -110,6 +116,7 @@ const InitiativeDetail = (props) => {
   const [isModalOpen, setOpen] = useState(false);
   const { register, handleSubmit } = useForm();
   const [timeLeft, setTimeLeft] = useState(10000);
+  const [invested, setInvested] = useState();
   const [data, setData] = useState(allInitiatives);
   useEffect(() => {
     dispatch(fetchAllInitiatives());
@@ -117,14 +124,25 @@ const InitiativeDetail = (props) => {
       const dataTemp =
         allInitiatives &&
         allInitiatives.data.filter(
-          (item) =>
-            item.iniciativeId === location.state.id ||
-            item.name === location.state.id
+          (item) => item.name === location.state.id
         )[0];
       setData(dataTemp);
       setTimeLeft(dataTemp.daysLeft * 24 * 60 * 60 * 1000);
+      if (
+        userInfo &&
+        userInfo.data.iniciativesSupported.filter(
+          (c) => c.iniciative === location.state.id
+        ).length > 0
+      ) {
+        setInvested(true);
+      }
     }
-  }, [dispatch, fetchAllInitiatives]);
+
+    if (initiativeSupported) {
+      setOpen(false);
+      setInvested(true);
+    }
+  }, [dispatch, fetchAllInitiatives, fetchSupportInitiatives]);
 
   return (
     <Root theme={theme}>
@@ -151,7 +169,7 @@ const InitiativeDetail = (props) => {
       <Image src={data.imageUrl} responsiveWidth={width} />
       <ContentInfo responsiveWidth={width}>
         <RowDetail>
-          <Col xl={7} lg={7} sm={12} md={7}>
+          <Col xl={7} lg={7} sm={12} md={12}>
             <Title theme={theme}>{data.name}</Title>
             <Info>
               <InfoContent>
@@ -172,7 +190,7 @@ const InitiativeDetail = (props) => {
               </InfoContent>
             </Info>
           </Col>
-          <Col xl={4} lg={4} sm={12} md={4}>
+          <Col xl={4} lg={4} sm={12} md={12}>
             <SectionDetail responsiveWidth={width} theme={theme}>
               <Subtitle theme={theme}>{t("timeLeft")}</Subtitle>
               {timeLeft && (
@@ -187,7 +205,7 @@ const InitiativeDetail = (props) => {
                 now={data.investPercentage}
               />
               <BtnContainer>
-                {location.state.didInvest ? (
+                {location.state.didInvest || invested ? (
                   <Subtitle theme={theme}>{"Gracias por Invertir"}</Subtitle>
                 ) : (
                   <PrimaryBtn
@@ -200,10 +218,10 @@ const InitiativeDetail = (props) => {
               </BtnContainer>
             </SectionDetail>
           </Col>
-          <Col xl={7} lg={7} sm={12} md={7}>
+          <Col xl={7} lg={7} sm={12} md={12}>
             <BodyContent>
               <Body theme={theme}>{data.resume}</Body>
-              {location.state.didInvest && (
+              {location.state.didInvest || invested && (
                 <>
                   <Subtitle theme={theme}>{"Encargado del Proyecto"}</Subtitle>
                   <Body theme={theme}>{data.responsibleName}</Body>
@@ -220,10 +238,11 @@ const InitiativeDetail = (props) => {
 };
 
 const mapToStateProps = (state) => {
-  const { allInitiatives } = state.initiativesReducer;
+  const { allInitiatives, initiativeSupported } = state.initiativesReducer;
   const { userInfo } = state.userReducer;
   return {
     allInitiatives: allInitiatives,
+    initiativeSupported: initiativeSupported,
     userInfo: userInfo,
   };
 };

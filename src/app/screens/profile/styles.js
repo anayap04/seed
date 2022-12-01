@@ -35,24 +35,23 @@ export const RowInvestment = styled(Row)`
 
 export const ColInvestment = styled(Col)`
   align-items: center;
-`
+`;
 
 export const SectionBonds = styled(SectionContainer)`
   text-align: center;
-  padding-left: ${({responsiveWidth}) => responsiveWidth * 0.45}px;
-  @media (${device.mobileAll}) {
-    padding-left: ${({responsiveWidth}) => responsiveWidth * 0.25}px;
+  padding-left: ${({ responsiveWidth }) => responsiveWidth * 0.45}px;
+  @media (${device.mobileAll}), (pointer: none), (pointer: coarse) {
+    padding-left: ${({ responsiveWidth }) => responsiveWidth * 0.25}px;
   }
   padding-top: 50px;
-`
+`;
 
 export const ProfileInfoInputs = styled.div``;
-
 
 export const BtnFooter = styled.div`
   margin-top: 35px;
   padding-bottom: 35px;
-  margin-left:  -${({responsiveWidth}) => responsiveWidth * 0.43}px;
+  margin-left: -${({ responsiveWidth }) => responsiveWidth * 0.43}px;
 `;
 
 export const SubInfo = styled.div`
@@ -66,7 +65,6 @@ export const ContainerProfile = styled(Container)`
   margin-left: 0px;
   margin: 0px;
   margin-top: 30px;
- 
 `;
 export const ColBonds = styled(Col)`
   padding-left: 80px;

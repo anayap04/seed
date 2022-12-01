@@ -33,20 +33,20 @@ const initiativesReducer = (state = initialState, action) => {
         ...state,
         isLoadingSupported: true,
       };
-    case Initiatives.SUPPORT_INITIATIVES_SUCCEED: 
+    case Initiatives.SUPPORT_INITIATIVES_SUCCEED:
       return {
         ...state,
         isLoadingSupported: false,
         initiativeSupported: action.data,
         initiativeSupportedError: null,
-      }
+      };
     case Initiatives.SUPPORT_INITIATIVES_ERROR:
       return {
         ...state,
         isLoadingSupported: false,
         initiativeSupported: null,
         initiativeSupportedError: action.error,
-      }
+      };
     default:
       return state;
   }

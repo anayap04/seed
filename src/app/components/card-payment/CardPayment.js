@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import axios from "axios";
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import { PaymentForm, PaymentFiledSet } from "./styles";
 import PrimaryBtn from "../atoms/buttons/Primary";
@@ -9,6 +8,7 @@ const CardPayment = (props) => {
   const [success, setSuccess] = useState(false);
   const stripe = useStripe();
   const elements = useElements();
+  console.log(stripe, elements);
 
   const CARD_OPTIONS = {
     iconStyle: "solid",
@@ -31,33 +31,19 @@ const CardPayment = (props) => {
     },
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    const { error, paymentMethod } = await stripe.createPaymentMethod({
+    const { error, paymentMethod } = stripe.createPaymentMethod({
       type: "card",
       card: elements.getElement(CardElement),
     });
-    console.log(paymentMethod, error);
-
-    if (!error) {
-      try {
-        const { id } = paymentMethod;
-        const response = await axios.post("http://localhost:4000/payment", {
-          amount: total,
-          id,
-        });
-
-        if (response.data.success) {
-          console.log("Successful payment");
-          setSuccess(true);
-        }
-      } catch (error) {
-        console.log("Error", error);
-      }
-    } else {
-      console.log(error.message);
-    }
+    console.log(paymentMethod, error, total);
+    const { id } = paymentMethod;
+    console.log(id)
+    setSuccess(true)
+        
   };
+  
 
   return (
     <>

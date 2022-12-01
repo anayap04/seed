@@ -1,6 +1,9 @@
 export default {
   login: "Inicia sesión",
+  changePass: "Cambiar Contraseña",
+  sendRequest: "Resetear Contraseña",
   register: "Regístrate",
+  forgetPass: "Olvidé mi contraseña",
   lang: "ES",
   modeDark: "Modo Oscuro",
   modeLight: "Modo Claro",
@@ -27,6 +30,7 @@ export default {
   registerSubtitle: "Para registrarse, ingrese la siguiente información",
   labelUserId: "Usuario",
   labelPass: "Contraseña",
+  newPass: "Nueva Contraseña",
   errorPass: "La contraseña es incorrecta",
   errorUser: "No existe el usuario",
   profile: "Mi Perfil",

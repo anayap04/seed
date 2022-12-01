@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { device } from "../../../theme/themes/DefaultTheme/screenSizes";
-import ProgressBar from 'react-bootstrap/ProgressBar';
+import ProgressBar from "react-bootstrap/ProgressBar";
 
 export const CardContainer = styled.div`
   width: 610px;
@@ -8,10 +8,10 @@ export const CardContainer = styled.div`
   border: ${({ theme }) => theme.primaryColor} 2px solid;
   display: flex;
   flex-direction: row;
-  @media (${device.laptop}) { 
+  @media (${device.laptop}) {
     width: 560px;
   }
-  @media(${device.mobileAll}) {
+  @media (${device.mobileAll}), (pointer: none), (pointer: coarse) {
     width: 320px;
   }
 `;
@@ -19,14 +19,14 @@ export const ImageFragment = styled.div`
   width: 250px;
   height: 370px;
   border-right: ${({ theme }) => theme.primaryColor} 2px solid;
-  background: url(${({url}) => url});
+  background: url(${({ url }) => url});
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  @media (${device.laptop}) { 
+  @media (${device.laptop}) {
     width: 230px;
   }
-  @media(${device.mobileAll}) {
+  @media (${device.mobileAll}), (pointer: none), (pointer: coarse) {
     width: 0px;
   }
 `;
@@ -41,9 +41,9 @@ export const TextFragment = styled.div`
 `;
 
 export const TitleContent = styled.div`
- height: 80px;
- margin-bottom: 10px;
-`
+  height: 80px;
+  margin-bottom: 10px;
+`;
 
 export const CardTitle = styled.p`
   color: ${({ theme }) => theme.fonts};
@@ -53,11 +53,10 @@ export const CardTitle = styled.p`
 `;
 
 export const ContentBody = styled.div`
- height: 120px;
- margin-bottom: 10px;
- width: 298px;
-`
-
+  height: 120px;
+  margin-bottom: 10px;
+  width: 298px;
+`;
 
 export const InfoSub = styled.div`
   display: flex;
@@ -79,21 +78,20 @@ export const InfoContainer = styled.div`
 
 export const FooterImg = styled.div`
   position: absolute;
-  height: ${({onHover}) => onHover ? '160px' : '81px'};
+  height: ${({ onHover }) => (onHover ? "160px" : "81px")};
   bottom: 0;
   background-color: ${({ theme }) => theme.background}85;
   width: 250px;
   padding-top: 5px;
   text-align: left;
   padding-left: 20px;
-  @media (${device.laptop}) { 
+  @media (${device.laptop}) {
     width: 224px;
   }
-  @media(${device.mobileAll}) {
+  @media (${device.mobileAll}), (pointer: none), (pointer: coarse) {
     width: 0px;
     display: none;
   }
- 
 `;
 
 export const ProfitTitle = styled.p`
@@ -101,7 +99,7 @@ export const ProfitTitle = styled.p`
   font-family: Bitter-SemiBold;
   font-size: 18px;
   margin-bottom: -5px;
-  @media(${device.mobileAll}) {
+  @media (${device.mobileAll}), (pointer: none), (pointer: coarse) {
     display: none;
   }
 `;
@@ -111,9 +109,9 @@ export const ProgressBarDiv = styled(ProgressBar)`
   height: 10px;
   margin-top: -15px;
   & > .progress {
-    background-color: #f9f9f98c
+    background-color: #f9f9f98c;
   }
   & > .progress-bar {
-    background-color: ${({theme}) => theme.primaryColor};
+    background-color: ${({ theme }) => theme.primaryColor};
   }
-`
+`;

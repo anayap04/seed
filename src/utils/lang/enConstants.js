@@ -1,6 +1,9 @@
 export default {
   login: "Login",
+  changePass: "Update Password",
+  sendRequest: "Reset Password",
   register: "Register",
+  forgetPass: "I forgot my password",
   lang: "EN",
   modeDark: "Dark Mode",
   modeLight: "Light Mode",
@@ -27,6 +30,7 @@ export default {
   registerSubtitle: "Please the follow information to register",
   labelUserId: "User",
   labelPass: "Password",
+  newPass: "New Password",
   errorPass: "Wrong password",
   errorUser: "Wrong user",
   profile: "My Profile",

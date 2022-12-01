@@ -4,8 +4,8 @@ import { Login } from "../redux/actions/login/constants";
 import { Register } from "../redux/actions/register/constants";
 import { User } from "../redux/actions/user/constants";
 import { allInitiativesSaga, supportInitiativesSaga } from "./initiatives";
-import { login } from "./login";
-import { signup } from "./register/login";
+import { login, requestNewPassword, resetPassword } from "./login";
+import { signup } from "./register";
 import { userSaga, userUpdateSaga } from "./user";
 
 function* appSagas() {
@@ -15,7 +15,9 @@ function* appSagas() {
     takeLatest(User.FETCH_USER, userSaga),
     takeLatest(User.USER_UPDATE_LOAD, userUpdateSaga),
     takeLatest(Initiatives.FETCH_ALL_INITIATIVES, allInitiativesSaga),
-    takeLatest(Initiatives.FETCH_SUPPORT_INITIATIVES, supportInitiativesSaga)
+    takeLatest(Initiatives.FETCH_SUPPORT_INITIATIVES, supportInitiativesSaga),
+    takeLatest(Login.CHANGE_PASSWORD_FETCH, resetPassword),
+    takeLatest(Login.RESQUEST_NEW_PASS_FETCH, requestNewPassword)
   ]);
 }
 export default appSagas;

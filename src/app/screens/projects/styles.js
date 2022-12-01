@@ -25,7 +25,7 @@ export const ColProject = styled(Col)`
   @media (${device.laptopL}) {
     padding-left: ${({ responsiveWidth }) => responsiveWidth * 0.02}px;
   }
-  @media (${device.mobileAll}) {
+  @media (${device.mobileAll}), (pointer:none), (pointer:coarse) {
     padding-left: ${({ responsiveWidth }) => responsiveWidth * 0.05}px;
   }
   

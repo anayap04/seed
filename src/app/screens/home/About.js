@@ -15,6 +15,7 @@ import logoDark from "../../../assets/imgs/seed-dark.png";
 import csci from "../../../assets/imgs/csci.png";
 import { Col, Row } from "react-bootstrap";
 import { Title } from "../../components/foundation/Typography";
+import { isMobile } from "react-device-detect";
 
 const About = (props) => {
   const { theme, aboutRef, mode } = props;
@@ -23,7 +24,7 @@ const About = (props) => {
   const items = [csci, csci, csci];
   const mapImages = (item) => (
     <ImageDiv xl={3} lg={4} xs={4} sm={1}>
-      <img src={item} width={(width > 700 ? 200 : 150)} />
+      <img src={item} width={(width > 700 && !isMobile ? 200 : 150)} />
     </ImageDiv>
   );
   return (
@@ -34,7 +35,7 @@ const About = (props) => {
       <Row>
       <Content responsiveHeight={height} responsiveWidth={width}>
         <Col xl={3} sm={12} md={12}>
-        <img src={mode === "dark" ? logo : logoDark} height={height * (width > 700 ? 0.1 : 0.05)} />
+        <img src={mode === "dark" ? logo : logoDark} height={height * (width > 700 && !isMobile ? 0.1 : 0.05)} />
         </Col>
         <Col xl={4} sm={12} md={12}>
         <DescriptionBody theme={theme} responsiveWidth={width}>

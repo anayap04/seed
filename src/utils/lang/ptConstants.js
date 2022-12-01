@@ -1,6 +1,9 @@
 export default {
   login: "Conecte-se",
+  changePass: "Cambiar Contraseña",
+  sendRequest: "Reset Password",
   register: "Cadastre-se",
+  forgetPass: "I forgot my password",
   lang: "PT",
   modeDark: "Modo Escuro",
   modeLight: "Modo Limpar",
@@ -27,6 +30,7 @@ export default {
   resgiterSubtitle: "Para registrarse, ingrese la siguiente información",
   labelUserId: "Usuario",
   labelPass: "Contraseña",
+  newPass: "New Password",
   errorPass: "La contraseña es incorrecta",
   errorUser: "No existe el usuario",
   profile: "Mi Perfil",

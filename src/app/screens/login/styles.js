@@ -7,9 +7,13 @@ const getGradient = color => color === '#FFFFFF' ? 'linear-gradient(90deg, rgba(
 export const Container = styled.div`
   background-color: ${({ theme }) => theme.background};
   width: 100vw;
-  height: 100vh;
+  height: fit-content;
   position: fixed;
+  @media (${device.laptopL}) {
+    height: 100vh;
+  }
   @media (${device.laptop}) {
+    height: 100vh;
     background: 
         ${({theme}) => getGradient(theme.background)},
       url(${image});
@@ -18,7 +22,7 @@ export const Container = styled.div`
 export const FormContainer = styled.div`
   @media (${device.laptop}) {
     width: 50vw;
-    padding-top: ${({ width }) => width * 0.1}px;
+    padding-top: ${({ width }) => width * 0.05}px;
   }
   padding: ${({ width }) => width * 0.15}px;
 `;
@@ -53,3 +57,19 @@ export const LinkContent = styled.div`
 export const ErrorContent = styled.div`
  width: 400px;
 `
+export const PetitionDiv = styled.div`
+  margin-top: 30px;
+  width: 350px;
+`
+
+export const InfoPopContent = styled.div`
+  max-width: ${({ responsiveWidth }) => responsiveWidth * 0.9}px;
+  border: ${({ theme }) => theme.primaryColor} 3px solid;
+  border-radius:
+  background-color: ${({ theme }) => theme.primaryColor + "bd"};
+  height: 60px;
+  padding-top: 15px;
+  border-radius: 10px;
+  padding-left: 10px;
+
+`;

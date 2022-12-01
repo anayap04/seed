@@ -15,7 +15,7 @@ const animationsObj = {
 
 export const VideoContainer = styled.video`
   z-index: -10;
-  ${device.mobileAll} {
+  ${device.mobileAll} , (pointer:none), (pointer:coarse) {
     height: 100vh;
   }
   ${device.tablet} {
@@ -45,8 +45,8 @@ export const Back = styled.div`
   @media (${device.laptopLess}) {
     height: 45vh;
   }
-  @media (${device.mobileAll}) {
-    height: 35vh;
+  @media (${device.mobileAll}), (pointer:none), (pointer:coarse) {
+    height: 38vh;
   }
   @media (${device.biggerScreens}) {
     height: 100vh;
@@ -84,7 +84,7 @@ export const ContainerAbout = styled.div`
   background-color: ${({ theme }) => theme.background};
   align-items: center;
   padding-top: ${({ responsiveHeight }) => responsiveHeight * 0.03}px;
-  @media (${device.mobileAll}) {
+  @media (${device.mobileAll}), (pointer:none), (pointer:coarse) {
     padding-top: ${({ responsiveHeight }) => responsiveHeight * 0.03}px;
   }
   @media (${device.tablet} and ${device.laptopLess}) {
@@ -96,14 +96,14 @@ export const Content = styled.div`
   height: ${({ responsiveHeight }) => responsiveHeight * 0.2}px;
   display: flex;
   flex-direction: row;
-  @media (${device.mobileAll}) {
+  @media (${device.mobileAll}), (pointer:none), (pointer:coarse) {
     flex-direction: column;
     padding-top: ${({ responsiveHeight }) => responsiveHeight * 0.07}px;
     height: ${({ responsiveHeight }) => responsiveHeight * 0.1}px;
     padding-left: -10px;
     margin-bottom: 380px;
   }
-  @media (${device.tablet} and ${device.laptopLess}) {
+  @media (${device.tablet} and ${device.laptopLess}), (pointer:none), (pointer:coarse) {
     margin-bottom: 390px;
     flex-direction: column;
     padding-top: ${({ responsiveHeight }) => responsiveHeight * 0.1}px;
@@ -118,13 +118,13 @@ export const DescriptionBody = styled.div`
   border-left: ${({ theme }) => theme.primaryColor} 2px solid;
   padding-left: ${({ responsiveWidth }) => responsiveWidth * 0.03}px;
   margin-left: ${({ responsiveWidth }) => responsiveWidth * 0.2}px;
-  @media (${device.mobileAll}) {
+  @media (${device.mobileAll}), (pointer:none), (pointer:coarse) {
     width: ${({ responsiveWidth }) => responsiveWidth * 0.7}px;
     padding-left: ${({ responsiveWidth }) => responsiveWidth * 0.03}px;
     margin-left: ${({ responsiveWidth }) => responsiveWidth * 0.05}px;
     margin-top: 10px;
   }
-  @media (${device.tablet} and ${device.laptopLess}) { 
+  @media (${device.tablet} and ${device.laptopLess}) {
     padding-left: ${({ responsiveWidth }) => responsiveWidth * 0.01}px;
     width: ${({ responsiveWidth }) => responsiveWidth * 0.75}px;
     margin-top: 100px;
@@ -176,11 +176,11 @@ export const BtnContainer = styled.div`
   left: ${({ posX }) => posX}%;
   position: absolute;
   animation: 2.5s ${({ animation }) => animationsObj[animation]};
-  @media ${device.mobileS} {
+  @media (${device.mobileS}), (pointer:none), (pointer:coarse) {
     top: ${({ posY }) => posY - 10}%;
     left: ${({ posX }) => posX - 10}%;
   }
-  @media (${device.tablet}) {
+  @media (${device.tablet}) , (pointer:none), (pointer:coarse) {
     top: ${({ posY }) => posY}%;
     left: ${({ posX }) => posX}%;
   }
@@ -195,10 +195,9 @@ export const HeadContainer = styled.div`
     margin-top: ${({ responsiveHeight }) => responsiveHeight * 0.35}px;
     left: ${({ responsiveWidth }) => responsiveWidth * 0.35}px;
   }
-  @media (${device.mobileAll}) {
-    margin-top: 30px;
+  @media (${device.mobileAll}), (pointer:none), (pointer:coarse) {
     left: 15px;
-    margin-top: ${({ responsiveWidth }) => responsiveWidth * 0.15}px;
+    margin-top: ${({ responsiveWidth }) => responsiveWidth * 0.05}px;
   }
   @media (${device.tablet} and ${device.laptopLess}) {
     margin-top: 30px;
@@ -216,7 +215,10 @@ export const HeadTitle = styled.div`
   @media (${device.laptop}) {
     font-size: ${({ responsiveWidth }) => responsiveWidth * 0.04}px;
   }
-  @media (${device.mobileS} and ${device.mobileAll}) {
+  @media (${device.laptopL}) {
+    font-size: ${({ responsiveWidth }) => responsiveWidth * 0.05}px;
+  }
+  @media (${device.mobileS} and ${device.mobileAll}), (pointer:none), (pointer:coarse) {
     font-size: ${({ responsiveWidth }) => responsiveWidth * 0.1}px;
     margin-left: ${({ responsiveWidth }) => responsiveWidth * 0.15}px;
   }
@@ -237,13 +239,18 @@ export const StepsShapes = styled.div`
   border-radius: 50%;
   border: ${({ theme }) => theme.fonts} 3px solid;
   @media (${device.laptop}) {
-    width: ${({ responsiveWidth }) => 0.33 * responsiveWidth}px;
-    height: ${({ responsiveWidth }) => 0.33 * responsiveWidth}px;
+    width: ${({ responsiveWidth }) => 0.35 * responsiveWidth}px;
+    height: ${({ responsiveWidth }) => 0.35 * responsiveWidth}px;
     margin-left: ${({ responsiveWidth }) => 0.3 * responsiveWidth}px;
   }
-  @media (${device.mobileS} and ${device.laptopLess}) {
-    height: ${({ responsiveHeight }) => 0.55 * responsiveHeight}px;
-    margin-top: ${({ responsiveHeight }) => 0.25 * responsiveHeight}px;
+  @media (${device.laptopL}) {
+    width: ${({ responsiveWidth }) => 0.35 * responsiveWidth}px;
+    height: ${({ responsiveWidth }) => 0.35 * responsiveWidth}px;
+    margin-left: ${({ responsiveWidth }) => 0.32 * responsiveWidth}px;
+  }
+  @media (${device.mobileS} and ${device.laptopLess}), (pointer:none), (pointer:coarse) {
+    height: ${({ responsiveHeight }) => 0.65 * responsiveHeight}px;
+    margin-top: ${({ responsiveHeight }) => 0.15 * responsiveHeight}px;
     margin-left: ${({ responsiveWidth }) => 0.05 * responsiveWidth}px;
     width: 0;
     border-radius: 0;
@@ -265,22 +272,32 @@ export const StepContainer = styled.div`
       ${({ responsiveWidth }) => -(responsiveWidth - 0.34 * responsiveWidth)}px,
       ${({ responsiveWidth }) => -(responsiveWidth - 0.63 * responsiveWidth)}px
     );
-    @media (${device.mobileS} and ${device.laptopLess}) {
+    @media (${device.mobileS} and ${device.mobileAll}), (pointer:none), (pointer:coarse) {
       width: ${({ responsiveWidth }) => responsiveWidth * 0.8}px;
       flex-direction: row;
       transform: translate(
         ${({ responsiveWidth }) => responsiveWidth * 0.03}px,
-        ${({ responsiveHeight }) => responsiveHeight * -0.56}px
+        ${({ responsiveHeight }) => responsiveHeight * -0.55}px
       );
     }
-    @media (${device.tablet} and ${device.laptopLess}) {
+    @media (${device.tablet} and ${device.laptopLess}), (pointer:none), (pointer:coarse) {
       margin-bottom: ${({ responsiveHeight }) => responsiveHeight * 0.09}px;
+    }
+    @media (${device.laptop}) {
+      flex-direction: row-reverse;
+      transform: translate(
+        ${({ responsiveWidth }) =>
+          -(responsiveWidth - 0.436 * responsiveWidth)}px,
+        ${({ responsiveWidth }) =>
+          -(responsiveWidth - 0.73 * responsiveWidth)}px
+      );
+      width: ${({ responsiveWidth }) => responsiveWidth * 0.9}px;
     }
     @media (${device.laptopL}) {
       flex-direction: row-reverse;
       transform: translate(
         ${({ responsiveWidth }) =>
-          -(responsiveWidth - 0.436 * responsiveWidth)}px,
+          -(responsiveWidth - 0.45 * responsiveWidth)}px,
         ${({ responsiveWidth }) =>
           -(responsiveWidth - 0.73 * responsiveWidth)}px
       );
@@ -294,24 +311,33 @@ export const StepContainer = styled.div`
         -(responsiveWidth - 0.355 * responsiveWidth)}px,
       ${({ responsiveWidth }) => -(responsiveWidth - 0.75 * responsiveWidth)}px
     );
-    @media (${device.mobileS} and ${device.laptopLess}) {
+    @media (${device.mobileS} and ${device.mobileAll}), (pointer:none), (pointer:coarse) {
       width: ${({ responsiveWidth }) => responsiveWidth * 0.9}px;
       flex-direction: row;
       transform: translate(
         ${({ responsiveWidth }) => responsiveWidth * 0.03}px,
-        ${({ responsiveHeight }) => responsiveHeight * -0.5}px
+        ${({ responsiveHeight }) => responsiveHeight * -0.6}px
       );
     }
-    @media (${device.tablet} and ${device.laptopLess}) {
+    @media (${device.tablet} and ${device.laptopLess}), (pointer:none), (pointer:coarse) {
       margin-bottom: ${({ responsiveHeight }) => responsiveHeight * 0.09}px;
     }
     @media (${device.laptop}) {
       flex-direction: row-reverse;
       transform: translate(
         ${({ responsiveWidth }) =>
-          -(responsiveWidth - 0.35 * responsiveWidth)}px,
+          -(responsiveWidth - 0.36 * responsiveWidth)}px,
         ${({ responsiveHeight }) =>
-          -(responsiveHeight - 0.5 * responsiveHeight)}px
+          -(responsiveHeight - 0.68 * responsiveHeight)}px
+      );
+    }
+    @media (${device.laptopL}) {
+      flex-direction: row-reverse;
+      transform: translate(
+        ${({ responsiveWidth }) =>
+          -(responsiveWidth - 0.4 * responsiveWidth)}px,
+        ${({ responsiveHeight }) =>
+          -(responsiveHeight - 0.61 * responsiveHeight)}px
       );
     }
   }
@@ -322,12 +348,12 @@ export const StepContainer = styled.div`
       ${({ responsiveWidth }) => -(responsiveWidth - 0.65 * responsiveWidth)}px
     );
     width: ${({ responsiveWidth }) => 0.26 * responsiveWidth}px;
-    @media (${device.mobileS} and ${device.laptopLess}) {
+    @media (${device.mobileS} and ${device.laptopLess}), (pointer:none), (pointer:coarse) {
       width: ${({ responsiveWidth }) => responsiveWidth * 0.8}px;
       flex-direction: row;
       transform: translate(
         ${({ responsiveWidth }) => responsiveWidth * 0.03}px,
-        ${({ responsiveHeight }) => responsiveHeight * -0.43}px
+        ${({ responsiveHeight }) => responsiveHeight * -0.62}px
       );
     }
     @media (${device.laptop}) {
@@ -335,7 +361,15 @@ export const StepContainer = styled.div`
       transform: translate(
         ${({ responsiveWidth }) => responsiveWidth - 0.39 * responsiveWidth}px,
         ${({ responsiveHeight }) =>
-          -(responsiveHeight - 0.15 * responsiveHeight)}px
+          -(responsiveHeight - 0.25 * responsiveHeight)}px
+      );
+    }
+    @media (${device.laptopL}) {
+      flex-direction: row;
+      transform: translate(
+        ${({ responsiveWidth }) => responsiveWidth - 0.38 * responsiveWidth}px,
+        ${({ responsiveHeight }) =>
+          -(responsiveHeight - 0.29 * responsiveHeight)}px
       );
     }
   }
@@ -349,7 +383,7 @@ export const TextContainer = styled.div`
   margin-right: ${({ responsiveWidth }) => responsiveWidth * 0.032}px;
   text-align: ${({ alignment }) => alignment};
   width: ${({ responsiveWidth }) => responsiveWidth * 0.25}px;
-  @media (${device.mobileS} and ${device.laptopLess}) {
+  @media (${device.mobileS} and ${device.laptopLess}), (pointer:none), (pointer:coarse) {
     width: ${({ responsiveWidth }) => responsiveWidth * 0.9}px;
     text-align: left;
     align-items: flex-start;
@@ -380,7 +414,7 @@ export const ColProject = styled(Col)`
   @media (${device.laptopL}) {
     padding-left: ${({ responsiveWidth }) => responsiveWidth * 0.05}px;
   }
-  @media (${device.mobileAll}) {
+  @media (${device.mobileAll}), (pointer:none), (pointer:coarse) {
     padding-left: ${({ responsiveWidth }) => responsiveWidth * 0.15}px;
   }
   @media (${device.tablet} and ${device.laptopLess}) {
@@ -399,7 +433,7 @@ export const ContainerProjects = styled.div`
     height: 190vh;
     padding-left: 60px;
   }
-  @media (${device.mobileAll}) {
+  @media (${device.mobileAll}), (pointer:none), (pointer:coarse) {
     padding-left: 0px;
     height: 130vh;
   }
@@ -408,7 +442,7 @@ export const ContainerProjects = styled.div`
   background-color: ${({ theme }) => theme.background};
   align-items: center;
   padding-top: ${({ responsiveHeight }) => responsiveHeight * 0.03}px;
-  @media (${device.mobileAll}) {
+  @media (${device.mobileAll}), (pointer:none), (pointer:coarse) {
     padding-top: ${({ responsiveHeight }) => responsiveHeight * 0.03}px;
   }
 `;

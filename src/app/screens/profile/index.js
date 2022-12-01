@@ -225,6 +225,7 @@ const Profile = (props) => {
         theme={theme}
         btnsArray={["lang", "mode", "logout", "projects"]}
       />
+     
       <ChipGroup
         spGroup
         labelsArray={chipsInfo}
