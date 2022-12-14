@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/static/css/main.668025a4.css",
-    "main.js": "/static/js/main.66aff936.js",
+    "main.css": "/static/css/main.85eb9370.css",
+    "main.js": "/static/js/main.c28bdc71.js",
     "static/js/787.4f83e0bb.chunk.js": "/static/js/787.4f83e0bb.chunk.js",
     "static/media/video_light.mp4": "/static/media/video_light.57d5cc9b65534fa3e6e9.mp4",
     "static/media/earth.jpeg": "/static/media/earth.8e9339dd53fe56ec2e52.jpeg",
@@ -9,23 +9,25 @@
     "static/media/trees.jpg": "/static/media/trees.49d03cda5f3675bc2683.jpg",
     "static/media/bonos.jpeg": "/static/media/bonos.9d6c4125412d71e26382.jpeg",
     "static/media/bonos_light.jpg": "/static/media/bonos_light.fda10d29c908f7610c58.jpg",
+    "static/media/green.png": "/static/media/green.67ab69b641f3f39df1eb.png",
+    "static/media/capexp.png": "/static/media/capexp.a5c0fbd075b7e99c052a.png",
+    "static/media/veleta.png": "/static/media/veleta.09594c7e7bd4633a4eab.png",
     "static/media/Montserrat-Regular.woff": "/static/media/Montserrat-Regular.a04b5e24af93da353f0e.woff",
     "static/media/Bitter-SemiBold.woff": "/static/media/Bitter-SemiBold.dc2b0e0f1128dccb52a3.woff",
     "static/media/Montserrat-Light.woff": "/static/media/Montserrat-Light.26f739ed3a0348e5d66a.woff",
     "static/media/operator.png": "/static/media/operator.4440b49bed697db498d5.png",
-    "static/media/csci.png": "/static/media/csci.59c995269a6108679094.png",
     "static/media/BebasNeue-Regular.woff": "/static/media/BebasNeue-Regular.558c0b09724cc2d2f36f.woff",
     "static/media/money.png": "/static/media/money.540b3c795d41699a6556.png",
     "static/media/seed-dark.png": "/static/media/seed-dark.c604763d9e84f5f5634c.png",
     "static/media/seed-white.png": "/static/media/seed-white.f9bdcc581d63863f2a43.png",
     "static/media/grow.png": "/static/media/grow.fb1269c6ee5389c5f6b3.png",
     "index.html": "/index.html",
-    "main.668025a4.css.map": "/static/css/main.668025a4.css.map",
-    "main.66aff936.js.map": "/static/js/main.66aff936.js.map",
+    "main.85eb9370.css.map": "/static/css/main.85eb9370.css.map",
+    "main.c28bdc71.js.map": "/static/js/main.c28bdc71.js.map",
     "787.4f83e0bb.chunk.js.map": "/static/js/787.4f83e0bb.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.668025a4.css",
-    "static/js/main.66aff936.js"
+    "static/css/main.85eb9370.css",
+    "static/js/main.c28bdc71.js"
   ]
 }
