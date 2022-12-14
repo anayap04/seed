@@ -5,6 +5,7 @@ import Row from "react-bootstrap/Row";
 import { device } from "../../../theme/themes/DefaultTheme/screenSizes";
 import texture from "../../../assets/imgs/earth.jpeg";
 import { SectionContainer } from "../../components/section/styles";
+import {Title} from "../../components/foundation/Typography"
 
 export const Root = styled.div`
   background-color: ${({ theme }) => theme.background};
@@ -39,9 +40,12 @@ export const ColInvestment = styled(Col)`
 
 export const SectionBonds = styled(SectionContainer)`
   text-align: center;
-  padding-left: ${({ responsiveWidth }) => responsiveWidth * 0.45}px;
+  
   @media (${device.mobileAll}), (pointer: none), (pointer: coarse) {
     padding-left: ${({ responsiveWidth }) => responsiveWidth * 0.25}px;
+  }
+  ${Title} {
+    margin-left: ${({ responsiveWidth }) => responsiveWidth * 0.45}px;
   }
   padding-top: 50px;
 `;

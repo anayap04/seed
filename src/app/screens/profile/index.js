@@ -1,23 +1,19 @@
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { connect, useDispatch } from "react-redux";
-import { fetchUser, userUpdateFetch } from "../../../redux/actions/user";
+import { fetchUser } from "../../../redux/actions/user";
 import {
   Title,
   Subtitle,
   BodyBold,
+  Body,
 } from "../../components/foundation/Typography";
 import Header from "../../components/header";
-import Input from "../../components/atoms/input";
 import Section from "../../components/section";
 import {
   Root,
   Content,
-  ProfileInfoInputs,
   BtnFooter,
-  ContainerProfile,
-  ColProfile,
-  RowProfile,
   RowInvestment,
   ColInvestment,
   SectionBonds,
@@ -28,77 +24,11 @@ import useWindowDimensions from "../../../utils/useWindowDimensions";
 import ChipGroup from "../../components/atoms/chips/ChipGroup";
 import TableSeed from "../../components/atoms/table/Table";
 import Footer from "../../components/footer/Footer";
-import { useForm } from "react-hook-form";
-import { mapTableInvesment } from "../../../utils/mappers";
+import { mapTableInvesment} from "../../../utils/mappers";
 import { useNavigate } from "react-router-dom";
 import Loading from "../../components/loading/Loading";
+import ProfileSummary from "./Summary";
 
-const ProfileSummary = ({
-  userInfo,
-  theme,
-  t,
-  disabled,
-  setDisabled,
-  register,
-  handleSubmit,
-  dispatch,
-  width,
-}) => {
-  const profileArray = [
-    { id: "firstName", value: userInfo.firstName, label: t("nameField") },
-    { id: "lastName", value: userInfo.lastName, label: t("lastnameField") },
-    { id: "email", value: userInfo.email, label: t("mailField") },
-    { id: "pass", value: "******", label: t("labelPass") },
-    {
-      id: "countryCode",
-      value: userInfo.countryCode,
-      label: t("countryField"),
-    },
-    { id: "phoneNumber", value: userInfo.phoneNumber, label: t("phoneField") },
-    { id: "identifier", value: userInfo.identifier, label: t("idField") },
-    {
-      id: "identifierType",
-      value: userInfo.identifierType,
-      label: t("documentType"),
-    },
-  ];
-  const clickPressed = () => (disabled ? setDisabled(!disabled) : null);
-  const onSubmit = (data) => {
-    dispatch(userUpdateFetch(data));
-    dispatch(fetchUser());
-    setDisabled(true);
-  };
-  const onError = (errors, e) => console.log(errors, e);
-
-  return (
-    <ProfileInfoInputs>
-      <form onSubmit={handleSubmit(onSubmit, onError)}>
-        <ContainerProfile responsiveWidth={width}>
-          <RowProfile>
-            {profileArray.map((info, e) => (
-              <ColProfile xl={3} lg={3} md={4} sm={6} key={e}>
-                <Input
-                  key={e}
-                  labelTitle={info.label}
-                  iconName="Edit"
-                  theme={theme}
-                  disabled={disabled}
-                  defaultValue={info.value}
-                  onClick={() => clickPressed()}
-                  label={info.id}
-                  register={register}
-                />
-              </ColProfile>
-            ))}
-          </RowProfile>
-        </ContainerProfile>
-        <BtnFooter>
-          <SecondaryBtn type="submit" theme={theme} label={t("updateBtn")} />
-        </BtnFooter>
-      </form>
-    </ProfileInfoInputs>
-  );
-};
 const Profits = ({ theme, userData, t, width, openTable, table, navigate }) => {
   const titleArr = ["Iniciativa", "Cantidad", "Fecha"];
   const body = userData && mapTableInvesment(userData, navigate);
@@ -109,7 +39,7 @@ const Profits = ({ theme, userData, t, width, openTable, table, navigate }) => {
         <RowInvestment>
           <ColInvestment>
             <Subtitle theme={theme}>{t("totalProfits")}</Subtitle>
-            <Title theme={theme}>{userData.iniciativesSupported?.length}</Title>
+            <Title theme={theme}>{`-`}</Title>
           </ColInvestment>
           <ColInvestment>
             <Subtitle theme={theme}>{t("investments")}</Subtitle>
@@ -149,9 +79,12 @@ const Profits = ({ theme, userData, t, width, openTable, table, navigate }) => {
 const Bonds = ({ theme, t, width, userData, navigate }) => (
   <Content>
     <Title theme={theme}>{t("myGreenBonds")}</Title>
-    <SectionBonds responsiveWidth={width} customWidth={width} theme={theme}>
+    <SectionBonds customWidth={width} theme={theme}>
       {userData.credits ? (
-        <Title theme={theme}>{`$ ${userData.credits} ${t("money")}`}</Title>
+        <>
+        <Title theme={theme}>{`${userData.credits} ${t("Bonos")}`}</Title>
+        <Body>{`Representan $ ${userData.credits * 1000} USD`}</Body>
+        </>
       ) : (
         <Title theme={theme}>{t("noMoney")}</Title>
       )}
@@ -173,9 +106,6 @@ const Summary = ({
   t,
   disabled,
   setDisabled,
-  register,
-  handleSubmit,
-  dispatch,
   width,
 }) => {
   return (
@@ -183,14 +113,10 @@ const Summary = ({
       <Title theme={theme}>{t("profile")}</Title>
       <Section theme={theme}>
         <ProfileSummary
-          t={t}
           userInfo={userData}
           theme={theme}
           disabled={disabled}
           setDisabled={setDisabled}
-          register={register}
-          handleSubmit={handleSubmit}
-          dispatch={dispatch}
           width={width}
         />
       </Section>
@@ -199,14 +125,14 @@ const Summary = ({
 };
 const Profile = (props) => {
   const { theme, themeToggler, mode, userInfo, isLoading } = props;
-  const dispatch = useDispatch();
   const { t } = useTranslation();
+  const dispatch = useDispatch();
   const { width } = useWindowDimensions();
-  const { register, handleSubmit } = useForm();
   const navigate = useNavigate();
   const [id, setId] = useState(0);
   const [table, openTable] = useState(false);
   const [disabled, setDisabled] = useState(true);
+
   const chipsInfo = [
     { id: 0, label: t("myInfo") },
     { id: 1, label: t("myBounds") },
@@ -225,7 +151,7 @@ const Profile = (props) => {
         theme={theme}
         btnsArray={["lang", "mode", "logout", "projects"]}
       />
-     
+
       <ChipGroup
         spGroup
         labelsArray={chipsInfo}
@@ -241,9 +167,7 @@ const Profile = (props) => {
           width={width}
           disabled={disabled}
           setDisabled={setDisabled}
-          register={register}
-          handleSubmit={handleSubmit}
-          dispatch={dispatch}
+
         />
       )}
       {id === 1 && userInfo && (

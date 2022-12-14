@@ -78,7 +78,7 @@ export const InfoContainer = styled.div`
 
 export const FooterImg = styled.div`
   position: absolute;
-  height: ${({ onHover }) => (onHover ? "160px" : "81px")};
+  height: ${({ isHover }) => (isHover ? "160px" : "81px")};
   bottom: 0;
   background-color: ${({ theme }) => theme.background}85;
   width: 250px;

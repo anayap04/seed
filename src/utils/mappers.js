@@ -35,3 +35,14 @@ export const mapTableInvesment = (data, navigate) => {
       })
     : [];
 };
+
+
+export const getDocumentPerCountry = country => {
+  const objDoc = {
+    CO: ['C.C.', 'C.E.', 'Pasaporte'],
+    MX: ['INE/IFE', 'Pasaporte'],
+    OTHER: ['Pasaporte'],
+  }
+  return objDoc[country]
+  
+}

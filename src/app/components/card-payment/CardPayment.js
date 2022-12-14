@@ -8,6 +8,7 @@ import { Spinner } from "react-bootstrap";
 import ModalSeed from "../modal/Modal";
 import {Body, BodyBold, Title} from "../foundation/Typography"
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 const CardPayment = (props) => {
   const { theme, total, paymentSuccess } = props;
@@ -15,6 +16,7 @@ const CardPayment = (props) => {
   const [isLoading, setIsLoading] = useState(false);
   const [isModalOpen, setOpen] = useState(false);
   const navigate = useNavigate();
+  const {t} = useTranslation();
   const stripe = useStripe();
   const elements = useElements();
   const dipatch = useDispatch();
@@ -90,7 +92,7 @@ const CardPayment = (props) => {
             <PrimaryBtn
               theme={theme}
               type="submit"
-              label="Pay"
+              label={t('pay')}
               margin={3}
               width={500}
             />
@@ -98,10 +100,10 @@ const CardPayment = (props) => {
         </PaymentForm>
       ) : (
         <ModalSeed isModalOpen={isModalOpen} setOpen={setOpen} theme={theme}>
-          <Title theme={theme}>{'¡Compra exitosa!'}</Title>
-          <Body theme={theme}>{'La compra de sus bono(s) ha sido exitosa. Resumen: '}</Body>
-          <BodyBold theme={theme}>{`${total / 1000} bonos por un valor de ${total} USD`}</BodyBold>
-          <PrimaryBtn theme={theme} width={351} label="Volver a Mi Perfil" onClick={() => navigate("/profile")} />
+          <Title theme={theme}>{t('paymentSuccessful')}</Title>
+          <Body theme={theme}>{t('resumePayment')}</Body>
+          <BodyBold theme={theme}>{`${total / 1000} ${t('bondsVal')} ${total} USD`}</BodyBold>
+          <PrimaryBtn theme={theme} width={351} label={t('backProfile')} onClick={() => navigate("/profile")} />
         </ModalSeed>
       )}
     </>

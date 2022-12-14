@@ -21,12 +21,12 @@ export const CardsContainer = styled.div`
 export const ColProject = styled(Col)`
   margin-top: 30px;
   margin-bottom: 20px;
-  padding-left: ${({ responsiveWidth }) => responsiveWidth * 0.01}px;
+  padding-left: ${({ width }) => width * 0.01}px;
   @media (${device.laptopL}) {
-    padding-left: ${({ responsiveWidth }) => responsiveWidth * 0.02}px;
+    padding-left: ${({ width }) => width * 0.02}px;
   }
   @media (${device.mobileAll}), (pointer:none), (pointer:coarse) {
-    padding-left: ${({ responsiveWidth }) => responsiveWidth * 0.05}px;
+    padding-left: ${({ width }) => width * 0.05}px;
   }
   
 `;

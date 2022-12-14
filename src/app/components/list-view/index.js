@@ -2,21 +2,25 @@ import React from "react";
 import { ListContainer, Item } from "./styles";
 
 const ListView = (props) => {
-  const { arrayItems, theme, setList } = props;
+  const { arrayItems, theme, setList, width, setValue } = props;
   
-  const clicked = item => {
-    item.onClick()
+  const clicked = item => {    
+    if (setValue) {
+      setValue(item)
+    } else {
+      item.onClick()
+    }
     setList(false)
   }
 
-  const renderItems = (item) => (
-    <Item theme={theme} onClick={item.onClick ? () => clicked(item) : null}>
-      {item.label}
+  const renderItems = (item, index) => (
+    <Item key={index} theme={theme} onClick={item.onClick || setValue ? () => clicked(item) : null}>
+      {item.label ? item.label : item}
     </Item>
   );
   return (
-    <ListContainer theme={theme}>
-      {arrayItems.map((i) => renderItems(i))}
+    <ListContainer width={width} theme={theme}>
+      {arrayItems.map((i, index) => renderItems(i, index))}
     </ListContainer>
   );
 };

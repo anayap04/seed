@@ -25,11 +25,15 @@ const InputWithIcon = ({
   defaultValue,
   valueWidth,
   register,
+  onFocus,
+  onBlur,
 }) => (
   <InputContent onClick={() => onClick()}>
     <Label theme={theme}>{labelTitle}</Label>
     <InputContentIcon valueWidth={valueWidth} disabled={disabled} theme={theme}>
       <FieldBlank
+        onFocus={onFocus}
+        onBlur={onBlur}
         valueWidth={valueWidth}
         value={value}
         defaultValue={defaultValue}
@@ -87,6 +91,8 @@ const Input = (props) => {
     defaultValue,
     customWidth,
     needsValidation,
+    onFocus,
+    onBlur,
   } = props;
   const width = useTextWidth({ text: !disabled ? value + 'sfgdrgfdg' : defaultValue, font: "20px Times" });
   const widthInt = Math.ceil(width);
@@ -106,7 +112,8 @@ const Input = (props) => {
       value={value}
       onClick={onClick}
       valueWidth={widthInt}
-      
+      onFocus={onFocus}
+      onBlur={onBlur}
     />
   ) : (
     <>

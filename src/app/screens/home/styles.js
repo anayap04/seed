@@ -143,9 +143,11 @@ export const CarouselContainer = styled.div`
   display: flex;
   flex-direction: row;
   margin-top: -10px;
+  width: 90%;
   @media (${device.laptopLess}) {
     margin-top: -5px;
     padding-left: 40px;
+    width: 95%;
   }
 `;
 

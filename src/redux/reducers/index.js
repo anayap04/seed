@@ -5,4 +5,10 @@ import initiativesReducer from "./initiatives";
 import registerReducer from "./register";
 import paymentReducer from "./payment";
 
-export default combineReducers({loginReducer, userReducer, initiativesReducer, registerReducer, paymentReducer})
+export default combineReducers({
+  loginReducer,
+  userReducer,
+  initiativesReducer,
+  registerReducer,
+  paymentReducer,
+});

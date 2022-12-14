@@ -88,7 +88,6 @@ const LoginPage = (props) => {
   };
 
   useEffect(() => {
-    console.log(userData, passwordChangedSuccess)
     if (loginError) {
       const message =
         loginError.message.indexOf("mail") > -1

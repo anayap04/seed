@@ -191,7 +191,7 @@ const InitiativeDetail = (props) => {
             </Info>
           </Col>
           <Col xl={4} lg={4} sm={12} md={12}>
-            <SectionDetail responsiveWidth={width} theme={theme}>
+            <SectionDetail customWidth={width} theme={theme}>
               <Subtitle theme={theme}>{t("timeLeft")}</Subtitle>
               {timeLeft && (
                 <CountdownStyle theme={theme} date={Date.now() + timeLeft} />

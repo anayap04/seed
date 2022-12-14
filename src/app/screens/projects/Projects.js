@@ -28,7 +28,7 @@ const ProjectsMain = (props) => {
   };
 
   const renderCards = (item) => (
-    <ColProject key={item.title} responsiveWidth={width} lg={12} xl={6} m={7}>
+    <ColProject key={item.title} width={width} lg={12} xl={6} m={7}>
       <Card
         theme={theme}
         key={item.title}

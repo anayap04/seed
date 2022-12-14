@@ -38,7 +38,7 @@ const Card = (props) => {
   return (
     <CardContainer onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)} theme={theme}>
       <ImageFragment url={imgUrl} theme={theme}>
-        <FooterImg onHover={onHover} theme={theme}>
+        <FooterImg isHover={onHover} theme={theme}>
           <ProfitTitle theme={theme}>{t("profit")}</ProfitTitle>
           <Body theme={theme}>{profit}</Body>
           {onHover && (
