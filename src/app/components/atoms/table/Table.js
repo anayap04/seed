@@ -3,7 +3,7 @@ import LinkBtn from "../buttons/Link";
 import { TableRoot, TableBody, BtnTable } from "./styles";
 
 const TableSeed = (props) => {
-  const { headArr, bodyArr, theme, enableBtn } = props;
+  const { headArr, bodyArr, theme, summary, enableBtn } = props;
   const renderRow = (item) => {
     return (
       <tr key={item.name}>
@@ -39,6 +39,13 @@ const TableSeed = (props) => {
         </tr>
       </thead>
       <TableBody>{bodyArr.map((item) => renderRow(item))}</TableBody>
+      {summary &&<thead>
+        <tr>
+          {summary.map((item) => (
+            <th key={item}>{item}</th>
+          ))}
+        </tr>
+      </thead>}
     </TableRoot>
   );
 };

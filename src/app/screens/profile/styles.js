@@ -82,3 +82,9 @@ export const ColProfile = styled(Col)`
 export const RowProfile = styled(Row)`
   max-width: ${({ responsiveWidth }) => responsiveWidth * 0.9}px;
 `;
+
+export const Total = styled.div`
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+`

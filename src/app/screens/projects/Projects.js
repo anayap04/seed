@@ -9,7 +9,6 @@ import { Title } from "../../components/foundation/Typography";
 import { CardsContainer, ColProject, Container, Root } from "./styles";
 import { mapCards } from "../../../utils/mappers";
 import useWindowDimensions from "../../../utils/useWindowDimensions";
-import Footer from "../../components/footer/Footer";
 import { useNavigate } from "react-router-dom";
 
 const ProjectsMain = (props) => {
@@ -20,10 +19,10 @@ const ProjectsMain = (props) => {
   const navigate = useNavigate();
 
   const handleNavigation = (id) => {
-    navigate('/initiative', {
+    navigate("/initiative", {
       state: {
         id: id,
-      }
+      },
     });
   };
 
@@ -63,7 +62,6 @@ const ProjectsMain = (props) => {
           <Row>{data && data.map((value) => renderCards(value))}</Row>
         </CardsContainer>
       </Container>
-      <Footer theme={theme} />
     </Root>
   );
 };

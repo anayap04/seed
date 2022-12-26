@@ -18,11 +18,11 @@ export const mapCards = (data) => {
 
 const converTime = time => DateTime.fromISO(time).toLocaleString()
 
-export const mapTableInvesment = (data, navigate) => {
-  return data.iniciativesSupported && data.iniciativesSupported.length > 0
+export const mapTableInvesment = (data, navigate, lang) => {
+  const dataMapped = data.iniciativesSupported && data.iniciativesSupported.length > 0
     ? data.iniciativesSupported.map((item) => {
         return {
-          name: item.iniciative,
+          name: item.translations[lang].name,
           quantity: item.quantity,
           date: converTime(item.investmentDate),
           onClick: () => navigate('/initiative', {
@@ -34,6 +34,8 @@ export const mapTableInvesment = (data, navigate) => {
         };
       })
     : [];
+  
+    return dataMapped.sort((a,b) => new Date(b.date) -  new Date(a.date))
 };
 
 

@@ -13,13 +13,20 @@ import {
 import Header from "../../components/header";
 import Section from "../../components/section";
 import { Row, Col } from "react-bootstrap";
-import Footer from "../../components/footer/Footer";
-import { Root, Counter, TableContainer, BtnContainer, CounterLabel } from "./styles";
+import {
+  Root,
+  Counter,
+  TableContainer,
+  BtnContainer,
+  CounterLabel,
+} from "./styles";
 import CardPayment from "../../components/card-payment/CardPayment";
 import useWindowDimensions from "../../../utils/useWindowDimensions";
-import {Elements} from '@stripe/react-stripe-js';
-import {loadStripe} from '@stripe/stripe-js';
-const stripePromise = loadStripe('pk_test_51M3u1vIzcGFb48GUz20hBuQXzMnrROio40lA80MYMQPJYipl6b5PMBNkb6QuweQ4emGR2bAAZdz2zIgeUMvLhzJG00HVhNYGQt');
+import { Elements } from "@stripe/react-stripe-js";
+import { loadStripe } from "@stripe/stripe-js";
+const stripePromise = loadStripe(
+  "pk_test_51M3u1vIzcGFb48GUz20hBuQXzMnrROio40lA80MYMQPJYipl6b5PMBNkb6QuweQ4emGR2bAAZdz2zIgeUMvLhzJG00HVhNYGQt"
+);
 
 const Buy = (props) => {
   const { theme, mode, themeToggler } = props;
@@ -49,7 +56,10 @@ const Buy = (props) => {
               label="-"
               margin={10}
             />
-            <CounterLabel> <H2 theme={theme}>{counter}</H2></CounterLabel>
+            <CounterLabel>
+              {" "}
+              <H2 theme={theme}>{counter}</H2>
+            </CounterLabel>
             <PrimaryBtn
               theme={theme}
               label="+"
@@ -118,10 +128,13 @@ const Buy = (props) => {
           </BtnContainer>
         </Col>
         <Col>
-          {card && <Elements stripe={stripePromise}><CardPayment total={counter * boundCost} theme={theme} /></Elements>}
+          {card && (
+            <Elements stripe={stripePromise}>
+              <CardPayment total={counter * boundCost} theme={theme} />
+            </Elements>
+          )}
         </Col>
       </Row>
-      <Footer isFixed theme={theme} />
     </Root>
   );
 };

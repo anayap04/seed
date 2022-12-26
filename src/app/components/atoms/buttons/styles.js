@@ -59,7 +59,7 @@ TextSecondary.defaultProps = {
 export const LinkContainer = styled.div`
   margin-left: 24px;
   padding-bottom: 0px;
-  width: fit-content;
+  width: max-content;
   color: ${({ theme }) => theme.fonts};
   border-bottom: 3px ${({ theme }) => theme.primaryColor} solid;
   &:hover {

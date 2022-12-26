@@ -75,7 +75,8 @@ export const InputContentIcon = styled.div`
 
 export const IconContainer = styled.div`
   padding-top: 8px;
-  padding-left: 5px;
+  padding-left: 3px;
+  padding-right: 3px;
 `;
 
 export const PasswordChecklistStyled = styled(PasswordChecklist)`

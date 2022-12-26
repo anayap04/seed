@@ -6,9 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { fetchAllInitiatives } from "../../../redux/actions/initiatives";
 import { mapCards } from "../../../utils/mappers";
 import useWindowDimensions from "../../../utils/useWindowDimensions";
-import SecondaryBtn from "../../components/atoms/buttons/Secondary";
 import Card from "../../components/cards/Card";
-import Footer from "../../components/footer/Footer";
 import { Title } from "../../components/foundation/Typography";
 import { ColProject, ContainerProjects, CardsContainer } from "./styles";
 
@@ -48,12 +46,6 @@ const Projects = (props) => {
       <CardsContainer>
       <Row>{data && data.slice(0, noOfCards).map((value) => renderCards(value))}</Row>
       </CardsContainer>
-      <SecondaryBtn
-        label={t('seeAll')}
-        fontSize={30}
-        theme={theme}
-      />
-      <Footer isFixed theme={theme} />
     </ContainerProjects>
   );
 };

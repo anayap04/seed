@@ -5,7 +5,7 @@ import { Col } from "react-bootstrap";
 export const Root = styled.div`
   background-color: ${({ theme }) => theme.background};
   width: 100vw;
-  padding-bottom: 50px;
+  padding-bottom: 30vh;
 `;
 
 export const Container = styled.div`

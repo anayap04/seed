@@ -5,17 +5,22 @@ import useWindowDimensions from "../../../utils/useWindowDimensions";
 import SecondaryBtn from "../../components/atoms/buttons/Secondary";
 import { isMobile } from "react-device-detect";
 import {
-  StepsShapes,
   ContainerHowTo,
   Dots,
-  StepContainer,
   TitleText,
   TextContainer,
   HowContainer,
   BodyText,
   HeadContainer,
   HeadTitle,
+  LineShape,
+  StepsContainerMobile,
+  StepContainer,
+  TextContainerMobile,
 } from "./styles";
+
+import circleDark from "../../../assets/imgs/circle_dark.png";
+import circleLight from "../../../assets/imgs/circle_light.png";
 
 const HowTo = (props) => {
   const { howRef, theme, userData } = props;
@@ -43,48 +48,76 @@ const HowTo = (props) => {
     },
   ];
   const renderStep = () =>
-    infoSteps.map((step) => (
-      <StepContainer
-        responsiveWidth={width}
-        responsiveHeight={height}
-        key={step.id}
-      >
-        <Dots theme={theme} />
-        <TextContainer responsiveWidth={width} alignment={step.alignment}>
-          <TitleText theme={theme}>{step.title}</TitleText>
-          <BodyText theme={theme}>{step.desc}</BodyText>
-        </TextContainer>
-      </StepContainer>
-    ));
+    infoSteps.map((step) =>
+      isMobile ? (
+        <StepsContainerMobile
+          responsiveWidth={width}
+          responsiveHeight={height}
+          key={step.id}
+          index={step.id}
+        >
+          <Dots theme={theme} />
+          <TextContainerMobile isMobile={isMobile} responsiveWidth={width} alignment={step.alignment}>
+            <TitleText theme={theme}>{step.title}</TitleText>
+            <BodyText theme={theme}>{step.desc}</BodyText>
+          </TextContainerMobile>
+        </StepsContainerMobile>
+      ) : (
+        
+          <TextContainer responsiveHeight={height} responsiveWidth={width} alignment={step.alignment}>
+            <TitleText theme={theme}>{step.title}</TitleText>
+            <BodyText theme={theme}>{step.desc}</BodyText>
+          </TextContainer>
+       
+      )
+    );
 
   return (
     <ContainerHowTo ref={howRef} theme={theme}>
-      <HeadContainer responsiveHeight={height} responsiveWidth={width}>
-        <HeadTitle responsiveWidth={width} theme={theme}>
+      <HeadContainer
+        isMobile={isMobile}
+        responsiveHeight={height}
+        responsiveWidth={width}
+        theme={theme}
+      >
+        <HeadTitle isMobile={isMobile} responsiveWidth={width} theme={theme}>
           {t("howWorks")}
         </HeadTitle>
-        {width > 1100 && !isMobile && <SecondaryBtn
-          onClick={() =>
-            userData
-              ? navigate("/profile")
-              : navigate("/register", {
-                  state: {
-                    isRegister: true,
-                  },
-                })
-          }
-          fontSize={width > 768 && !isMobile  ? width * 0.025 : width * 0.07}
-          theme={theme}
-          label={t("start")}
-        />}
+        {!isMobile && (
+          <SecondaryBtn
+            onClick={() =>
+              userData
+                ? navigate("/profile")
+                : navigate("/register", {
+                    state: {
+                      isRegister: true,
+                    },
+                  })
+            }
+            fontSize={width * 0.04}
+            theme={theme}
+            label={t("start")}
+          />
+        )}
       </HeadContainer>
       <HowContainer>
-        <StepsShapes
-          responsiveWidth={width}
-          responsiveHeight={height}
-          theme={theme}
-        />
-        {renderStep()}
+        {isMobile ? (
+          <LineShape
+            responsiveWidth={width}
+            responsiveHeight={height}
+            theme={theme}
+          >
+            {renderStep()}
+          </LineShape>
+        ) : (
+          <>
+            <StepContainer  responsiveWidth={width}>{renderStep()}</StepContainer>
+            <img
+              width={width * 0.45}
+              src={theme.background === "#FFFFFF" ? circleLight : circleDark}
+            />
+          </>
+        )}
       </HowContainer>
     </ContainerHowTo>
   );

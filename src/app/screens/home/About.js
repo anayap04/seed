@@ -58,14 +58,14 @@ const About = (props) => {
       </HeadTitle>
       <Row>
         <Content responsiveHeight={height} responsiveWidth={width}>
-          <Col xl={3} sm={12} md={12}>
+          {!isMobile && <Col>
             <img
               src={mode === "dark" ? logo : logoDark}
               height={height * (width > 700 && !isMobile ? 0.1 : 0.05)}
             />
-          </Col>
-          <Col xl={4} sm={12} md={12}>
-            <DescriptionBody theme={theme} responsiveWidth={width}>
+          </Col>}
+          <Col>
+            <DescriptionBody isMobile={isMobile} theme={theme} responsiveWidth={width}>
               <DescriptionText theme={theme}>{t("aboutDesc")}</DescriptionText>
             </DescriptionBody>
           </Col>

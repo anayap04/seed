@@ -13,6 +13,8 @@ import InitiativeDetail from "./app/screens/detail/InitiativeDetails";
 import Buy from "./app/screens/bounds/Buy";
 import { FloatingWhatsApp } from "react-floating-whatsapp";
 import imageChat from './assets/imgs/operator.png'
+import Footer from "./app/components/footer/Footer";
+import Contact from "./app/screens/contact";
 
 function App() {
   const [theme, themeToggler] = useDarkMode();
@@ -90,6 +92,12 @@ function App() {
               <Buy themeToggler={themeToggler} theme={themeMode} mode={theme} />
             }
           ></Route>
+          <Route
+            path="/contact"
+            element={
+              <Contact themeToggler={themeToggler} theme={themeMode} mode={theme} />
+            }
+          ></Route>
         </Routes>
         <FloatingWhatsApp
         darkMode={theme !== "light"}
@@ -99,6 +107,7 @@ function App() {
           phoneNumber="5215567878498"
           avatar={imageChat}
         />
+        <Footer theme={themeMode} />
       </BrowserRouter>
     </ThemeProvider>
   );

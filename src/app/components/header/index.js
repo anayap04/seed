@@ -43,12 +43,20 @@ const Header = (props) => {
   };
   const arrayComplete = [
     {
+      id: "home",
+      type: "secondary",
+      hasList: true,
+      label: "Inicio",
+      onClick: () => navigate("/"),
+    },
+    {
       id: "lang",
       type: "secondary",
       hasList: true,
       label: t("lang"),
       onClick: () => open(),
     },
+   
     {
       id: "mode",
       type: "secondary",

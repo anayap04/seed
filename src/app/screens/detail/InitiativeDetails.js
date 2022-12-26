@@ -8,7 +8,6 @@ import {
   fetchSupportInitiatives,
 } from "../../../redux/actions/initiatives";
 import useWindowDimensions from "../../../utils/useWindowDimensions";
-import Footer from "../../components/footer/Footer";
 import {
   Body,
   Subtitle,
@@ -221,18 +220,22 @@ const InitiativeDetail = (props) => {
           <Col xl={7} lg={7} sm={12} md={12}>
             <BodyContent>
               <Body theme={theme}>{data.resume}</Body>
-              {location.state.didInvest || invested && (
-                <>
-                  <Subtitle theme={theme}>{"Encargado del Proyecto"}</Subtitle>
-                  <Body theme={theme}>{data.responsibleName}</Body>
-                  <Subtitle theme={theme}>{"Últimas Actualizaciones"}</Subtitle>
-                </>
-              )}
+              {location.state.didInvest ||
+                (invested && (
+                  <>
+                    <Subtitle theme={theme}>
+                      {"Encargado del Proyecto"}
+                    </Subtitle>
+                    <Body theme={theme}>{data.responsibleName}</Body>
+                    <Subtitle theme={theme}>
+                      {"Últimas Actualizaciones"}
+                    </Subtitle>
+                  </>
+                ))}
             </BodyContent>
           </Col>
         </RowDetail>
       </ContentInfo>
-      <Footer theme={theme} />
     </Root>
   );
 };

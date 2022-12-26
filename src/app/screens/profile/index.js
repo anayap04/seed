@@ -23,15 +23,17 @@ import SecondaryBtn from "../../components/atoms/buttons/Secondary";
 import useWindowDimensions from "../../../utils/useWindowDimensions";
 import ChipGroup from "../../components/atoms/chips/ChipGroup";
 import TableSeed from "../../components/atoms/table/Table";
-import Footer from "../../components/footer/Footer";
 import { mapTableInvesment} from "../../../utils/mappers";
 import { useNavigate } from "react-router-dom";
 import Loading from "../../components/loading/Loading";
 import ProfileSummary from "./Summary";
 
-const Profits = ({ theme, userData, t, width, openTable, table, navigate }) => {
+const Profits = ({ theme, userData, t, width, openTable, table, navigate, actualLang }) => {
   const titleArr = ["Iniciativa", "Cantidad", "Fecha"];
-  const body = userData && mapTableInvesment(userData, navigate);
+  const body = userData && mapTableInvesment(userData, navigate, actualLang);
+  const totalInvested = body.map(i => i.quantity).reduce((a,b) => a + b)
+  const summaryArr = ["Total Invertido", totalInvested, ` Un total de $ ${totalInvested * 1000} USD`]
+
   return (
     <Content>
       <Title theme={theme}>{t("profitTable")}</Title>
@@ -47,12 +49,14 @@ const Profits = ({ theme, userData, t, width, openTable, table, navigate }) => {
           </ColInvestment>
         </RowInvestment>
         {table && (
-          <TableSeed
+          <><TableSeed
             theme={theme}
             headArr={titleArr}
             bodyArr={body}
+            summary={summaryArr}
             enableBtn
           />
+          </>
         )}
         <BtnFooter>
           {userData.iniciativesSupported?.length === 0 && (
@@ -125,7 +129,7 @@ const Summary = ({
 };
 const Profile = (props) => {
   const { theme, themeToggler, mode, userInfo, isLoading } = props;
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const dispatch = useDispatch();
   const { width } = useWindowDimensions();
   const navigate = useNavigate();
@@ -188,9 +192,10 @@ const Profile = (props) => {
           openTable={openTable}
           table={table}
           navigate={navigate}
+          actualLang={i18n.language}
         />
       )}
-      <Footer isFixed theme={theme} />
+
     </Root>
   );
 };
