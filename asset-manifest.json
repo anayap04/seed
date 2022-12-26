@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/static/css/main.85eb9370.css",
-    "main.js": "/static/js/main.c28bdc71.js",
+    "main.js": "/static/js/main.28949fd4.js",
     "static/js/787.4f83e0bb.chunk.js": "/static/js/787.4f83e0bb.chunk.js",
     "static/media/video_light.mp4": "/static/media/video_light.57d5cc9b65534fa3e6e9.mp4",
     "static/media/earth.jpeg": "/static/media/earth.8e9339dd53fe56ec2e52.jpeg",
@@ -16,18 +16,20 @@
     "static/media/Bitter-SemiBold.woff": "/static/media/Bitter-SemiBold.dc2b0e0f1128dccb52a3.woff",
     "static/media/Montserrat-Light.woff": "/static/media/Montserrat-Light.26f739ed3a0348e5d66a.woff",
     "static/media/operator.png": "/static/media/operator.4440b49bed697db498d5.png",
+    "static/media/circle_dark.png": "/static/media/circle_dark.917ca4804ff5efabda90.png",
     "static/media/BebasNeue-Regular.woff": "/static/media/BebasNeue-Regular.558c0b09724cc2d2f36f.woff",
     "static/media/money.png": "/static/media/money.540b3c795d41699a6556.png",
     "static/media/seed-dark.png": "/static/media/seed-dark.c604763d9e84f5f5634c.png",
+    "static/media/circle_light.png": "/static/media/circle_light.ac3f51acf7af85fc4b67.png",
     "static/media/seed-white.png": "/static/media/seed-white.f9bdcc581d63863f2a43.png",
     "static/media/grow.png": "/static/media/grow.fb1269c6ee5389c5f6b3.png",
     "index.html": "/index.html",
     "main.85eb9370.css.map": "/static/css/main.85eb9370.css.map",
-    "main.c28bdc71.js.map": "/static/js/main.c28bdc71.js.map",
+    "main.28949fd4.js.map": "/static/js/main.28949fd4.js.map",
     "787.4f83e0bb.chunk.js.map": "/static/js/787.4f83e0bb.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.85eb9370.css",
-    "static/js/main.c28bdc71.js"
+    "static/js/main.28949fd4.js"
   ]
 }
