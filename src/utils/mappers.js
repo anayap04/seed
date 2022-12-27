@@ -1,11 +1,12 @@
 import { DateTime } from "luxon";
 
-export const mapCards = (data) => {
-  return data.map((value) => {
+export const mapCards = (data, lang) => {
+
+  return data.map((value) => {    
     return {
       id: value.iniciativeId,
-      title: value.name,
-      description: `${value.resume.slice(0, 150)}...`,
+      title: value.translations[lang].name,
+      description: `${value.translations[lang].resume.slice(0, 150)}...`,
       objective: value.objective,
       percentage: value.percentage,
       daysLeft: value.daysLeft,
@@ -27,8 +28,7 @@ export const mapTableInvesment = (data, navigate, lang) => {
           date: converTime(item.investmentDate),
           onClick: () => navigate('/initiative', {
             state: {
-              id: item.iniciative,
-              didInvest: true,
+              id: item.translations[lang].name,
             }
           }),
         };

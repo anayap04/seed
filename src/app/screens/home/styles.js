@@ -79,14 +79,18 @@ export const Content = styled.div`
   margin-bottom: 200px;
 `;
 
+export const ImageContainer = styled.div`
+padding-left: ${({ responsiveWidth}) =>responsiveWidth * 0.05}px;
+`
+
 export const DescriptionBody = styled.div`
   width: ${({ responsiveWidth, isMobile }) =>
-    isMobile ? responsiveWidth * 0.85 : responsiveWidth * 0.4}px;
+    isMobile ? responsiveWidth * 0.85 : responsiveWidth * 0.5}px;
   border-left: ${({ theme }) => theme.primaryColor} 2px solid;
   padding-left: ${({ responsiveWidth, isMobile }) =>
     isMobile ? responsiveWidth * 0.05 : responsiveWidth * 0.03}px;
   margin-left: ${({ responsiveWidth, isMobile }) =>
-    isMobile ? responsiveWidth * 0.03 : responsiveWidth * 0.2}px;
+    isMobile ? responsiveWidth * 0.03 : responsiveWidth * 0.1}px;
 `;
 
 export const DescriptionText = styled.div`
@@ -154,6 +158,7 @@ export const HeadTitle = styled.p`
   color: ${({ theme }) => theme.fonts};
   font-size: ${({ responsiveWidth, isMobile }) =>
     isMobile ? responsiveWidth * 0.08 : responsiveWidth * 0.06}px;
+  z-index: 100;
 `;
 
 export const HowContainer = styled.div``;

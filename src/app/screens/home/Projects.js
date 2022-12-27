@@ -12,7 +12,7 @@ import { ColProject, ContainerProjects, CardsContainer } from "./styles";
 
 const Projects = (props) => {
   const { theme, projectRef, allInitiatives } = props;
-  const { t } = useTranslation()
+  const { t, i18n } = useTranslation()
   const { width } = useWindowDimensions();
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -20,7 +20,7 @@ const Projects = (props) => {
   useEffect(() => {
     dispatch(fetchAllInitiatives());
   }, [dispatch]);
-  const data = allInitiatives && mapCards(allInitiatives.data);
+  const data = allInitiatives && mapCards(allInitiatives.data, i18n.language);
 
   const renderCards = (item) => (
     <ColProject key={item.title} responsiveWidth={width} lg={12} xl={6} md={12}>

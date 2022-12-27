@@ -39,6 +39,7 @@ import Input from "../../components/atoms/input";
 import { useForm } from "react-hook-form";
 import SecondaryBtn from "../../components/atoms/buttons/Secondary";
 import { DateTime } from "luxon";
+import imageDefault from "../../../assets/imgs/default.png";
 
 const InvestmentModal = ({
   theme,
@@ -53,13 +54,15 @@ const InvestmentModal = ({
   handleSubmit,
 }) => {
   const onSubmit = (data) => {
+
     const date = DateTime.now().setZone("utc");
     const dataObj = {
-      iniciativeId: dataInfo && dataInfo.iniciativeId,
+      iniciativeId: dataInfo.iniciativeid,
       supportQuantity: parseInt(data.supportQuantity),
       investmentDate: parseInt(date.toMillis()),
     };
     dispatch(fetchSupportInitiatives(dataObj));
+    setOpen(false);
   };
 
   return (
@@ -107,9 +110,10 @@ const InitiativeDetail = (props) => {
     allInitiatives,
     userInfo,
     initiativeSupported,
+    isLoadingAllInitiatives,
   } = props;
   const dispatch = useDispatch();
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const location = useLocation();
   const { width } = useWindowDimensions();
   const [isModalOpen, setOpen] = useState(false);
@@ -117,13 +121,14 @@ const InitiativeDetail = (props) => {
   const [timeLeft, setTimeLeft] = useState(10000);
   const [invested, setInvested] = useState();
   const [data, setData] = useState(allInitiatives);
+
   useEffect(() => {
     dispatch(fetchAllInitiatives());
     if (allInitiatives) {
       const dataTemp =
         allInitiatives &&
         allInitiatives.data.filter(
-          (item) => item.name === location.state.id
+          (item) => item.translations[i18n.language].name === location.state.id
         )[0];
       setData(dataTemp);
       setTimeLeft(dataTemp.daysLeft * 24 * 60 * 60 * 1000);
@@ -142,7 +147,6 @@ const InitiativeDetail = (props) => {
       setInvested(true);
     }
   }, [dispatch, fetchAllInitiatives, fetchSupportInitiatives]);
-
   return (
     <Root theme={theme}>
       <Header
@@ -165,88 +169,109 @@ const InitiativeDetail = (props) => {
           handleSubmit={handleSubmit}
         />
       )}
-      <Image src={data.imageUrl} responsiveWidth={width} />
-      <ContentInfo responsiveWidth={width}>
-        <RowDetail>
-          <Col xl={7} lg={7} sm={12} md={12}>
-            <Title theme={theme}>{data.name}</Title>
-            <Info>
-              <InfoContent>
-                <img src={grow} width={40} height={40} />{" "}
-                <TextInfo>
-                  <Subtitle theme={theme}>{t("profit")}</Subtitle>
-                  <Body theme={theme}>{`${(data.percentage * 100).toFixed(
-                    2
-                  )} %`}</Body>
-                </TextInfo>
-              </InfoContent>
-              <InfoContent>
-                <img src={money} width={40} height={40} />{" "}
-                <TextInfo>
-                  <Subtitle theme={theme}>{t("objectiveTitle")}</Subtitle>
-                  <Body theme={theme}>{`${data.objective * 100} USD`}</Body>
-                </TextInfo>
-              </InfoContent>
-            </Info>
-          </Col>
-          <Col xl={4} lg={4} sm={12} md={12}>
-            <SectionDetail customWidth={width} theme={theme}>
-              <Subtitle theme={theme}>{t("timeLeft")}</Subtitle>
-              {timeLeft && (
-                <CountdownStyle theme={theme} date={Date.now() + timeLeft} />
-              )}
-              <Subtitle theme={theme}>{t("achieved")}</Subtitle>
-              <BodyBold theme={theme}>{`${data.investPercentage} %`}</BodyBold>
-              <ProgressBarDiv
-                responsiveWidth={width}
-                theme={theme}
-                animated
-                now={data.investPercentage}
-              />
-              <BtnContainer>
-                {location.state.didInvest || invested ? (
-                  <Subtitle theme={theme}>{"Gracias por Invertir"}</Subtitle>
-                ) : (
-                  <PrimaryBtn
-                    onClick={() => setOpen(!isModalOpen)}
-                    width={width < 768 ? width * 0.5 : width * 0.2}
+      {!isLoadingAllInitiatives && data && data.translations && (
+        <>
+          <Image
+            src={data && data.imageUrl ? data.imageUrl : imageDefault}
+            responsiveWidth={width}
+          />
+          <ContentInfo responsiveWidth={width}>
+            <RowDetail>
+              <Col xl={7} lg={7} sm={12} md={12}>
+                <Title theme={theme}>
+                  {data && data.translations[i18n.language].name}
+                </Title>
+                <Info>
+                  <InfoContent>
+                    <img src={grow} width={40} height={40} />
+                    <TextInfo>
+                      <Subtitle theme={theme}>{t("profit")}</Subtitle>
+                      <Body theme={theme}>{`${(data
+                        ? data.percentage * 100
+                        : 0
+                      ).toFixed(2)} %`}</Body>
+                    </TextInfo>
+                  </InfoContent>
+                  <InfoContent>
+                    <img src={money} width={40} height={40} />
+                    <TextInfo>
+                      <Subtitle theme={theme}>{t("objectiveTitle")}</Subtitle>
+                      <Body theme={theme}>{`${
+                        data && data.objective * 100
+                      } USD`}</Body>
+                    </TextInfo>
+                  </InfoContent>
+                </Info>
+              </Col>
+              <Col xl={4} lg={4} sm={12} md={12}>
+                <SectionDetail customWidth={width} theme={theme}>
+                  <Subtitle theme={theme}>{t("timeLeft")}</Subtitle>
+                  {timeLeft && (
+                    <CountdownStyle
+                      theme={theme}
+                      date={Date.now() + timeLeft}
+                    />
+                  )}
+                  <Subtitle theme={theme}>{t("achieved")}</Subtitle>
+                  <BodyBold theme={theme}>{`${
+                    data ? data.investPercentage : 0
+                  } %`}</BodyBold>
+                  <ProgressBarDiv
+                    responsiveWidth={width}
                     theme={theme}
-                    label="Invertir"
+                    animated
+                    now={data ? data.investPercentage : 0}
                   />
-                )}
-              </BtnContainer>
-            </SectionDetail>
-          </Col>
-          <Col xl={7} lg={7} sm={12} md={12}>
-            <BodyContent>
-              <Body theme={theme}>{data.resume}</Body>
-              {location.state.didInvest ||
-                (invested && (
-                  <>
-                    <Subtitle theme={theme}>
-                      {"Encargado del Proyecto"}
-                    </Subtitle>
-                    <Body theme={theme}>{data.responsibleName}</Body>
-                    <Subtitle theme={theme}>
-                      {"Últimas Actualizaciones"}
-                    </Subtitle>
-                  </>
-                ))}
-            </BodyContent>
-          </Col>
-        </RowDetail>
-      </ContentInfo>
+                  {invested && (
+                    <Subtitle theme={theme}>{t("thanksInversion")}</Subtitle>
+                  )}
+                  <BtnContainer>
+                    <PrimaryBtn
+                      onClick={() => setOpen(!isModalOpen)}
+                      width={width < 768 ? width * 0.5 : width * 0.2}
+                      theme={theme}
+                      label={t("invest")}
+                    />
+                  </BtnContainer>
+                </SectionDetail>
+              </Col>
+              <Col xl={7} lg={7} sm={12} md={12}>
+                <BodyContent>
+                  <Body theme={theme}>
+                    {data && data.translations[i18n.language].resume}
+                  </Body>
+                  {location.state.didInvest ||
+                    (invested && (
+                      <>
+                        <Subtitle theme={theme}>
+                          {"Encargado del Proyecto"}
+                        </Subtitle>
+                        <Body theme={theme}>{data.responsibleName}</Body>
+                        <Subtitle theme={theme}>
+                          {"Últimas Actualizaciones"}
+                        </Subtitle>
+                      </>
+                    ))}
+                </BodyContent>
+              </Col>
+            </RowDetail>
+          </ContentInfo>
+        </>
+      )}
     </Root>
   );
 };
 
 const mapToStateProps = (state) => {
-  const { allInitiatives, initiativeSupported } = state.initiativesReducer;
+  const { allInitiatives, initiativeSupported, isLoadingAllInitiatives } =
+    state.initiativesReducer;
   const { userInfo } = state.userReducer;
+
   return {
     allInitiatives: allInitiatives,
     initiativeSupported: initiativeSupported,
     userInfo: userInfo,
+    isLoadingAllInitiatives: isLoadingAllInitiatives,
   };
 };
 

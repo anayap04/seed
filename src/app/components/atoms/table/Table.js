@@ -1,3 +1,4 @@
+import { t } from "i18next";
 import React from "react";
 import LinkBtn from "../buttons/Link";
 import { TableRoot, TableBody, BtnTable } from "./styles";
@@ -19,7 +20,7 @@ const TableSeed = (props) => {
                 fontSize={20}
                 key={item.name}
                 theme={theme}
-                label={"Ver proyecto"}
+                label={t('checkProject')}
                 onClick={() => item.onClick()}
               />
             }

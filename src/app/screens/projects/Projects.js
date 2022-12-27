@@ -13,7 +13,7 @@ import { useNavigate } from "react-router-dom";
 
 const ProjectsMain = (props) => {
   const { theme, mode, themeToggler, allInitiatives } = props;
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const { width } = useWindowDimensions();
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -47,7 +47,7 @@ const ProjectsMain = (props) => {
   useEffect(() => {
     dispatch(fetchAllInitiatives());
   }, [dispatch]);
-  const data = allInitiatives && mapCards(allInitiatives.data);
+  const data = allInitiatives && mapCards(allInitiatives.data, i18n.language);
   return (
     <Root theme={theme}>
       <Header

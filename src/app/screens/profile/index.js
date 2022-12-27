@@ -29,10 +29,10 @@ import Loading from "../../components/loading/Loading";
 import ProfileSummary from "./Summary";
 
 const Profits = ({ theme, userData, t, width, openTable, table, navigate, actualLang }) => {
-  const titleArr = ["Iniciativa", "Cantidad", "Fecha"];
+  const titleArr = [t('initiative'), t('amount'), t('date')];
   const body = userData && mapTableInvesment(userData, navigate, actualLang);
   const totalInvested = body.map(i => i.quantity).reduce((a,b) => a + b)
-  const summaryArr = ["Total Invertido", totalInvested, ` Un total de $ ${totalInvested * 1000} USD`]
+  const summaryArr = [t('totalInvested'), totalInvested, ` ${t('totalOf')} ${totalInvested * 1000} USD`]
 
   return (
     <Content>

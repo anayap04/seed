@@ -83,5 +83,12 @@ export const PasswordChecklistStyled = styled(PasswordChecklist)`
   color: ${({ theme }) => theme.fonts};
   font-family: Montserrat-Regular;
   font-size: 14px;
-  width: 400px;
+  position: relative;
+  z-index: 0;
+  margin-top: 10px;
+  & > * {
+    position: relative;
+    z-index: -10;
+
+  }
 `;

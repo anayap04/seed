@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import image from "../../../assets/imgs/trees.jpg";
-import { device } from "../../../theme/themes/DefaultTheme/screenSizes";
 
 const getGradient = (color) =>
   color === "#FFFFFF"
@@ -10,31 +9,13 @@ const getGradient = (color) =>
 export const Container = styled.div`
   background-color: ${({ theme }) => theme.background};
   width: 100vw;
-  height: fit-content;
-  position: fixed;
-  @media (${device.laptopL}) {
-    height: 100vh;
-  }
-  @media (${device.laptop}) {
-    height: 100vh;
-    background: ${({ theme }) => getGradient(theme.background)}, url(${image});
-  }
-  @media (${device.mobileAll}), (pointer: none), (pointer: coarse) {
-    heigth: 150vh;
-   }
+  background: ${({ theme, isMobile }) =>
+      isMobile ? theme.background : getGradient(theme.background)},
+    url(${image});
+  margin-bottom: ${({ additional }) => additional}px;
 `;
 export const FormContainer = styled.div`
-  @media (${device.mobileAll}), (pointer: none), (pointer: coarse) {
-    margin-bottom: 200px;
-    overflow-x: auto;
-    padding-top: ${({ width }) => width * 0.05}px;
-    padding-bottom: 100px;
-  }
-  @media (${device.laptop}) {
-    width: 50vw;
-    padding-top: ${({ width }) => width * 0.05}px;
-  }
-  padding: ${({ width }) => width * 0.15}px;
+  padding: ${({ width }) => width * 0.05}px;
 `;
 
 export const BtnSubmit = styled.input.attrs({
@@ -48,7 +29,7 @@ export const BtnSubmit = styled.input.attrs({
   padding-right: 10px;
   margin-top: 20px;
   font-size: 24px;
-  width: 300px;
+  width: ${({isMobile}) => isMobile ? '85vw' : '300px'};
   background-color: transparent;
   &:hover {
     background-color: ${({ theme }) => theme.primaryColor};
@@ -59,9 +40,10 @@ export const BtnSubmit = styled.input.attrs({
 `;
 
 export const LinkContent = styled.div`
-  width: 300px;
+  width: ${({isMobile}) => isMobile ? '85vw' : '300px'};
   padding-top: 20px;
-  padding-left: 45px;
+  text-align: center;
+  padding-left: 17vw;
 `;
 
 export const ErrorContent = styled.div`

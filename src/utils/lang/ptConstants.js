@@ -85,5 +85,15 @@ export default {
   paymentSuccessful: "¡Seu pagamento foi bem-sucedido!",
   resumePayment: "A compra de seus bônus foi bem-sucedida. Resumo:  ",
   bondsVal: " bônus por um valor de  ",
-  backProfile: "Voltar ao Meu Perfil"
+  backProfile: "Voltar ao Meu Perfil",
+  totalInvested: "Total Invertido",
+  totalOf: " Un total de $ ",
+  initiative: "Iniciativa",
+  amount: "Cantidad",
+  date: "Fecha",
+  checkProject: "Ver proyecto",
+  thanksInversion: "Gracias por Invertir",
+  invest: "Invertir",
+  supervisor: "Encargado del Proyecto",
+  lastUpdated: "Últimas Actualizaciones",
 };

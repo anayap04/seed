@@ -1,4 +1,4 @@
-import React, {  useState } from "react";
+import React, { useState } from "react";
 import Icon from "../../foundation/Icon";
 import {
   Label,
@@ -9,9 +9,8 @@ import {
   FieldBlank,
   PasswordChecklistStyled,
 } from "./styles";
-import { useTextWidth } from '@tag0/use-text-width';
+import { useTextWidth } from "@tag0/use-text-width";
 import { useTranslation } from "react-i18next";
-
 
 const InputWithIcon = ({
   theme,
@@ -71,7 +70,7 @@ const InputWithoutIcon = ({
       type={type}
       theme={theme}
       {...register(label, { required })}
-      onChange={e => setPassword ? setPassword(e.target.value) : null}
+      onChange={(e) => (setPassword ? setPassword(e.target.value) : null)}
     />
   </InputContent>
 );
@@ -94,10 +93,13 @@ const Input = (props) => {
     onFocus,
     onBlur,
   } = props;
-  const width = useTextWidth({ text: !disabled ? value + 'sfgdrgfdg' : defaultValue, font: "20px Times" });
+  const width = useTextWidth({
+    text: !disabled ? value + "sfgdrgfdg" : defaultValue,
+    font: "20px Times",
+  });
   const widthInt = Math.ceil(width);
-  const [password, setPassword] = useState("")
-  const {t} = useTranslation()
+  const [password, setPassword] = useState("");
+  const { t } = useTranslation();
   return iconName ? (
     <InputWithIcon
       type={type}
@@ -117,31 +119,33 @@ const Input = (props) => {
     />
   ) : (
     <>
-    <InputWithoutIcon
-      type={type}
-      label={label}
-      labelTitle={labelTitle}
-      disabled={disabled}
-      register={register}
-      theme={theme}
-      required={required}
-      onClick={onClick}
-      value={value}
-      valueWidth={widthInt}
-      customWidth={customWidth}
-      setPassword={setPassword}
-    />
-    {label === 'password' && needsValidation && <PasswordChecklistStyled
-    theme={theme}
-				rules={["minLength","number","capital"]}
-				minLength={6}
-				value={password}
-				messages={{
-					minLength: t('minLength'),
-					number: t('number'),
-					capital: t('capital'),
-				}}
-			/>}
+      <InputWithoutIcon
+        type={type}
+        label={label}
+        labelTitle={labelTitle}
+        disabled={disabled}
+        register={register}
+        theme={theme}
+        required={required}
+        onClick={onClick}
+        value={value}
+        valueWidth={widthInt}
+        customWidth={customWidth}
+        setPassword={setPassword}
+      />
+      {label === "password" && needsValidation && (
+        <PasswordChecklistStyled
+          theme={theme}
+          rules={["minLength", "number", "capital"]}
+          minLength={6}
+          value={password}
+          messages={{
+            minLength: t("minLength"),
+            number: t("number"),
+            capital: t("capital"),
+          }}
+        />
+      )}
     </>
   );
 };

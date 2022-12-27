@@ -85,5 +85,15 @@ export default {
   paymentSuccessful: "Your payment has been successful!",
   resumePayment: "The purchase of your bound(s) has been successful. Summary: ",
   bondsVal: " bond(s) for a value of ",
-  backProfile: "Back to My Profile"
+  backProfile: "Back to My Profile",
+  totalInvested: "Total Invested: ",
+  totalOf: " Which represents $ ",
+  initiative: "Iniciative",
+  amount: "Amount (Bonds)",
+  date: "Date",
+  checkProject: "Project Details",
+  thanksInversion: "Thank you for invest!",
+  invest: "Invest",
+  supervisor: "Project Supervisor",
+  lastUpdated: "Last Updates",
 };

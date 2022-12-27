@@ -18,6 +18,10 @@ const SelectCountry = (props) => {
     menu: () => ({
       color: theme.fonts,
       backgroundColor: theme.background,
+      width: customWidth + 3,
+      height: 200,
+      marginLeft: -3,
+      zIndex: 100,
     }),
     option: () => ({
       color: theme.fonts,
@@ -42,6 +46,8 @@ const SelectCountry = (props) => {
 
   return (
     <SelectContent
+
+    placeholder="Selecciona País"
       theme={theme}
       customWidth={customWidth}
       options={options}

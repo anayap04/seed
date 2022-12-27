@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
 import useWindowDimensions from "../../../utils/useWindowDimensions";
 import {
@@ -32,10 +32,13 @@ import SelectCountry from "../../components/atoms/select/SelectCountry";
 import logoWhite from "../../../assets/imgs/seed-white.png";
 import logoDark from "../../../assets/imgs/seed-dark.png";
 import { isMobile } from "react-device-detect";
+import Header from "../../components/header";
 
 const LoginPage = (props) => {
   const {
     theme,
+    mode,
+    themeToggler,
     loginError,
     userData,
     registerData,
@@ -43,7 +46,7 @@ const LoginPage = (props) => {
     requestNewPassData,
     passwordChangedSuccess,
   } = props;
-  const { width } = useWindowDimensions();
+  const { width, height } = useWindowDimensions();
   const { t } = useTranslation();
   const { register, handleSubmit } = useForm();
   const navigate = useNavigate();
@@ -58,6 +61,9 @@ const LoginPage = (props) => {
     location && location.state && location.state.isRegister
   );
   const tokenReset = searchParams.get("token");
+  const btnsArray = ["home", "lang", "mode"];
+  const containerRef = useRef();
+  const currentHeight = containerRef.current ? containerRef.current.clientHeight : 500;
 
   const onSubmit = (data) => {
     if (searchParams.get("resetPass")) {
@@ -70,8 +76,7 @@ const LoginPage = (props) => {
       );
     } else if (reset) {
       dispatch(requestNewPass({ email: data.userId }));
-      setResetPass(false)
-      
+      setResetPass(false);
     } else {
       dispatch(
         isRegister
@@ -108,18 +113,42 @@ const LoginPage = (props) => {
     } else if (registerError) {
       setErrorMsg(registerError.message);
     } else if (passwordChangedSuccess) {
-      setResetPass(false)
+      setResetPass(false);
       navigate("/register");
     }
-  }, [loginError, userData, registerData, registerError, passwordChangedSuccess]);
+  }, [
+    loginError,
+    userData,
+    registerData,
+    registerError,
+    passwordChangedSuccess,
+  ]);
 
   return (
-    <Container theme={theme}>
+    <Container
+      ref={containerRef}
+      additional={
+        currentHeight > height * 0.8
+          ? height * 0.9
+          : height * 0.9 - currentHeight
+      }
+      isMobile={isMobile}
+      theme={theme}
+    >
+      <Header
+        theme={theme}
+        mode={mode}
+        themeToggler={themeToggler}
+        btnsArray={btnsArray}
+      />
       <FormContainer width={width}>
-        {passwordChangedSuccess  && <InfoPopContent theme={theme}><BodyBold theme={theme}>
-        {'Su contraseña ha sido actualizada'}
-      </BodyBold>
-      </InfoPopContent>}
+        {passwordChangedSuccess && (
+          <InfoPopContent theme={theme}>
+            <BodyBold theme={theme}>
+              {"Su contraseña ha sido actualizada"}
+            </BodyBold>
+          </InfoPopContent>
+        )}
         {!requestNewPassData ? (
           <>
             <Title theme={theme}>
@@ -141,14 +170,14 @@ const LoginPage = (props) => {
                     register={register}
                     required
                     type="mail"
-                    customWidth={300}
+                    customWidth={isMobile ? width * 0.85 : 300}
                   />
                   <SelectCountry
                     required
                     label="country"
                     theme={theme}
                     setCountry={setCountry}
-                    customWidth={300}
+                    customWidth={isMobile ? width * 0.85 : 300}
                   />
                 </>
               )}
@@ -159,7 +188,7 @@ const LoginPage = (props) => {
                   label="userId"
                   register={register}
                   required
-                  customWidth={300}
+                  customWidth={isMobile ? width * 0.85 : 300}
                 />
               )}
               {!reset && (
@@ -175,24 +204,26 @@ const LoginPage = (props) => {
                   register={register}
                   required
                   type="password"
-                  customWidth={300}
+                  customWidth={isMobile ? width * 0.85 : 300}
                 />
               )}
 
               {!searchParams.get("resetPass") && !reset ? (
                 <BtnSubmit
+                  isMobile={isMobile}
                   value={isRegister ? t("register") : t("login")}
                   isRegister={isRegister}
                   theme={theme}
                 />
               ) : (
                 <BtnSubmit
+                  isMobile={isMobile}
                   value={reset ? t("sendRequest") : t("changePass")}
                   theme={theme}
                 />
               )}
             </form>
-            <LinkContent>
+            <LinkContent isMobile={isMobile}>
               {!searchParams.get("resetPass") && !reset && (
                 <>
                   <LinkBtn
@@ -213,15 +244,17 @@ const LoginPage = (props) => {
           </>
         ) : (
           <>
-          <img width={isMobile ? "50%" : "120%"}
-          src={theme.background === "#FFFFFF" ? logoDark : logoWhite} />
-          <PetitionDiv>
-            <TitleSmall theme={theme}>{'Petición Enviada'}</TitleSmall>
-            <BodyBold theme={theme}>
-              {
-                 "En breve le enviaremos un correo con los pasos para cambiar su contraseña"
-              }
-            </BodyBold>
+            <img
+              width={isMobile ? "50%" : "120%"}
+              src={theme.background === "#FFFFFF" ? logoDark : logoWhite}
+            />
+            <PetitionDiv>
+              <TitleSmall theme={theme}>{"Petición Enviada"}</TitleSmall>
+              <BodyBold theme={theme}>
+                {
+                  "En breve le enviaremos un correo con los pasos para cambiar su contraseña"
+                }
+              </BodyBold>
             </PetitionDiv>
           </>
         )}
@@ -231,7 +264,8 @@ const LoginPage = (props) => {
 };
 
 const mapStateToProps = (state) => {
-  const { loginError, userData, requestNewPassData, passwordChangedSuccess } = state.loginReducer;
+  const { loginError, userData, requestNewPassData, passwordChangedSuccess } =
+    state.loginReducer;
   const { registerError, registerData } = state.registerReducer;
   return {
     loginError: loginError,

@@ -8,11 +8,12 @@ import {
   DescriptionBody,
   DescriptionText,
   CarouselContainer,
+  ImageContainer,
 } from "./styles";
 import logo from "../../../assets/imgs/seed-white.png";
 import logoDark from "../../../assets/imgs/seed-dark.png";
 
-import { Col, Row } from "react-bootstrap";
+import { Row } from "react-bootstrap";
 import { Title } from "../../components/foundation/Typography";
 import { isMobile } from "react-device-detect";
 import AliceCarousel from "react-alice-carousel";
@@ -58,17 +59,17 @@ const About = (props) => {
       </HeadTitle>
       <Row>
         <Content responsiveHeight={height} responsiveWidth={width}>
-          {!isMobile && <Col>
+          {!isMobile &&
+          <ImageContainer responsiveWidth={width}>
             <img
               src={mode === "dark" ? logo : logoDark}
               height={height * (width > 700 && !isMobile ? 0.1 : 0.05)}
             />
-          </Col>}
-          <Col>
+            </ImageContainer>
+          }
             <DescriptionBody isMobile={isMobile} theme={theme} responsiveWidth={width}>
               <DescriptionText theme={theme}>{t("aboutDesc")}</DescriptionText>
             </DescriptionBody>
-          </Col>
         </Content>
       </Row>
       <Title theme={theme}>{t("partners")}</Title>

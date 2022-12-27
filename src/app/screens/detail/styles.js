@@ -17,6 +17,8 @@ export const Root = styled.div`
 
 export const Image = styled.img`
   width: 100%;
+  object-fit: cover;
+  object-position: 80% 80%;
   @media (${device.laptop}) {
     width: ${({ responsiveWidth }) => responsiveWidth * 0.9}px;
     margin-left: ${({ responsiveWidth }) => responsiveWidth * 0.05}px;

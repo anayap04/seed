@@ -59,9 +59,10 @@ TextSecondary.defaultProps = {
 export const LinkContainer = styled.div`
   margin-left: 24px;
   padding-bottom: 0px;
-  width: max-content;
+  width: 180px;
   color: ${({ theme }) => theme.fonts};
-  border-bottom: 3px ${({ theme }) => theme.primaryColor} solid;
+  text-align: center;
+  align-items: center;
   &:hover {
     color: ${({ theme }) => theme.primaryColor};
     cursor: pointer;
@@ -72,9 +73,11 @@ LinkContainer.defaultProps = {
   theme: DefaultTheme,
 };
 
-export const TextLink = styled.div`
+export const TextLink = styled.p`
   font-family: BebasNeue-Regular;
   font-size: ${({fontSize}) => fontSize ? fontSize+'px' : '20px'};
+  border-bottom: 3px ${({ theme }) => theme.primaryColor} solid;
+  max-width: fit-content;
   margin-bottom: -5px;
   &:hover {
     color: ${({ theme }) => theme.primaryColor};
