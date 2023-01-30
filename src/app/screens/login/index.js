@@ -129,8 +129,7 @@ const LoginPage = (props) => {
       ref={containerRef}
       additional={
         currentHeight > height * 0.8
-          ? height * 0.9
-          : height * 0.9 - currentHeight
+          && height * 0.9 - currentHeight
       }
       isMobile={isMobile}
       theme={theme}
@@ -246,7 +245,7 @@ const LoginPage = (props) => {
           <>
             <img
               width={isMobile ? "50%" : "120%"}
-              src={theme.background === "#FFFFFF" ? logoDark : logoWhite}
+              src={theme.background === "#E3F2FD" ? logoDark : logoWhite}
             />
             <PetitionDiv>
               <TitleSmall theme={theme}>{"Petición Enviada"}</TitleSmall>

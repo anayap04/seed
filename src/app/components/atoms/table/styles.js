@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { LinkContainer } from "../buttons/styles";
 
 export const TableRoot = styled(Table)`
-  font-family: Bitter-SemiBold;
+  font-family: AcuminBdPro;
   font-size: 18px;
   color: ${({ theme }) => theme.fonts};
   margin-top: 30px;
@@ -11,7 +11,7 @@ export const TableRoot = styled(Table)`
 `;
 
 export const TableBody = styled.tbody`
-  font-family: Montserrat-Regular;
+  font-family:Acumin-RPro;
   font-size: 16px;
   color: ${({ theme }) => theme.fonts};
 `;

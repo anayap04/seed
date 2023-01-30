@@ -7,7 +7,7 @@ export const FooterContent = styled.div`
   display: flex;
   flex-wrap: wrap;
   padding-bottom: ${({ isMobile }) => (isMobile ? "15px" : "30px")};
-  border-top: ${({ theme }) => theme.primaryColor} 3px solid;
+  border-top: ${({ theme }) => theme.green} 3px solid;
 `;
 
 export const ImageContainer = styled.div`

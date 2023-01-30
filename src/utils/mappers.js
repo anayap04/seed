@@ -7,7 +7,7 @@ export const mapCards = (data, lang) => {
       id: value.iniciativeId,
       title: value.translations[lang].name,
       description: `${value.translations[lang].resume.slice(0, 150)}...`,
-      objective: value.objective,
+      objective: value.objective ,
       percentage: value.percentage,
       daysLeft: value.daysLeft,
       profit: `${(value.percentage * 100).toFixed(2)}%`,

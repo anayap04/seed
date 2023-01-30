@@ -4,7 +4,6 @@ import { connect, useDispatch } from "react-redux";
 import { fetchAllInitiatives } from "../../../redux/actions/initiatives";
 import Card from "../../components/cards/Card";
 import Header from "../../components/header";
-import { Row } from "react-bootstrap";
 import { Title } from "../../components/foundation/Typography";
 import { CardsContainer, ColProject, Container, Root } from "./styles";
 import { mapCards } from "../../../utils/mappers";
@@ -27,17 +26,16 @@ const ProjectsMain = (props) => {
   };
 
   const renderCards = (item) => (
-    <ColProject key={item.title} width={width} lg={12} xl={6} m={7}>
+    <ColProject key={item.title} width={width}>
       <Card
         theme={theme}
         key={item.title}
         title={item.title}
         location="CDMX, Mex"
         description={item.description}
-        time={item.daysLeft}
         objective={item.objective}
-        profit={item.profit}
         img={item.img}
+        customWidth={width * 0.95}
         achieved={item.achieved}
         btnClick={() => handleNavigation(item.title)}
       />
@@ -59,7 +57,7 @@ const ProjectsMain = (props) => {
       <Container>
         <Title theme={theme}>{t("projectsTitle")}</Title>
         <CardsContainer>
-          <Row>{data && data.map((value) => renderCards(value))}</Row>
+          {data && data.map((value) => renderCards(value))}
         </CardsContainer>
       </Container>
     </Root>

@@ -34,9 +34,9 @@ export const LocationSection = styled.div`
 export const BtnSubmit = styled.input.attrs({
   type: "submit",
 })`
-  border: ${({ theme }) => theme.primaryColor} 2px solid;
+  border: ${({ theme }) => theme.green} 2px solid;
   color: ${({ theme }) => theme.fonts};
-  font-family: BebasNeue-Regular;
+  font-family: AcuminBdPro;
   padding: 10px;
   padding-left: 10px;
   padding-right: 10px;
@@ -45,18 +45,18 @@ export const BtnSubmit = styled.input.attrs({
   width: ${({ width }) => width}px;
   background-color: transparent;
   &:hover {
-    background-color: ${({ theme }) => theme.primaryColor};
+    background-color: ${({ theme }) => theme.green};
   }
   & > {
-    color: ${({ theme }) => theme.primaryColor};
+    color: ${({ theme }) => theme.green};
   }
 `;
 
 export const SuccessIndicator = styled.div`
-  border: ${({ theme }) => theme.primaryColor} 2px solid;
+  border: ${({ theme }) => theme.green} 2px solid;
   padding: 10px;
   border-radius: 5px;
-  background-color: ${({ theme }) => theme.primaryColor}38;
+  background-color: ${({ theme }) => theme.green}38;
   width: ${({ isMobile }) => (isMobile ? "80vw" : "40vw")};
   ${Body} {
     margin-bottom: 0px;

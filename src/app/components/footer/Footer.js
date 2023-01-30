@@ -21,7 +21,7 @@ const Footer = (props) => {
     <FooterContent isMobile={isMobile} isFixed={isFixed} theme={theme}>
       {!isMobile && <ImageContainer>
         <img
-          src={theme.background === "#FFFFFF" ? logoDark : logo}
+          src={theme.background === "#E3F2FD" ? logoDark : logo}
           width={200}
         />
       </ImageContainer>}

@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import PasswordChecklist from "react-password-checklist";
+import PhoneInput from "react-phone-number-input";
 
 const widthCalc = (textWidth) => {
   const totalWidth = textWidth + 75;
@@ -8,23 +9,23 @@ const widthCalc = (textWidth) => {
 
 export const Label = styled.label`
   color: ${({ theme }) => theme.fonts};
-  font-family: Bitter-SemiBold;
+  font-family: AcuminBdPro;
   font-size: 18px;
 `;
 
 export const Field = styled.input`
-  border: ${({ theme }) => theme.primaryColor} 2px solid;
+  border: ${({ theme }) => theme.green} 2px solid;
   height: 50px;
   font-size: 20px;
   background-color: transparent;
-  font-family: Montserrat-Regular;
+  font-family:Acumin-RPro;
   color: ${({ theme }) => theme.fonts};
   :not(textarea) {
     line-height: 1;
-    border: ${({ theme }) => theme.primaryColor} 2px solid;
+    border: ${({ theme }) => theme.green} 2px solid;
   }
   focus {
-    font-family: Montserrat-Regular;
+    font-family:Acumin-RPro;
     color: ${({ theme }) => theme.fonts};
   }
 `;
@@ -42,7 +43,7 @@ export const FieldBlank = styled.input`
   background-color: transparent;
   padding-left: 10px;
   width: ${({ valueWidth }) => valueWidth + 35}px !important;
-  font-family: Montserrat-Regular;
+  font-family:Acumin-RPro;
   opacity: ${({ disabled }) => (disabled ? 0.3 : 1)};
   border: 0;
   color: ${({ theme }) => theme.fonts};
@@ -51,7 +52,7 @@ export const FieldBlank = styled.input`
     border: 0;
   }
   focus {
-    font-family: Montserrat-Regular;
+    font-family:Acumin-RPro;
     color: ${({ theme }) => theme.fonts};
     border: 0;
   }
@@ -62,13 +63,13 @@ export const InputContentIcon = styled.div`
   margin-right: 10px;
   display: flex;
   flex-direction: row;
-  border: ${({ theme }) => theme.primaryColor} 2px solid;
+  border: ${({ theme }) => theme.green} 2px solid;
   :not(textarea) {
     line-height: 1;
-    border: ${({ theme }) => theme.primaryColor} 2px solid;
+    border: ${({ theme }) => theme.green} 2px solid;
   }
   focus {
-    font-family: Montserrat-Regular;
+    font-family:Acumin-RPro;
     color: ${({ theme }) => theme.fonts};
   }
 `;
@@ -81,7 +82,7 @@ export const IconContainer = styled.div`
 
 export const PasswordChecklistStyled = styled(PasswordChecklist)`
   color: ${({ theme }) => theme.fonts};
-  font-family: Montserrat-Regular;
+  font-family:Acumin-RPro;
   font-size: 14px;
   position: relative;
   z-index: 0;
@@ -89,6 +90,17 @@ export const PasswordChecklistStyled = styled(PasswordChecklist)`
   & > * {
     position: relative;
     z-index: -10;
+  }
+`;
 
+export const Phone = styled(PhoneInput)`
+  border: ${({ theme }) => theme.green} 2px solid;
+  font-size: 14.5px;
+  width: ${({ customWidth }) => (customWidth ? customWidth : "280")}px;
+  height: 40px;
+  padding-left: 10px;
+  & > input {
+    border: transparent 0 solid;
+    background-color: transparent;
   }
 `;

@@ -6,7 +6,7 @@ export const Content = styled.div`
 
 export const RootTextArea = styled.textarea`
   width: ${({width}) => width || 300}px;
-  border: ${({theme}) => theme.primaryColor} 3px solid;
+  border: ${({theme}) => theme.green} 3px solid;
   background: ${({theme}) => theme.background};
   color:  ${({theme}) => theme.fonts};
   height: 150px;

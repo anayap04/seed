@@ -15,6 +15,7 @@ import {
   ColProfile,
   RowProfile,
 } from "./styles";
+import PhoneNumberInput from "../../components/atoms/input/PhoneNumberInput";
 
 const ProfileSummary = (props) => {
   const { userInfo, theme, width } = props;
@@ -71,20 +72,28 @@ const ProfileSummary = (props) => {
           <RowProfile>
             {profileArray.map((info, e) => (
               <ColProfile xl={3} lg={3} md={4} sm={6} key={e}>
-                <Input
-                  key={e}
-                  labelTitle={info.label}
-                  iconName="Edit"
-                  theme={theme}
-                  disabled={disabled}
-                  defaultValue={info.value}
-                  value={info.hasList && value}
-                  onClick={() => clickPressed()}
-                  label={info.id}
-                  register={register}
-                  onFocus={() => (info.hasList ? openList() : closeList())}
-                  onBlur={() => info.hasList && closeList()}
-                />
+                {info.id === "phoneNumber" ? (
+                  <PhoneNumberInput
+                    theme={theme}
+                    label={info.label}
+                    defaultCountry={userInfo.countryCode}
+                  />
+                ) : (
+                  <Input
+                    key={e}
+                    labelTitle={info.label}
+                    iconName="Edit"
+                    theme={theme}
+                    disabled={disabled}
+                    defaultValue={info.value}
+                    value={info.hasList && value}
+                    onClick={() => clickPressed()}
+                    label={info.id}
+                    register={register}
+                    onFocus={() => (info.hasList ? openList() : closeList())}
+                    onBlur={() => info.hasList && closeList()}
+                  />
+                )}
                 {info.hasList && listOpen && (
                   <ListView
                     arrayItems={getDocumentPerCountry(userInfo.countryCode)}

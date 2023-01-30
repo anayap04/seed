@@ -4,6 +4,8 @@ import { device } from "../../../theme/themes/DefaultTheme/screenSizes";
 import { SectionContainer } from "../../components/section/styles";
 import { fadeIn } from "react-animations";
 import Countdown from "react-countdown";
+import { PrimaryContainer } from "../../components/atoms/buttons/styles";
+import { isMobile } from "react-device-detect";
 
 const fadeAnimation = keyframes`${fadeIn}`;
 
@@ -19,11 +21,10 @@ export const Image = styled.img`
   width: 100%;
   object-fit: cover;
   object-position: 80% 80%;
-  @media (${device.laptop}) {
-    width: ${({ responsiveWidth }) => responsiveWidth * 0.9}px;
-    margin-left: ${({ responsiveWidth }) => responsiveWidth * 0.05}px;
+    width: ${({ responsiveWidth }) => isMobile ? responsiveWidth * 0.99 :  responsiveWidth * 0.9}px;
+    margin-left: ${({ responsiveWidth }) => isMobile ? responsiveWidth * 0.01 : responsiveWidth * 0.05}px;
     height: 450px;
-  }
+
 `;
 
 export const ContentInfo = styled.div`
@@ -52,14 +53,15 @@ export const SectionDetail = styled(SectionContainer)`
 `;
 
 export const ProgressBarDiv = styled(ProgressBar)`
-  width: ${({ responsiveWidth }) => responsiveWidth * 0.28}px;
+  width: ${({ responsiveWidth }) => responsiveWidth * 0.25}px;
+  margin-right: 15px;
   height: 15px;
   margin-top: -10px;
   & > .progress {
     background-color: #f9f9f98c;
   }
   & > .progress-bar {
-    background-color: ${({ theme }) => theme.primaryColor};
+    background-color: ${({ theme }) => theme.green};
   }
 `;
 
@@ -69,8 +71,8 @@ export const BodyContent = styled.div`
 `;
 
 export const CountdownStyle = styled(Countdown)`
-  color: ${({ theme }) => theme.primaryColor};
-  font-family: BebasNeue-Regular;
+  color: ${({ theme }) => theme.green};
+  font-family: AcuminBdPro;
   font-size: 34px;
 `;
 
@@ -90,8 +92,10 @@ export const TextInfo = styled.div`
 `
 
 export const BtnContainer = styled.div`
-  padding-left: 20px;
   padding-top: 20px;
+  ${PrimaryContainer} {
+    margin: 0px;
+  }
 `
 
 export const ModalBtnContainer = styled.div`

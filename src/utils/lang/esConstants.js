@@ -9,7 +9,7 @@ export default {
   modeLight: "Modo Claro",
   about: "¿Quiénes somos?",
   aboutDesc:
-    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. ",
+  "Seed Capital Group es una plataforma de inversiones digitales  que permite  a cualquier persona  en el mundo participar en proyectos fotovoltaicos  y recibir alto potencial de beneficios, por otro lado brinda a las empresas/proyecto una fuente de financiación alternativa, influenciando en el desarrollo hacia un futuro energético descarbonizado y limpio.",
   weAre: "Ver más información",
   howTo: "¿Cómo invertir?",
   projects: "Ver Proyectos",

@@ -11,40 +11,42 @@ import {
   TextContainer,
   HowContainer,
   BodyText,
-  HeadContainer,
-  HeadTitle,
   LineShape,
   StepsContainerMobile,
   StepContainer,
   TextContainerMobile,
+  HomeTitle,
 } from "./styles";
-
-import circleDark from "../../../assets/imgs/circle_dark.png";
-import circleLight from "../../../assets/imgs/circle_light.png";
+import Icon from "../../components/foundation/Icon";
+import { useState } from "react";
 
 const HowTo = (props) => {
   const { howRef, theme, userData } = props;
   const { height, width } = useWindowDimensions();
   const navigate = useNavigate();
   const { t } = useTranslation();
+  const [hoverText, setHoverText] = useState();
   const infoSteps = [
     {
       id: 0,
       title: t("createAccount"),
       desc: t("createAccountDesc"),
       alignment: "right",
+      icon: "Account",
     },
     {
       id: 1,
       title: t("startInvest"),
       desc: t("startInvestDesc"),
       alignment: "right",
+      icon: "Grow",
     },
     {
       id: 2,
       title: t("checkBenefits"),
       desc: t("checkBenefitsDesc"),
       alignment: "left",
+      icon: "Money",
     },
   ];
   const renderStep = () =>
@@ -57,49 +59,37 @@ const HowTo = (props) => {
           index={step.id}
         >
           <Dots theme={theme} />
-          <TextContainerMobile isMobile={isMobile} responsiveWidth={width} alignment={step.alignment}>
-            <TitleText theme={theme}>{step.title}</TitleText>
-            <BodyText theme={theme}>{step.desc}</BodyText>
+          <TextContainerMobile
+            isMobile={isMobile}
+            responsiveWidth={width}
+            alignment={step.alignment}
+          >
+            <TitleText isMobile={isMobile} theme={theme}>{step.title}</TitleText>
+            <BodyText isMobile={isMobile} theme={theme}>{step.desc}</BodyText>
           </TextContainerMobile>
         </StepsContainerMobile>
       ) : (
-        
-          <TextContainer responsiveHeight={height} responsiveWidth={width} alignment={step.alignment}>
-            <TitleText theme={theme}>{step.title}</TitleText>
-            <BodyText theme={theme}>{step.desc}</BodyText>
-          </TextContainer>
-       
+        <TextContainer
+          onMouseEnter={() => setHoverText(step.id)}
+          onMouseLeave={() => setHoverText(null)}
+          responsiveHeight={height}
+          responsiveWidth={width}
+          theme={theme}
+          id={step.id}
+        >
+          <Icon iconName={step.icon} size={100} tintColor={theme.green} />
+          <TitleText theme={theme}>{step.title}</TitleText>
+          {hoverText === step.id &&<BodyText theme={theme}>{step.desc}</BodyText>}
+        </TextContainer>
       )
     );
 
   return (
     <ContainerHowTo ref={howRef} theme={theme}>
-      <HeadContainer
-        isMobile={isMobile}
-        responsiveHeight={height}
-        responsiveWidth={width}
-        theme={theme}
-      >
-        <HeadTitle isMobile={isMobile} responsiveWidth={width} theme={theme}>
-          {t("howWorks")}
-        </HeadTitle>
-        {!isMobile && (
-          <SecondaryBtn
-            onClick={() =>
-              userData
-                ? navigate("/profile")
-                : navigate("/register", {
-                    state: {
-                      isRegister: true,
-                    },
-                  })
-            }
-            fontSize={width * 0.04}
-            theme={theme}
-            label={t("start")}
-          />
-        )}
-      </HeadContainer>
+      <HomeTitle isMobile={isMobile} responsiveWidth={width} theme={theme}>
+        {t("howWorks")}
+      </HomeTitle>
+
       <HowContainer>
         {isMobile ? (
           <LineShape
@@ -111,14 +101,28 @@ const HowTo = (props) => {
           </LineShape>
         ) : (
           <>
-            <StepContainer  responsiveWidth={width}>{renderStep()}</StepContainer>
-            <img
-              width={width * 0.45}
-              src={theme.background === "#FFFFFF" ? circleLight : circleDark}
-            />
+            <StepContainer responsiveWidth={width}>
+              {renderStep()}
+            </StepContainer>
           </>
         )}
       </HowContainer>
+      {!isMobile && (
+        <SecondaryBtn
+          onClick={() =>
+            userData
+              ? navigate("/profile")
+              : navigate("/register", {
+                  state: {
+                    isRegister: true,
+                  },
+                })
+          }
+          fontSize={width * 0.04}
+          theme={theme}
+          label={t("start")}
+        />
+      )}
     </ContainerHowTo>
   );
 };

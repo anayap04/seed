@@ -29,7 +29,7 @@ const SelectCountry = (props) => {
       padding: 5,
       cursor: "pointer",
       ":hover": {
-        color: theme.primaryColor,
+        color: theme.green,
       },
     }),
     valueContainer: () => ({

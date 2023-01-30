@@ -25,14 +25,14 @@ const CardPayment = (props) => {
     iconStyle: "solid",
     style: {
       base: {
-        iconColor: theme.primaryColor,
-        borderColor: theme.primaryColor,
+        iconColor: theme.green,
+        borderColor: theme.green,
         color: theme.fonts,
         fontWeight: 500,
         fontFamily: "Roboto, Open Sans, Segoe UI, sans-serif",
         fontSize: "18px",
         fontSmoothing: "antialiased",
-        ":-webkit-autofill": { color: theme.primaryColor },
+        ":-webkit-autofill": { color: theme.green },
         "::placeholder": { color: theme.disabled },
       },
       invalid: {

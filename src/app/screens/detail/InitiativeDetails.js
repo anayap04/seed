@@ -40,6 +40,7 @@ import { useForm } from "react-hook-form";
 import SecondaryBtn from "../../components/atoms/buttons/Secondary";
 import { DateTime } from "luxon";
 import imageDefault from "../../../assets/imgs/default.png";
+import { isMobile } from "react-device-detect";
 
 const InvestmentModal = ({
   theme,
@@ -52,6 +53,7 @@ const InvestmentModal = ({
   width,
   dispatch,
   handleSubmit,
+  setInvested,
 }) => {
   const onSubmit = (data) => {
 
@@ -62,6 +64,7 @@ const InvestmentModal = ({
       investmentDate: parseInt(date.toMillis()),
     };
     dispatch(fetchSupportInitiatives(dataObj));
+    setInvested(true)
     setOpen(false);
   };
 
@@ -147,6 +150,8 @@ const InitiativeDetail = (props) => {
       setInvested(true);
     }
   }, [dispatch, fetchAllInitiatives, fetchSupportInitiatives]);
+
+
   return (
     <Root theme={theme}>
       <Header
@@ -167,11 +172,13 @@ const InitiativeDetail = (props) => {
           t={t}
           dispatch={dispatch}
           handleSubmit={handleSubmit}
+          setInvested={setInvested}
         />
       )}
       {!isLoadingAllInitiatives && data && data.translations && (
         <>
           <Image
+            isMobile={isMobile}
             src={data && data.imageUrl ? data.imageUrl : imageDefault}
             responsiveWidth={width}
           />
@@ -228,7 +235,7 @@ const InitiativeDetail = (props) => {
                   <BtnContainer>
                     <PrimaryBtn
                       onClick={() => setOpen(!isModalOpen)}
-                      width={width < 768 ? width * 0.5 : width * 0.2}
+                      width={width < 768 ? width * 0.5 : width * 0.25}
                       theme={theme}
                       label={t("invest")}
                     />

@@ -3,23 +3,23 @@ import { DefaultTheme } from "../../../../theme/themes";
 import { device } from "../../../../theme/themes/DefaultTheme/screenSizes";
 
 export const PrimaryContainer = styled.button`
-  border: 2px solid ${({ theme, disabled }) => disabled ? theme.disabled : theme.primaryColor };
-  font-size: ${({fontSize}) => fontSize ? fontSize : '18'}px;
+  border: 2px solid
+    ${({ theme, disabled }) => (disabled ? theme.disabled : theme.green)};
+  font-size: ${({ fontSize }) => (fontSize ? fontSize : "18")}px;
   background-color: transparent;
   padding: 5px;
   padding-left: 10px;
   padding-right: 10px;
-  margin-left: ${({margin}) => margin ? margin : '24px'};
-  width: ${({width}) => width}px;
+  margin-left: ${({ margin }) => (margin ? margin : "24px")};
+  width: ${({ width }) => width}px;
   &:hover {
-    background-color: ${({ theme, disabled }) => !disabled && theme.primaryColor};
+    background-color: ${({ theme, disabled }) => !disabled && theme.green};
     cursor: pointer;
   }
 `;
 
-
 export const TextButton = styled.div`
-  font-family: BebasNeue-Regular;
+  font-family: AcuminBdPro;
   color: ${({ theme }) => theme.fonts};
 `;
 
@@ -31,10 +31,10 @@ export const SecondaryContainer = styled.button`
   padding: 5px;
   margin-left: 24px;
   background: transparent;
-  width: ${({width}) => width}px;
+  width: ${({ width }) => width}px;
   border: 0;
   &:hover {
-    color: ${({ theme }) => theme.primaryColor};
+    color: ${({ theme }) => theme.green};
     cursor: pointer;
   }
 `;
@@ -44,50 +44,34 @@ SecondaryContainer.defaultProps = {
 };
 
 export const TextSecondary = styled.div`
-  font-family: BebasNeue-Regular;
+  font-family: AcuminBdPro;
   color: ${({ theme }) => theme.fonts};
-  font-size: ${({fontSize}) => fontSize ? fontSize : '18'}px;
+  font-size: ${({ fontSize }) => (fontSize ? fontSize : "18")}px;
   &:hover {
-    color: ${({ theme }) => theme.primaryColor};
-}
+    color: ${({ theme }) => theme.green};
+  }
 `;
 
 TextSecondary.defaultProps = {
   theme: DefaultTheme,
 };
 
-export const LinkContainer = styled.div`
-  margin-left: 24px;
-  padding-bottom: 0px;
-  width: 180px;
-  color: ${({ theme }) => theme.fonts};
-  text-align: center;
-  align-items: center;
-  &:hover {
-    color: ${({ theme }) => theme.primaryColor};
-    cursor: pointer;
-  }
-`;
-
-LinkContainer.defaultProps = {
-  theme: DefaultTheme,
-};
-
 export const TextLink = styled.p`
-  font-family: BebasNeue-Regular;
-  font-size: ${({fontSize}) => fontSize ? fontSize+'px' : '20px'};
-  border-bottom: 3px ${({ theme }) => theme.primaryColor} solid;
+  font-family: AcuminBdPro;
+  font-size: ${({ fontSize }) => (fontSize ? fontSize + "px" : "20px")};
+  border-bottom: 3px ${({ theme, hasBackground }) =>
+    hasBackground ? "transparent" : theme.green} solid;
   max-width: fit-content;
   margin-bottom: -5px;
   &:hover {
-    color: ${({ theme }) => theme.primaryColor};
+    color: ${({ theme }) => theme.green};
     cursor: pointer;
   }
   @media (${device.mobileS}) {
     font-size: 24px
   }
   @media (${device.tablet}) {
-    font-size: ${({fontSize}) => fontSize ? fontSize+'px' : '20px'};
+    font-size: ${({ fontSize }) => (fontSize ? fontSize + "px" : "20px")};
   }
 }
 `;
@@ -96,4 +80,26 @@ TextLink.defaultProps = {
   theme: DefaultTheme,
 };
 
+export const LinkContainer = styled.div`
+  padding-bottom: 0px;
+  width: ${({ width }) => (width ? width : 180)}px;
+  color: ${({ theme }) => theme.fonts};
+  align-items: center;
+  padding-left: ${({ hasBackground }) => (hasBackground ? "20px" : "0")};
+  margin-left: ${({margin}) => margin ? margin : '20'}px;
+  border-bottom: 3px
+    ${({ hasBackground, theme }) =>
+      hasBackground ? theme.tangerine : "transparent"}
+    solid;
+  &:hover {
+    color: ${({ theme }) => theme.green};
+    cursor: pointer;
+    ${TextLink} {
+      transform: scale(1.1);
+    }
+  }
+`;
 
+LinkContainer.defaultProps = {
+  theme: DefaultTheme,
+};

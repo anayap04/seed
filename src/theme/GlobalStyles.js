@@ -1,27 +1,21 @@
 // @flow
 import { createGlobalStyle } from 'styled-components'
-import  BebasNeue from '../assets/fonts/BebasNeue-Regular.woff'
-import Montserrat from '../assets/fonts/Montserrat-Regular.woff'
-import MontserratLight from '../assets/fonts/Montserrat-Light.woff'
-import Bitter from '../assets/fonts/Bitter-SemiBold.woff'
+import  AcuminBdPro from '../assets/fonts/Acumin-BdPro.woff'
+import AcuminRPro from '../assets/fonts/Acumin-RPro.woff'
+import AcuminProLight from '../assets/fonts/Acumin-ProLight.woff'
 
 const GlobalStyles = createGlobalStyle`
   @font-face {
-    font-family: BebasNeue-Regular;
-    src: url(${BebasNeue}) format('woff');
+    font-family: AcuminBdPro;
+    src: url(${AcuminBdPro}) format('woff');
   }
   @font-face {
-    font-family: Montserrat-Regular;
-    src: url(${Montserrat})format('woff');
+    font-family: Acumin-RPro;
+    src: url(${AcuminRPro})format('woff');
   }
   @font-face {
-    font-family: Montserrat-Light;
-    src: url(${MontserratLight})format('woff');
-  }
-  @font-face {
-    font-family: Bitter-SemiBold;
-    src: url(${Bitter})format('woff');
-
+    font-family:Acumin-ProLight;
+    src: url(${AcuminProLight})format('woff');
   }
 
   body {

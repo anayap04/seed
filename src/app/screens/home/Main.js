@@ -1,91 +1,59 @@
-import React, { useRef } from "react";
+import React from "react";
 import { useTranslation } from "react-i18next";
-import LinkBtn from "../../components/atoms/buttons/Link";
-import {
-  BtnContainer,
-  ContainerMain,
-  ImgContainer,
-  Back,
-  VideoContainer,
-} from "./styles";
+import { BtnContainer, ContainerMain, ImgContainer } from "./styles";
 import logoWhite from "../../../assets/imgs/seed-white.png";
 import logoDark from "../../../assets/imgs/seed-dark.png";
-import video from "../../../assets/video/video.mp4";
-import videoLight from "../../../assets/video/video_light.mp4";
+
 import { isMobile } from "react-device-detect";
 import useWindowDimensions from "../../../utils/useWindowDimensions";
+import LinkBtn from "../../components/atoms/buttons/Link";
 
 const Main = (props) => {
   const { theme, scrollToView, refs } = props;
   const { t } = useTranslation();
-  const videoRef = useRef();
-  const { height, width } = useWindowDimensions();
+  const { width } = useWindowDimensions();
 
   const btns = [
     {
       id: 0,
       title: t("about"),
       ref: refs.aboutRef,
-      animation: "right",
     },
     {
       id: 1,
       title: t("howTo"),
       ref: refs.howRef,
-      animation: "left",
     },
     {
       id: 2,
       title: t("projects"),
       ref: refs.projectRef,
-      animation: "right",
     },
   ];
 
   return (
     <ContainerMain theme={theme}>
-      <VideoContainer
-        ref={videoRef}
-        height="90%"
-        autoPlay
-        muted
-        loop
-        no-controls
-      >
-        <source src={theme.background === "#FFFFFF" ? videoLight : video} />
-      </VideoContainer>
-      
-      <Back
-        height={videoRef.current ? videoRef.current.clientHeight : height * 0.3}
-        isMobile={isMobile}
-        theme={theme}
-      >
-        {btns.map((btn, index) => (
-          <BtnContainer
-            key={btn.id}
-            index={index}
-            animation={btn.animation}
-            isMobile={isMobile}
-            responsiveWidth={width}
-          >
-            <LinkBtn
-              fontSize={isMobile ? 30 : 44}
-              key={btn.id}
-              theme={theme}
-              label={btn.title}
-              onClick={() => scrollToView(btn.ref)}
-            />
-          </BtnContainer>
-        ))}
-        {!isMobile && (
-        <ImgContainer theme={theme}>
+      <ImgContainer isMobile={isMobile} theme={theme}>
           <img
-            width={isMobile ? "50%" : "80%"}
-            src={theme.background === "#FFFFFF" ? logoDark : logoWhite}
+            width={"100%"}
+            src={theme.background !== "#0F110C" ? logoDark : logoWhite}
           />
         </ImgContainer>
-      )}
-      </Back>
+      <BtnContainer isMobile={isMobile} responsiveWidth={width}>
+        
+        {btns.map((btn) => (
+          <LinkBtn
+            hasBackground={true}
+            fontSize={isMobile ? 24 : 30}
+            key={btn.id}
+            theme={theme}
+            width={width * 0.20}
+            label={btn.title}
+            margin={isMobile ? width * 0.01 : width * 0.1}
+            onClick={() => scrollToView(btn.ref)}
+          />
+        ))}
+      </BtnContainer>
     </ContainerMain>
   );
 };

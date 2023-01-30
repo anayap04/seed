@@ -7,12 +7,12 @@ const Loading = (props) => {
   const override = {
     display: "block",
     margin: "0 auto",
-    borderColor: theme.primaryColor,
+    borderColor: theme.green,
   };
   return (
     <Modal>
       <BeatLoader
-        color={theme.primaryColor}
+        color={theme.green}
         loading={isLoading}
         cssOverride={override}
         size={150}

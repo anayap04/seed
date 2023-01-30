@@ -9,9 +9,9 @@ const Container = styled.div`
   display: flex;
   justify-content: right;
   z-index: 100;
+  margin-right: 0px;
 `;
 const ButtonContainer = styled.div`
-  margin-right: 20px;
   display: flex;
   flex-direction: row;
 `
@@ -23,5 +23,14 @@ Container.defaultProps = {
 export const ListContent = styled.div`
   margin-left: 5px;
 `
+export const ButtonHeader = styled.div`
+  margin-top: -12px;
+  margin-bottom: -12px;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  padding-right: 15px;
+  background-color: ${({color}) => color};
+`
+
 
 export { Container, ButtonContainer };

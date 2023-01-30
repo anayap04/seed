@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 export const ListContainer = styled.div`
   width: ${({width}) => width ? width : '60'}px;
-  font-family: BebasNeue-Regular;
+  font-family: AcuminBdPro;
   font-size: 16px;
   color: ${({theme}) => theme.fonts};
   background-color: ${({theme}) => theme.background};
@@ -14,8 +14,8 @@ export const ListContainer = styled.div`
 `
 
 export const Item = styled.div`
-  border:  ${({theme}) => theme.primaryColor} 1px solid;
+  border:  ${({theme}) => theme.green} 1px solid;
   &:hover {
-    color: ${({theme}) => theme.primaryColor};
+    color: ${({theme}) => theme.green};
   }
 `

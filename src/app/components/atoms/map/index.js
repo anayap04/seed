@@ -21,16 +21,16 @@ const MapLocation = () => {
         zoom={17}
         google={window.google}
         initialCenter={{
-          lat: 11.013457337338147,
-          lng: -74.82629669925919,
+          lat: 11.003586810685562,
+          lng: -74.82489794514642,
         }}
         style={style}
       >
 
 <AnyReactComponent
-          lat={11.013457337338147}
-          lng={-74.82629669925919}
-          text={'Kreyser Avrora'}
+          lat={11.003586810685562}
+          lng={-74.82489794514642}
+          text={'Oficinas'}
         />
       </Map>
     </Root>

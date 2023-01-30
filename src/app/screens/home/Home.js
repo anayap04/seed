@@ -6,6 +6,8 @@ import HowTo from "./HowTo";
 import Projects from "./Projects";
 import { connect } from "react-redux";
 import { loginSuccessed } from "../../../redux/actions/login";
+import "animate.css/animate.min.css";
+import { AnimationOnScroll } from "react-animation-on-scroll";
 
 const Home = (props) => {
   const { theme, themeToggler, mode, userData } = props;
@@ -13,12 +15,12 @@ const Home = (props) => {
   const aboutRef = useRef(null);
   const howRef = useRef(null);
   const projectRef = useRef(null);
-  const btnsArray = ['lang', 'mode'];
-  const cachedUser = localStorage.getItem('userId')
+  const btnsArray = ["lang", "mode"];
+  const cachedUser = localStorage.getItem("userId");
   if (cachedUser || userData) {
-    btnsArray.push(...['profile', 'logout'])
+    btnsArray.push(...["profile", "logout"]);
   } else {
-    btnsArray.push(...['reg', 'login'])
+    btnsArray.push(...["reg", "login"]);
   }
 
   const scrollToView = (ref) => {
@@ -32,14 +34,25 @@ const Home = (props) => {
         themeToggler={themeToggler}
         btnsArray={btnsArray}
       />
+
       <Main
         theme={theme}
         scrollToView={scrollToView}
         refs={{ homeRef, aboutRef, howRef, projectRef }}
       />
-      <About mode={mode} theme={theme} aboutRef={aboutRef} />
-      <HowTo userData={cachedUser || userData} theme={theme} howRef={howRef} />
-      <Projects theme={theme} projectRef={projectRef} />
+      <AnimationOnScroll animateIn="animate__fadeIn">
+        <About mode={mode} theme={theme} aboutRef={aboutRef} />
+      </AnimationOnScroll>
+      <AnimationOnScroll animateIn="animate__fadeIn">
+        <HowTo
+          userData={cachedUser || userData}
+          theme={theme}
+          howRef={howRef}
+        />
+      </AnimationOnScroll>
+      <AnimationOnScroll animateIn="animate__fadeIn">
+        <Projects theme={theme} projectRef={projectRef} />
+      </AnimationOnScroll>
     </div>
   );
 };
@@ -48,12 +61,12 @@ const mapToStateProps = (state) => {
   return {
     userData: userData,
   };
-}
+};
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    loadUser: () => dispatch(loginSuccessed)
-  }
-}
+    loadUser: () => dispatch(loginSuccessed),
+  };
+};
 
 export default connect(mapToStateProps, mapDispatchToProps)(Home);

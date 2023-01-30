@@ -1,117 +1,96 @@
-import styled from "styled-components";
-import { device } from "../../../theme/themes/DefaultTheme/screenSizes";
+import styled, { keyframes } from "styled-components";
 import ProgressBar from "react-bootstrap/ProgressBar";
+import { fadeIn } from "react-animations";
+const fadeAnimation = keyframes`${fadeIn}`;
+
+export const Content = styled.div`
+  width: ${({ width, isMobile }) => (isMobile ? width * 0.9 : width * 0.4)}px;
+  margin: 0 0 0 auto;
+  display: flex;
+  height: 257px;
+  flex-direction: row;
+  padding-top: 77px;
+  
+`;
+
+export const ColInfo = styled.div`
+  width ${({ width }) => (width ? width * 0.8 : "12vw")};
+  height: 227px;
+  text-align: center;
+  display: grid;
+
+`;
+
+export const Row = styled.div`
+  width: ${({ width, isMobile }) => (isMobile ? width * 0.3 : width * 0.15)}px;
+  background-color: ${({ backgroundColor }) => backgroundColor};
+  text-align: center;
+  height: 128.5px;
+  padding-top: 20px;
+`;
+
+export const ColTitle = styled.div`
+  padding: 10px 0px 0px 10px;
+  width ${({ width, isMobile }) => (isMobile ? width * 0.6 : width * 0.25)}px;
+  background-color: ${({ theme }) => theme.backgroundLighter};
+  height: 257px;
+`;
 
 export const CardContainer = styled.div`
-  width: 610px;
-  heigth: 370px;
-  border: ${({ theme }) => theme.primaryColor} 2px solid;
-  display: flex;
-  flex-direction: row;
-  @media (${device.laptop}) {
-    width: 560px;
+  width: ${({ width }) => width * 0.95}px;
+  background-image: url(${({ urlImage }) => urlImage});
+  background-size: ${({ width }) => width * 0.95}px;
+  height: 334px;
+  object-fit: cover;
+  object-position: 100% 100%;
+  animation: 0.5s ${fadeAnimation};
+  margin-top: 30px;
+  &:hover {
+    ${Content} {
+      height: 333px;
+      padding-top: 0px;
+      width: ${({ width }) => width * 0.95}px;
+    }
+    ${ColTitle} {
+      margin-top: 0;
+      width: ${({ width, isMobile }) =>
+        isMobile ? width * 0.7 : width * 0.9}px;
+      transition: all 0.5s ease 0.1s;
+      background-color: ${({ theme }) => theme.backgroundLighter}de;
+      height: 334px;
+    }
+    ${Row} {
+      height: 167px;
+      transition: 0.3s ease-in-out;
+    }
   }
-  @media (${device.mobileAll}), (pointer: none), (pointer: coarse) {
-    width: 320px;
-  }
-`;
-export const ImageFragment = styled.div`
-  width: 250px;
-  height: 370px;
-  border-right: ${({ theme }) => theme.primaryColor} 2px solid;
-  background: url(${({ url }) => url});
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  @media (${device.laptop}) {
-    width: 230px;
-  }
-  @media (${device.mobileAll}), (pointer: none), (pointer: coarse) {
-    width: 0px;
-  }
 `;
 
-export const TextFragment = styled.div`
-  padding-left: 20px;
-  paddig-right: 20px;
-  padding-top: 10px;
-  text-align: left;
-  width: 340px;
-  height: 250px;
+export const BodyDiv = styled.div`
+  width: 70vw;
 `;
-
-export const TitleContent = styled.div`
-  height: 80px;
-  margin-bottom: 10px;
-`;
-
-export const CardTitle = styled.p`
-  color: ${({ theme }) => theme.fonts};
-  font-family: Bitter-SemiBold;
-  font-size: 18px;
-  margin-bottom: 5px;
-`;
-
-export const ContentBody = styled.div`
-  height: 120px;
-  margin-bottom: 10px;
-  width: 298px;
-`;
-
-export const InfoSub = styled.div`
-  display: flex;
-  flex-direction: row;
-`;
-export const TitleInfo = styled.p`
-  color: ${({ theme }) => theme.fonts};
-  font-family: Bitter-SemiBold;
-  font-size: 12px;
-  margin-bottom: 3px;
-`;
-
-export const InfoContainer = styled.div`
-  width: 140px;
+export const InfoColumn = styled.div`
+  width: 35vw;
   text-align: center;
-  margin-top: 2px;
-  margin-bottom: 5px;
-`;
+`
 
-export const FooterImg = styled.div`
-  position: absolute;
-  height: ${({ isHover }) => (isHover ? "160px" : "81px")};
-  bottom: 0;
-  background-color: ${({ theme }) => theme.background}85;
-  width: 250px;
-  padding-top: 5px;
-  text-align: left;
-  padding-left: 20px;
-  @media (${device.laptop}) {
-    width: 224px;
-  }
-  @media (${device.mobileAll}), (pointer: none), (pointer: coarse) {
-    width: 0px;
-    display: none;
-  }
-`;
+export const MoreInfoContent = styled.div`
+  display: flex;
+  flex-direction: row;
+  text-align: center;
+  width: 60vw;
 
-export const ProfitTitle = styled.p`
-  color: ${({ theme }) => theme.primaryColor};
-  font-family: Bitter-SemiBold;
-  font-size: 18px;
-  margin-bottom: -5px;
-  @media (${device.mobileAll}), (pointer: none), (pointer: coarse) {
-    display: none;
-  }
-`;
+`
 
 export const ProgressBarDiv = styled(ProgressBar)`
-  width: 180px;
+  width: 160px;
   height: 10px;
   margin-top: -15px;
+  margin-left: 10px;
   & > .progress {
     background-color: #f9f9f98c;
   }
   & > .progress-bar {
-    background-color: ${({ theme }) => theme.primaryColor};
+    background-color: ${({ theme }) => theme.green};
   }
 `;

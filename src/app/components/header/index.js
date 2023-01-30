@@ -3,11 +3,10 @@ import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { logout } from "../../../redux/actions/login";
-import PrimaryBtn from "../atoms/buttons/Primary";
 import SecondaryBtn from "../atoms/buttons/Secondary";
 import ListView from "../list-view";
 // Styled components
-import { Container, ButtonContainer, ListContent} from "./styles";
+import { Container, ButtonContainer, ListContent, ButtonHeader } from "./styles";
 const Header = (props) => {
   const { btnsArray, theme, themeToggler, mode } = props;
   const navigate = useNavigate();
@@ -42,36 +41,36 @@ const Header = (props) => {
     navigate("/");
   };
   const arrayComplete = [
-    {
-      id: "home",
-      type: "secondary",
-      hasList: true,
-      label: "Inicio",
-      onClick: () => navigate("/"),
-    },
+    
     {
       id: "lang",
-      type: "secondary",
+      color: "transparent",
       hasList: true,
       label: t("lang"),
       onClick: () => open(),
     },
-   
+
     {
       id: "mode",
-      type: "secondary",
+      color: "secondary",
       label: mode === "dark" ? t("modeDark") : t("modeLight"),
       onClick: () => themeToggler(),
     },
     {
+      id: "home",
+      color: theme.lavender,
+      label: "Inicio",
+      onClick: () => navigate("/"),
+    },
+    {
       id: "login",
-      type: "secondary",
+      color: theme.lavender,
       label: t("login"),
       onClick: () => navigate("/register"),
     },
     {
       id: "reg",
-      type: "primary",
+      color: theme.tangerine,
       label: t("register"),
       onClick: () =>
         navigate("/register", {
@@ -82,19 +81,19 @@ const Header = (props) => {
     },
     {
       id: "profile",
-      type: "secondary",
+      color: theme.lavender,
       label: t("profile"),
       onClick: () => navigate("/profile"),
     },
     {
       id: "projects",
-      type: "secondary",
+      color: theme.blue,
       label: t("projects"),
       onClick: () => navigate("/projects"),
     },
     {
       id: "logout",
-      type: "primary",
+      color: theme.tangerine,
       label: t("logout"),
       onClick: () => logoutSession(),
     },
@@ -104,30 +103,21 @@ const Header = (props) => {
     btnsArray.includes(option.id)
   );
 
-  const btnRender = (btn) => {
-    return btn.type === "secondary" ? (
-      <div key={btn.id}>
-        <SecondaryBtn theme={theme} label={btn.label} onClick={btn.onClick} />
-        {listOpen && btn.hasList && (
-          <ListContent>
+  const btnRender = (btn) => (
+    <ButtonHeader color={btn.color} key={btn.id}>
+      <SecondaryBtn theme={theme} label={btn.label} onClick={btn.onClick} />
+      {listOpen && btn.hasList && (
+        <ListContent>
           <ListView
             key={btn.id}
             setList={setList}
             arrayItems={arrayLang}
             theme={theme}
           />
-          </ListContent>
-        )}
-      </div>
-    ) : (
-      <PrimaryBtn
-        theme={theme}
-        key={btn.id}
-        label={btn.label}
-        onClick={btn.onClick}
-      />
-    );
-  };
+        </ListContent>
+      )}
+    </ButtonHeader>
+  );
 
   return (
     <Container theme={theme}>

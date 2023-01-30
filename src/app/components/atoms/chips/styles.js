@@ -2,10 +2,10 @@ import styled from "styled-components";
 import { device } from "../../../../theme/themes/DefaultTheme/screenSizes";
 
 export const ChipDiv = styled.div`
-  border: ${({theme}) => theme.primaryColor} 4px solid;
+  border: ${({theme}) => theme.green} 4px solid;
   border-radius: 10px;
   padding-top: 4px;
-  background-color: ${({theme, selected}) => selected ? theme.primaryColor + '80' : 'transparent'};
+  background-color: ${({theme, selected}) => selected ? theme.green + '80' : 'transparent'};
   width: fit-content;
   padding-left: 10px;
   padding-right: 10px;
@@ -17,7 +17,7 @@ export const ChipDiv = styled.div`
 `
 
 export const ChipText  = styled.p`
-  font-family: Bitter-SemiBold;
+  font-family: AcuminBdPro;
   font-size: 18px;
   color: ${({theme}) => theme.fonts};
 `

@@ -17,9 +17,7 @@ export const Root = styled.div`
     url(${texture});
   width: 100vw;
   padding-bottom: 30px;
-  @media (${device.laptop}) {
-    height: 100vh;
-  }
+  margin-bottom: ${({marginBottom}) => marginBottom}px;
 `;
 export const Content = styled.div`
   background-color: ${({ theme }) => theme.background};
@@ -37,12 +35,12 @@ export const ColInvestment = styled(Col)`
 
 export const SectionBonds = styled(SectionContainer)`
   text-align: center;
-  
+  align-items: center;
   @media (${device.mobileAll}), (pointer: none), (pointer: coarse) {
     padding-left: ${({ responsiveWidth }) => responsiveWidth * 0.25}px;
   }
   ${Title} {
-    margin-left: ${({ responsiveWidth }) => responsiveWidth * 0.45}px;
+    margin-left: ${({ responsiveWidth }) => responsiveWidth * 0.40}px;
   }
   padding-top: 50px;
 `;

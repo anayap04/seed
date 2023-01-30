@@ -2,8 +2,8 @@ import styled from "styled-components";
 import image from "../../../assets/imgs/trees.jpg";
 
 const getGradient = (color) =>
-  color === "#FFFFFF"
-    ? "linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 46%, rgba(255,255,255,0) 75%)"
+  color === "#E3F2FD"
+    ? "linear-gradient(90deg, rgba(227, 242, 253) 0%, rgba(227, 242, 253,1) 46%, rgba(227, 242, 253,0) 75%)"
     : "linear-gradient(90deg, rgba(13,13,13,1) 0%, rgba(13,13,13,1) 50%, rgba(13,13,13,0) 87%)";
 
 export const Container = styled.div`
@@ -21,9 +21,9 @@ export const FormContainer = styled.div`
 export const BtnSubmit = styled.input.attrs({
   type: "submit",
 })`
-  border: ${({ theme }) => theme.primaryColor} 2px solid;
+  border: ${({ theme }) => theme.green} 2px solid;
   color: ${({ theme }) => theme.fonts};
-  font-family: BebasNeue-Regular;
+  font-family: AcuminBdPro;
   padding: 10px;
   padding-left: 10px;
   padding-right: 10px;
@@ -32,10 +32,10 @@ export const BtnSubmit = styled.input.attrs({
   width: ${({isMobile}) => isMobile ? '85vw' : '300px'};
   background-color: transparent;
   &:hover {
-    background-color: ${({ theme }) => theme.primaryColor};
+    background-color: ${({ theme }) => theme.green};
   }
   & > {
-    color: ${({ theme }) => theme.primaryColor};
+    color: ${({ theme }) => theme.green};
   }
 `;
 
@@ -56,9 +56,9 @@ export const PetitionDiv = styled.div`
 
 export const InfoPopContent = styled.div`
   max-width: ${({ responsiveWidth }) => responsiveWidth * 0.9}px;
-  border: ${({ theme }) => theme.primaryColor} 3px solid;
+  border: ${({ theme }) => theme.green} 3px solid;
   border-radius:
-  background-color: ${({ theme }) => theme.primaryColor + "bd"};
+  background-color: ${({ theme }) => theme.green + "bd"};
   height: 60px;
   padding-top: 15px;
   border-radius: 10px;

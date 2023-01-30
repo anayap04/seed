@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { device } from "../../../theme/themes/DefaultTheme/screenSizes";
 import { Col } from "react-bootstrap";
 
 export const Root = styled.div`
@@ -22,11 +21,5 @@ export const ColProject = styled(Col)`
   margin-top: 30px;
   margin-bottom: 20px;
   padding-left: ${({ width }) => width * 0.01}px;
-  @media (${device.laptopL}) {
-    padding-left: ${({ width }) => width * 0.02}px;
-  }
-  @media (${device.mobileAll}), (pointer:none), (pointer:coarse) {
-    padding-left: ${({ width }) => width * 0.05}px;
-  }
   
 `;

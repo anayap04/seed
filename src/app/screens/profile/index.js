@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect,useState } from "react";
 import { useTranslation } from "react-i18next";
 import { connect, useDispatch } from "react-redux";
 import { fetchUser } from "../../../redux/actions/user";
@@ -83,7 +83,7 @@ const Profits = ({ theme, userData, t, width, openTable, table, navigate, actual
 const Bonds = ({ theme, t, width, userData, navigate }) => (
   <Content>
     <Title theme={theme}>{t("myGreenBonds")}</Title>
-    <SectionBonds customWidth={width} theme={theme}>
+    <SectionBonds responsiveWidth={width} theme={theme}>
       {userData.credits ? (
         <>
         <Title theme={theme}>{`${userData.credits} ${t("Bonos")}`}</Title>
@@ -131,11 +131,13 @@ const Profile = (props) => {
   const { theme, themeToggler, mode, userInfo, isLoading } = props;
   const { t, i18n } = useTranslation();
   const dispatch = useDispatch();
-  const { width } = useWindowDimensions();
+  const { width, height } = useWindowDimensions();
   const navigate = useNavigate();
   const [id, setId] = useState(0);
   const [table, openTable] = useState(false);
   const [disabled, setDisabled] = useState(true);
+
+
 
   const chipsInfo = [
     { id: 0, label: t("myInfo") },
@@ -147,7 +149,7 @@ const Profile = (props) => {
   }, [dispatch, fetchUser]);
 
   return (
-    <Root theme={theme}>
+    <Root  marginBottom={((id === 1 || id === 2) && !table ? height * 0.3 : 100)} theme={theme}>
       <Loading theme={theme} isLoading={isLoading} />
       <Header
         mode={mode}
@@ -171,7 +173,6 @@ const Profile = (props) => {
           width={width}
           disabled={disabled}
           setDisabled={setDisabled}
-
         />
       )}
       {id === 1 && userInfo && (
@@ -193,6 +194,7 @@ const Profile = (props) => {
           table={table}
           navigate={navigate}
           actualLang={i18n.language}
+          
         />
       )}
 

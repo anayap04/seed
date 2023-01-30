@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./App.css";
 import { darkTheme, lightTheme } from "../src/theme/themes/DefaultTheme/colors";
 import ThemeProvider from "./theme/ThemeProvider";
+import ScrollToTop from './utils/ScrollToTop';
 import { useDarkMode } from "./utils/useDarkMode";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./app/screens/home/Home";
@@ -35,6 +36,7 @@ function App() {
     <ThemeProvider theme={themeMode || mode}>
       <GlobalStyles theme={themeMode || mode} />
       <BrowserRouter basename="/seed">
+      <ScrollToTop />
         <Routes>
           <Route
             path="/"

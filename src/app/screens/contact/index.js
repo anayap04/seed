@@ -27,8 +27,6 @@ const Contact = (props) => {
 
   const sendEmail = (e) => {
     e.preventDefault();
-    console.log(form.current, e);
-
     emailjs
       .sendForm(
         "service_7u028i9",
@@ -108,7 +106,7 @@ const Contact = (props) => {
         <LocationSection isMobile={isMobile}>
           <Title theme={theme}>{"Ubicación"}</Title>
           <Subtitle theme={theme}>{"SEED"}</Subtitle>
-          <Body theme={theme}>{"Cl. 98 #52-115, Riomar, Barranquilla"}</Body>
+          <Body theme={theme}>{"Cra. 46 #90-17 Of 401, Barranquilla, Atlántico"}</Body>
           <Body theme={theme}>{"(+57) 3 78 70 43"}</Body>
           <MapLocation zoomLevel={17} isMobile={isMobile} />
         </LocationSection>

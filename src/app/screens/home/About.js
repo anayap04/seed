@@ -4,11 +4,11 @@ import useWindowDimensions from "../../../utils/useWindowDimensions";
 import {
   ContainerAbout,
   Content,
-  HeadTitle,
   DescriptionBody,
   DescriptionText,
   CarouselContainer,
   ImageContainer,
+  HomeTitle,
 } from "./styles";
 import logo from "../../../assets/imgs/seed-white.png";
 import logoDark from "../../../assets/imgs/seed-dark.png";
@@ -20,7 +20,12 @@ import AliceCarousel from "react-alice-carousel";
 import "react-alice-carousel/lib/alice-carousel.css";
 import veleta from "../../../assets/imgs/veleta.png";
 import capexp from "../../../assets/imgs/capexp.png";
+import capexDark from "../../../assets/imgs/capex_dark.png";
 import green from "../../../assets/imgs/green.png";
+import mtbren from "../../../assets/imgs/mtbren.png";
+import positive from "../../../assets/imgs/positive.png";
+
+
 
 const handleDragStart = (e) => e.preventDefault();
 
@@ -39,7 +44,7 @@ const About = (props) => {
     <img
       key={1}
       width={250}
-      src={capexp}
+      src={mode === "dark" ? capexDark : capexp}
       onDragStart={handleDragStart}
       role="presentation"
     />,
@@ -50,13 +55,27 @@ const About = (props) => {
       onDragStart={handleDragStart}
       role="presentation"
     />,
+    <img
+      key={2}
+      width={200}
+      src={mtbren}
+      onDragStart={handleDragStart}
+      role="presentation"
+    />,
+    <img
+      key={2}
+      width={200}
+      src={positive}
+      onDragStart={handleDragStart}
+      role="presentation"
+    />,
   ];
 
   return (
     <ContainerAbout responsiveHeight={height} ref={aboutRef} theme={theme}>
-      <HeadTitle responsiveWidth={width} theme={theme}>
+      <HomeTitle responsiveWidth={width} theme={theme}>
         {t("about")}
-      </HeadTitle>
+      </HomeTitle>
       <Row>
         <Content responsiveHeight={height} responsiveWidth={width}>
           {!isMobile &&
@@ -86,6 +105,7 @@ const About = (props) => {
           items={items}
         />
       </CarouselContainer>
+      
     </ContainerAbout>
   );
 };
