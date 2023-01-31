@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/static/css/main.e94c48b3.css",
-    "main.js": "/static/js/main.1ae09216.js",
+    "main.js": "/static/js/main.d46979f1.js",
     "static/js/787.4f83e0bb.chunk.js": "/static/js/787.4f83e0bb.chunk.js",
     "static/media/earth.jpeg": "/static/media/earth.8e9339dd53fe56ec2e52.jpeg",
     "static/media/bonos_light.png": "/static/media/bonos_light.e8ddc5c2d1e1f88246dc.png",
@@ -13,6 +13,7 @@
     "static/media/green.png": "/static/media/green.67ab69b641f3f39df1eb.png",
     "static/media/capexp.png": "/static/media/capexp.a5c0fbd075b7e99c052a.png",
     "static/media/veleta.png": "/static/media/veleta.09594c7e7bd4633a4eab.png",
+    "static/media/qr_payment.png": "/static/media/qr_payment.8d9551534261dca6770c.png",
     "static/media/operator.png": "/static/media/operator.4440b49bed697db498d5.png",
     "static/media/Acumin-BdPro.woff": "/static/media/Acumin-BdPro.9029d20893677b60fe04.woff",
     "static/media/Acumin-RPro.woff": "/static/media/Acumin-RPro.619962d87c184a44be27.woff",
@@ -25,11 +26,11 @@
     "static/media/grow.png": "/static/media/grow.fb1269c6ee5389c5f6b3.png",
     "index.html": "/index.html",
     "main.e94c48b3.css.map": "/static/css/main.e94c48b3.css.map",
-    "main.1ae09216.js.map": "/static/js/main.1ae09216.js.map",
+    "main.d46979f1.js.map": "/static/js/main.d46979f1.js.map",
     "787.4f83e0bb.chunk.js.map": "/static/js/787.4f83e0bb.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.e94c48b3.css",
-    "static/js/main.1ae09216.js"
+    "static/js/main.d46979f1.js"
   ]
 }
