@@ -96,4 +96,6 @@ export default {
   invest: "Invest",
   supervisor: "Project Supervisor",
   lastUpdated: "Last Updates",
+  payCard: "Pay with Debit/Credit Card",
+  payCrypto: "Pay with Ether",
 };

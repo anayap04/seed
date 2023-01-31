@@ -96,4 +96,6 @@ export default {
   invest: "Invertir",
   supervisor: "Encargado del Proyecto",
   lastUpdated: "Últimas Actualizaciones",
+  payCard: "Pago con Tarjeta Débito/Crédito",
+  payCrypto: "Pago con Ether (Cryptomoneda)",
 };

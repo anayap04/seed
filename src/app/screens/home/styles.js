@@ -204,6 +204,10 @@ export const TextContainer = styled.div`
     background: ${({theme}) => theme.tangerine}90;
     ${TitleText} {
       transform: scale(1.1);
+      
+    }
+    ${BodyText} {
+      animation: 0.5s ${fadeAnimation};
     }
 
   }

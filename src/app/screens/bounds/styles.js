@@ -11,6 +11,7 @@ export const Root = styled.div`
   @media(${device.mobileAll}) {
     padding-left: 20px;
   }
+  padding-bottom: 100px;
 `;
 
 export const Counter = styled.div`
@@ -33,4 +34,9 @@ export const TableContainer = styled.div`
 
 export const BtnContainer = styled.div`
   padding-top: 20px;
+`
+
+export const Instrunctions = styled.div`
+  margin-top: 20px;
+  padding: 10px;
 `

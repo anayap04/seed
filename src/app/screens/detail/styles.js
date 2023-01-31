@@ -12,18 +12,15 @@ const fadeAnimation = keyframes`${fadeIn}`;
 export const Root = styled.div`
   background-color: ${({ theme }) => theme.background};
   width: 100vw;
-  @media (${device.laptop}) {
-    height: 100vh;
-  }
+  padding-bottom: 100px;
 `;
 
 export const Image = styled.img`
-  width: 100%;
   object-fit: cover;
   object-position: 80% 80%;
-    width: ${({ responsiveWidth }) => isMobile ? responsiveWidth * 0.99 :  responsiveWidth * 0.9}px;
-    margin-left: ${({ responsiveWidth }) => isMobile ? responsiveWidth * 0.01 : responsiveWidth * 0.05}px;
-    height: 450px;
+  width: ${({ responsiveWidth }) => isMobile ? responsiveWidth * 0.99 :  responsiveWidth * 0.9}px;
+  margin-left: ${({ responsiveWidth }) => isMobile ? responsiveWidth * 0.01 : responsiveWidth * 0.05}px;
+  height: 450px;
 
 `;
 
@@ -31,6 +28,7 @@ export const ContentInfo = styled.div`
   margin-left: ${({ responsiveWidth }) => responsiveWidth * 0.05}px;
   padding-top: 30px;
   animation: 1.5s ${fadeAnimation};
+  padding-bottom: 10vh;
 `;
 
 export const RowDetail = styled(Row)`

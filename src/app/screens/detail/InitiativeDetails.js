@@ -253,7 +253,7 @@ const InitiativeDetail = (props) => {
                         <Subtitle theme={theme}>
                           {"Encargado del Proyecto"}
                         </Subtitle>
-                        <Body theme={theme}>{data.responsibleName}</Body>
+                        <Body theme={theme}>{`${data.responsibleName} (LinkedIn: @jdoe)`}</Body>
                         <Subtitle theme={theme}>
                           {"Últimas Actualizaciones"}
                         </Subtitle>

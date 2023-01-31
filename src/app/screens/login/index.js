@@ -230,12 +230,14 @@ const LoginPage = (props) => {
                     theme={theme}
                     label={isRegister ? t("iHaveAcc") : t("iHaveNotAcc")}
                     onClick={() => setRegister(!isRegister)}
+                    width={250}
                   />
                   <LinkBtn
                     fontSize={24}
                     theme={theme}
                     label={t("forgetPass")}
                     onClick={() => setResetPass(!reset)}
+                    width={250}
                   />
                 </>
               )}

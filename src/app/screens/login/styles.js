@@ -43,7 +43,6 @@ export const LinkContent = styled.div`
   width: ${({isMobile}) => isMobile ? '85vw' : '300px'};
   padding-top: 20px;
   text-align: center;
-  padding-left: 17vw;
 `;
 
 export const ErrorContent = styled.div`

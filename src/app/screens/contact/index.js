@@ -111,6 +111,9 @@ const Contact = (props) => {
           <MapLocation zoomLevel={17} isMobile={isMobile} />
         </LocationSection>
       </Container>
+      <Container>
+        <Subtitle theme={theme}>{'Nuestro equipo'}</Subtitle>
+      </Container>
     </Root>
   );
 };
