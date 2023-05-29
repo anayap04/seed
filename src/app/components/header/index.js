@@ -1,129 +1,87 @@
-import React, { useState } from "react";
-import { useTranslation } from "react-i18next";
-import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import { logout } from "../../../redux/actions/login";
-import SecondaryBtn from "../atoms/buttons/Secondary";
-import ListView from "../list-view";
+import React from 'react';
+import { useTranslation } from 'react-i18next';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { useTheme } from 'styled-components';
+import { DefaultTheme } from '../../../theme/themes';
+import { logout } from '../../../redux/actions/login';
+import SecondaryBtn from '../atoms/buttons/Secondary';
+import logo from '../../../assets/imgs/seed-dark.png';
+import logoLight from '../../../assets/imgs/seed-white.png';
+import { Subtitle } from '../foundation/Typography';
 // Styled components
-import { Container, ButtonContainer, ListContent, ButtonHeader } from "./styles";
+import {
+  Container,
+  ButtonContainer,
+  ButtonHeader,
+  LogoContainer,
+  AccesBtnContainer
+} from './styles';
+import InputSearch from '../atoms/input/InputSearch';
+import { isMobile } from 'react-device-detect';
+import HamMenu from './HamMenu';
+
 const Header = (props) => {
-  const { btnsArray, theme, themeToggler, mode } = props;
+  const { btnsArray, hideLogin, colorBack, isLogged } = props;
+  console.log(btnsArray);
   const navigate = useNavigate();
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
+  const theme = useTheme() || DefaultTheme;
   const dispatch = useDispatch();
-  const [listOpen, setList] = useState(false);
-  const arrayLang = [
-    {
-      id: "en",
-      label: "EN",
-      onClick: () => i18n.changeLanguage("en"),
-    },
-    {
-      id: "es",
-      label: "ES",
-      onClick: () => i18n.changeLanguage("es"),
-    },
-    {
-      id: "pt",
-      label: "PT",
-      onClick: () => i18n.changeLanguage("pt"),
-    },
-  ];
-  const open = () => {
-    setList(!listOpen);
-  };
 
   const logoutSession = () => {
     dispatch(logout());
-    localStorage.removeItem("userId");
-    localStorage.removeItem("mail");
-    navigate("/");
+    localStorage.removeItem('userId');
+    localStorage.removeItem('mail');
+    navigate('/');
   };
-  const arrayComplete = [
-    
-    {
-      id: "lang",
-      color: "transparent",
-      hasList: true,
-      label: t("lang"),
-      onClick: () => open(),
-    },
 
-    {
-      id: "mode",
-      color: "secondary",
-      label: mode === "dark" ? t("modeDark") : t("modeLight"),
-      onClick: () => themeToggler(),
-    },
-    {
-      id: "home",
-      color: theme.lavender,
-      label: "Inicio",
-      onClick: () => navigate("/"),
-    },
-    {
-      id: "login",
-      color: theme.lavender,
-      label: t("login"),
-      onClick: () => navigate("/register"),
-    },
-    {
-      id: "reg",
-      color: theme.tangerine,
-      label: t("register"),
-      onClick: () =>
-        navigate("/register", {
-          state: {
-            isRegister: true,
-          },
-        }),
-    },
-    {
-      id: "profile",
-      color: theme.lavender,
-      label: t("profile"),
-      onClick: () => navigate("/profile"),
-    },
-    {
-      id: "projects",
-      color: theme.blue,
-      label: t("projects"),
-      onClick: () => navigate("/projects"),
-    },
-    {
-      id: "logout",
-      color: theme.tangerine,
-      label: t("logout"),
-      onClick: () => logoutSession(),
-    },
-  ];
+  if (btnsArray.filter((btn) => btn.placeholder).length === 0) {
+    btnsArray.push({
+      placeholder: 'Search',
+      color: colorBack === 'dark' ? theme.colors.green : theme.colors.nero,
+      id: 'search'
+    });
+  }
 
-  const btnFiletered = arrayComplete.filter((option) =>
-    btnsArray.includes(option.id)
-  );
-
-  const btnRender = (btn) => (
-    <ButtonHeader color={btn.color} key={btn.id}>
-      <SecondaryBtn theme={theme} label={btn.label} onClick={btn.onClick} />
-      {listOpen && btn.hasList && (
-        <ListContent>
-          <ListView
-            key={btn.id}
-            setList={setList}
-            arrayItems={arrayLang}
-            theme={theme}
-          />
-        </ListContent>
+  const btnRender = (btn, index) => (
+    <ButtonHeader
+      onClick={() => btn.onClick()}
+      color={btn.color}
+      isFirst={index === 0}
+      isLast={btnsArray.length - 1 === index}
+      enablePadding={btn.placeholder}
+      key={btn.id}>
+      {btn.placeholder ? (
+        <InputSearch placeholder={btn.placeholder} iconName="Search" />
+      ) : (
+        <Subtitle color={colorBack === 'dark' ? theme.colors.black : theme.colors.green}>
+          {btn.label}
+        </Subtitle>
       )}
     </ButtonHeader>
   );
 
   return (
-    <Container theme={theme}>
-      <ButtonContainer>
-        {btnFiletered.map((btn) => btnRender(btn))}
-      </ButtonContainer>
+    <Container>
+      <LogoContainer>
+        <img src={colorBack === 'dark' ? logoLight : logo} width={150} />
+      </LogoContainer>
+      {isMobile ? (
+        <HamMenu navArr={btnsArray} />
+      ) : (
+        <>
+          <ButtonContainer>{btnsArray.map((btn, index) => btnRender(btn, index))}</ButtonContainer>
+          {!hideLogin && (
+            <AccesBtnContainer>
+              <SecondaryBtn
+                label={isLogged ? t('logout') : t('register')}
+                onClick={() => (isLogged ? logoutSession() : navigate('/register'))}
+              />
+            </AccesBtnContainer>
+          )}
+        </>
+      )}
     </Container>
   );
 };

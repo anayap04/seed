@@ -1,203 +1,96 @@
-import React, { useEffect,useState } from "react";
-import { useTranslation } from "react-i18next";
-import { connect, useDispatch } from "react-redux";
-import { fetchUser } from "../../../redux/actions/user";
-import {
-  Title,
-  Subtitle,
-  BodyBold,
-  Body,
-} from "../../components/foundation/Typography";
-import Header from "../../components/header";
-import Section from "../../components/section";
-import {
-  Root,
-  Content,
-  BtnFooter,
-  RowInvestment,
-  ColInvestment,
-  SectionBonds,
-  SubInfo,
-} from "./styles";
-import SecondaryBtn from "../../components/atoms/buttons/Secondary";
-import useWindowDimensions from "../../../utils/useWindowDimensions";
-import ChipGroup from "../../components/atoms/chips/ChipGroup";
-import TableSeed from "../../components/atoms/table/Table";
-import { mapTableInvesment} from "../../../utils/mappers";
-import { useNavigate } from "react-router-dom";
-import Loading from "../../components/loading/Loading";
-import ProfileSummary from "./Summary";
+import React, { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { connect, useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { useTheme } from 'styled-components';
+import { fetchUser } from '../../../redux/actions/user';
+import Header from '../../components/header';
+import Section from '../../components/section';
+import { Root, Content } from './styles';
+import useWindowDimensions from '../../../utils/useWindowDimensions';
+import ChipGroup from '../../components/atoms/chips/ChipGroup';
+import Loading from '../../components/loading/Loading';
+import ProfileSummary from './Summary';
+import Bonds from './Bonds';
+import Profits from './Profits';
+import TitleWtihArroW from '../../components/atoms/title-arrow';
+import ContactFragment from '../../components/contact';
 
-const Profits = ({ theme, userData, t, width, openTable, table, navigate, actualLang }) => {
-  const titleArr = [t('initiative'), t('amount'), t('date')];
-  const body = userData && mapTableInvesment(userData, navigate, actualLang);
-  const totalInvested = body.map(i => i.quantity).reduce((a,b) => a + b)
-  const summaryArr = [t('totalInvested'), totalInvested, ` ${t('totalOf')} ${totalInvested * 1000} USD`]
-
+const Summary = ({ userData, t, disabled, setDisabled, theme }) => {
   return (
     <Content>
-      <Title theme={theme}>{t("profitTable")}</Title>
-      <Section customWidth={width} theme={theme}>
-        <RowInvestment>
-          <ColInvestment>
-            <Subtitle theme={theme}>{t("totalProfits")}</Subtitle>
-            <Title theme={theme}>{`-`}</Title>
-          </ColInvestment>
-          <ColInvestment>
-            <Subtitle theme={theme}>{t("investments")}</Subtitle>
-            <Title theme={theme}>{userData.iniciativesSupported?.length}</Title>
-          </ColInvestment>
-        </RowInvestment>
-        {table && (
-          <><TableSeed
-            theme={theme}
-            headArr={titleArr}
-            bodyArr={body}
-            summary={summaryArr}
-            enableBtn
-          />
-          </>
-        )}
-        <BtnFooter>
-          {userData.iniciativesSupported?.length === 0 && (
-            <SubInfo>
-              <BodyBold theme={theme}>{t("withoutInvestments")}</BodyBold>
-            </SubInfo>
-          )}
-          <SecondaryBtn
-            fontSize={width > 500 ? width * 0.02 : width * 0.07}
-            onClick={() =>
-              userData.iniciativesSupported?.length > 0
-                ? openTable(!table)
-                : navigate("/projects")
-            }
-            theme={theme}
-            label={table ? t("noSeeInvestments") : t("seeInvestments")}
-          />
-        </BtnFooter>
-      </Section>
-    </Content>
-  );
-};
-
-const Bonds = ({ theme, t, width, userData, navigate }) => (
-  <Content>
-    <Title theme={theme}>{t("myGreenBonds")}</Title>
-    <SectionBonds responsiveWidth={width} theme={theme}>
-      {userData.credits ? (
-        <>
-        <Title theme={theme}>{`${userData.credits} ${t("Bonos")}`}</Title>
-        <Body>{`Representan $ ${userData.credits * 1000} USD`}</Body>
-        </>
-      ) : (
-        <Title theme={theme}>{t("noMoney")}</Title>
-      )}
-      <BtnFooter responsiveWidth={width}>
-        <SecondaryBtn
-          fontSize={width > 500 ? width * 0.02 : width * 0.07}
-          onClick={() => navigate("/buyBonds")}
-          theme={theme}
-          label={t("buyBonds")}
-        />
-      </BtnFooter>
-    </SectionBonds>
-  </Content>
-);
-
-const Summary = ({
-  theme,
-  userData,
-  t,
-  disabled,
-  setDisabled,
-  width,
-}) => {
-  return (
-    <Content>
-      <Title theme={theme}>{t("profile")}</Title>
-      <Section theme={theme}>
-        <ProfileSummary
-          userInfo={userData}
-          theme={theme}
-          disabled={disabled}
-          setDisabled={setDisabled}
-          width={width}
-        />
+      <TitleWtihArroW title={t('profile')} color={theme.colors.green} />
+      <Section>
+        <ProfileSummary userInfo={userData} disabled={disabled} setDisabled={setDisabled} />
       </Section>
     </Content>
   );
 };
 const Profile = (props) => {
-  const { theme, themeToggler, mode, userInfo, isLoading } = props;
+  const { userInfo, isLoading } = props;
   const { t, i18n } = useTranslation();
   const dispatch = useDispatch();
   const { width, height } = useWindowDimensions();
+  const theme = useTheme();
   const navigate = useNavigate();
   const [id, setId] = useState(0);
-  const [table, openTable] = useState(false);
   const [disabled, setDisabled] = useState(true);
 
-
+  const btnsArray = [
+    {
+      id: 'home',
+      color: theme.colors.green,
+      label: t('home'),
+      onClick: () => navigate('/')
+    },
+    {
+      id: 'profile',
+      color: theme.colors.green,
+      label: t('profile'),
+      onClick: () => navigate('/profile')
+    },
+    {
+      id: 'project',
+      color: theme.colors.green,
+      label: t('projects'),
+      onClick: () => navigate('/projects')
+    },
+    {
+      id: 'faq',
+      color: theme.colors.green,
+      label: t('faqTitle'),
+      onClick: () => navigate('/faq')
+    }
+  ];
 
   const chipsInfo = [
-    { id: 0, label: t("myInfo") },
-    { id: 1, label: t("myBounds") },
-    { id: 2, label: t("profitTable") },
+    { id: 0, label: t('myInfo') },
+    { id: 1, label: t('myBounds') },
+    { id: 2, label: t('profitTable') }
   ];
   useEffect(() => {
     dispatch(fetchUser());
   }, [dispatch, fetchUser]);
 
   return (
-    <Root  marginBottom={((id === 1 || id === 2) && !table ? height * 0.3 : 100)} theme={theme}>
-      <Loading theme={theme} isLoading={isLoading} />
-      <Header
-        mode={mode}
-        themeToggler={themeToggler}
-        theme={theme}
-        btnsArray={["lang", "mode", "logout", "projects"]}
-      />
+    <Root marginBottom={id === 1 || id === 2 ? height * 0.3 : 100}>
+      <Loading isLoading={isLoading} />
+      <Header btnsArray={btnsArray} colorBack="dark" isLogged={true} />
 
-      <ChipGroup
-        spGroup
-        labelsArray={chipsInfo}
-        theme={theme}
-        idSelected={id}
-        setId={setId}
-      />
+      <ChipGroup spGroup labelsArray={chipsInfo} idSelected={id} setId={setId} />
       {id === 0 && userInfo && (
         <Summary
-          theme={theme}
           userData={userInfo.data}
           t={t}
+          theme={theme}
           width={width}
           disabled={disabled}
           setDisabled={setDisabled}
         />
       )}
-      {id === 1 && userInfo && (
-        <Bonds
-          theme={theme}
-          userData={userInfo.data}
-          t={t}
-          width={width}
-          navigate={navigate}
-        />
-      )}
-      {id === 2 && userInfo && (
-        <Profits
-          theme={theme}
-          userData={userInfo.data}
-          t={t}
-          width={width}
-          openTable={openTable}
-          table={table}
-          navigate={navigate}
-          actualLang={i18n.language}
-          
-        />
-      )}
-
+      {id === 1 && userInfo && <Bonds userData={userInfo.data} width={width} />}
+      {id === 2 && userInfo && <Profits userData={userInfo.data} actualLang={i18n.language} />}
+      <ContactFragment />
     </Root>
   );
 };
@@ -206,7 +99,7 @@ const mapStateToProps = (state) => {
   const { userInfo, isLoading } = state.userReducer;
   return {
     userInfo: userInfo,
-    isLoading: isLoading,
+    isLoading: isLoading
   };
 };
 

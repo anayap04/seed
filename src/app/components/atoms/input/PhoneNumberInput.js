@@ -1,17 +1,17 @@
-import React, { useState } from "react";
-import 'react-phone-number-input/style.css'
+import React, { useState } from 'react';
+import 'react-phone-number-input/style.css';
 
-import { InputContent, Label, Phone } from "./styles";
+import { InputContent, Label, Phone } from './styles';
 
 const PhoneNumberInput = (props) => {
-  const { theme, defaultCountry = 'US', customWidth, label } = props;
+  const { defaultCountry = 'US', customWidth, label } = props;
   const [value, setValue] = useState();
 
   return (
-      <InputContent customWidth={customWidth}>
-        <Label>{label}</Label>
-      <Phone theme={theme} defaultCountry={defaultCountry} value={value} onChange={setValue} />
-      </InputContent>
+    <InputContent customWidth={customWidth}>
+      <Label>{label}</Label>
+      <Phone defaultCountry={defaultCountry} value={value} onChange={setValue} />
+    </InputContent>
   );
 };
 

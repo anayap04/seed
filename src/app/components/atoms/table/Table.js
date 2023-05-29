@@ -1,10 +1,10 @@
-import { t } from "i18next";
-import React from "react";
-import LinkBtn from "../buttons/Link";
-import { TableRoot, TableBody, BtnTable } from "./styles";
+import { t } from 'i18next';
+import React from 'react';
+import LinkBtn from '../buttons/Link';
+import { TableRoot, TableBody, BtnTable } from './styles';
 
 const TableSeed = (props) => {
-  const { headArr, bodyArr, theme, summary, enableBtn } = props;
+  const { headArr, bodyArr, summary, enableBtn } = props;
   const renderRow = (item) => {
     return (
       <tr key={item.name}>
@@ -19,7 +19,6 @@ const TableSeed = (props) => {
               <LinkBtn
                 fontSize={20}
                 key={item.name}
-                theme={theme}
                 label={t('checkProject')}
                 onClick={() => item.onClick()}
               />
@@ -31,7 +30,7 @@ const TableSeed = (props) => {
   };
 
   return (
-    <TableRoot theme={theme} borderless>
+    <TableRoot borderless>
       <thead>
         <tr>
           {headArr.map((item) => (
@@ -40,13 +39,15 @@ const TableSeed = (props) => {
         </tr>
       </thead>
       <TableBody>{bodyArr.map((item) => renderRow(item))}</TableBody>
-      {summary &&<thead>
-        <tr>
-          {summary.map((item) => (
-            <th key={item}>{item}</th>
-          ))}
-        </tr>
-      </thead>}
+      {summary && (
+        <thead>
+          <tr>
+            {summary.map((item) => (
+              <th key={item}>{item}</th>
+            ))}
+          </tr>
+        </thead>
+      )}
     </TableRoot>
   );
 };

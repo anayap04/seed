@@ -1,3 +1,3 @@
 // @flow
 /* istanbul ignore file */
-export { default as DefaultTheme } from './DefaultTheme'
+export { default as DefaultTheme } from './DefaultTheme';

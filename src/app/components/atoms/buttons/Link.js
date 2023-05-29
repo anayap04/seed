@@ -1,21 +1,18 @@
-import React from "react";
-import { LinkContainer, TextLink } from "./styles";
+import React from 'react';
+import { LinkContainer, TextLink } from './styles';
 
 const LinkBtn = (props) => {
-  const { label, onClick, disabled, theme, fontSize, width, hasBackground, margin } =
-    props;
+  const { label, onClick, disabled, fontSize, width, hasBackground, margin } = props;
   return (
     <LinkContainer
-      theme={theme}
       hasBackground={hasBackground}
       onClick={!disabled && onClick}
       onKeyPress={!disabled && onClick}
       width={width}
       aria-label={label}
       margin={margin}
-      role="button"
-    >
-      <TextLink hasBackground={hasBackground} fontSize={fontSize} theme={theme}>
+      role="button">
+      <TextLink hasBackground={hasBackground} fontSize={fontSize}>
         {label}
       </TextLink>
     </LinkContainer>

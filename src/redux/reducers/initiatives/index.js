@@ -1,4 +1,4 @@
-import { Initiatives } from "../../actions/initiatives/constants";
+import { Initiatives } from '../../actions/initiatives/constants';
 
 const initialState = {
   isLoadingAllInitiatives: false,
@@ -6,7 +6,7 @@ const initialState = {
   initiativesError: null,
   isLoadingSupported: false,
   initiativeSupported: null,
-  initiativeSupportedError: null,
+  initiativeSupportedError: null
 };
 
 const initiativesReducer = (state = initialState, action) => {
@@ -14,38 +14,38 @@ const initiativesReducer = (state = initialState, action) => {
     case Initiatives.FETCH_ALL_INITIATIVES:
       return {
         ...state,
-        isLoadingAllInitiatives: true,
+        isLoadingAllInitiatives: true
       };
     case Initiatives.ALL_INITIATIVES_SUCCEED:
       return {
         ...state,
         isLoadingAllInitiatives: false,
-        allInitiatives: action.data,
+        allInitiatives: action.data
       };
     case Initiatives.ALL_INITIATIVES_ERROR:
       return {
         ...state,
         isLoadingAllInitiatives: false,
-        initiativesError: action.error,
+        initiativesError: action.error
       };
     case Initiatives.FETCH_SUPPORT_INITIATIVES:
       return {
         ...state,
-        isLoadingSupported: true,
+        isLoadingSupported: true
       };
     case Initiatives.SUPPORT_INITIATIVES_SUCCEED:
       return {
         ...state,
         isLoadingSupported: false,
         initiativeSupported: action.data,
-        initiativeSupportedError: null,
+        initiativeSupportedError: null
       };
     case Initiatives.SUPPORT_INITIATIVES_ERROR:
       return {
         ...state,
         isLoadingSupported: false,
         initiativeSupported: null,
-        initiativeSupportedError: action.error,
+        initiativeSupportedError: action.error
       };
     default:
       return state;

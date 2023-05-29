@@ -1,24 +1,18 @@
-import React from "react";
-import { useState } from "react";
-import { useForm } from "react-hook-form";
-import { useTranslation } from "react-i18next";
-import { useDispatch } from "react-redux";
-import { fetchUser, userUpdateFetch } from "../../../redux/actions/user";
-import { getDocumentPerCountry } from "../../../utils/mappers";
-import Input from "../../components/atoms/input";
-import ListView from "../../components/list-view";
-import SecondaryBtn from "../../components/atoms/buttons/Secondary";
-import {
-  ProfileInfoInputs,
-  BtnFooter,
-  ContainerProfile,
-  ColProfile,
-  RowProfile,
-} from "./styles";
-import PhoneNumberInput from "../../components/atoms/input/PhoneNumberInput";
+import React from 'react';
+import { useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
+import { useDispatch } from 'react-redux';
+import { fetchUser, userUpdateFetch } from '../../../redux/actions/user';
+import { getDocumentPerCountry } from '../../../utils/mappers';
+import Input from '../../components/atoms/input';
+import ListView from '../../components/list-view';
+import SecondaryBtn from '../../components/atoms/buttons/Secondary';
+import { ProfileInfoInputs, BtnFooter, ContainerProfile, ColProfile, RowProfile } from './styles';
+import PhoneNumberInput from '../../components/atoms/input/PhoneNumberInput';
 
 const ProfileSummary = (props) => {
-  const { userInfo, theme, width } = props;
+  const { userInfo } = props;
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const { register, handleSubmit } = useForm();
@@ -27,23 +21,23 @@ const ProfileSummary = (props) => {
   const [value, setValue] = useState();
 
   const profileArray = [
-    { id: "firstName", value: userInfo.firstName, label: t("nameField") },
-    { id: "lastName", value: userInfo.lastName, label: t("lastnameField") },
-    { id: "email", value: userInfo.email, label: t("mailField") },
-    { id: "pass", value: "******", label: t("labelPass") },
+    { id: 'firstName', value: userInfo.firstName, label: t('nameField') },
+    { id: 'lastName', value: userInfo.lastName, label: t('lastnameField') },
+    { id: 'email', value: userInfo.email, label: t('mailField') },
+    { id: 'pass', value: '******', label: t('labelPass') },
     {
-      id: "countryCode",
+      id: 'countryCode',
       value: userInfo.countryCode,
-      label: t("countryField"),
+      label: t('countryField')
     },
-    { id: "phoneNumber", value: userInfo.phoneNumber, label: t("phoneField") },
-    { id: "identifier", value: userInfo.identifier, label: t("idField") },
+    { id: 'phoneNumber', value: userInfo.phoneNumber, label: t('phoneField') },
+    { id: 'identifier', value: userInfo.identifier, label: t('idField') },
     {
-      id: "identifierType",
+      id: 'identifierType',
       value: userInfo.identifierType,
-      label: t("documentType"),
-      hasList: true,
-    },
+      label: t('documentType'),
+      hasList: true
+    }
   ];
 
   const openList = () => setList(true);
@@ -57,7 +51,7 @@ const ProfileSummary = (props) => {
         lastName: data.lastName,
         phoneNumber: parseInt(data.phoneNumber),
         identifier: data.identifier,
-        identifierType: value || data.identifierType,
+        identifierType: value || data.identifierType
       })
     );
     dispatch(fetchUser());
@@ -68,22 +62,17 @@ const ProfileSummary = (props) => {
   return (
     <ProfileInfoInputs>
       <form onSubmit={handleSubmit(onSubmit, onError)}>
-        <ContainerProfile responsiveWidth={width}>
+        <ContainerProfile>
           <RowProfile>
             {profileArray.map((info, e) => (
               <ColProfile xl={3} lg={3} md={4} sm={6} key={e}>
-                {info.id === "phoneNumber" ? (
-                  <PhoneNumberInput
-                    theme={theme}
-                    label={info.label}
-                    defaultCountry={userInfo.countryCode}
-                  />
+                {info.id === 'phoneNumber' ? (
+                  <PhoneNumberInput label={info.label} defaultCountry={userInfo.countryCode} />
                 ) : (
                   <Input
                     key={e}
                     labelTitle={info.label}
                     iconName="Edit"
-                    theme={theme}
                     disabled={disabled}
                     defaultValue={info.value}
                     value={info.hasList && value}
@@ -97,7 +86,6 @@ const ProfileSummary = (props) => {
                 {info.hasList && listOpen && (
                   <ListView
                     arrayItems={getDocumentPerCountry(userInfo.countryCode)}
-                    theme={theme}
                     setValue={setValue}
                     setList={setList}
                     width={150}
@@ -108,7 +96,7 @@ const ProfileSummary = (props) => {
           </RowProfile>
         </ContainerProfile>
         <BtnFooter>
-          <SecondaryBtn type="submit" theme={theme} label={t("updateBtn")} />
+          <SecondaryBtn type="submit" label={t('updateBtn')} />
         </BtnFooter>
       </form>
     </ProfileInfoInputs>

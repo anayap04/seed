@@ -1,9 +1,9 @@
-import { Payment } from "../../actions/payment/constants";
+import { Payment } from '../../actions/payment/constants';
 
 const initialState = {
   isLoadingPayment: false,
   paymentSuccess: null,
-  paymentError: null,
+  paymentError: null
 };
 
 const paymentReducer = (state = initialState, action) => {
@@ -13,21 +13,21 @@ const paymentReducer = (state = initialState, action) => {
         ...state,
         isLoadingPayment: true,
         paymentSuccess: null,
-        paymentError: null,
+        paymentError: null
       };
     case Payment.PAYMENT_SUCCESS:
       return {
         ...state,
         isLoadingPayment: false,
         paymentSuccess: action.data,
-        paymentError: null,
+        paymentError: null
       };
     case Payment.PAYMENT_FAILED:
       return {
         ...state,
         isLoadingPayment: false,
         paymentSuccess: null,
-        paymentError: action.error,
+        paymentError: action.error
       };
     default:
       return state;

@@ -1,25 +1,25 @@
-import { put } from "redux-saga/effects";
+import { put } from 'redux-saga/effects';
 import {
   changePasswordError,
   changePasswordSuccess,
   loginFailed,
   loginSuccessed,
   requestNewPassSuccess,
-  requestNewPassdError,
-} from "../../redux/actions/login";
-import axios from "axios";
+  requestNewPassdError
+} from '../../redux/actions/login';
+import axios from 'axios';
 
 export function* login(payload) {
   try {
     const response = yield axios.post(
-      "http://pruebaproyecto3-env.eba-hqp2m6wq.us-east-1.elasticbeanstalk.com/login",
+      'http://pruebaproyecto3-env.eba-hqp2m6wq.us-east-1.elasticbeanstalk.com/login',
       JSON.stringify(payload.payload),
       {
         headers: {
-          "Access-Control-Allow-Origin": "*",
-          "Content-Type": "application/json",
-          accept: "text/html; charset=utf-8",
-        },
+          'Access-Control-Allow-Origin': '*',
+          'Content-Type': 'application/json',
+          accept: 'text/html; charset=utf-8'
+        }
       },
       { withCredentials: true }
     );
@@ -35,14 +35,14 @@ export function* login(payload) {
 export function* requestNewPassword(payload) {
   try {
     const response = yield axios.post(
-      "http://pruebaproyecto3-env.eba-hqp2m6wq.us-east-1.elasticbeanstalk.com/requestResetPassword",
+      'http://pruebaproyecto3-env.eba-hqp2m6wq.us-east-1.elasticbeanstalk.com/requestResetPassword',
       JSON.stringify(payload.payload),
       {
         headers: {
-          "Access-Control-Allow-Origin": "*",
-          "Content-Type": "application/json",
-          accept: "text/html; charset=utf-8",
-        },
+          'Access-Control-Allow-Origin': '*',
+          'Content-Type': 'application/json',
+          accept: 'text/html; charset=utf-8'
+        }
       }
     );
 
@@ -57,14 +57,14 @@ export function* requestNewPassword(payload) {
 export function* resetPassword(payload) {
   try {
     const response = yield axios.post(
-      "http://pruebaproyecto3-env.eba-hqp2m6wq.us-east-1.elasticbeanstalk.com/resetPassword",
+      'http://pruebaproyecto3-env.eba-hqp2m6wq.us-east-1.elasticbeanstalk.com/resetPassword',
       JSON.stringify(payload.payload),
       {
         headers: {
-          "Access-Control-Allow-Origin": "*",
-          "Content-Type": "application/json",
-          accept: "text/html; charset=utf-8",
-        },
+          'Access-Control-Allow-Origin': '*',
+          'Content-Type': 'application/json',
+          accept: 'text/html; charset=utf-8'
+        }
       }
     );
 

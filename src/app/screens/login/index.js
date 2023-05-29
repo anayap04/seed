@@ -1,77 +1,185 @@
-import React, { useEffect, useRef, useState } from "react";
-import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
-import useWindowDimensions from "../../../utils/useWindowDimensions";
+import React, { useEffect, useRef, useState } from 'react';
+import { useNavigate, useSearchParams } from 'react-router-dom';
+import { useForm } from 'react-hook-form';
+import { isMobile } from 'react-device-detect';
+import { useTranslation } from 'react-i18next';
+import { connect, useDispatch } from 'react-redux';
+import { changePasswordFetch, loginRequest, requestNewPass } from '../../../redux/actions/login';
+import { registerRequest } from '../../../redux/actions/register';
+import useWindowDimensions from '../../../utils/useWindowDimensions';
 import {
-  Body,
   Title,
   BodyError,
   BodyBold,
   TitleSmall,
-} from "../../components/foundation/Typography";
+  H2,
+  H2Bold
+} from '../../components/foundation/Typography';
+import Input from '../../components/atoms/input';
+import PhoneNumberInput from '../../components/atoms/input/PhoneNumberInput';
+import SelectCountry from '../../components/atoms/select/SelectCountry';
+import Header from '../../components/header';
+import SecondaryBtn from '../../components/atoms/buttons/Secondary';
+import { Col, Row } from 'react-bootstrap';
 import {
-  BtnSubmit,
   Container,
   FormContainer,
-  LinkContent,
   ErrorContent,
   PetitionDiv,
   InfoPopContent,
-} from "./styles";
-import { useForm } from "react-hook-form";
-import Input from "../../components/atoms/input";
-import { useTranslation } from "react-i18next";
-import { connect, useDispatch } from "react-redux";
-import {
-  changePasswordFetch,
-  loginRequest,
-  requestNewPass,
-} from "../../../redux/actions/login";
-import LinkBtn from "../../components/atoms/buttons/Link";
-import { registerRequest } from "../../../redux/actions/register";
-import SelectCountry from "../../components/atoms/select/SelectCountry";
-import logoWhite from "../../../assets/imgs/seed-white.png";
-import logoDark from "../../../assets/imgs/seed-dark.png";
-import { isMobile } from "react-device-detect";
-import Header from "../../components/header";
+  TitleContainer,
+  InputsContainer,
+  BtnSubmit,
+  SummaryContainer,
+  ImageLogin
+} from './styles';
+import { useTheme } from 'styled-components';
+import { DefaultTheme } from '../../../theme/themes';
+import img from '../../../assets/imgs/landscape-with-windmills.jpg';
+import ContactFragment from '../../components/contact';
 
 const LoginPage = (props) => {
   const {
-    theme,
-    mode,
-    themeToggler,
     loginError,
     userData,
     registerData,
     registerError,
     requestNewPassData,
-    passwordChangedSuccess,
+    passwordChangedSuccess
   } = props;
   const { width, height } = useWindowDimensions();
   const { t } = useTranslation();
   const { register, handleSubmit } = useForm();
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const location = useLocation();
+  const theme = useTheme() || DefaultTheme;
   const [errorMsg, setErrorMsg] = useState(null);
   const [country, setCountry] = useState(null);
   const [user, setUser] = useState();
   const [reset, setResetPass] = useState(false);
   const [searchParams] = useSearchParams();
-  const [isRegister, setRegister] = useState(
-    location && location.state && location.state.isRegister
-  );
-  const tokenReset = searchParams.get("token");
-  const btnsArray = ["home", "lang", "mode"];
+  const [formSelected, selectForm] = useState();
+  const [isRegister, setRegister] = useState();
+  const tokenReset = searchParams.get('token');
   const containerRef = useRef();
-  const currentHeight = containerRef.current ? containerRef.current.clientHeight : 500;
+  const [currentHeight, setCurrentHeight] = useState(
+    containerRef.current ? containerRef.current.clientHeight : 500
+  );
+
+  const registerArray = [
+    { id: 'name', label: t('nameField'), typeOfInput: 'inputNoIcon' },
+    { id: 'last', label: t('lastnameField'), typeOfInput: 'inputNoIcon' },
+    { id: 'email', label: t('mailField'), typeOfInput: 'inputNoIcon' },
+    { id: 'country', label: t('countryField'), typeOfInput: 'countrySelect' },
+    { id: 'phoneNumber', label: t('phoneField'), typeOfInput: 'phoneNbr' },
+    { id: 'identifier', label: t('idField'), typeOfInput: 'inputNoIcon' },
+    { id: 'identifierType', label: t('documentType'), hasList: true },
+    { id: 'password', label: t('labelPass'), typeOfInput: 'inputNoIcon', needsValidation: true }
+  ];
+
+  const loginArray = [
+    { id: 'userId', label: t('labelUserId'), typeOfInput: 'inputNoIcon' },
+    { id: 'password', label: t('labelPass'), typeOfInput: 'inputNoIcon' }
+  ];
+
+  const summaryArr = [
+    { id: 'info1', label: t('summaryInfo1') },
+    { id: 'info2', label: t('summaryInfo2') },
+    { id: 'info3', label: t('summaryInfo3') }
+  ];
+
+  const btnsArray = [
+    {
+      id: 'about',
+      color: theme.colors.green,
+      label: t('about'),
+      onClick: () =>
+        navigate('/', {
+          state: {
+            section: 'about'
+          }
+        })
+    },
+    {
+      id: 'how',
+      color: theme.colors.green,
+      label: t('howTo'),
+      onClick: () =>
+        navigate('/', {
+          state: {
+            section: 'how'
+          }
+        })
+    },
+    {
+      id: 'projects',
+      color: theme.colors.green,
+      label: t('projects'),
+      onClick: () =>
+        navigate('/', {
+          state: {
+            section: 'projects'
+          }
+        })
+    },
+    {
+      id: 'faq',
+      color: theme.colors.green,
+      label: t('faqTitle'),
+      onClick: () => navigate('/faq')
+    }
+  ];
+
+  const updatePage = () => {
+    setRegister(!isRegister);
+    setCurrentHeight(containerRef.current ? containerRef.current.clientHeight : 500);
+  };
+
+  const renderInput = (field) => {
+    switch (field.typeOfInput) {
+      case 'inputNoIcon':
+      default:
+        return (
+          <Col>
+            <Input
+              labelTitle={field.label}
+              label={field.id}
+              register={register}
+              required
+              needsValidation={field.needsValidation}
+              type={field.id}
+            />
+          </Col>
+        );
+
+      case 'countrySelect':
+        return (
+          <Col>
+            <SelectCountry
+              required
+              labelTitle={field.label}
+              label="country"
+              setCountry={setCountry}
+              customWidth={isMobile ? width * 0.85 : 300}
+            />
+          </Col>
+        );
+      case 'phoneNbr':
+        return (
+          <Col>
+            <PhoneNumberInput label={field.label} defaultCountry="CO" />
+          </Col>
+        );
+    }
+  };
 
   const onSubmit = (data) => {
-    if (searchParams.get("resetPass")) {
+    if (searchParams.get('resetPass')) {
       dispatch(
         changePasswordFetch({
-          userId: parseInt(searchParams.get("id")),
+          userId: parseInt(searchParams.get('id')),
           token: tokenReset,
-          password: data.password,
+          password: data.password
         })
       );
     } else if (reset) {
@@ -84,7 +192,7 @@ const LoginPage = (props) => {
               userId: data.userId,
               password: data.password,
               email: data.email,
-              country: country,
+              country: country
             })
           : loginRequest({ userId: data.userId, password: data.password })
       );
@@ -93,180 +201,90 @@ const LoginPage = (props) => {
   };
 
   useEffect(() => {
+    selectForm(!isRegister ? loginArray : registerArray);
     if (loginError) {
-      const message =
-        loginError.message.indexOf("mail") > -1
-          ? t("errorUser")
-          : t("errorPass");
+      const message = loginError.message.indexOf('mail') > -1 ? t('errorUser') : t('errorPass');
       setErrorMsg(message);
     } else if (userData) {
-      localStorage.setItem("userId", userData.data.user.userId);
-      localStorage.setItem("mail", userData.data.user.mail);
-      localStorage.setItem("token", userData.data.token);
-      navigate("/profile");
+      localStorage.setItem('userId', userData.data.user.userId);
+      localStorage.setItem('mail', userData.data.user.mail);
+      localStorage.setItem('token', userData.data.token);
+      navigate('/profile');
     } else if (registerData) {
       dispatch(loginRequest({ userId: user.userId, password: user.password }));
-      localStorage.setItem("userId", userData.data.user.userId);
-      localStorage.setItem("mail", userData.data.user.mail);
-      localStorage.setItem("token", userData.data.token);
-      navigate("/profile");
+      localStorage.setItem('userId', userData.data.user.userId);
+      localStorage.setItem('mail', userData.data.user.mail);
+      localStorage.setItem('token', userData.data.token);
+      navigate('/profile');
     } else if (registerError) {
       setErrorMsg(registerError.message);
     } else if (passwordChangedSuccess) {
       setResetPass(false);
-      navigate("/register");
+      navigate('/register');
     }
-  }, [
-    loginError,
-    userData,
-    registerData,
-    registerError,
-    passwordChangedSuccess,
-  ]);
+  }, [loginError, userData, registerData, registerError, passwordChangedSuccess, currentHeight]);
 
   return (
-    <Container
-      ref={containerRef}
-      additional={
-        currentHeight > height * 0.8
-          && height * 0.9 - currentHeight
-      }
-      isMobile={isMobile}
-      theme={theme}
-    >
-      <Header
-        theme={theme}
-        mode={mode}
-        themeToggler={themeToggler}
-        btnsArray={btnsArray}
-      />
-      <FormContainer width={width}>
+    <Container isMobile={isMobile}>
+      <Header btnsArray={btnsArray} hideLogin={true} colorBack="dark" />
+      <TitleContainer isMobile={isMobile}>
+        <H2 color={theme.colors.white}>{t('profile')}</H2>
+      </TitleContainer>
+      <FormContainer
+        ref={containerRef}
+        additional={currentHeight < height * 0.8 && height * 0.9 - currentHeight}
+        width={width}>
+        <SecondaryBtn
+          fontSize={18}
+          background={theme.colors.green}
+          label={isRegister ? t('iHaveAcc') : t('iHaveNotAcc')}
+          onClick={() => updatePage()}
+          width={350}
+          marginLeft={isMobile ? -10 : '55vw'}
+        />
         {passwordChangedSuccess && (
-          <InfoPopContent theme={theme}>
-            <BodyBold theme={theme}>
-              {"Su contraseña ha sido actualizada"}
-            </BodyBold>
+          <InfoPopContent>
+            <BodyBold>{t('passwordSuccessfulUpdated')}</BodyBold>
           </InfoPopContent>
         )}
         {!requestNewPassData ? (
           <>
-            <Title theme={theme}>
-              {isRegister ? t("registerTitle") : t("loginTitle")}
-            </Title>
-            <Body theme={theme}>
-              {isRegister ? t("registerSubtitle") : t("loginSubtitle")}
-            </Body>
-            <ErrorContent>
-              {errorMsg && <BodyError theme={theme}>{errorMsg}</BodyError>}
-            </ErrorContent>
+            <Title>{!isRegister ? t('registerTitle') : t('loginTitle')}</Title>
+            <ErrorContent>{errorMsg && <BodyError>{errorMsg}</BodyError>}</ErrorContent>
             <form onSubmit={handleSubmit(onSubmit)}>
-              {isRegister && (
-                <>
-                  <Input
-                    theme={theme}
-                    labelTitle={t("mailField")}
-                    label="email"
-                    register={register}
-                    required
-                    type="mail"
-                    customWidth={isMobile ? width * 0.85 : 300}
-                  />
-                  <SelectCountry
-                    required
-                    label="country"
-                    theme={theme}
-                    setCountry={setCountry}
-                    customWidth={isMobile ? width * 0.85 : 300}
-                  />
-                </>
-              )}
-              {!searchParams.get("id") && (
-                <Input
-                  theme={theme}
-                  labelTitle={reset ? t("mailField") : t("labelUserId")}
-                  label="userId"
-                  register={register}
-                  required
-                  customWidth={isMobile ? width * 0.85 : 300}
-                />
-              )}
-              {!reset && (
-                <Input
-                  theme={theme}
-                  labelTitle={
-                    searchParams.get("resetPass")
-                      ? t("newPass")
-                      : t("labelPass")
-                  }
-                  label="password"
-                  needsValidation={isRegister || searchParams.get("resetPass")}
-                  register={register}
-                  required
-                  type="password"
-                  customWidth={isMobile ? width * 0.85 : 300}
-                />
-              )}
-
-              {!searchParams.get("resetPass") && !reset ? (
-                <BtnSubmit
-                  isMobile={isMobile}
-                  value={isRegister ? t("register") : t("login")}
-                  isRegister={isRegister}
-                  theme={theme}
-                />
-              ) : (
-                <BtnSubmit
-                  isMobile={isMobile}
-                  value={reset ? t("sendRequest") : t("changePass")}
-                  theme={theme}
-                />
-              )}
+              <InputsContainer>
+                <Row>{formSelected && formSelected.map((field) => renderInput(field))}</Row>
+              </InputsContainer>
+              <BtnSubmit
+                isMobile={isMobile}
+                value={isRegister ? t('register') : t('login')}
+                isRegister={isRegister}
+              />
             </form>
-            <LinkContent isMobile={isMobile}>
-              {!searchParams.get("resetPass") && !reset && (
-                <>
-                  <LinkBtn
-                    fontSize={24}
-                    theme={theme}
-                    label={isRegister ? t("iHaveAcc") : t("iHaveNotAcc")}
-                    onClick={() => setRegister(!isRegister)}
-                    width={250}
-                  />
-                  <LinkBtn
-                    fontSize={24}
-                    theme={theme}
-                    label={t("forgetPass")}
-                    onClick={() => setResetPass(!reset)}
-                    width={250}
-                  />
-                </>
-              )}
-            </LinkContent>
+
+            <SummaryContainer>
+              {summaryArr.map((info) => (
+                <H2Bold key={info.id}>{info.label}</H2Bold>
+              ))}
+            </SummaryContainer>
           </>
         ) : (
           <>
-            <img
-              width={isMobile ? "50%" : "120%"}
-              src={theme.background === "#E3F2FD" ? logoDark : logoWhite}
-            />
             <PetitionDiv>
-              <TitleSmall theme={theme}>{"Petición Enviada"}</TitleSmall>
-              <BodyBold theme={theme}>
-                {
-                  "En breve le enviaremos un correo con los pasos para cambiar su contraseña"
-                }
-              </BodyBold>
+              <TitleSmall>{t('petitionSent')}</TitleSmall>
+              <BodyBold>{t('messagePasswordReset')}</BodyBold>
             </PetitionDiv>
           </>
         )}
       </FormContainer>
+      <ImageLogin src={img} />
+      <ContactFragment />
     </Container>
   );
 };
 
 const mapStateToProps = (state) => {
-  const { loginError, userData, requestNewPassData, passwordChangedSuccess } =
-    state.loginReducer;
+  const { loginError, userData, requestNewPassData, passwordChangedSuccess } = state.loginReducer;
   const { registerError, registerData } = state.registerReducer;
   return {
     loginError: loginError,
@@ -274,7 +292,7 @@ const mapStateToProps = (state) => {
     registerData: registerData,
     registerError: registerError,
     requestNewPassData: requestNewPassData,
-    passwordChangedSuccess: passwordChangedSuccess,
+    passwordChangedSuccess: passwordChangedSuccess
   };
 };
 

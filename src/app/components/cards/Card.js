@@ -1,113 +1,55 @@
-import React, { useState } from "react";
-import { useTranslation } from "react-i18next";
-import PrimaryBtn from "../atoms/buttons/Primary";
-import Icon from "../foundation/Icon";
-import {
-  CardContainer,
-  Content,
-  ColInfo,
-  Row,
-  ColTitle,
-  ProgressBarDiv,
-  BodyDiv,
-  MoreInfoContent,
-  InfoColumn,
-} from "./styles";
-import { Body, BodyBold, BodySmall, H2 } from "../foundation/Typography";
-import { isMobile } from "react-device-detect";
-import useWindowDimensions from "../../../utils/useWindowDimensions";
-import CurrencyFormat from "react-currency-format";
+import React from 'react';
+import { useTranslation } from 'react-i18next';
+import Icon from '../foundation/Icon';
+import { CardContainer, ColInfo, ColTitle, ImageStyled, Content } from './styles';
+import { H2Bold, H3 } from '../foundation/Typography';
+import { isMobile } from 'react-device-detect';
+import useWindowDimensions from '../../../utils/useWindowDimensions';
+import CurrencyFormat from 'react-currency-format';
+import SecondaryBtn from '../atoms/buttons/Secondary';
+import { useTheme } from 'styled-components';
+import { DefaultTheme } from '../../../theme/themes';
 
 const Card = (props) => {
-  const {
-    theme,
-    title,
-    location,
-    description,
-    time,
-    objective,
-    profit,
-    img,
-    achieved,
-    customWidth,
-    btnClick,
-  } = props;
+  const { title, location, objective, img, achieved, customWidth, btnClick, isDark } = props;
   const { t } = useTranslation();
   const { width } = useWindowDimensions();
-  const [showDescription, setShowMore] = useState(false);
   const imgUrl = img;
   const actualWidth = customWidth || width;
   const widthCustom = isMobile ? actualWidth * 0.95 : actualWidth;
+  const theme = useTheme() || DefaultTheme;
 
   return (
-    <CardContainer
-      onMouseEnter={() => setShowMore(true)}
-      onMouseLeave={() => setShowMore(false)}
-      theme={theme}
-      width={widthCustom}
-      urlImage={imgUrl}
-      isMobile={isMobile}
-    >
-      <Content isMobile={isMobile} width={actualWidth}>
-        <ColInfo isMobile={isMobile} width={widthCustom}>
-          <Row
-            isMobile={isMobile}
-            width={widthCustom}
-            backgroundColor={theme.tangerine}
-          >
-            <BodyBold theme={theme}>{t("objectiveTitle")}</BodyBold>
-
-            <Body theme={theme}>
-              {" "}
-              <CurrencyFormat
-                value={objective}
-                displayType={"text"}
-                thousandSeparator={true}
-                prefix={"$"}
-              />
-              {` USD`}
-            </Body>
-          </Row>
-
-          <Row
-            isMobile={isMobile}
-            width={widthCustom}
-            backgroundColor={theme.lavender}
-          >
-            <BodyBold theme={theme}>{t("achieved")}</BodyBold>
-            <Body theme={theme}>{`${achieved} %`}</Body>
-            <ProgressBarDiv theme={theme} animated now={achieved} />
-          </Row>
+    <CardContainer width={widthCustom} isMobile={isMobile}>
+      <ImageStyled src={imgUrl} />
+      <Content>
+        <ColInfo isDark={isDark} isMobile={isMobile} width={widthCustom}>
+          <H2Bold color={isDark && theme.colors.white}>{t('objectiveTitle')}</H2Bold>
+          <H3 color={isDark && theme.colors.white}>
+            <CurrencyFormat
+              value={objective}
+              displayType={'text'}
+              thousandSeparator={true}
+              prefix={'$'}
+            />
+            {` USD`}
+          </H3>
+          <H2Bold color={isDark && theme.colors.white}>{t('achieved')}</H2Bold>
+          <H3 color={isDark && theme.colors.white}>{`${achieved} %`}</H3>
         </ColInfo>
-        <ColTitle theme={theme} isMobile={isMobile} width={widthCustom}>
-          <BodySmall theme={theme}>
-            <Icon tintColor={theme.green} size={18} iconName="Location" />
+        <ColTitle isMobile={isMobile} width={widthCustom}>
+          <H2Bold>
+            <Icon tintColor={theme.colors.green} size={18} iconName="Location" />
             {location}
-          </BodySmall>
-          <H2 theme={theme}>{title}</H2>
-
-          {showDescription && !isMobile && (
-            <BodyDiv>
-              <Body theme={theme}>{description}</Body>
-              <MoreInfoContent>
-                <InfoColumn>
-                  <BodyBold theme={theme}>{t("profit")}</BodyBold>
-                  <Body theme={theme}>{profit}</Body>
-                </InfoColumn>
-                <InfoColumn>
-                  <BodyBold theme={theme}>{t("daysLeft")}</BodyBold>
-                  <Body theme={theme}>{time}</Body>
-                </InfoColumn>
-              </MoreInfoContent>
-            </BodyDiv>
-          )}
-
-          <PrimaryBtn
-            margin={20}
+          </H2Bold>
+          <H3>{title}</H3>
+          <SecondaryBtn
+            margin={100}
             width={isMobile ? width * 0.3 : 275}
-            label={t("seeMore")}
-            theme={theme}
+            label={t('seeMore')}
             onClick={btnClick}
+            background={theme.colors.nero}
+            fontColor={theme.colors.white}
           />
         </ColTitle>
       </Content>

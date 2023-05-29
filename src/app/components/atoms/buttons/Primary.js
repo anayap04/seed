@@ -1,20 +1,25 @@
-import React from "react";
-import { PrimaryContainer, TextButton } from "./styles";
+import React from 'react';
+import { PrimaryContainer, TextButton } from './styles';
+import Icon from '../../foundation/Icon';
 
 const PrimaryBtn = (props) => {
-  const { label, onClick, disabled, theme, width, margin } = props;
+  const { label, onClick, disabled, width, margin, icon, iconColor } = props;
   return (
     <PrimaryContainer
       disabled={disabled}
-      theme={theme}
       width={width}
       onClick={!disabled ? onClick : null}
-      onKeyPress={!disabled ? onClick: null}
+      onKeyPress={!disabled ? onClick : null}
       aria-label={label}
       role="button"
-      margin={margin}
-    >
-      <TextButton theme={theme}>{label}</TextButton>
+      icon={icon}
+      margin={margin}>
+      {icon && (
+        <>
+          <Icon iconName={icon} tintColor={iconColor} size={24} />
+        </>
+      )}
+      <TextButton>{label}</TextButton>
     </PrimaryContainer>
   );
 };

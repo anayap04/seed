@@ -1,57 +1,92 @@
-import React, { useRef } from "react";
-import Header from "../../components/header";
-import Main from "./Main";
-import About from "./About";
-import HowTo from "./HowTo";
-import Projects from "./Projects";
-import { connect } from "react-redux";
-import { loginSuccessed } from "../../../redux/actions/login";
-import "animate.css/animate.min.css";
-import { AnimationOnScroll } from "react-animation-on-scroll";
+import React, { useEffect, useRef } from 'react';
+import Header from '../../components/header';
+import Main from './Main';
+import About from './About';
+import HowTo from './HowTo';
+import Projects from './Projects';
+import { connect } from 'react-redux';
+import { loginSuccessed } from '../../../redux/actions/login';
+import 'animate.css/animate.min.css';
+import { AnimationOnScroll } from 'react-animation-on-scroll';
+import { useTranslation } from 'react-i18next';
+import Partners from './Partners';
+import { useTheme } from 'styled-components';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 const Home = (props) => {
-  const { theme, themeToggler, mode, userData } = props;
+  const { userData } = props;
+  const { t } = useTranslation();
+  const location = useLocation();
   const homeRef = useRef(null);
   const aboutRef = useRef(null);
   const howRef = useRef(null);
   const projectRef = useRef(null);
-  const btnsArray = ["lang", "mode"];
-  const cachedUser = localStorage.getItem("userId");
-  if (cachedUser || userData) {
-    btnsArray.push(...["profile", "logout"]);
-  } else {
-    btnsArray.push(...["reg", "login"]);
-  }
+  const faqRef = useRef(null);
+  const theme = useTheme();
+  const navigate = useNavigate();
 
   const scrollToView = (ref) => {
-    ref.current.scrollIntoView({ behavior: "smooth", block: "start" });
+    ref.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
   };
+
+  const btnsArray = [
+    {
+      id: 'about',
+      color: theme.colors.nero,
+      label: t('about'),
+      onClick: () => scrollToView(aboutRef)
+    },
+    {
+      id: 'how',
+      color: theme.colors.nero,
+      label: t('howTo'),
+      onClick: () => scrollToView(howRef)
+    },
+    {
+      id: 'projects',
+      color: theme.colors.nero,
+      label: t('projects'),
+      onClick: () => scrollToView(projectRef)
+    },
+    {
+      id: 'faq',
+      color: theme.colors.nero,
+      label: t('faqTitle'),
+      onClick: () => navigate('/faq')
+    }
+  ];
+
+  const cachedUser = localStorage.getItem('userId');
+
+  useEffect(() => {
+    const sectionRef = {
+      about: aboutRef,
+      how: howRef,
+      projects: projectRef
+    };
+
+    if (location && location.state && location.state.section) {
+      const sectionSelected = sectionRef[location.state.section];
+      scrollToView(sectionSelected);
+    }
+  }, [aboutRef, howRef, projectRef]);
+
   return (
     <div className="App">
-      <Header
-        theme={theme}
-        mode={mode}
-        themeToggler={themeToggler}
-        btnsArray={btnsArray}
-      />
+      <Header btnsArray={btnsArray} onClick={scrollToView} />
 
-      <Main
-        theme={theme}
-        scrollToView={scrollToView}
-        refs={{ homeRef, aboutRef, howRef, projectRef }}
-      />
+      <Main scrollToView={scrollToView} refs={{ homeRef, aboutRef, howRef, projectRef, faqRef }} />
       <AnimationOnScroll animateIn="animate__fadeIn">
-        <About mode={mode} theme={theme} aboutRef={aboutRef} />
+        <About aboutRef={aboutRef} />
       </AnimationOnScroll>
       <AnimationOnScroll animateIn="animate__fadeIn">
-        <HowTo
-          userData={cachedUser || userData}
-          theme={theme}
-          howRef={howRef}
-        />
+        <Partners />
       </AnimationOnScroll>
       <AnimationOnScroll animateIn="animate__fadeIn">
-        <Projects theme={theme} projectRef={projectRef} />
+        <HowTo userData={cachedUser || userData} howRef={howRef} />
+      </AnimationOnScroll>
+      <AnimationOnScroll animateIn="animate__fadeIn">
+        <Projects projectRef={projectRef} />
       </AnimationOnScroll>
     </div>
   );
@@ -59,13 +94,13 @@ const Home = (props) => {
 const mapToStateProps = (state) => {
   const { userData } = state.loginReducer;
   return {
-    userData: userData,
+    userData: userData
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    loadUser: () => dispatch(loginSuccessed),
+    loadUser: () => dispatch(loginSuccessed)
   };
 };
 

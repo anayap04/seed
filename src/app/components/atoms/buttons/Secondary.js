@@ -1,18 +1,18 @@
-import React from "react";
-import { SecondaryContainer, TextSecondary } from "./styles";
+import React from 'react';
+import { SecondaryContainer, TextSecondary } from './styles';
 
 const SecondaryBtn = (props) => {
-  const { label, onClick, disabled, theme, fontSize, width } = props;
+  const { label, onClick, disabled, fontSize, width, background, fontColor, marginLeft } = props;
   return (
     <SecondaryContainer
-      theme={theme}
       onClick={!disabled && onClick}
       onKeyPress={!disabled && onClick}
       aria-label={label}
       width={width}
-      role="button"
-    >
-      <TextSecondary fontSize={fontSize} theme={theme}>
+      backgroundColor={background}
+      marginLeft={marginLeft}
+      role="button">
+      <TextSecondary fontSize={fontSize} fontColor={fontColor}>
         {label}
       </TextSecondary>
     </SecondaryContainer>

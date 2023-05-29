@@ -1,8 +1,9 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const PaymentForm = styled.form`
   width: 500px;
   margin-top: 30px;
+  margin-bottom: 50px;
 `;
 
 export const PaymentFiledSet = styled.fieldset`
@@ -48,5 +49,4 @@ export const Spinner = styled.div`
     -webkit-animation: loading 2s infinite ease;
     animation: loading 2s infinite ease;
   }
-  
 `;

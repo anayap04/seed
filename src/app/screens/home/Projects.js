@@ -1,38 +1,37 @@
-import React, { useEffect } from "react";
-import { useTranslation } from "react-i18next";
-import { connect, useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import { fetchAllInitiatives } from "../../../redux/actions/initiatives";
-import { mapCards } from "../../../utils/mappers";
-import useWindowDimensions from "../../../utils/useWindowDimensions";
-import Card from "../../components/cards/Card";
+import React, { useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
+import { connect, useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { fetchAllInitiatives } from '../../../redux/actions/initiatives';
+import { mapCards } from '../../../utils/mappers';
+import useWindowDimensions from '../../../utils/useWindowDimensions';
+import Card from '../../components/cards/Card';
 
-import {
-  ColProject,
-  ContainerProjects,
-  CardsContainer,
-  HomeTitle,
-} from "./styles";
-import "animate.css/animate.min.css";
-import { AnimationOnScroll } from "react-animation-on-scroll";
-import { isMobile } from "react-device-detect";
+import { ColProject, ContainerProjects, CardsContainer } from './styles';
+import 'animate.css/animate.min.css';
+import { AnimationOnScroll } from 'react-animation-on-scroll';
+import { isMobile } from 'react-device-detect';
+
+import { useTheme } from 'styled-components';
+
+import TitleWithArrow from '../../components/atoms/title-arrow';
 
 const Projects = (props) => {
-  const { theme, projectRef, allInitiatives } = props;
+  const { projectRef, allInitiatives } = props;
   const { t, i18n } = useTranslation();
   const { width } = useWindowDimensions();
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const noOfCards = isMobile ? 3 : 2;
+  const theme = useTheme();
+  const noOfCards = isMobile ? 3 : 1;
   useEffect(() => {
     dispatch(fetchAllInitiatives());
   }, [dispatch]);
   const data = allInitiatives && mapCards(allInitiatives.data, i18n.language);
 
   const renderCards = (item) => (
-    <ColProject key={item.title} responsiveWidth={width}>
+    <ColProject key={item.title}>
       <Card
-        theme={theme}
         key={item.title}
         title={item.title}
         location="CDMX, Mex"
@@ -42,15 +41,15 @@ const Projects = (props) => {
         profit={item.profit}
         img={item.img}
         achieved={item.achieved}
-        btnClick={() => navigate("/register")}
-        customWidth={isMobile ? width * 0.95 : width * 0.9}
+        btnClick={() => navigate('/register')}
+        customWidth={width * 0.95}
       />
     </ColProject>
   );
 
   return (
-    <ContainerProjects isMobile={isMobile} ref={projectRef} theme={theme}>
-      <HomeTitle theme={theme}>{t("projectsTitle")}</HomeTitle>
+    <ContainerProjects isMobile={isMobile} ref={projectRef}>
+      <TitleWithArrow title={t('projectsTitle')} color={theme.colors.green} />
       <AnimationOnScroll delay={500} animateIn="animate__fadeIn">
         <CardsContainer>
           {data && data.slice(0, noOfCards).map((value) => renderCards(value))}
@@ -63,7 +62,7 @@ const Projects = (props) => {
 const mapToStateProps = (state) => {
   const { allInitiatives } = state.initiativesReducer;
   return {
-    allInitiatives: allInitiatives,
+    allInitiatives: allInitiatives
   };
 };
 

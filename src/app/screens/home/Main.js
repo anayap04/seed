@@ -1,60 +1,60 @@
-import React from "react";
-import { useTranslation } from "react-i18next";
-import { BtnContainer, ContainerMain, ImgContainer } from "./styles";
-import logoWhite from "../../../assets/imgs/seed-white.png";
-import logoDark from "../../../assets/imgs/seed-dark.png";
+import React, { useRef } from 'react';
+import { useTheme } from 'styled-components';
+import PrimaryBtn from '../../components/atoms/buttons/Primary';
+import { Slide } from 'react-slideshow-image';
+import { Body, H2Bold } from '../../components/foundation/Typography';
+import useWindowDimensions from '../../../utils/useWindowDimensions';
+import { ImgContainer, SlideDiv } from './styles';
+import 'react-slideshow-image/dist/styles.css';
+//Image Background
+import img1 from '../../../assets/imgs/mainBck1.png';
+import img2 from '../../../assets/imgs/mainBck2.png';
+import img3 from '../../../assets/imgs/mainBck3.png';
+import { useTranslation } from 'react-i18next';
 
-import { isMobile } from "react-device-detect";
-import useWindowDimensions from "../../../utils/useWindowDimensions";
-import LinkBtn from "../../components/atoms/buttons/Link";
-
-const Main = (props) => {
-  const { theme, scrollToView, refs } = props;
+const Main = () => {
+  const theme = useTheme();
   const { t } = useTranslation();
-  const { width } = useWindowDimensions();
+  const slideRef = useRef();
+  const { height } = useWindowDimensions();
+  const properties = {
+    duration: 12000,
+    autoplay: true,
+    transitionDuration: 500,
+    arrows: false,
+    infinite: true,
+    easing: 'ease'
+  };
 
-  const btns = [
-    {
-      id: 0,
-      title: t("about"),
-      ref: refs.aboutRef,
-    },
-    {
-      id: 1,
-      title: t("howTo"),
-      ref: refs.howRef,
-    },
-    {
-      id: 2,
-      title: t("projects"),
-      ref: refs.projectRef,
-    },
+  const imagesArr = [
+    { url: img1, title: t('slide1Title'), desc: t('slide1Desc'), color: theme.colors.nero },
+    { url: img2, title: t('slide2Title'), desc: t('slide2Desc'), color: theme.colors.white },
+    { url: img3, title: t('slide3Title'), desc: t('slide3Desc'), color: theme.colors.white }
   ];
 
   return (
-    <ContainerMain theme={theme}>
-      <ImgContainer isMobile={isMobile} theme={theme}>
-          <img
-            width={"100%"}
-            src={theme.background !== "#0F110C" ? logoDark : logoWhite}
-          />
-        </ImgContainer>
-      <BtnContainer isMobile={isMobile} responsiveWidth={width}>
-        
-        {btns.map((btn) => (
-          <LinkBtn
-            hasBackground={true}
-            fontSize={isMobile ? 24 : 30}
-            key={btn.id}
-            theme={theme}
-            width={width * 0.20}
-            label={btn.title}
-            margin={isMobile ? width * 0.01 : width * 0.1}
-            onClick={() => scrollToView(btn.ref)}
-          />
-        ))}
-      </BtnContainer>
-    </ContainerMain>
+    <div style={{ overflow: 'hidden', marginTop: -100 }}>
+      <div className="slide-container">
+        <Slide ref={slideRef} {...properties}>
+          {imagesArr.map((slide, index) => (
+            <SlideDiv key={index} className="each-slide">
+              <img width="100%" height={height} className="lazy" src={slide.url} alt="sample" />
+              <ImgContainer>
+                <H2Bold color={slide.color}>{slide.title}</H2Bold>
+                <Body color={slide.color}>{slide.desc}</Body>
+                <PrimaryBtn
+                  iconColor={theme.colors.white}
+                  icon="User"
+                  width={250}
+                  margin={-13}
+                  label={'Únete al cambio'}
+                />
+              </ImgContainer>
+            </SlideDiv>
+          ))}
+        </Slide>
+      </div>
+    </div>
   );
 };
 

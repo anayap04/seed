@@ -1,2 +1,2 @@
 /* istanbul ignore file */
-export { DefaultTheme } from './DefaultTheme'
+export { DefaultTheme } from './DefaultTheme';

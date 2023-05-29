@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import Icon from "../../foundation/Icon";
+import React, { useState } from 'react';
+import Icon from '../../foundation/Icon';
 import {
   Label,
   Field,
@@ -7,10 +7,11 @@ import {
   InputContentIcon,
   IconContainer,
   FieldBlank,
-  PasswordChecklistStyled,
-} from "./styles";
-import { useTextWidth } from "@tag0/use-text-width";
-import { useTranslation } from "react-i18next";
+  PasswordChecklistStyled
+} from './styles';
+import { useTextWidth } from '@tag0/use-text-width';
+import { useTranslation } from 'react-i18next';
+import { useTheme } from 'styled-components';
 
 const InputWithIcon = ({
   theme,
@@ -25,11 +26,11 @@ const InputWithIcon = ({
   valueWidth,
   register,
   onFocus,
-  onBlur,
+  onBlur
 }) => (
   <InputContent onClick={() => onClick()}>
-    <Label theme={theme}>{labelTitle}</Label>
-    <InputContentIcon valueWidth={valueWidth} disabled={disabled} theme={theme}>
+    {label && <Label>{labelTitle}</Label>}
+    <InputContentIcon valueWidth={valueWidth} disabled={disabled}>
       <FieldBlank
         onFocus={onFocus}
         onBlur={onBlur}
@@ -38,18 +39,16 @@ const InputWithIcon = ({
         defaultValue={defaultValue}
         disabled={disabled}
         type={type}
-        theme={theme}
         {...register(label)}
       />
       <IconContainer>
-        <Icon iconName={iconName} tintColor={theme.fonts} size={24} />
+        <Icon iconName={iconName} tintColor={theme.colors.nero} size={24} />
       </IconContainer>
     </InputContentIcon>
   </InputContent>
 );
 
 const InputWithoutIcon = ({
-  theme,
   register,
   required,
   type,
@@ -59,16 +58,15 @@ const InputWithoutIcon = ({
   value,
   valueWidth,
   customWidth,
-  setPassword,
+  setPassword
 }) => (
   <InputContent customWidth={customWidth}>
-    <Label theme={theme}>{labelTitle}</Label>
+    <Label>{labelTitle}</Label>
     <Field
       valueWidth={valueWidth}
       value={value}
       disabled={disabled}
       type={type}
-      theme={theme}
       {...register(label, { required })}
       onChange={(e) => (setPassword ? setPassword(e.target.value) : null)}
     />
@@ -80,7 +78,6 @@ const Input = (props) => {
     label,
     register,
     required,
-    theme,
     type,
     labelTitle,
     iconName,
@@ -91,15 +88,16 @@ const Input = (props) => {
     customWidth,
     needsValidation,
     onFocus,
-    onBlur,
+    onBlur
   } = props;
   const width = useTextWidth({
-    text: !disabled ? value + "sfgdrgfdg" : defaultValue,
-    font: "20px Times",
+    text: !disabled ? value + 'sfgdrgfdg' : defaultValue,
+    font: '20px Times'
   });
   const widthInt = Math.ceil(width);
-  const [password, setPassword] = useState("");
+  const [password, setPassword] = useState('');
   const { t } = useTranslation();
+  const theme = useTheme();
   return iconName ? (
     <InputWithIcon
       type={type}
@@ -107,7 +105,6 @@ const Input = (props) => {
       labelTitle={labelTitle}
       disabled={disabled}
       register={register}
-      theme={theme}
       required={required}
       iconName={iconName}
       defaultValue={defaultValue}
@@ -116,6 +113,7 @@ const Input = (props) => {
       valueWidth={widthInt}
       onFocus={onFocus}
       onBlur={onBlur}
+      theme={theme}
     />
   ) : (
     <>
@@ -125,7 +123,6 @@ const Input = (props) => {
         labelTitle={labelTitle}
         disabled={disabled}
         register={register}
-        theme={theme}
         required={required}
         onClick={onClick}
         value={value}
@@ -133,16 +130,15 @@ const Input = (props) => {
         customWidth={customWidth}
         setPassword={setPassword}
       />
-      {label === "password" && needsValidation && (
+      {label === 'password' && needsValidation && (
         <PasswordChecklistStyled
-          theme={theme}
-          rules={["minLength", "number", "capital"]}
+          rules={['minLength', 'number', 'capital']}
           minLength={6}
           value={password}
           messages={{
-            minLength: t("minLength"),
-            number: t("number"),
-            capital: t("capital"),
+            minLength: t('minLength'),
+            number: t('number'),
+            capital: t('capital')
           }}
         />
       )}

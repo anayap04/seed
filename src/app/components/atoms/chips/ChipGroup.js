@@ -1,10 +1,9 @@
-import React, { useState } from "react";
-import Chip from "./Chip";
-import { Group, ChipSingle } from "./styles";
-
+import React, { useState } from 'react';
+import Chip from './Chip';
+import { Group, ChipSingle } from './styles';
 
 const ChipGroup = (props) => {
-  const { theme, labelsArray, setId, idSelected } = props;
+  const { labelsArray, setId, idSelected } = props;
   const [actualChip, setActualChip] = useState(idSelected);
 
   const setChipSelected = (id) => {
@@ -21,14 +20,8 @@ const ChipGroup = (props) => {
             tabIndex={item.id.toString()}
             onClick={() => setChipSelected(item.id)}
             onKeyPress={() => setChipSelected(item.id)}
-            key={item.id}
-          >
-            <Chip
-              theme={theme}
-              id={item.id || index}
-              label={item.label}
-              selected={actualChip === item.id}
-            />
+            key={item.id}>
+            <Chip id={item.id || index} label={item.label} selected={actualChip === item.id} />
           </ChipSingle>
         );
       })}

@@ -1,61 +1,62 @@
-import React, { useEffect, useState } from "react";
-import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
-import { PaymentForm, PaymentFiledSet } from "./styles";
-import PrimaryBtn from "../atoms/buttons/Primary";
-import { connect, useDispatch } from "react-redux";
-import { paymentRequest } from "../../../redux/actions/payment";
-import { Spinner } from "react-bootstrap";
-import ModalSeed from "../modal/Modal";
-import {Body, BodyBold, Title} from "../foundation/Typography"
-import { useNavigate } from "react-router-dom";
-import { useTranslation } from "react-i18next";
+import React, { useEffect, useState } from 'react';
+import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js';
+import { PaymentForm, PaymentFiledSet } from './styles';
+import PrimaryBtn from '../atoms/buttons/Primary';
+import { connect, useDispatch } from 'react-redux';
+import { paymentRequest } from '../../../redux/actions/payment';
+import { Spinner } from 'react-bootstrap';
+import ModalSeed from '../modal/Modal';
+import { Body, BodyBold, Title } from '../foundation/Typography';
+import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
+import { useTheme } from 'styled-components';
 
 const CardPayment = (props) => {
-  const { theme, total, paymentSuccess } = props;
+  const { total, paymentSuccess } = props;
   const [success, setSuccess] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [isModalOpen, setOpen] = useState(false);
+  const theme = useTheme();
   const navigate = useNavigate();
-  const {t} = useTranslation();
+  const { t } = useTranslation();
   const stripe = useStripe();
   const elements = useElements();
   const dipatch = useDispatch();
 
   const CARD_OPTIONS = {
-    iconStyle: "solid",
+    iconStyle: 'solid',
     style: {
       base: {
-        iconColor: theme.green,
-        borderColor: theme.green,
-        color: theme.fonts,
+        iconColor: theme.colors.green,
+        borderColor: theme.colors.green,
+        color: theme.colors.nero,
         fontWeight: 500,
-        fontFamily: "Roboto, Open Sans, Segoe UI, sans-serif",
-        fontSize: "18px",
-        fontSmoothing: "antialiased",
-        ":-webkit-autofill": { color: theme.green },
-        "::placeholder": { color: theme.disabled },
+        fontFamily: 'Roboto, Open Sans, Segoe UI, sans-serif',
+        fontSize: '18px',
+        fontSmoothing: 'antialiased',
+        ':-webkit-autofill': { color: theme.colors.green },
+        '::placeholder': { color: theme.colors.disabled }
       },
       invalid: {
-        iconColor: theme.error,
-        color: theme.error,
-      },
-    },
+        iconColor: theme.colors.error,
+        color: theme.colors.error
+      }
+    }
   };
 
   useEffect(() => {
     if (paymentSuccess) {
       setIsLoading(false);
       setSuccess(true);
-      setOpen(!isModalOpen)
+      setOpen(!isModalOpen);
     }
-
-  }, [paymentSuccess])
+  }, [paymentSuccess]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     const { error, paymentMethod } = await stripe.createPaymentMethod({
-      type: "card",
-      card: elements.getElement(CardElement),
+      type: 'card',
+      card: elements.getElement(CardElement)
     });
     setIsLoading(true);
 
@@ -66,11 +67,11 @@ const CardPayment = (props) => {
           paymentRequest({
             amount: total,
             id,
-            description: `${total} USD for ${total / 1000} bound(s)`,
+            description: `${total} USD for ${total / 1000} bound(s)`
           })
-        );       
+        );
       } catch (error) {
-        console.log("Error", error);
+        console.log('Error', error);
       }
     } else {
       console.log(error.message);
@@ -89,21 +90,15 @@ const CardPayment = (props) => {
           {isLoading ? (
             <Spinner />
           ) : (
-            <PrimaryBtn
-              theme={theme}
-              type="submit"
-              label={t('pay')}
-              margin={3}
-              width={500}
-            />
+            <PrimaryBtn type="submit" label={t('pay')} margin={3} width={500} />
           )}
         </PaymentForm>
       ) : (
-        <ModalSeed isModalOpen={isModalOpen} setOpen={setOpen} theme={theme}>
-          <Title theme={theme}>{t('paymentSuccessful')}</Title>
-          <Body theme={theme}>{t('resumePayment')}</Body>
-          <BodyBold theme={theme}>{`${total / 1000} ${t('bondsVal')} ${total} USD`}</BodyBold>
-          <PrimaryBtn theme={theme} width={351} label={t('backProfile')} onClick={() => navigate("/profile")} />
+        <ModalSeed isModalOpen={isModalOpen} setOpen={setOpen}>
+          <Title>{t('paymentSuccessful')}</Title>
+          <Body>{t('resumePayment')}</Body>
+          <BodyBold>{`${total / 1000} ${t('bondsVal')} ${total} USD`}</BodyBold>
+          <PrimaryBtn width={351} label={t('backProfile')} onClick={() => navigate('/profile')} />
         </ModalSeed>
       )}
     </>
@@ -113,7 +108,7 @@ const CardPayment = (props) => {
 const mapToStateProps = (state) => {
   const { paymentSuccess } = state.paymentReducer;
   return {
-    paymentSuccess: paymentSuccess,
+    paymentSuccess: paymentSuccess
   };
 };
 

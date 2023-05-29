@@ -1,29 +1,39 @@
-import styled from "styled-components";
-import Container from "react-bootstrap/Container";
-import Col from "react-bootstrap/Col";
-import Row from "react-bootstrap/Row";
-import { device } from "../../../theme/themes/DefaultTheme/screenSizes";
-import texture from "../../../assets/imgs/earth.jpeg";
-import { SectionContainer } from "../../components/section/styles";
-import {Title} from "../../components/foundation/Typography"
+import styled from 'styled-components';
+import Container from 'react-bootstrap/Container';
+import Col from 'react-bootstrap/Col';
+import Row from 'react-bootstrap/Row';
+import { DefaultTheme } from '../../../theme/themes';
+import ticket from '../../../assets/imgs/coupon.png';
+import { Group } from '../../components/atoms/chips/styles';
+import background from '../../../assets/imgs/backDark2.png';
 
 export const Root = styled.div`
-  background-color: ${({ theme }) => theme.background};
-  background: linear-gradient(
-      ${({ theme }) => theme.background + "ed"},
-      ${({ theme }) => theme.background + "eb"},
-      ${({ theme }) => theme.background}
-    ),
-    url(${texture});
+  background-image: url(${background});
+  background-size: cover;
+  background-repeat: no-repeat;
   width: 100vw;
-  padding-bottom: 30px;
-  margin-bottom: ${({marginBottom}) => marginBottom}px;
+  padding-bottom: 80px;
+  align-items: center;
+  ${Group} {
+    margin-top: 30px;
+    margin-bottom: 10px;
+    width: 100vw;
+    padding-left: 33vw;
+  }
 `;
+
+Root.defaultProps = {
+  theme: DefaultTheme
+};
+
 export const Content = styled.div`
-  background-color: ${({ theme }) => theme.background};
   padding-top: 20px;
-  padding-left: 30px;
+  padding-left: 7vw;
 `;
+
+Content.defaultProps = {
+  theme: DefaultTheme
+};
 
 export const RowInvestment = styled(Row)`
   padding-left: 30px;
@@ -33,16 +43,39 @@ export const ColInvestment = styled(Col)`
   align-items: center;
 `;
 
-export const SectionBonds = styled(SectionContainer)`
-  text-align: center;
-  align-items: center;
-  @media (${device.mobileAll}), (pointer: none), (pointer: coarse) {
-    padding-left: ${({ responsiveWidth }) => responsiveWidth * 0.25}px;
+export const BondsTitle = styled.div`
+  display: flex;
+  padding-top: 220px;
+  padding-left: 50px;
+  height: 310px;
+  width: 35vw;
+  margin-top: 20px;
+`;
+
+BondsTitle.defaultProps = {
+  theme: DefaultTheme
+};
+
+export const SectionBonds = styled.div`
+  background-image: url(${ticket});
+  width: 60vw;
+  background-size: cover;
+  height: 350px;
+  padding-top: 5px;
+  padding-left: 40px;
+  margin-left: 13vw;
+  margin-top: 10vh;
+  margin-bottom: 60px;
+`;
+
+export const TitleContainer = styled.div`
+  display: flex;
+  & > p {
+    margin-right: 15px;
+    margin-top: -15px;
   }
-  ${Title} {
-    margin-left: ${({ responsiveWidth }) => responsiveWidth * 0.40}px;
-  }
-  padding-top: 50px;
+  padding-left: 50px;
+  padding-top: 20px;
 `;
 
 export const ProfileInfoInputs = styled.div``;
@@ -50,7 +83,6 @@ export const ProfileInfoInputs = styled.div``;
 export const BtnFooter = styled.div`
   margin-top: 35px;
   padding-bottom: 35px;
-  margin-left: -${({ responsiveWidth }) => responsiveWidth * 0.43}px;
 `;
 
 export const SubInfo = styled.div`
@@ -58,13 +90,17 @@ export const SubInfo = styled.div`
   padding-left: 30px;
 `;
 export const ContainerProfile = styled(Container)`
-  max-width: ${({ responsiveWidth }) => responsiveWidth * 1.1}px;
+  max-width: ${({ responsiveWidth }) => responsiveWidth * 0.8}px;
   padding-bottom: 100px;
-  background-color: ${({ theme }) => theme.background};
+  background-color: ${({ theme }) => theme.colors.white};
   margin-left: 0px;
   margin: 0px;
   margin-top: 30px;
 `;
+
+ContainerProfile.defaultProps = {
+  theme: DefaultTheme
+};
 export const ColBonds = styled(Col)`
   padding-left: 80px;
 `;
@@ -82,4 +118,13 @@ export const Total = styled.div`
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-`
+`;
+
+export const BondsQty = styled.div`
+  margin-right: 10vw;
+  & > p {
+    margin-top: 0px;
+    margin-bottom: -20px;
+  }
+  margin-top: -50px;
+`;

@@ -1,115 +1,53 @@
-import React, { useEffect, useState } from "react";
-import "./App.css";
-import { darkTheme, lightTheme } from "../src/theme/themes/DefaultTheme/colors";
-import ThemeProvider from "./theme/ThemeProvider";
+import React from 'react';
+import './App.css';
+import ThemeProvider from './theme/ThemeProvider';
 import ScrollToTop from './utils/ScrollToTop';
-import { useDarkMode } from "./utils/useDarkMode";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Home from "./app/screens/home/Home";
-import LoginPage from "./app/screens/login";
-import Profile from "./app/screens/profile";
-import GlobalStyles from "./theme/GlobalStyles";
-import ProjectsMain from "./app/screens/projects/Projects";
-import InitiativeDetail from "./app/screens/detail/InitiativeDetails";
-import Buy from "./app/screens/bounds/Buy";
-import { FloatingWhatsApp } from "react-floating-whatsapp";
-import imageChat from './assets/imgs/operator.png'
-import Footer from "./app/components/footer/Footer";
-import Contact from "./app/screens/contact";
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Home from './app/screens/home/Home';
+import LoginPage from './app/screens/login';
+import Profile from './app/screens/profile';
+import GlobalStyles from './theme/GlobalStyles';
+import ProjectsMain from './app/screens/projects/Projects';
+import InitiativeDetail from './app/screens/detail/InitiativeDetails';
+import Buy from './app/screens/bounds/Buy';
+import { FloatingWhatsApp } from 'react-floating-whatsapp';
+import imageChat from './assets/imgs/operator.png';
+import Footer from './app/components/footer/Footer';
+import Contact from './app/screens/contact';
+import GeneralInfo from './app/screens/info/Generalnfo';
+import NotFound from './app/screens/error/NotFound';
+
+import { DefaultTheme } from './theme/themes';
+import { useTranslation } from 'react-i18next';
+import Faq from './app/screens/faq/FAQ';
 
 function App() {
-  const [theme, themeToggler] = useDarkMode();
-  const [mode, setMode] = useState();
-  const themeMode = theme === "light" ? lightTheme : darkTheme;
-
-  useEffect(() => {
-    window
-      .matchMedia("(prefers-color-scheme: dark)")
-      .addEventListener("change", (event) => {
-        const colorScheme = event.matches ? "dark" : "light";
-        localStorage.setItem("themeMode");
-        setMode(colorScheme);
-      });
-  }, []);
-
+  const { t } = useTranslation();
   return (
-    <ThemeProvider theme={themeMode || mode}>
-      <GlobalStyles theme={themeMode || mode} />
+    <ThemeProvider theme={DefaultTheme}>
+      <GlobalStyles />
       <BrowserRouter basename="/seed">
-      <ScrollToTop />
+        <ScrollToTop />
         <Routes>
-          <Route
-            path="/"
-            element={
-              <Home
-                themeToggler={themeToggler}
-                theme={themeMode}
-                mode={theme}
-              />
-            }
-          ></Route>
-          <Route
-            path="/register"
-            element={
-              <LoginPage
-                themeToggler={themeToggler}
-                theme={themeMode}
-                mode={theme}
-              />
-            }
-          ></Route>
-          <Route
-            path="/profile"
-            element={
-              <Profile
-                themeToggler={themeToggler}
-                theme={themeMode}
-                mode={theme}
-              />
-            }
-          ></Route>
-          <Route
-            path="/projects"
-            element={
-              <ProjectsMain
-                themeToggler={themeToggler}
-                theme={themeMode}
-                mode={theme}
-              />
-            }
-          ></Route>
-          <Route
-            path="/initiative"
-            element={
-              <InitiativeDetail
-                themeToggler={themeToggler}
-                theme={themeMode}
-                mode={theme}
-              />
-            }
-          ></Route>
-          <Route
-            path="/buyBonds"
-            element={
-              <Buy themeToggler={themeToggler} theme={themeMode} mode={theme} />
-            }
-          ></Route>
-          <Route
-            path="/contact"
-            element={
-              <Contact themeToggler={themeToggler} theme={themeMode} mode={theme} />
-            }
-          ></Route>
+          <Route path="*" element={<NotFound />}></Route>
+          <Route path="/" element={<Home />}></Route>
+          <Route path="/register" element={<LoginPage />}></Route>
+          <Route path="/profile" element={<Profile />}></Route>
+          <Route path="/projects" element={<ProjectsMain />}></Route>
+          <Route path="/initiative" element={<InitiativeDetail />}></Route>
+          <Route path="/buyBonds" element={<Buy />}></Route>
+          <Route path="/contact" element={<Contact />}></Route>
+          <Route path="/info" element={<GeneralInfo />}></Route>
+          <Route path="/faq" element={<Faq />}></Route>
         </Routes>
         <FloatingWhatsApp
-        darkMode={theme !== "light"}
-          chatMessage="¡Hola! Estamos disponibles para atender cualquier duda que tengas"
-          statusMessage="Chatea con nosotros"
-          accountName="SEED Soporte"
-          phoneNumber="5215567878498"
+          chatMessage={t('chatMessage')}
+          statusMessage={t('statusMessage')}
+          accountName={t('accountName')}
+          phoneNumber="573148124903"
           avatar={imageChat}
         />
-        <Footer theme={themeMode} />
+        <Footer />
       </BrowserRouter>
     </ThemeProvider>
   );

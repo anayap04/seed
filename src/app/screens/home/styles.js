@@ -1,55 +1,47 @@
-import styled, { keyframes } from "styled-components";
-import { DefaultTheme } from "../../../theme/themes";
-import backgroundDark from "../../../assets/imgs/background-dark.jpg";
-import backgroundLight from "../../../assets/imgs/background-light.jpg";
-import bonos from "../../../assets/imgs/bono.png";
-import bonosLight from "../../../assets/imgs/bonos_light.png";
-import { fadeIn, fadeInRight, fadeInLeft, fadeInDown } from "react-animations";
-import { device } from "../../../theme/themes/DefaultTheme/screenSizes";
-import { Col } from "react-bootstrap";
-import { SecondaryContainer } from "../../components/atoms/buttons/styles";
-import { Title } from "../../components/foundation/Typography";
-import Icon from "../../components/foundation/Icon";
+import styled, { keyframes } from 'styled-components';
+import { DefaultTheme } from '../../../theme/themes';
 
+import { fadeIn, fadeInRight, fadeInLeft, fadeInDown } from 'react-animations';
+import { device } from '../../../theme/themes/DefaultTheme/screenSizes';
+import { Col } from 'react-bootstrap';
+import { SecondaryContainer } from '../../components/atoms/buttons/styles';
+
+import background from '../../../assets/imgs/background-light.jpg';
+import imageBack from '../../../assets/imgs/about.png';
 const fadeAnimation = keyframes`${fadeIn}`;
 const animationsObj = {
   right: keyframes`${fadeInRight}`,
   left: keyframes`${fadeInLeft}`,
-  down: keyframes`${fadeInDown},`,
+  down: keyframes`${fadeInDown},`
 };
 
 export const ContainerMain = styled.div`
   width: 100vw;
-  z-index: 10;
-  background-image: url(${({ theme }) =>
-    theme.background === "#0F110C" ? backgroundDark : backgroundLight});
+  background: url(${background});
   display: flex;
   flex-direction: row;
-  height: 95vh;
+  height: 99vh;
+  z-index: -1;
+  margin-top: -80px;
 `;
 
 ContainerMain.defaultProps = {
-  theme: DefaultTheme,
+  theme: DefaultTheme
 };
+
+export const SlideDiv = styled.div`
+  width: 100%;
+`;
 
 export const ImgContainer = styled.div`
   animation: 2s ${fadeAnimation};
-  position: absolute;
-  padding: 50px;
-  margin: ${({isMobile}) => isMobile ? '30vh auto auto auto' : '15vh auto auto 25vw'};
-`;
-
-export const BtnContainer = styled.div`
-  width: ${({ responsiveWidth }) => responsiveWidth * 0.99}px;
-  z-index: 100;
-  display: flex;
-  height: 100px;
-  flex-direction: row;
-  flex-wrap: wrap;
+  text-align: left;
+  width: 40vw;
   padding-top: 30px;
-  padding-left: ${({ responsiveWidth }) => responsiveWidth * 0.03}px;
-  text-align: center;
-  animation: 2.5s ${({ animation }) => animationsObj[animation]};
+  padding-left: 80px;
+  top: 26vh;
+  z-index: 100;
+  position: absolute;
 `;
 
 export const ContainerAbout = styled.div`
@@ -57,7 +49,7 @@ export const ContainerAbout = styled.div`
   width: 100vw !important;
   display: flex;
   flex-direction: column;
-  background-color: ${({ theme }) => theme.background};
+  background-color: ${({ theme }) => theme.colors.nero};
   align-items: center;
   padding-top: ${({ responsiveHeight }) => responsiveHeight * 0.04}px;
   z-index: 100;
@@ -70,28 +62,25 @@ export const Content = styled.div`
   align-content: center;
   padding-top: ${({ responsiveHeight }) => responsiveHeight * 0.1}px;
   margin-bottom: 200px;
-  z-index: 100;
 `;
 
 export const ImageContainer = styled.div`
-  padding-left: ${({ responsiveWidth }) => responsiveWidth * 0.05}px;
+  padding-left: ${({ responsiveWidth }) => responsiveWidth * 0.01}px;
 `;
 
 export const DescriptionBody = styled.div`
   width: ${({ responsiveWidth, isMobile }) =>
-    isMobile ? responsiveWidth * 0.85 : responsiveWidth * 0.5}px;
-  border-left: ${({ theme }) => theme.green} 2px solid;
+    isMobile ? responsiveWidth * 0.85 : responsiveWidth * 0.3}px;
   padding-left: ${({ responsiveWidth, isMobile }) =>
     isMobile ? responsiveWidth * 0.05 : responsiveWidth * 0.03}px;
-  margin-left: ${({ responsiveWidth, isMobile }) =>
-    isMobile ? responsiveWidth * 0.03 : responsiveWidth * 0.1}px;
+  padding-top: 10vh;
 `;
 
 export const DescriptionText = styled.div`
-  font-family: Acumin-RPro;
+  font-family: Poppins-Regular;
   animation: 2s ${animationsObj.left};
-  margin-bottom: 20px;
-  color: ${({ theme }) => theme.fonts};
+  margin-bottom: 16px;
+  color: ${({ theme }) => theme.colors.white};
   text-align: left;
 `;
 
@@ -112,19 +101,16 @@ export const ImageDiv = styled(Col)`
 
 export const ContainerHowTo = styled.div`
   height: 100vh;
-  padding-top: 30px;
-  padding-left: 30px;
+  padding-top: 80px;
+  padding-left: 80px;
+  rgb(242, 247, 255);
   background: linear-gradient(
-      180deg,
-      ${({ theme }) =>
-        theme.background === "#E3F2FD"
-          ? theme.background + "60"
-          : "rgba(13, 13, 13, 1) 5%"},
-      transparent
-        ${({ theme }) => (theme.background === "#E3F2FD" ? "65%" : "85%")},
-      ${({ theme }) => theme.background}
-    ),
-    url(${({ theme }) => (theme.background === "#E3F2FD" ? bonosLight : bonos)});
+    180deg,
+    rgba(36, 255, 190, 1) 0%,
+    rgba(242, 247, 255, 1) 32%,
+    rgba(242, 247, 255, 1) 73%,
+    rgba(36, 255, 190, 1) 93%
+  );
 `;
 
 export const HeadContainer = styled.div`
@@ -143,48 +129,24 @@ export const HeadContainer = styled.div`
 
 export const HowContainer = styled.div``;
 
-export const LineShape = styled.div`
-  height: 65vh;
-  width: 90vw;
-  border-left: ${({ theme }) => theme.fonts} 3px solid;
-  margin-left: ${({ responsiveWidth }) => 0.05 * responsiveWidth}px;
-  display: block;
-  z-index: 3;
-`;
-
-export const StepsContainerMobile = styled.div`
-  display: flex;
-  flow-direction: row;
-  height: 32vh;
-  margin-left: -15px;
-  width: ${({ responsiveWidth }) => 0.8 * responsiveWidth}px;
-`;
-
-export const Dots = styled.div`
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  background-color: ${({ theme }) => theme.green};
-`;
-
 export const TitleText = styled.p`
-  font-family: AcuminBdPro;
+  font-family: Poppins-Bold;
   width: fit-content;
-  border-bottom: ${({ theme }) => theme.green} 3px solid;
-  color: ${({ theme }) => theme.fonts};
-  font-size: ${({isMobile}) => isMobile ? 16 : 28 }px;
+  border-bottom: ${({ theme }) => theme.colors.green} 3px solid;
+  color: ${({ theme }) => theme.colors.nero};
+  font-size: ${({ isMobile }) => (isMobile ? 16 : 28)}px;
   text-align: center;
   margin-bottom: 5px;
   align-self: center;
 `;
 
 export const BodyText = styled.div`
-  margin-top: 30px;
-  font-family: Acumin-RPro;
+  margin-top: 14px;
+  font-family: Poppins-SemiBold;
   margin-left: 5px;
   margin-right: 5px;
-  font-size: ${({isMobile}) => isMobile ? 16 : 24 }px;
-  color: ${({ theme }) => theme.fonts};
+  font-size: ${({ isMobile }) => (isMobile ? 16 : 18)}px;
+  color: ${({ theme }) => theme.colors.nero};
 `;
 
 export const TextContainer = styled.div`
@@ -197,19 +159,8 @@ export const TextContainer = styled.div`
   text-align: center;
   align-items: center;
   padding: 20px;
-  & > ${Icon} {
+  & > .svg {
     margin-bottom: 10px;
-  }
-  &: hover {
-    background: ${({theme}) => theme.tangerine}90;
-    ${TitleText} {
-      transform: scale(1.1);
-      
-    }
-    ${BodyText} {
-      animation: 0.5s ${fadeAnimation};
-    }
-
   }
 `;
 
@@ -230,9 +181,7 @@ export const TextContainerMobile = styled.div`
   z-index: 100;
   @media (${device.laptopL}) {
     margin-top: ${({ responsiveHeight, alignment }) =>
-      alignment === "left"
-        ? -responsiveHeight * 0.3
-        : responsiveHeight * 0.2}px;
+      alignment === 'left' ? -responsiveHeight * 0.3 : responsiveHeight * 0.2}px;
   }
 `;
 
@@ -245,17 +194,63 @@ export const CardsContainer = styled.div`
 `;
 
 export const ContainerProjects = styled.div`
-  padding-left: ${({isMobile}) => !isMobile && '40px'};
+  padding-left: ${({ isMobile }) => !isMobile && '80px'};
   padding-bottom: 20vh;
-  
+  padding-top: 80px;
   display: flex;
   flex-direction: column;
-  background-color: ${({ theme }) => theme.background};
+  background-color: ${({ theme }) => theme.colors.nero};
 
-  padding-top: ${({ responsiveHeight, isMobile }) => isMobile ? responsiveHeight * 0.01 :  responsiveHeight * 0.03}px;
- 
+  padding-top: ${({ responsiveHeight, isMobile }) =>
+    isMobile ? responsiveHeight * 0.01 : responsiveHeight * 0.03}px;
 `;
 
-export const HomeTitle = styled(Title)`
-  align-self: center;
+export const IconContainer = styled.div`
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  padding-top: 25px;
+  box-shadow: -2px 2px 13px 7px rgba(89, 89, 89, 0.32);
+  -webkit-box-shadow: -2px 2px 13px 7px rgba(89, 89, 89, 0.32);
+  -moz-box-shadow: -2px 2px 13px 7px rgba(89, 89, 89, 0.32);
+  z-index: 100;
+  background-color: ${({ theme }) => theme.colors.white};
+`;
+
+export const BorderText = styled.div`
+  border: 2px solid ${({ theme }) => theme.colors.green};
+  border-radius: 20px;
+  padding: 70px 30px 20px 30px;
+  margin-top: -50px;
+  height: 320px;
+  text-align: left;
+  margin-bottom: -20px;
+`;
+
+export const PartnersLogos = styled.div`
+  background-color: ${({ theme }) => theme.colors.white};
+  border-radius: 20px;
+  box-shadow: 0px -1px 10px 4px rgba(189, 189, 189, 0.71);
+  -webkit-box-shadow: 0px -1px 10px 4px rgba(189, 189, 189, 0.71);
+  -moz-box-shadow: 0px -1px 10px 4px rgba(189, 189, 189, 0.71);
+
+  padding: 20px;
+  width: 80vw;
+  margin-top: 50px;
+`;
+
+export const RootPartners = styled.div`
+  width: 100vw;
+  height: 100vh;
+  padding-top: 10vh;
+  padding-left: 10vw;
+  background-image: url(${imageBack});
+  background-size: cover;
+  background-repeat: no-repeat;
+`;
+
+export const RowPartners = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
 `;
